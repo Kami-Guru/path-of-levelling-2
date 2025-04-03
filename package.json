@@ -7,6 +7,15 @@
 	"type": "module",
 	"main": "dist-electron/main.js",
 	"postinstall": "electron-builder install-app-deps",
+	"build": {
+		"appId": "com.kami-guru.pathOfLevelling2",
+		"win": {
+			"target": "nsis"
+		},
+		"nsis": {
+			"oneClick": "false"
+		}
+	},
 	"scripts": {
 		"dev": "npm-run-all --parallel dev:react dev:electron",
 		"dev:react": "vite",
@@ -16,13 +25,14 @@
 		"lint": "eslint .",
 		"preview": "vite preview",
 		"dist:mac": "npm run transpile:electron && npm run build && electron-builder --mac --arm64",
-		"dist:win": "npm run transpile:electron && npm run build && electron-builder --win --x64",
+		"dist:win": "npm run transpile:electron && npm run build && electron-builder --win --x64 -p always",
 		"dist:linux": "npm run transpile:electron && npm run build && electron-builder --linux --x64",
 		"dist:testing": "electron-builder"
 	},
 	"dependencies": {
 		"electron-overlay-window": "3.3.0",
 		"electron-store": "^10.0.1",
+		"electron-updater": "^6.6.2",
 		"npm": "^11.2.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",

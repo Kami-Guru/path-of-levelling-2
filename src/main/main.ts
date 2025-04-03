@@ -1,5 +1,6 @@
 import { app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray } from 'electron';
 import { OVERLAY_WINDOW_OPTS, OverlayController } from 'electron-overlay-window';
+import electronUpdater, { type AppUpdater } from 'electron-updater';
 import path from 'path';
 import { LogWatcher } from './LogWatcher.js';
 import { getDesktopIconPath, getPreloadPath, getUIPath } from './pathResolver.js';
@@ -12,11 +13,21 @@ declare global {
 	var mainState: StateTracker;
 }
 
+export function getAutoUpdater(): AppUpdater {
+	// Using destructuring to access autoUpdater due to the CommonJS module of 'electron-updater'.
+	// It is a workaround for ESM compatibility issues, see https://github.com/electron-userland/electron-builder/issues/7976.
+	const { autoUpdater } = electronUpdater;
+	return autoUpdater;
+}
+
 app.whenReady().then(() => {
 	setTimeout(
 		createWindow,
 		process.platform === 'linux' ? 1000 : 0 // https://github.com/electron/electron/issues/16809
 	);
+
+	// Auto updates
+	getAutoUpdater().checkForUpdatesAndNotify();
 });
 
 function createWindow() {
