@@ -1,0 +1,249 @@
+@font-face {
+	font-family: 'Jetbrains Mono Regular';
+	src: local('Jetbrains Mono Regular'), url(./fonts/JetbrainsMono-Regular.woff2),
+		format('woff2');
+}
+
+html {
+	height: 100%;
+	overflow: visible;
+}
+
+body {
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+#root {
+	max-width: 9999px;
+	height: 100%;
+}
+
+:root {
+	height: 100%;
+	margin: 0px;
+	margin-left: 0px;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	font-family: 'Jetbrains Mono Regular';
+	font-size: 14px;
+	font-weight: 400; /*TODO: Wtf does this do?*/
+
+	-webkit-font-smoothing: antialiased;
+	-webkit-padding-end: 0;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.overlay-container-shown {
+	height: 100%;
+	width: 100%;
+	background-color: rgba(50, 50, 50, 0.7);
+}
+
+.overlay-container-hidden {
+	background-color: none;
+}
+
+react-draggable {
+	background-color: rgba(50, 50, 50, 0.7);
+}
+
+.SettingsOverlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+	color: white;
+	background-color: rgba(50, 50, 50);
+
+	display: block;
+}
+
+.SettingsOverlay * {
+	text-align: left;
+	padding-left: 15px;
+}
+
+.SettingsLabel {
+	float: left;
+}
+
+.ClientPathInput {
+	min-width: 400px;
+	border: none;
+}
+
+.SaveClientPathSettingsButton {
+	margin-left: 13px;
+	padding: 2px;
+	border: none;
+}
+
+.ClientWatcherNotActiveWarning {
+	color: red;
+}
+
+.ZoneNotes {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+	color: white;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.ZoneNotes * {
+	margin: 0;
+	padding-left: 5px;
+	width: 100%-10px; /*Account for padding*/
+	flex-grow: 1;
+
+	position: relative;
+
+	color: white;
+	background-color: rgba(50, 50, 50, 0.7);
+
+	white-space: pre-wrap;
+}
+
+.LayoutImages {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-start;
+	background-color: rgba(50, 50, 50, 0.7);
+}
+
+.LayoutImageContainer {
+	margin-left: 15px;
+}
+
+.LayoutImage {
+	width: 100%;
+	height: 100%;
+
+	object-fit: contain;
+}
+
+.ZoneDropdown {
+	/*Select tags don't make the boxes bigger with padding, so we have to
+	increase width here to match the <p> tags*/
+	width: 100%;
+	height: auto;
+	flex-grow: 0;
+	padding-left: 0px;
+	padding-top: 6px;
+	padding-bottom: 4px;
+	font-family: 'Jetbrains Mono Regular';
+	font-size: 18px;
+
+	text-align: center;
+
+	appearance: none;
+	background-color: rgba(50, 50, 50);
+	border: 0px;
+}
+
+.ZoneOrActNotes {
+	text-align: start;
+}
+
+.LevelTracker {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+	color: white;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.LevelTracker * {
+	margin: 0;
+	padding-left: 5px;
+	width: 100%-10px; /*Account for padding*/
+	min-height: auto;
+	flex-grow: 1;
+
+	position: relative;
+	text-align: start;
+
+	color: white;
+	background-color: rgba(50, 50, 50, 0.7);
+
+	white-space: pre-wrap;
+}
+
+.ExpMulti {
+	text-align: end;
+}
+
+.GemTracker {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 100%;
+	height: 100%;
+	color: white;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.GemTracker * {
+	margin: 0;
+	padding-left: 5px;
+	width: 100%-10px; /*Account for padding*/
+	flex-grow: 1;
+
+	position: relative;
+	text-align: start;
+
+	color: white;
+	background-color: rgba(50, 50, 50, 0.7);
+
+	white-space: pre-wrap;
+}
+
+.gemDropdown {
+	/*Select tags don't make the boxes bigger with padding, so we have to
+	increase width here to match the <p> tags*/
+	width: 100%;
+	height: auto;
+	flex-grow: 0;
+	padding-left: 20px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	font-family: 'Jetbrains Mono Regular';
+	font-size: 16px;
+
+	appearance: none;
+	background-color: rgba(50, 50, 50);
+	border: 0px;
+}
+
+.gemSources,
+.gemLinks {
+	background-color: rgb(0, 0, 0, 0);
+}

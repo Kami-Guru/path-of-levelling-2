@@ -1,3 +1,10 @@
+dist
+dist-electron
+dist-react
+
+
+### From Github
+
 # Logs
 logs
 *.log

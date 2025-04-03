@@ -1,0 +1,36 @@
+{
+	"clientTxtPath": "C:/SteamLibrary/steamapps/common/Path of Exile 2/logs/Client.txt",
+	"buildFolder": "0.1.0 Lightning Arrow Deadeye",
+	"uiSettings": {
+		"settingsOverlayPosition": {
+			"x": 659,
+			"y": 232,
+			"height": "259px",
+			"width": "613px"
+		},
+		"zoneTrackerPosition": {
+			"x": 0,
+			"y": 108,
+			"height": "263px",
+			"width": "516px"
+		},
+		"layoutImagesTrackerPosition": {
+			"x": 1,
+			"y": 110,
+			"height": "263px",
+			"width": "516px"
+		},
+		"levelTrackerPosition": {
+			"x": 1775,
+			"y": 1395,
+			"height": "19px",
+			"width": "335px"
+		},
+		"gemTrackerPosition": {
+			"x": 0,
+			"y": 377,
+			"height": "53px",
+			"width": "516px"
+		}
+	}
+}

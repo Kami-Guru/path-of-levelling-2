@@ -1,0 +1,85 @@
+{
+	"zoneNotes": [
+		{
+			"code": "G1_1",
+			"name": "The Riverbank",
+			"notes": "test1"
+		},
+		{
+			"code": "G1_2",
+			"name": "Clearfell",
+			"notes": "test2"
+		},
+		{
+			"code": "G1_3",
+			"name": "Mud Burrow",
+			"notes": "test3"
+		},
+		{
+			"code": "G1_4",
+			"name": "The Grelwood",
+			"notes": "test4"
+		},
+		{
+			"code": "G1_5",
+			"name": "The Red Vale",
+			"notes": "test5"
+		},
+		{
+			"code": "G1_6",
+			"name": "The Grim Tangle",
+			"notes": "test6"
+		},
+		{
+			"code": "G1_7",
+			"name": "Cemetary Of The Eternals",
+			"notes": "test7"
+		},
+		{
+			"code": "G1_8",
+			"name": "Mausoleum Of The Praetor",
+			"notes": "test8"
+		},
+		{
+			"code": "G1_9",
+			"name": "Tomb Of The Consort",
+			"notes": "test9"
+		},
+		{
+			"code": "G1_11",
+			"name": "Hunting Grounds",
+			"notes": "test10"
+		},
+		{
+			"code": "G1_12",
+			"name": "Freythorn",
+			"notes": "test11"
+		},
+		{
+			"code": "G1_13_1",
+			"name": "Ogham Farmlands",
+			"notes": "test12"
+		},
+		{
+			"code": "G1_13_2",
+			"name": "Ogham Village",
+			"notes": "test13"
+		},
+		{
+			"code": "G1_14",
+			"name": "The Manor Ramparts",
+			"notes": "test14"
+		},
+		{
+			"code": "G1_15",
+			"name": "Ogham Manor",
+			"notes": "test15"
+		}
+	],
+	"actNotes": [
+		{
+			"name": "Act 1",
+			"notes": "test"
+		}
+	]
+}

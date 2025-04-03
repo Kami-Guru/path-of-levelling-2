@@ -1,0 +1,176 @@
+Riverbank--------------------------------------------------
+Kill Hillock and Exit > Town
+
+Thank you for using Path Of Levelling 2!
+
+
+Clearfell--------------------------------------------------
+[Optional] Mudburrow boss has Lvl 2 skill + Lvl 1 support
+But usually not worthwhile
+
+Get the waypoint
+Beira usually directly north from waypoint
+
+Exit > The Grelwood
+
+Grelwood---------------------------------------------------
+Four locations, always shaped like a diamond
+
+If you find Grim Tangle or Red Vale, go in and grab 
+the waypoint before coming back
+
+1) Grim Tangle - enter and get the waypoint
+2) Tree Of Souls + Waypoint
+3) Brambleghast - Lvl 1 Skill
+4) Areagne's Hut - optional potions + Lvl 1 Skill
+
+Exit > Red Vale, usually same corner as Brambleghast
+
+Red Vale---------------------------------------------------
+Usually a spiral pattern, try following the zone clockwise or counterclockwise with the wall just offscreen
+
+Listen for music when altar is nearby
+
+One altar may randomly spawn in the middle of the zone
+
+Kill the boss, TP > Town, then Waypoint > Grim Tangle
+
+
+Grim Tangle------------------------------------------------
+Go roughly up and left
+
+Zone layout may be flipped vertically, so if you start north
+go south
+
+[Optional] Rotten Druid drops a Lvl 1 Support
+
+Exit > Cemetary Of The Eternals
+
+Cemetery of the Eternals-----------------------------------
+Zone layout may be rotated
+Wall-follow around the zone, get both checkpoints first
+Exits usually on opposite sides of the zone
+
+Grave on the edge of the zone could have an Iron Ring
+
+Checkpoint > Mausoleum Of The Praetor
+----------
+Second time here Checkpoint > Tomb of the Consort
+
+Mausoleum Of The Praetor-----------------------------------
+Draw a line from the exit through the tile in the middle of the zone, boss is in that direction
+
+Kill the boss, Exit > Cemetary Of The Eternals
+Then Checkpoint > Tomb of the Consort
+
+Tomb of the Consort----------------------------------------
+Boss is usually in north corner of the zone, or right in the middle
+
+Follow the corridors through the center of the zone
+
+TP > Town, Waypoint > Cemetery of the Eternals for boss
+
+Hunting Grounds--------------------------------------------
+Follow the edge of the zone clockwise
+
+Kill Crowbell for 2 Passive Points. If you find a giant pit the boss is nearby
+
+If you find Ogham Farmlands or Freythorn then go in, get the waypoint and come back. Or get waypoints if you are worried about Hunting Grounds resetting before you come back
+
+Exit > Freythorn, or TP Town then Waypoint if you got it
+
+Second time here Exit/TP > Ogham Farmlands
+
+Freythorn--------------------------------------------------
+This layout is busted, good luck. 
+
+If you find the final ritual without the other 3, there are wisps that point to the direction of the remaining rituals
+
+Kill King In The Mist then TP > Town
+Then Waypoint > Hunting Grounds to Exit > Ogham Farmlands
+
+Ogham Farmlands--------------------------------------------
+Usually go down and left, exit always on opposite wall 
+from entrance
+
+Last layout image is the Una's Lute tile. Quest item is always on the other side of the broken down caravans
+
+Exit > Ogham Village
+
+
+Ogham Village----------------------------------------------
+Follow the edge of the zone north
+
+If you find the boss before Renly's Tools take Checkpoint to the entrance then wall-follow south
+
+Kill The Executioner then Exit > The Manor Ramparts
+
+
+The Manor Ramparts-----------------------------------------
+Layout could be flipped vertically! Usually go clockwise
+
+[Optional] Gallows on north wall has Lvl 1 Support, or south wall if layout is flipped
+
+
+Ogham Manor------------------------------------------------
+Each floor has a bridge roughly in the middle, find that
+first
+
+First Floor usually up and right. If you care about time get checkpoint for Candlemass but don't kill yet
+
+Second floor go in opposite direction as first floor
+
+Third floor go in opposite direction as second floor
+
+Kill Geonor. If you didn't kill Candlemass, before cutscene click Respawn At Checkpoint then Checkpoint > Candlemass then come back
+
+Exit > Act 2!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

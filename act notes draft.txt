@@ -1,0 +1,82 @@
+Act1-------------------------------------------------------
+Clearfell       - Beira         - 10% Cold Res
+Hunting Ground  - Crowbell Boss - 2 Passive Points
+Freythorn - King In The Mists - 30 Spirit + Lvl4 Spirit Gem
+Ogham Farmlands - Una's Lute    - 2 Passive Points
+Ogham Manor     - Candlemass    - +20 Life
+
+Ctrl+Alt+S to open settings and drag/scale windows
+
+Check Vendor at level up for
+Movespeed boots
+New Weapon
+Potions: Lvl 4, 10, 16, 23
+
+
+
+Act2-------------------------------------------------------
+Traitor's Passage    - Balbala      - Ascendancy
+Keth                 - Kabala       - 2 Passive Points
+Valley Of The Titans - Ancient Vows - Choice
+Deshar               - Final Letter - 2 Passive Points
+Spires Of Deshar - Sisters Of Garukhan - 10% Light res
+
+Check Vendor at level up for
+Movespeed boots
+New Weapon
+Potions: Lvl 23, 30, 40
+
+
+
+Act3-------------------------------------------------------
+Sandswept Marsh - Orok Campfire     - Lesser Jeweller's
+Jungle Ruins    - Mighty Silverfist - 2 Passive Points
+Venom Crypts    - Venom Draught     - Choice
+Azak Bog        - Ignagduk - 30 Spirit / Lvl10 spirit gem
+Jiquani's Machinarium - Blackjaw    - +10% Fire res
+Aggorat         - Blood Sacrifice   - 2 Passive Points
+
+Check Vendor at level up for
+Movespeed boots
+New Weapon
+Potions: Lvl 30, 40, 50
+
+
+Act4-------------------------------------------------------
+Clearfell       - Beira         - 10% Cold Res
+Hunting Ground  - Crowbell Boss - 2 Passive Points
+Ogham Farmlands - Una's Lute    - 2 Passive Points
+Ogham Manor     - Candlemass    - +8% Max Life
+Freythorn - King In The Mists - 30 Spirit / Lvl4 Spirit Gem
+
+Check Vendor at level up for
+Movespeed boots
+New Weapon
+Potions: Lvl 30, 40, 50
+
+
+
+Act5-------------------------------------------------------
+Keth                 - Kabala       - 2 Passive Points
+Valley Of The Titans - Ancient Vows - Choice
+Deshar               - Final Letter - 2 Passive Points
+Spires Of Deshar - Sisters Of Garukhan - 10% Light res
+
+Check Vendor at level up for
+Movespeed boots
+New Weapon
+Potions: Lvl 30, 40, 50
+
+
+
+Act6-------------------------------------------------------
+Sandswept Marsh - Orok Campfire     - Lesser Jeweller's
+Jungle Ruins    - Mighty Silverfist - 2 Passive Points
+Venom Crypts    - Venom Draught     - Choice
+Jiquani's Machinarium - Blackjaw    - +10% Fire res
+Azak Bog        - Ignagduk - 30 Spirit / Lvl10 spirit gem
+
+Check Vendor at level up for
+Movespeed boots
+New Weapon
+Potions: Lvl 40, 50, 60

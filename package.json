@@ -1,0 +1,49 @@
+{
+	"name": "path-of-levelling-2",
+	"productName": "Path Of Levelling 2",
+	"author": "Kami Guru",
+	"private": true,
+	"version": "0.1.0",
+	"type": "module",
+	"main": "dist-electron/main.js",
+	"postinstall": "electron-builder install-app-deps",
+	"scripts": {
+		"dev": "npm-run-all --parallel dev:react dev:electron",
+		"dev:react": "vite",
+		"dev:electron": "npm run transpile:electron && cross-env NODE_ENV=development electron .",
+		"transpile:electron": "tsc --project src/main/tsconfig.json",
+		"build": "tsc -b && vite build",
+		"lint": "eslint .",
+		"preview": "vite preview",
+		"dist:mac": "npm run transpile:electron && npm run build && electron-builder --mac --arm64",
+		"dist:win": "npm run transpile:electron && npm run build && electron-builder --win --x64",
+		"dist:linux": "npm run transpile:electron && npm run build && electron-builder --linux --x64",
+		"dist:testing": "electron-builder"
+	},
+	"dependencies": {
+		"electron-overlay-window": "3.3.0",
+		"electron-store": "^10.0.1",
+		"npm": "^11.2.0",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-rnd": "^10.5.2"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.21.0",
+		"@types/os-utils": "^0.0.4",
+		"@types/react": "^19.0.12",
+		"@types/react-dom": "^19.0.4",
+		"@vitejs/plugin-react": "^4.3.4",
+		"cross-env": "^7.0.3",
+		"electron": "33.2.1",
+		"electron-builder": "25.1.8",
+		"eslint": "^9.21.0",
+		"eslint-plugin-react-hooks": "^5.1.0",
+		"eslint-plugin-react-refresh": "^0.4.19",
+		"globals": "^15.15.0",
+		"npm-run-all": "^4.1.5",
+		"typescript": "5.6.x",
+		"typescript-eslint": "^8.29.0",
+		"vite": "^6.2.0"
+	}
+}
