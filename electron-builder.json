@@ -1,22 +1,22 @@
 {
-  "appId": "com.j-rabie.pathOfLevelling2",
-  "files": ["dist-electron", "dist-react"],
-  "extraResources": [
-    "dist-electron/ipc/preload.cjs",
-    "src/main/Builds/**",
-    "src/main/Settings/defaultSettings.json",
-    "src/renderer/assets/**"
-  ],
-  "icon": "assets/icon.ico",
-  "asarUnpack": ["**/*.node"],
-  "mac": {
-    "target": "dmg"
-  },
-  "linux": {
-    "target": "AppImage",
-    "category": "Utility"
-  },
-  "win": {
-    "target": ["nsis"]
-  }
+	"appId": "com.kami-guru.pathOfLevelling2",
+	"files": ["dist-electron", "dist-react"],
+	"extraResources": [
+		"dist-electron/ipc/preload.cjs",
+		"src/main/Builds/**",
+		"src/main/Settings/defaultSettings.json",
+		"src/renderer/assets/**"
+	],
+	"icon": "assets/icon.ico",
+	"asarUnpack": ["**/*.node"],
+	"mac": {
+		"target": "dmg"
+	},
+	"linux": {
+		"target": "AppImage",
+		"category": "Utility"
+	},
+	"win": {
+		"target": ["nsis"]
+	}
 }
