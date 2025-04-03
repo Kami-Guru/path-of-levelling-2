@@ -29,6 +29,7 @@
 		"react-rnd": "^10.5.2"
 	},
 	"devDependencies": {
+		"@electron-forge/publisher-github": "^7.8.0",
 		"@eslint/js": "^9.21.0",
 		"@types/os-utils": "^0.0.4",
 		"@types/react": "^19.0.12",
