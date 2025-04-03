@@ -24,14 +24,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Determine next version
-        id: version
+      - name: Determine Next Version
+        shell: pwsh
         run: |
-          LAST_TAG=$(git describe --tags --abbrev=0 || echo "v0.0.0")
-          echo "Last version: $LAST_TAG"
-          VERSION=$(echo $LAST_TAG | awk -F. '{print $1"."$2"."$3+1}')
-          echo "New version: $VERSION"
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          $LAST_TAG = $(git describe --tags --abbrev=0) -replace "`n", ""
+          if (-not $LAST_TAG) { $LAST_TAG = "v0.0.0" }
+          echo "LAST_TAG=$LAST_TAG" | Out-File -FilePath $env:GITHUB_ENV -Append
 
       - name: Update package.json version
         run: npm version $VERSION --no-git-tag-version
