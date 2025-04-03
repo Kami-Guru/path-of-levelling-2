@@ -4,6 +4,7 @@ import { getBuildPath } from '../pathResolver.js';
 import { GemTracker } from './GemTracker.js';
 import { LevelTracker } from './LevelTracker.js';
 import { ZoneTracker } from './ZoneTracker.js';
+import log from 'electron-log';
 
 // Class to basically track state that shows in the front end, eg the current zone,
 // current player/monster level, current gem setup, etc.
@@ -59,6 +60,7 @@ export class StateTracker {
 			var buffer = fs.readFileSync(this.savedStatePath);
 			var savedState = JSON.parse(buffer.toString());
 
+			log.info('Loading notes from path', this.zoneNotesPath);
 			this.ZoneTracker.loadAllZoneNotes(this.zoneNotesPath);
 			this.ZoneTracker.saveZoneFromCode(savedState.zoneCode, true);
 
@@ -72,8 +74,8 @@ export class StateTracker {
 			this.GemTracker.saveGemSetupFromPlayerLevel(savedState.playerLevel);
 		} catch (error) {
 			//TODO: Do I even need to do anything here? This feature is not important
-			console.log('Could not load saved state, with error:');
-			console.log(error);
+			log.info('Could not load saved state, with error:');
+			log.info(error);
 		}
 	}
 

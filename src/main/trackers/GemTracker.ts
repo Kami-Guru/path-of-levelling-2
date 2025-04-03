@@ -1,4 +1,5 @@
 import fs from 'fs';
+import log from 'electron-log';
 
 export class GemTracker {
 	allGemSetups: GemSetup[];
@@ -19,7 +20,7 @@ export class GemTracker {
 
 	// Load gem setups from file.
 	loadGemSetups(gemSetupPath: string) {
-		console.log('Trying to get gem setups');
+		log.info('Trying to get gem setups');
 		this.gemSetupPath = gemSetupPath;
 
 		try {
@@ -31,9 +32,9 @@ export class GemTracker {
 				return setup.level;
 			});
 
-			console.log('Successfully loaded gem setups');
+			log.info('Successfully loaded gem setups');
 		} catch (error) {
-			console.log('Could not load gem setups');
+			log.info('Could not load gem setups');
 		}
 	}
 
@@ -53,11 +54,11 @@ export class GemTracker {
 		});
 
 		if (foundGemSetup == null) {
-			console.log('Could not find gem setup matching level', playerLevel);
+			log.info('Could not find gem setup matching level', playerLevel);
 			return false;
 		}
 		if (foundGemSetup == this.gemSetup) {
-			console.log('Gem setup found, but same as existing. No changes made.');
+			log.info('Gem setup found, but same as existing. No changes made.');
 			return false;
 		}
 

@@ -56,5 +56,8 @@ export function getClientTxtPathWindows() {
 }
 
 export function getZoneLayoutImagesAbsolutePath() {
-	return path.join(app.getAppPath(), 'assets/Layout Images');
+	return path.join(
+		app.getAppPath(),
+		isDev() ? 'assets/Layout Images' : 'dist-react/Layout Images'
+	);
 }

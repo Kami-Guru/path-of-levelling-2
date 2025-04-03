@@ -1,4 +1,5 @@
 import { BrowserWindow } from 'electron';
+import log from 'electron-log';
 import fs from 'fs';
 import { getClientTxtPath } from './pathResolver.js';
 
@@ -16,6 +17,7 @@ export class LogWatcher {
 
 	// The fs.watchFile is the watcher that gets changes from client.txt
 	watchClientTxt(mainWindow: BrowserWindow) {
+		log.info('Trying to subscribe to Client.txt');
 		try {
 			this.previousFileSize = fs.statSync(settings.getClientTxtPath()).size;
 		} catch (e: any) {
@@ -25,13 +27,13 @@ export class LogWatcher {
 
 			if ((e.code = 'ENOENT')) {
 				//@ts-ignore
-				console.log(
+				log.info(
 					'ERROR: Could not subscribe to client txt changes, wrong client path!'
 				);
 				return;
 			}
 
-			console.log(
+			log.info(
 				'ERROR: Could not subscribe to client txt changes, unknown error',
 				e
 			);
@@ -39,6 +41,7 @@ export class LogWatcher {
 		}
 
 		mainState.logWatcherActive = true;
+		log.info('Successfully subscribed to Client.txt');
 
 		fs.watchFile(settings.getClientTxtPath(), (current, previous) => {
 			var data = this.readNewLines(current, previous);
@@ -125,7 +128,7 @@ export class LogWatcher {
 		//read the buffer here
 		var data = this.parseBuffer(buffer);
 
-		console.log('New lines had data', data);
+		log.info('New lines had data', data);
 		return data;
 	}
 

@@ -1,3 +1,4 @@
+import log from 'electron-log';
 import fs from 'fs';
 import path from 'path';
 import { getBuildPath, getZoneLayoutImagesAbsolutePath } from '../pathResolver.js';
@@ -48,14 +49,17 @@ export class ZoneTracker {
 
 	// TODO: This should be part of constructor, I forgot why it isn't.
 	loadAllZoneNotes(allZoneNotesPath: string) {
+		log.info('Trying to load zone notes at path', allZoneNotesPath);
+
 		this.allZoneNotesPath = allZoneNotesPath;
 
 		try {
 			var buffer = fs.readFileSync(this.allZoneNotesPath);
 			this.allZoneNotes = JSON.parse(buffer.toString());
+			log.info('Successfully loaded zone notes');
 		}
 		catch (error) {
-			console.log('Could not load zone notes');
+			log.info('Could not load zone notes');
 		}
 	}
 
@@ -191,9 +195,16 @@ export class ZoneTracker {
 
 		this.actNotes = actNotes.notes;
 
+		// Reuse Normal difficulty zone notes for Cruel
+		// TODO: Uh can I do this? I think cruel is a little different right
+		var zoneCodeNoCruel = this.zoneCode
+		if (zoneCodeNoCruel.substring(0, 2) == 'C_') {
+			zoneCodeNoCruel = zoneCodeNoCruel.substring(2);
+		}
+
 		//@ts-ignore
 		var zoneNotes = this.allZoneNotes.zoneNotes.find((zoneNotes) => {
-			return zoneNotes.code == this.zoneCode;
+			return zoneNotes.code == zoneCodeNoCruel;
 		});
 
 		// This basically gives users the option to not set notes for a zone
@@ -217,7 +228,7 @@ export class ZoneTracker {
 			zoneCode = zoneCode.substring(2);
 		}
 
-		console.log('Trying to get zone image paths')
+		log.info('Trying to get zone image paths for zone code', zoneCode)
 		const directories = fs.readdirSync(getZoneLayoutImagesAbsolutePath());
 
 		// Note we HAVE to use find since G1_1 also matches G1_15
@@ -242,7 +253,7 @@ export class ZoneTracker {
 		})
 
 		this.zoneImageFilePaths = filePaths;
-		console.log('Found zone image paths', this.zoneImageFilePaths)
+		log.info('Found zone image paths', this.zoneImageFilePaths)
 		return true;
 	}
 }
