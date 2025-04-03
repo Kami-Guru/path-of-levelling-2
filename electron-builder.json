@@ -1,5 +1,6 @@
 {
 	"appId": "com.kami-guru.pathOfLevelling2",
+	"productName": "Path Of Levelling 2",
 	"files": ["dist-electron", "dist-react"],
 	"extraResources": [
 		"dist-electron/ipc/preload.cjs",
@@ -9,13 +10,6 @@
 	],
 	"icon": "assets/icon.ico",
 	"asarUnpack": ["**/*.node"],
-	"mac": {
-		"target": "dmg"
-	},
-	"linux": {
-		"target": "AppImage",
-		"category": "Utility"
-	},
 	"win": {
 		"target": ["nsis"]
 	}

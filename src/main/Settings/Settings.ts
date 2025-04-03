@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { LogWatcher } from '../LogWatcher.js';
 import { getDefaultSettingsPath } from '../pathResolver.js';
+import defaultSettings from './defaultSettings.json' with { type: "json" };
 
 export class Settings {
 	store: Store;
@@ -14,8 +15,6 @@ export class Settings {
 		// Ensure that the settings store doesn't return undefined everywhere by
 		// copying from a default settings.
 		// !Keep the default settings updated!
-		var defaultSettingsBuffer = fs.readFileSync(getDefaultSettingsPath());
-		var defaultSettings = JSON.parse(defaultSettingsBuffer.toString());
 
 		// TODO Yes yes this is terrible I'll do it recursively later
 		var test = this.store.get('clientTxtPath');

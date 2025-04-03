@@ -24,6 +24,7 @@ export class LogWatcher {
 			mainState.logWatcherActive = false;
 
 			if ((e.code = 'ENOENT')) {
+				//@ts-ignore
 				console.log(
 					'ERROR: Could not subscribe to client txt changes, wrong client path!'
 				);

@@ -1,4 +1,5 @@
 import { app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray } from 'electron';
+import log from 'electron-log';
 import { OVERLAY_WINDOW_OPTS, OverlayController } from 'electron-overlay-window';
 import electronUpdater, { type AppUpdater } from 'electron-updater';
 import path from 'path';
@@ -20,6 +21,11 @@ export function getAutoUpdater(): AppUpdater {
 	return autoUpdater;
 }
 
+getAutoUpdater().logger = log;
+//@ts-ignore
+getAutoUpdater().logger.transports.file.level = 'info';
+log.info('App starting...');
+
 app.whenReady().then(() => {
 	setTimeout(
 		createWindow,
@@ -28,6 +34,10 @@ app.whenReady().then(() => {
 
 	// Auto updates
 	getAutoUpdater().checkForUpdatesAndNotify();
+});
+
+getAutoUpdater().on('update-available', (message) => {
+	log.info('Checked for update, received:', message);
 });
 
 function createWindow() {

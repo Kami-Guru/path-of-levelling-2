@@ -2,19 +2,15 @@
 	"name": "path-of-levelling-2",
 	"productName": "Path Of Levelling 2",
 	"author": "Kami Guru",
+	"repository": "https://github.com/JaredRabie/path-of-levelling-2",
 	"private": true,
-	"version": "0.1.0",
+	"version": "0.1.2",
 	"type": "module",
 	"main": "dist-electron/main.js",
 	"postinstall": "electron-builder install-app-deps",
-	"build": {
-		"appId": "com.kami-guru.pathOfLevelling2",
-		"win": {
-			"target": "nsis"
-		},
-		"nsis": {
-			"oneClick": "false"
-		}
+	"publish": {
+		"provider": "github",
+		"releaseType": "release"
 	},
 	"scripts": {
 		"dev": "npm-run-all --parallel dev:react dev:electron",
@@ -24,12 +20,11 @@
 		"build": "tsc -b && vite build",
 		"lint": "eslint .",
 		"preview": "vite preview",
-		"dist:mac": "npm run transpile:electron && npm run build && electron-builder --mac --arm64",
 		"dist:win": "npm run transpile:electron && npm run build && electron-builder --win --x64 -p always",
-		"dist:linux": "npm run transpile:electron && npm run build && electron-builder --linux --x64",
-		"dist:testing": "electron-builder"
+		"dist:testing": "npm run transpile:electron && npm run build && electron-builder --win --x64"
 	},
 	"dependencies": {
+		"electron-log": "^5.3.3",
 		"electron-overlay-window": "3.3.0",
 		"electron-store": "^10.0.1",
 		"electron-updater": "^6.6.2",
