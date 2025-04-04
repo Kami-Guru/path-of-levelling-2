@@ -24,6 +24,28 @@ export class Settings {
 		if (!this.store.get('buildFolder')) {
 			this.store.set('buildFolder', defaultSettings.buildFolder);
 		}
+
+		// Get last session state
+		if (!this.store.get('lastSessionState.zoneCode')) {
+			this.store.set(
+				'lastSessionState.zoneCode',
+				defaultSettings.lastSessionState.zoneCode
+			);
+		}
+		if (!this.store.get('lastSessionState.playerLevel')) {
+			this.store.set(
+				'lastSessionState.playerLevel',
+				defaultSettings.lastSessionState.playerLevel
+			);
+		}
+		if (!this.store.get('lastSessionState.monsterLevel')) {
+			this.store.set(
+				'lastSessionState.monsterLevel',
+				defaultSettings.lastSessionState.monsterLevel
+			);
+		}
+
+		// Get UI positions
 		if (!this.store.get('uiSettings.settingsOverlayPosition')) {
 			this.store.set(
 				'uiSettings.settingsOverlayPosition',

@@ -1,6 +1,11 @@
 {
 	"clientTxtPath": "C:/SteamLibrary/steamapps/common/Path of Exile 2/logs/Client.txt",
 	"buildFolder": "0.1.0 Lightning Arrow Deadeye",
+	"lastSessionState": {
+		"zoneCode": "G1_1",
+		"monsterLevel": 1,
+		"playerLevel": 1
+	},
 	"uiSettings": {
 		"settingsOverlayPosition": {
 			"x": 659,

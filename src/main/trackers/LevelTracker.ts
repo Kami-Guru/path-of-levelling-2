@@ -1,3 +1,5 @@
+import log from 'electron-log';
+
 export class LevelTracker {
 	playerLevel: number;
 	monsterLevel: number;
@@ -31,44 +33,51 @@ export class LevelTracker {
 	}
 
 	recalculateEXPModifier() {
+		log.info(
+			'Recalculating EXP modifier with playerLevel',
+			this.playerLevel,
+			'monsterLevel',
+			this.monsterLevel
+		);
 		var safeZone = Math.floor(3 + this.playerLevel / 16);
 
 		// Don't want to modify this.monsterLevel so just make a placeholder
 		var monsterLevel = this.monsterLevel;
-		if ((monsterLevel = 71)) {
+		if ((monsterLevel == 71)) {
 			monsterLevel = 70.94;
-		} else if ((monsterLevel = 72)) {
+		} else if ((monsterLevel == 72)) {
 			monsterLevel = 71.82;
-		} else if ((monsterLevel = 73)) {
+		} else if ((monsterLevel == 73)) {
 			monsterLevel = 72.64;
-		} else if ((monsterLevel = 74)) {
+		} else if ((monsterLevel == 74)) {
 			monsterLevel = 73.4;
-		} else if ((monsterLevel = 75)) {
+		} else if ((monsterLevel == 75)) {
 			monsterLevel = 74.1;
-		} else if ((monsterLevel = 76)) {
+		} else if ((monsterLevel == 76)) {
 			monsterLevel = 74.74;
-		} else if ((monsterLevel = 77)) {
+		} else if ((monsterLevel == 77)) {
 			monsterLevel = 75.32;
-		} else if ((monsterLevel = 78)) {
+		} else if ((monsterLevel == 78)) {
 			monsterLevel = 75.84;
-		} else if ((monsterLevel = 79)) {
+		} else if ((monsterLevel == 79)) {
 			monsterLevel = 76.3;
-		} else if ((monsterLevel = 80)) {
+		} else if ((monsterLevel == 80)) {
 			monsterLevel = 76.7;
-		} else if ((monsterLevel = 81)) {
+		} else if ((monsterLevel == 81)) {
 			monsterLevel = 77.04;
-		} else if ((monsterLevel = 82)) {
+		} else if ((monsterLevel == 82)) {
 			monsterLevel = 77.32;
-		} else if ((monsterLevel = 83)) {
+		} else if ((monsterLevel == 83)) {
 			monsterLevel = 77.54;
-		} else if ((monsterLevel = 84)) {
+		} else if ((monsterLevel == 84)) {
 			monsterLevel = 77.7;
 		}
 
 		var effectiveDifference = Math.abs(this.playerLevel - monsterLevel) - safeZone;
 
 		if (effectiveDifference < 0) {
-			return 1;
+			this.expMulti = 1;
+			return;
 		}
 
 		var expMulti = Math.sqrt(
