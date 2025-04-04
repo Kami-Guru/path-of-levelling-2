@@ -29,11 +29,16 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Zip dist directory
+        run: |
+          powershell Compress-Archive -Path dist\* -DestinationPath dist.zip
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/*.exe
-          
+          files: |
+            dist/*.exe
+            dist.zip
           tag_name: stable
           name: Release stable
           body: "Automated release of version ${{ github.ref_name }}"
