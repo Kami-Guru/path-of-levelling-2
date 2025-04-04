@@ -31,7 +31,7 @@ jobs:
 
       - name: Zip dist directory
         run: |
-          powershell Compress-Archive -Path dist\* -DestinationPath portable.zip
+          powershell Compress-Archive -Path ./ -DestinationPath portable.zip
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
