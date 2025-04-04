@@ -11,6 +11,6 @@
 	"icon": "assets/icon.ico",
 	"asarUnpack": ["**/*.node"],
 	"win": {
-		"target": ["nsis"]
+		"target": ["nsis", "portable"]
 	}
 }
