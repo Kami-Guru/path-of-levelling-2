@@ -125,6 +125,7 @@ export function SettingsComponent() {
 				handleResize(e, direction, ref, delta, position)
 			}
 			style={{ backgroundColor: 'rgba(50, 50, 50, 0.7)' }}
+			bounds="parent"
 		>
 			<div className="SettingsOverlay">
 				<div className="HotkeysWrapper">

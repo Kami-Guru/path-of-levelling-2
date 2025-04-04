@@ -4,6 +4,11 @@
 		format('woff2');
 }
 
+::-webkit-scrollbar {
+	width: 0; /* Remove scrollbar space */
+	background: transparent; /* Optional: just make scrollbar invisible */
+}
+
 html {
 	height: 100%;
 	overflow: visible;

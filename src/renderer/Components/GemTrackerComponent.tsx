@@ -125,13 +125,14 @@ export function GemTrackerComponent() {
 			onResizeStop={(e, direction, ref, delta, position) =>
 				handleResize(e, direction, ref, delta, position)
 			}
+			bounds="parent"
 		>
 			<div className="GemTracker">
 				<select
 					className="gemDropdown"
 					name="gemLevelSelected"
 					value={gemDropdown.playerLevelSelected}
-					onChange={ (gemSetupLevel) => {
+					onChange={(gemSetupLevel) => {
 						handleGemDropdownSelection(gemSetupLevel);
 					}}
 				>

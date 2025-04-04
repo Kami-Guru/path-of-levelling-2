@@ -88,6 +88,7 @@ export function LayoutImagesComponent(props: { sharedZoneCode: any }) {
 			onResizeStop={(e, direction, ref, delta, position) =>
 				handleResize(e, direction, ref, delta, position)
 			}
+			bounds="parent"
 		>
 			<div className="LayoutImages">
 				{filePaths.map(function (filePath: string) {

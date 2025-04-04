@@ -136,6 +136,7 @@ export function ZoneNotesComponent(props: {
 			onResizeStop={(e, direction, ref, delta, position) =>
 				handleResize(e, direction, ref, delta, position)
 			}
+			bounds="parent"
 		>
 			<div className="ZoneNotes">
 				<select
@@ -158,9 +159,7 @@ export function ZoneNotesComponent(props: {
 						);
 					})}
 				</select>
-				<p className="ZoneOrActNotes">
-					{zoneDropdown.currentActNotes}
-				</p>
+				<p className="ZoneOrActNotes">{zoneDropdown.currentActNotes}</p>
 				<select
 					className="ZoneDropdown"
 					name="zoneNameSelected"

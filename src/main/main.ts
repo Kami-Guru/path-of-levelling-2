@@ -17,10 +17,15 @@ import { Settings } from './Settings/Settings.js';
 import { StateTracker } from './trackers/StateTracker.js';
 import { isDev } from './util.js';
 
-
 declare global {
 	var settings: Settings;
 	var mainState: StateTracker;
+}
+
+const gotTheLock = app.requestSingleInstanceLock();
+
+if (!gotTheLock) {
+	app.quit();
 }
 
 export function getAutoUpdater(): AppUpdater {

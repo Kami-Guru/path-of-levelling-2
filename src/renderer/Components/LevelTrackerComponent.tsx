@@ -115,6 +115,7 @@ export function LevelTrackerComponent() {
 				bottomLeft: false,
 				topLeft: false,
 			}}
+			bounds="parent"
 		>
 			<div className="LevelTracker">
 				<p>{getDiffLine()}</p>
