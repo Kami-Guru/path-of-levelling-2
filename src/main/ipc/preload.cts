@@ -15,7 +15,9 @@ electron.contextBridge.exposeInMainWorld('electron', {
 	getClientPath: async () => electron.ipcRenderer.invoke('getClientPath'),
 	saveClientPath: async (clientTxtPath: string) =>
 		electron.ipcRenderer.invoke('saveClientPath', clientTxtPath),
+
 	// Position Settings
+	getFontScalingFactor: async () => electron.ipcRenderer.invoke('getFontScalingFactor'),
 	getSettingsOverlayPositionSettings: async () =>
 		electron.ipcRenderer.invoke('getSettingsOverlayPositionSettings'),
 	saveSettingsOverlayPositionSettings: async (settingsOverlaySettings: string) =>
@@ -23,10 +25,12 @@ electron.contextBridge.exposeInMainWorld('electron', {
 			'saveSettingsOverlayPositionSettings',
 			settingsOverlaySettings
 		),
+
 	getZoneOverlayPositionSettings: async () =>
 		electron.ipcRenderer.invoke('getZoneOverlayPositionSettings'),
 	saveZoneOverlayPositionSettings: async (zoneSettings: string) =>
 		electron.ipcRenderer.invoke('saveZoneOverlayPositionSettings', zoneSettings),
+
 	getLayoutImagesOverlayPositionSettings: async () =>
 		electron.ipcRenderer.invoke('getLayoutImagesOverlayPositionSettings'),
 	saveLayoutImagesOverlayPositionSettings: async (layoutImagesSettings: string) =>
@@ -34,10 +38,12 @@ electron.contextBridge.exposeInMainWorld('electron', {
 			'saveLayoutImagesOverlayPositionSettings',
 			layoutImagesSettings
 		),
+
 	getLevelOverlayPositionSettings: async () =>
 		electron.ipcRenderer.invoke('getLevelOverlayPositionSettings'),
 	saveLevelOverlayPositionSettings: async (levelSettings: string) =>
 		electron.ipcRenderer.invoke('saveLevelOverlayPositionSettings', levelSettings),
+
 	getGemOverlayPositionSettings: async () =>
 		electron.ipcRenderer.invoke('getGemOverlayPositionSettings'),
 	saveGemOverlayPositionSettings: async (gemSettings: string) =>

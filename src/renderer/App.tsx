@@ -14,6 +14,8 @@ function App() {
 	//NOT IMPLEMENTED SO ALWAYS FALSE
 	const [gemTrackerActive, setGemTrackerActive] = useState(false);
 
+	const [fontSize, setFontSize] = useState(11);
+
 	useEffect(() => {
 		//@ts-ignore
 		window.electron.subscribeToHotkeys((hotkeyEvent: any) => {
@@ -48,8 +50,17 @@ function App() {
 		}
 	};
 
+	useEffect(() => {
+		//@ts-ignore
+		window.electron.getFontScalingFactor().then((fontScale: any) => {
+			console.log('got font scale', fontScale)
+			setFontSize(Math.ceil(11 * fontScale));
+		});
+	}, []);
+
 	return (
 		<div
+			style={{ fontSize: fontSize }}
 			className={
 				settingsActive ? 'overlay-container-shown' : 'overlay-container-hidden'
 			}

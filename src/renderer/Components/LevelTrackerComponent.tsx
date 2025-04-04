@@ -108,7 +108,7 @@ export function LevelTrackerComponent() {
 			enableResizing={{
 				top: false,
 				right: true,
-				bottom: true,
+				bottom: false,
 				left: true,
 				topRight: false,
 				bottomRight: false,

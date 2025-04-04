@@ -8,26 +8,26 @@
 	},
 	"uiSettings": {
 		"settingsOverlayPosition": {
-			"x": 659,
-			"y": 232,
-			"height": "259px",
-			"width": "613px"
+			"x": 665,
+			"y": 221,
+			"height": "358px",
+			"width": "611px"
 		},
 		"zoneTrackerPosition": {
-			"x": 0,
-			"y": 108,
+			"x": 22,
+			"y": 24,
 			"height": "263px",
 			"width": "516px"
 		},
 		"layoutImagesTrackerPosition": {
-			"x": 1,
-			"y": 110,
-			"height": "263px",
-			"width": "516px"
+			"x": 58,
+			"y": 405,
+			"height": "200",
+			"width": "400"
 		},
 		"levelTrackerPosition": {
-			"x": 1775,
-			"y": 1395,
+			"x": 61,
+			"y": 632,
 			"height": "19px",
 			"width": "335px"
 		},

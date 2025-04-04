@@ -1,4 +1,12 @@
-import { app, BrowserWindow, globalShortcut, ipcMain, Menu, Tray } from 'electron';
+import {
+	app,
+	BrowserWindow,
+	globalShortcut,
+	ipcMain,
+	Menu,
+	screen,
+	Tray,
+} from 'electron';
 import log from 'electron-log';
 import { OVERLAY_WINDOW_OPTS, OverlayController } from 'electron-overlay-window';
 import electronUpdater, { type AppUpdater } from 'electron-updater';
@@ -27,6 +35,9 @@ getAutoUpdater().logger = log;
 getAutoUpdater().logger.transports.file.level = 'info';
 log.info('App starting...');
 
+app.commandLine.appendSwitch('high-dpi-support', '1');
+app.commandLine.appendSwitch('force-device-scale-factor', '1');
+
 app.whenReady().then(() => {
 	setTimeout(
 		createWindow,
@@ -37,6 +48,7 @@ app.whenReady().then(() => {
 	getAutoUpdater().checkForUpdatesAndNotify();
 });
 
+// Check for update on startup
 getAutoUpdater().on('update-available', (message) => {
 	log.info('Checked for update, received:', message);
 });
@@ -107,6 +119,12 @@ function createWindow() {
 }
 
 function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatcher) {
+	ipcMain.handle('getFontScalingFactor', async (event) => {
+		const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+		console.log('Main monitor width and height', width, height);
+		return height / 1080; // return a scaling factor to scale up text with resolution
+	});
+
 	// Handle events from the settings overlay
 	ipcMain.handle('getClientPath', async (event) => {
 		return settings.getClientTxtPath();
