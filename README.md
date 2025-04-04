@@ -13,7 +13,9 @@ In Progress:
      - An overlay for displaying gem setups at different level breakpoints
      - An overlay which shows a screenshot of a passive skill tree (presumably from POB), with many potential screenshots that will be displayed based on your current level.
 
-## Some Screenshots:
+## Demo:
+https://youtu.be/iSzbu-6Ncwk
+
 ![image](https://github.com/user-attachments/assets/54e9e939-04ac-4f27-93c1-b3164e434b67)
 
 Use Ctrl+Alt+S to open settings:
