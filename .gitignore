@@ -1,7 +1,11 @@
+# Electron Local Dev/Test
 dist
 dist-electron
 dist-react
 
+# Docs
+docs/.vitepress/dist
+docs/.vitepress/cache
 
 ### From Github
 
