@@ -12,5 +12,8 @@
 	"asarUnpack": ["**/*.node"],
 	"win": {
 		"target": ["nsis", "portable"]
+	},
+	"linux": {
+		"target": ["AppImage"]
 	}
 }

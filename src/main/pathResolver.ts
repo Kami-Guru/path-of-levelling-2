@@ -5,8 +5,8 @@ import { isDev } from './util.js';
 export function getPreloadPath() {
 	return path.join(
 		app.getAppPath(),
-		isDev() ? '.' : '..', //Need to escape app.asar in production for any files listed in electron-builder.json
-		'/dist-electron/ipc/preload.cjs' //Needs to be cjs so that it is compiled separately and can be accessed after compilation.
+		isDev() ? '.' : '..', // Need to escape app.asar in production for any files listed in electron-builder.json
+		'/dist-electron/ipc/preload.cjs' // Needs to be cjs so that it is compiled separately and can be accessed after compilation.
 	);
 }
 
@@ -17,7 +17,8 @@ export function getUIPath() {
 export function getDesktopIconPath() {
 	return path.join(
 		app.getAppPath(),
-		isDev() ? 'assets/icon.ico' : 'dist-react/icon.ico'
+		isDev() ? 'assets' : 'dist-react',
+		process.platform === "win32" ? "icon.ico" : "icon.png"
 	);
 }
 
@@ -41,8 +42,6 @@ export function getDefaultSettingsPath() {
 
 export function getClientTxtPath(): string {
 	return getClientTxtPathWindows();
-	//this is for when I'm developing on WSL
-	//return isDev() ? getClientTxtPathWSL() : getClientTxtPathWindows();
 }
 
 export function getClientTxtPathWSL() {

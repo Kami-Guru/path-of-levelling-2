@@ -1,7 +1,6 @@
 @font-face {
 	font-family: 'Jetbrains Mono Regular';
-	src: local('Jetbrains Mono Regular'), url(./fonts/JetbrainsMono-Regular.woff2),
-		format('woff2');
+	src: local('Jetbrains Mono Regular'), url(/fonts/JetBrainsMono-Regular.woff2), format('woff2');
 }
 
 ::-webkit-scrollbar {
@@ -33,7 +32,6 @@ body {
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	font-family: 'Jetbrains Mono Regular';
-	font-weight: 400; /*TODO: Wtf does this do?*/
 
 	-webkit-font-smoothing: antialiased;
 	-webkit-padding-end: 0;
