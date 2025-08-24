@@ -24,8 +24,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
+      - name: Build Windows release
         run: npm run dist:win
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Linux release
+        run: npm run dist:linux
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
