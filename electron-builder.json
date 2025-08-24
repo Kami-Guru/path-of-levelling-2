@@ -8,12 +8,13 @@
 		"src/main/Settings/defaultSettings.json",
 		"src/renderer/assets/**"
 	],
-	"icon": "assets/icon.ico",
 	"asarUnpack": ["**/*.node"],
 	"win": {
-		"target": ["nsis", "portable"]
+		"target": ["nsis", "portable"],
+		"icon": "assets/icon.ico"
 	},
 	"linux": {
-		"target": ["AppImage"]
+		"target": ["AppImage"],
+		"icon": "assets/icon-big.png"
 	}
 }

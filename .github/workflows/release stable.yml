@@ -33,19 +33,3 @@ jobs:
         run: npm run dist:linux
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Zip dist directory
-        run: |
-          powershell Compress-Archive -Path ./ -DestinationPath portable.zip
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            dist/*.exe
-            portable.zip
-          tag_name: stable
-          name: Release stable
-          body: "Automated release of version ${{ github.ref_name }}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
