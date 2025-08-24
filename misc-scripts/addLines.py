@@ -1,7 +1,6 @@
 clientTxtFile = open('/mnt/d/SteamLibrary/steamapps/common/Path of Exile 2/logs/Client.txt', "a")
 
-
-#update zone
+#Insert a line to the client file - simulate changing zone.
 zoneCode = input("Enter zone code:")
 print("zoneCode selected", zoneCode)
 
@@ -17,7 +16,7 @@ clientTxtFile.close()
 
 
 """
-#update player level
+#simulate player level up
 playerLevel = input("Enter player level:")
 print("playerLevel selected", playerLevel)
 

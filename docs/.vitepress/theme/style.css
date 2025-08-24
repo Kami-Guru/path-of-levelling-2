@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+th,
+td {
+    width: 60%;
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+    word-break: break-word;
+    
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    width: 22%;
+    text-align: center;
+}

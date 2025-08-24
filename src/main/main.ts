@@ -6,9 +6,10 @@ import {
 	Menu,
 	screen,
 	Tray,
+	nativeImage,
 } from 'electron';
 import log from 'electron-log';
-import { OVERLAY_WINDOW_OPTS, OverlayController } from 'electron-overlay-window';
+import { AttachEvent, OVERLAY_WINDOW_OPTS, OverlayController } from 'electron-overlay-window';
 import electronUpdater, { type AppUpdater } from 'electron-updater';
 import path from 'path';
 import { LogWatcher } from './LogWatcher.js';
@@ -22,9 +23,8 @@ declare global {
 	var mainState: StateTracker;
 }
 
-const gotTheLock = app.requestSingleInstanceLock();
-
-if (!gotTheLock) {
+// Only allow one instance of the app
+if (!app.requestSingleInstanceLock()) {
 	app.quit();
 }
 
@@ -40,6 +40,8 @@ getAutoUpdater().logger = log;
 getAutoUpdater().logger.transports.file.level = 'info';
 log.info('App starting...');
 
+// Basically remove the scale factor people use on windows - we only need to scale font size
+// not the whole window, so this stops padding etc from taking up the whole screen.
 app.commandLine.appendSwitch('high-dpi-support', '1');
 app.commandLine.appendSwitch('force-device-scale-factor', '1');
 
@@ -60,9 +62,11 @@ getAutoUpdater().on('update-available', (message) => {
 
 function createWindow() {
 	// Set up the tray
-	const tray = new Tray(path.join(getDesktopIconPath()));
-	tray.setToolTip(`Path Of Levelling 2 v${app.getVersion()}`);
+	const trayImage = nativeImage.createFromPath(getDesktopIconPath());
+	if (trayImage.isEmpty()) console.log('Tray image failed to load, tray icon will not display!');
 
+	const tray = new Tray(trayImage);
+	tray.setToolTip(`Path Of Levelling 2 v${app.getVersion()}`);
 	tray.setContextMenu(
 		Menu.buildFromTemplate([
 			{
@@ -77,6 +81,7 @@ function createWindow() {
 	// Set up main window
 	const mainWindow = new BrowserWindow({
 		...OVERLAY_WINDOW_OPTS,
+		icon: trayImage,
 		webPreferences: {
 			//nodeIntegration: true,
 			preload: path.join(getPreloadPath()),
@@ -85,18 +90,14 @@ function createWindow() {
 
 	if (isDev()) {
 		mainWindow.loadURL('http://localhost:5123');
+		mainWindow.webContents.openDevTools({ mode: 'detach', activate: false });
 	} else {
 		mainWindow.loadFile(path.join(getUIPath()));
 	}
 
-	if (isDev()) {
-		mainWindow.webContents.openDevTools();
-	}
-
 	OverlayController.attachByTitle(
 		mainWindow,
-		//isDev() ? 'Untitled - Notepad' : 'Path of Exile 2'
-		'Path of Exile 2'
+		"Path of Exile 2"
 	);
 
 	// Declare global singletons
@@ -114,13 +115,8 @@ function createWindow() {
 
 	registerGlobalHotkeys(mainWindow);
 
-	//---------------testing
-	OverlayController.events.addListener('blur', () => {
-		mainWindow.show();
-	});
-
 	// Uh still unfamiliar with this package so just logging all events
-	LogOverlayEventCalls();
+	if (isDev()) LogOverlayEventCalls(mainWindow);
 }
 
 function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatcher) {
@@ -247,7 +243,6 @@ function registerGlobalHotkeys(mainWindow: BrowserWindow) {
 	//Show/hide settings - default hidden
 	globalShortcut.register('Ctrl+Alt+S', () => {
 		mainState.settingsOpen = !mainState.settingsOpen;
-		// Push settings open/closed to frontend
 		mainWindow.webContents.send('Hotkeys', {
 			Hotkey: 'ToggleSettings',
 			value: mainState.settingsOpen,
@@ -258,7 +253,6 @@ function registerGlobalHotkeys(mainWindow: BrowserWindow) {
 	//Show/hide zone notes - default shown
 	globalShortcut.register('Ctrl+Alt+z', () => {
 		mainState.zoneNotesOpen = !mainState.zoneNotesOpen;
-		// Push settings open/closed to frontend
 		mainWindow.webContents.send('Hotkeys', {
 			Hotkey: 'ToggleZoneNotes',
 			value: mainState.zoneNotesOpen,
@@ -267,7 +261,6 @@ function registerGlobalHotkeys(mainWindow: BrowserWindow) {
 	//Show/hide layout images - default shown
 	globalShortcut.register('Ctrl+Alt+i', () => {
 		mainState.layoutImagesOpen = !mainState.layoutImagesOpen;
-		// Push settings open/closed to frontend
 		mainWindow.webContents.send('Hotkeys', {
 			Hotkey: 'ToggleLayoutImages',
 			value: mainState.layoutImagesOpen,
@@ -276,7 +269,6 @@ function registerGlobalHotkeys(mainWindow: BrowserWindow) {
 	//Show/hide level tracker - default shown
 	globalShortcut.register('Ctrl+Alt+l', () => {
 		mainState.levelTrackerOpen = !mainState.levelTrackerOpen;
-		// Push settings open/closed to frontend
 		mainWindow.webContents.send('Hotkeys', {
 			Hotkey: 'ToggleLevelTracker',
 			value: mainState.levelTrackerOpen,
@@ -286,29 +278,29 @@ function registerGlobalHotkeys(mainWindow: BrowserWindow) {
 }
 
 //-----------------------testing
-function LogOverlayEventCalls() {
+function LogOverlayEventCalls(mainWindow: BrowserWindow) {
 	// Still getting used to the events so uhhhhh just log when all of them are used.
-	OverlayController.events.addListener('attach', () => {
-		console.log('attach event emitted ');
-	});
-
-	OverlayController.events.addListener('fullscreen', () => {
-		console.log('fullscreen event emitted ');
+	OverlayController.events.addListener('attach', (params) => {
+		console.log('attach event emitted', params);
 	});
 
 	OverlayController.events.addListener('detach', () => {
 		console.log('detach event emitted ');
 	});
 
-	OverlayController.events.addListener('moveresize', () => {
-		console.log('moveresize event emitted ');
+	OverlayController.events.addListener('fullscreen', () => {
+		console.log('fullscreen event emitted');
 	});
 
-	OverlayController.events.addListener('blur', () => {
-		console.log('blur event emitted ');
+	OverlayController.events.addListener('moveresize', (params) => {
+		console.log('moveresize event emitted ', params);
 	});
 
-	OverlayController.events.addListener('focus', () => {
-		console.log('focus event emitted ');
+	OverlayController.events.addListener('blur', (params) => {
+		console.log('blur event emitted ', params);
+	});
+
+	OverlayController.events.addListener('focus', (params) => {
+		console.log('focus event emitted ', params);
 	});
 }
