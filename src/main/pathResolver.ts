@@ -41,7 +41,7 @@ export function getDefaultSettingsPath() {
 }
 
 export function getClientTxtPath(): string {
-	return getClientTxtPathWindows();
+	return process.platform === "win32" ? getClientTxtPathWindows() : getClientTxtPathLinux();
 }
 
 export function getClientTxtPathWSL() {
@@ -52,6 +52,10 @@ export function getClientTxtPathWSL() {
 
 export function getClientTxtPathWindows() {
 	return path.join('D:/SteamLibrary/steamapps/common/Path of Exile 2/logs/Client.txt');
+}
+
+export function getClientTxtPathLinux() {
+	return path.join('/home/punchingbag/.steam/root/steamapps/common/Path of Exile 2/logs/Client.txt');
 }
 
 export function getZoneLayoutImagesAbsolutePath() {
