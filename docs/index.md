@@ -50,12 +50,11 @@ You can download Path of Levelling 2 on the following platforms:
 
 *Note that the Windows installer is unsigned, so you will have to bypass a security check the first time you run the application.
 
-**Path of Exile 2 must be Windowed or Windowed Fullscreen for the overlay to function.**
+> [!TIP] 
+> **Path of Exile 2 must be Windowed or Windowed Fullscreen for the overlay to function.**
 
 ### Additional Linux Setup Steps
-Linux requires some additional steps to get up and running. First, until [this issue](https://github.com/SnosMe/electron-overlay-window/issues/44) is resolved, if you have a second monitor on the left of your primary monitor, you need to start Path of Levelling 2 *before* running Path of Exile 2. I have a PR up to fix this issue, so hopefully I can remove this step soon. 
-
-Next, if you use Windowed Fullscreen on KDE, create the following window rule:
+Linux requires some additional steps to get up and running. First, if you use Windowed Fullscreen on KDE, create the following window rule:
 ![Linux Window Rule Overlay Fix](/images/linux-window-rule-overlay-fix.png)
 
 This rule sets the layer for both the levelling overlay and PoE2 to OSD (On-screen display) so that the overlay can overlap while PoE 2 is in focus.
