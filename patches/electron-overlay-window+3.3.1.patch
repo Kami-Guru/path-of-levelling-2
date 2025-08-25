@@ -1,0 +1,758 @@
+diff --git a/node_modules/electron-overlay-window/binding.gyp b/node_modules/electron-overlay-window/binding.gyp
+index a68504f..5bac41e 100644
+--- a/node_modules/electron-overlay-window/binding.gyp
++++ b/node_modules/electron-overlay-window/binding.gyp
+@@ -29,12 +29,13 @@
+           ],
+           'link_settings': {
+             'libraries': [
+-              '-lxcb', '-lpthread'
++              '-lxcb', '-lpthread', '-lwayland-client'
+             ]
+           },
+           'cflags': ['-std=c99', '-pedantic', '-Wall', '-pthread'],
+       	  'sources': [
+             'src/lib/x11.c',
++            'src/lib/wayland.c',
+           ]
+         }],
+         ['OS=="mac"', {
+diff --git a/node_modules/electron-overlay-window/build/Release/.deps/Release/obj.target/overlay_window/src/lib/addon.o.d b/node_modules/electron-overlay-window/build/Release/.deps/Release/obj.target/overlay_window/src/lib/addon.o.d
+new file mode 100644
+index 0000000..d002d34
+--- /dev/null
++++ b/node_modules/electron-overlay-window/build/Release/.deps/Release/obj.target/overlay_window/src/lib/addon.o.d
+@@ -0,0 +1,26 @@
++cmd_Release/obj.target/overlay_window/src/lib/addon.o := cc -o Release/obj.target/overlay_window/src/lib/addon.o ../src/lib/addon.c '-DNODE_GYP_MODULE_NAME=overlay_window' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-DELECTRON_ENSURE_CONFIG_GYPI' '-D_LARGEFILE_SOURCE' '-DUSING_ELECTRON_CONFIG_GYPI' '-DV8_COMPRESS_POINTERS' '-DV8_COMPRESS_POINTERS_IN_SHARED_CAGE' '-DV8_31BIT_SMIS_ON_64BIT_ARCH' '-DV8_ENABLE_SANDBOX' '-DV8_EXTERNAL_CODE_SPACE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DOPENSSL_NO_ASM' '-D_GNU_SOURCE' '-DBUILDING_NODE_EXTENSION' -I/home/punchingbag/.electron-gyp/37.3.1/include/node -I/home/punchingbag/.electron-gyp/37.3.1/src -I/home/punchingbag/.electron-gyp/37.3.1/deps/openssl/config -I/home/punchingbag/.electron-gyp/37.3.1/deps/openssl/openssl/include -I/home/punchingbag/.electron-gyp/37.3.1/deps/uv/include -I/home/punchingbag/.electron-gyp/37.3.1/deps/zlib -I/home/punchingbag/.electron-gyp/37.3.1/deps/v8/include -I../src/lib  -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -std=c99 -pedantic -Wall -pthread -m64 -O3 -fno-omit-frame-pointer  -MMD -MF ./Release/.deps/Release/obj.target/overlay_window/src/lib/addon.o.d.raw   -c
++Release/obj.target/overlay_window/src/lib/addon.o: ../src/lib/addon.c \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/node_api.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/js_native_api.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/js_native_api_types.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/node_api_types.h \
++ ../src/lib/napi_helpers.h ../src/lib/overlay_window.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/uv.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/uv/errno.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/uv/version.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/uv/unix.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/uv/threadpool.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/uv/linux.h
++../src/lib/addon.c:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/node_api.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/js_native_api.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/js_native_api_types.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/node_api_types.h:
++../src/lib/napi_helpers.h:
++../src/lib/overlay_window.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/uv.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/uv/errno.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/uv/version.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/uv/unix.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/uv/threadpool.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/uv/linux.h:
+diff --git a/node_modules/electron-overlay-window/build/Release/.deps/Release/obj.target/overlay_window/src/lib/napi_helpers.o.d b/node_modules/electron-overlay-window/build/Release/.deps/Release/obj.target/overlay_window/src/lib/napi_helpers.o.d
+new file mode 100644
+index 0000000..51f3a19
+--- /dev/null
++++ b/node_modules/electron-overlay-window/build/Release/.deps/Release/obj.target/overlay_window/src/lib/napi_helpers.o.d
+@@ -0,0 +1,13 @@
++cmd_Release/obj.target/overlay_window/src/lib/napi_helpers.o := cc -o Release/obj.target/overlay_window/src/lib/napi_helpers.o ../src/lib/napi_helpers.c '-DNODE_GYP_MODULE_NAME=overlay_window' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-DELECTRON_ENSURE_CONFIG_GYPI' '-D_LARGEFILE_SOURCE' '-DUSING_ELECTRON_CONFIG_GYPI' '-DV8_COMPRESS_POINTERS' '-DV8_COMPRESS_POINTERS_IN_SHARED_CAGE' '-DV8_31BIT_SMIS_ON_64BIT_ARCH' '-DV8_ENABLE_SANDBOX' '-DV8_EXTERNAL_CODE_SPACE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DOPENSSL_NO_ASM' '-D_GNU_SOURCE' '-DBUILDING_NODE_EXTENSION' -I/home/punchingbag/.electron-gyp/37.3.1/include/node -I/home/punchingbag/.electron-gyp/37.3.1/src -I/home/punchingbag/.electron-gyp/37.3.1/deps/openssl/config -I/home/punchingbag/.electron-gyp/37.3.1/deps/openssl/openssl/include -I/home/punchingbag/.electron-gyp/37.3.1/deps/uv/include -I/home/punchingbag/.electron-gyp/37.3.1/deps/zlib -I/home/punchingbag/.electron-gyp/37.3.1/deps/v8/include -I../src/lib  -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -std=c99 -pedantic -Wall -pthread -m64 -O3 -fno-omit-frame-pointer  -MMD -MF ./Release/.deps/Release/obj.target/overlay_window/src/lib/napi_helpers.o.d.raw   -c
++Release/obj.target/overlay_window/src/lib/napi_helpers.o: \
++ ../src/lib/napi_helpers.c ../src/lib/napi_helpers.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/node_api.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/js_native_api.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/js_native_api_types.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/node_api_types.h
++../src/lib/napi_helpers.c:
++../src/lib/napi_helpers.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/node_api.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/js_native_api.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/js_native_api_types.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/node_api_types.h:
+diff --git a/node_modules/electron-overlay-window/build/Release/.deps/Release/obj.target/overlay_window/src/lib/x11.o.d b/node_modules/electron-overlay-window/build/Release/.deps/Release/obj.target/overlay_window/src/lib/x11.o.d
+new file mode 100644
+index 0000000..9da3a43
+--- /dev/null
++++ b/node_modules/electron-overlay-window/build/Release/.deps/Release/obj.target/overlay_window/src/lib/x11.o.d
+@@ -0,0 +1,17 @@
++cmd_Release/obj.target/overlay_window/src/lib/x11.o := cc -o Release/obj.target/overlay_window/src/lib/x11.o ../src/lib/x11.c '-DNODE_GYP_MODULE_NAME=overlay_window' '-DUSING_UV_SHARED=1' '-DUSING_V8_SHARED=1' '-DV8_DEPRECATION_WARNINGS=1' '-D_GLIBCXX_USE_CXX11_ABI=1' '-D_FILE_OFFSET_BITS=64' '-DELECTRON_ENSURE_CONFIG_GYPI' '-D_LARGEFILE_SOURCE' '-DUSING_ELECTRON_CONFIG_GYPI' '-DV8_COMPRESS_POINTERS' '-DV8_COMPRESS_POINTERS_IN_SHARED_CAGE' '-DV8_31BIT_SMIS_ON_64BIT_ARCH' '-DV8_ENABLE_SANDBOX' '-DV8_EXTERNAL_CODE_SPACE' '-D__STDC_FORMAT_MACROS' '-DOPENSSL_NO_PINSHARED' '-DOPENSSL_THREADS' '-DOPENSSL_NO_ASM' '-D_GNU_SOURCE' '-DBUILDING_NODE_EXTENSION' -I/home/punchingbag/.electron-gyp/37.3.1/include/node -I/home/punchingbag/.electron-gyp/37.3.1/src -I/home/punchingbag/.electron-gyp/37.3.1/deps/openssl/config -I/home/punchingbag/.electron-gyp/37.3.1/deps/openssl/openssl/include -I/home/punchingbag/.electron-gyp/37.3.1/deps/uv/include -I/home/punchingbag/.electron-gyp/37.3.1/deps/zlib -I/home/punchingbag/.electron-gyp/37.3.1/deps/v8/include -I../src/lib  -fPIC -pthread -Wall -Wextra -Wno-unused-parameter -std=c99 -pedantic -Wall -pthread -m64 -O3 -fno-omit-frame-pointer  -MMD -MF ./Release/.deps/Release/obj.target/overlay_window/src/lib/x11.o.d.raw   -c
++Release/obj.target/overlay_window/src/lib/x11.o: ../src/lib/x11.c \
++ ../src/lib/overlay_window.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/uv.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/uv/errno.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/uv/version.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/uv/unix.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/uv/threadpool.h \
++ /home/punchingbag/.electron-gyp/37.3.1/include/node/uv/linux.h
++../src/lib/x11.c:
++../src/lib/overlay_window.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/uv.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/uv/errno.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/uv/version.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/uv/unix.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/uv/threadpool.h:
++/home/punchingbag/.electron-gyp/37.3.1/include/node/uv/linux.h:
+diff --git a/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/addon.o b/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/addon.o
+new file mode 100644
+index 0000000..0e1cbe0
+Binary files /dev/null and b/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/addon.o differ
+diff --git a/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/napi_helpers.o b/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/napi_helpers.o
+new file mode 100644
+index 0000000..2914274
+Binary files /dev/null and b/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/napi_helpers.o differ
+diff --git a/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/x11.o b/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/x11.o
+new file mode 100644
+index 0000000..df32d07
+Binary files /dev/null and b/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/x11.o differ
+diff --git a/node_modules/electron-overlay-window/src/lib/addon.c b/node_modules/electron-overlay-window/src/lib/addon.c
+index 10ad0d8..9dc195b 100644
+--- a/node_modules/electron-overlay-window/src/lib/addon.c
++++ b/node_modules/electron-overlay-window/src/lib/addon.c
+@@ -5,6 +5,11 @@
+ #include "napi_helpers.h"
+ #include "overlay_window.h"
+ 
++#ifdef __linux__
++extern void ow_x11_start_hook(char* target_window_title, void* overlay_window_id);
++extern void ow_wayland_start_hook(char* target_window_title, void* overlay_window_id);
++#endif
++
+ static napi_threadsafe_function threadsafe_fn = NULL;
+ static struct ow_window_bounds last_reported_bounds = {0, 0, 0, 0};
+ 
+@@ -163,7 +168,7 @@ napi_value AddonStart(napi_env env, napi_callback_info info) {
+   size_t info_argc = 3;
+   napi_value info_argv[3];
+   status = napi_get_cb_info(env, info, &info_argc, info_argv, NULL, NULL);
+-  NAPI_THROW_IF_FAILED(env, status, NULL);
++  NAPI_FATAL_IF_FAILED(status, "AddonStart", "napi_get_cb_info");
+ 
+   // [0] Overlay Window ID
+   void* overlay_window_id = NULL;
+@@ -190,8 +195,18 @@ napi_value AddonStart(napi_env env, napi_callback_info info) {
+   status = napi_create_threadsafe_function(env, info_argv[2], NULL, async_resource_name, 0, 1, NULL, NULL, NULL, tsfn_to_js_proxy, &threadsafe_fn);
+   NAPI_THROW_IF_FAILED(env, status, NULL);
+ 
+-  // printf("start(window=%x, title=\"%s\")\n", *((int*)overlay_window_id), target_window_title);
+-  ow_start_hook(target_window_title, overlay_window_id);
++  #ifdef __linux__
++    const char* wayland_display = getenv("WAYLAND_DISPLAY");
++    const char* xdg_session_type = getenv("XDG_SESSION_TYPE");
++    int use_wayland = (wayland_display && wayland_display[0]) || (xdg_session_type && strcmp(xdg_session_type, "wayland") == 0);
++    if (use_wayland) {
++      ow_wayland_start_hook(target_window_title, overlay_window_id);
++    } else {
++      ow_x11_start_hook(target_window_title, overlay_window_id);
++    }
++  #else
++    ow_start_hook(target_window_title, overlay_window_id);
++  #endif
+ 
+   return NULL;
+ }
+@@ -210,13 +225,13 @@ napi_value AddonScreenshot(napi_env env, napi_callback_info info) {
+   napi_status status;
+ 
+   napi_value img_buffer;
+-  uint8_t* img_data;
++  void* img_data;
+   size_t size = last_reported_bounds.width * last_reported_bounds.height * 4;
+   status = napi_create_buffer(env, size, &img_data, &img_buffer);
+   NAPI_FATAL_IF_FAILED(status, "AddonScreenshot", "napi_create_buffer");
+ 
+ #ifdef _WIN32
+-  ow_screenshot(img_data, last_reported_bounds.width, last_reported_bounds.height);
++  ow_screenshot((uint8_t*)img_data, last_reported_bounds.width, last_reported_bounds.height);
+ #endif
+ 
+   return img_buffer;
+diff --git a/node_modules/electron-overlay-window/src/lib/wayland-protocols.h b/node_modules/electron-overlay-window/src/lib/wayland-protocols.h
+new file mode 100644
+index 0000000..46c7e92
+--- /dev/null
++++ b/node_modules/electron-overlay-window/src/lib/wayland-protocols.h
+@@ -0,0 +1,83 @@
++#ifndef WAYLAND_PROTOCOLS_H
++#define WAYLAND_PROTOCOLS_H
++
++#include <wayland-client.h>
++
++// KDE Plasma Window Management Protocol
++// Based on: https://github.com/KDE/plasma-wayland-protocols
++
++#define ORG_KDE_PLASMA_WINDOW_STATE_ACTIVE 1
++#define ORG_KDE_PLASMA_WINDOW_STATE_MINIMIZED 2
++#define ORG_KDE_PLASMA_WINDOW_STATE_MAXIMIZED 4
++#define ORG_KDE_PLASMA_WINDOW_STATE_FULLSCREEN 8
++#define ORG_KDE_PLASMA_WINDOW_STATE_KEEP_ABOVE 16
++#define ORG_KDE_PLASMA_WINDOW_STATE_KEEP_BELOW 32
++#define ORG_KDE_PLASMA_WINDOW_STATE_ON_ALL_DESKTOPS 64
++#define ORG_KDE_PLASMA_WINDOW_STATE_DEMANDS_ATTENTION 128
++#define ORG_KDE_PLASMA_WINDOW_STATE_CLOSEABLE 256
++#define ORG_KDE_PLASMA_WINDOW_STATE_MINIMIZABLE 512
++#define ORG_KDE_PLASMA_WINDOW_STATE_MAXIMIZABLE 1024
++#define ORG_KDE_PLASMA_WINDOW_STATE_FULLSCREENABLE 2048
++#define ORG_KDE_PLASMA_WINDOW_STATE_SKIPTASKBAR 4096
++#define ORG_KDE_PLASMA_WINDOW_STATE_SKIPSWITCHER 8192
++#define ORG_KDE_PLASMA_WINDOW_STATE_SHADEABLE 16384
++#define ORG_KDE_PLASMA_WINDOW_STATE_SHAVED 32768
++#define ORG_KDE_PLASMA_WINDOW_STATE_MOVABLE 65536
++#define ORG_KDE_PLASMA_WINDOW_STATE_RESIZABLE 131072
++#define ORG_KDE_PLASMA_WINDOW_STATE_MAXIMIZED_VERTICALLY 262144
++#define ORG_KDE_PLASMA_WINDOW_STATE_MAXIMIZED_HORIZONTALLY 524288
++#define ORG_KDE_PLASMA_WINDOW_STATE_VIRTUAL_DESKTOP_CHANGEABLE 1048576
++
++// Forward declarations
++struct org_kde_plasma_window_management;
++struct org_kde_plasma_window;
++
++// Interface definitions
++extern const struct wl_interface org_kde_plasma_window_management_interface;
++extern const struct wl_interface org_kde_plasma_window_interface;
++
++// Listener structures
++struct org_kde_plasma_window_management_listener {
++  void (*window)(void *data,
++                 struct org_kde_plasma_window_management *org_kde_plasma_window_management,
++                 struct org_kde_plasma_window *window);
++  void (*window_with_uuid)(void *data,
++                          struct org_kde_plasma_window_management *org_kde_plasma_window_management,
++                          struct org_kde_plasma_window *window,
++                          const char *uuid);
++};
++
++struct org_kde_plasma_window_listener {
++  void (*title_changed)(void *data,
++                       struct org_kde_plasma_window *org_kde_plasma_window,
++                       const char *title);
++  void (*state_changed)(void *data,
++                       struct org_kde_plasma_window *org_kde_plasma_window,
++                       uint32_t changed,
++                       uint32_t set);
++  void (*geometry)(void *data,
++                  struct org_kde_plasma_window *org_kde_plasma_window,
++                  int32_t x,
++                  int32_t y,
++                  uint32_t width,
++                  uint32_t height);
++  void (*unmapped)(void *data,
++                   struct org_kde_plasma_window *org_kde_plasma_window);
++  void (*mapped)(void *data,
++                 struct org_kde_plasma_window *org_kde_plasma_window);
++  void (*active_changed)(void *data,
++                        struct org_kde_plasma_window *org_kde_plasma_window);
++};
++
++// Function declarations
++void org_kde_plasma_window_management_destroy(struct org_kde_plasma_window_management *org_kde_plasma_window_management);
++void org_kde_plasma_window_management_add_listener(struct org_kde_plasma_window_management *org_kde_plasma_window_management,
++                                                  const struct org_kde_plasma_window_management_listener *listener,
++                                                  void *data);
++
++void org_kde_plasma_window_destroy(struct org_kde_plasma_window *org_kde_plasma_window);
++void org_kde_plasma_window_add_listener(struct org_kde_plasma_window *org_kde_plasma_window,
++                                       const struct org_kde_plasma_window_listener *listener,
++                                       void *data);
++
++#endif // WAYLAND_PROTOCOLS_H 
+\ No newline at end of file
+diff --git a/node_modules/electron-overlay-window/src/lib/wayland.c b/node_modules/electron-overlay-window/src/lib/wayland.c
+new file mode 100644
+index 0000000..360347d
+--- /dev/null
++++ b/node_modules/electron-overlay-window/src/lib/wayland.c
+@@ -0,0 +1,467 @@
++#include <stdlib.h>
++#include <stdio.h>
++#include <string.h>
++#include <stdbool.h>
++#include <wayland-client.h>
++#include <wayland-client-protocol.h>
++#include "overlay_window.h"
++#include "wayland-protocols.h"
++
++// Forward declarations
++static void add_window(struct org_kde_plasma_window *window, const char *title);
++static void plasma_window_handle_title_changed(void *data, struct org_kde_plasma_window *org_kde_plasma_window, const char *title);
++static void plasma_window_handle_state_changed(void *data, struct org_kde_plasma_window *org_kde_plasma_window, uint32_t changed, uint32_t set);
++static void plasma_window_handle_geometry(void *data, struct org_kde_plasma_window *org_kde_plasma_window, int32_t x, int32_t y, uint32_t width, uint32_t height);
++static void plasma_window_handle_unmapped(void *data, struct org_kde_plasma_window *org_kde_plasma_window);
++static void plasma_window_handle_mapped(void *data, struct org_kde_plasma_window *org_kde_plasma_window);
++static void plasma_window_handle_active_changed(void *data, struct org_kde_plasma_window *org_kde_plasma_window);
++static uv_thread_t hook_tid;
++
++// Wayland protocols
++struct wl_display *display = NULL;
++struct wl_registry *registry = NULL;
++struct wl_compositor *compositor = NULL;
++struct wl_shell *shell = NULL;
++struct wl_seat *seat = NULL;
++struct wl_pointer *pointer = NULL;
++struct wl_keyboard *keyboard = NULL;
++
++// KDE Plasma specific protocols (if available)
++struct org_kde_plasma_window_management *plasma_window_management = NULL;
++struct org_kde_plasma_window *plasma_window = NULL;
++
++// Store all windows for tracking
++struct wayland_window
++{
++    struct org_kde_plasma_window *window;
++    char *title;
++    uint32_t window_id;
++    bool is_active;
++    bool is_fullscreen;
++    struct ow_window_bounds bounds;
++};
++
++static struct wayland_window *windows = NULL;
++static size_t window_count = 0;
++static size_t window_capacity = 0;
++
++struct ow_target_window
++{
++    char *title;
++    uint32_t window_id;
++    bool is_focused;
++    bool is_destroyed;
++    bool is_fullscreen;
++};
++
++struct ow_overlay_window
++{
++    uint32_t window_id;
++};
++
++static struct ow_target_window target_info = {
++    .title = NULL,
++    .window_id = 0,
++    .is_focused = false,
++    .is_destroyed = false,
++    .is_fullscreen = false};
++
++static struct ow_overlay_window overlay_info = {
++    .window_id = 0};
++
++// Wayland registry listener
++static void registry_handle_global(void *data, struct wl_registry *registry,
++                                   uint32_t name, const char *interface, uint32_t version)
++{
++    if (strcmp(interface, "wl_compositor") == 0)
++    {
++        compositor = wl_registry_bind(registry, name, &wl_compositor_interface, 1);
++    }
++    else if (strcmp(interface, "wl_shell") == 0)
++    {
++        shell = wl_registry_bind(registry, name, &wl_shell_interface, 1);
++    }
++    else if (strcmp(interface, "wl_seat") == 0)
++    {
++        seat = wl_registry_bind(registry, name, &wl_seat_interface, 1);
++    }
++    else if (strcmp(interface, "org_kde_plasma_window_management") == 0)
++    {
++        // KDE Plasma window management protocol
++        plasma_window_management = wl_registry_bind(registry, name,
++                                                    &org_kde_plasma_window_management_interface, 1);
++    }
++}
++
++static void registry_handle_global_remove(void *data, struct wl_registry *registry,
++                                          uint32_t name)
++{
++    // Handle global removal
++}
++
++static const struct wl_registry_listener registry_listener = {
++    .global = registry_handle_global,
++    .global_remove = registry_handle_global_remove,
++};
++
++// KDE Plasma window management listeners
++static void plasma_window_management_handle_window(void *data,
++                                                   struct org_kde_plasma_window_management *org_kde_plasma_window_management,
++                                                   struct org_kde_plasma_window *window)
++{
++    // Handle new window creation
++    add_window(window, NULL); // Title will be set when title_changed is called
++}
++
++static void plasma_window_management_handle_window_with_uuid(void *data,
++                                                             struct org_kde_plasma_window_management *org_kde_plasma_window_management,
++                                                             struct org_kde_plasma_window *window,
++                                                             const char *uuid)
++{
++    // Handle window with UUID
++    add_window(window, NULL); // Title will be set when title_changed is called
++}
++
++static const struct org_kde_plasma_window_management_listener plasma_window_management_listener = {
++    .window = plasma_window_management_handle_window,
++    .window_with_uuid = plasma_window_management_handle_window_with_uuid,
++};
++
++// Plasma window listener declaration
++static const struct org_kde_plasma_window_listener plasma_window_listener = {
++    .title_changed = plasma_window_handle_title_changed,
++    .state_changed = plasma_window_handle_state_changed,
++    .geometry = plasma_window_handle_geometry,
++    .unmapped = plasma_window_handle_unmapped,
++    .mapped = plasma_window_handle_mapped,
++    .active_changed = plasma_window_handle_active_changed,
++};
++
++// Helper functions for window management
++static void add_window(struct org_kde_plasma_window *window, const char *title)
++{
++    if (window_count >= window_capacity)
++    {
++        window_capacity = window_capacity == 0 ? 10 : window_capacity * 2;
++        windows = realloc(windows, window_capacity * sizeof(struct wayland_window));
++    }
++
++    windows[window_count].window = window;
++    windows[window_count].title = title ? strdup(title) : NULL;
++    windows[window_count].window_id = window_count;
++    windows[window_count].is_active = false;
++    windows[window_count].is_fullscreen = false;
++    windows[window_count].bounds = (struct ow_window_bounds){0, 0, 0, 0};
++
++    // Add listener to the window
++    org_kde_plasma_window_add_listener(window, &plasma_window_listener, &windows[window_count]);
++
++    window_count++;
++}
++
++static struct wayland_window *find_window_by_title(const char *title)
++{
++    for (size_t i = 0; i < window_count; i++)
++    {
++        if (windows[i].title && strcmp(windows[i].title, title) == 0)
++        {
++            return &windows[i];
++        }
++    }
++    return NULL;
++}
++
++static void remove_window(struct org_kde_plasma_window *window)
++{
++    for (size_t i = 0; i < window_count; i++)
++    {
++        if (windows[i].window == window)
++        {
++            if (windows[i].title)
++            {
++                free(windows[i].title);
++            }
++            // Move last window to this position
++            if (i < window_count - 1)
++            {
++                windows[i] = windows[window_count - 1];
++            }
++            window_count--;
++            break;
++        }
++    }
++}
++
++static void plasma_window_handle_title_changed(void *data,
++                                               struct org_kde_plasma_window *org_kde_plasma_window,
++                                               const char *title)
++{
++    struct wayland_window *window = (struct wayland_window *)data;
++
++    // Update window title
++    if (window->title)
++    {
++        free(window->title);
++    }
++    window->title = title ? strdup(title) : NULL;
++
++    // Check if this is our target window
++    if (target_info.title && window->title && strcmp(window->title, target_info.title) == 0)
++    {
++        // Found our target window
++        target_info.window_id = window->window_id;
++        target_info.is_focused = window->is_active;
++        target_info.is_fullscreen = window->is_fullscreen;
++
++        struct ow_event e = {
++            .type = OW_ATTACH,
++            .data.attach = {
++                .has_access = -1, // Not applicable on Wayland
++                .is_fullscreen = window->is_fullscreen ? 1 : 0,
++                .bounds = window->bounds}};
++        ow_emit_event(&e);
++    }
++}
++
++static void plasma_window_handle_state_changed(void *data,
++                                               struct org_kde_plasma_window *org_kde_plasma_window,
++                                               uint32_t changed,
++                                               uint32_t set)
++{
++    struct wayland_window *window = (struct wayland_window *)data;
++
++    // Update window state
++    bool was_fullscreen = window->is_fullscreen;
++    bool was_active = window->is_active;
++
++    window->is_fullscreen = (set & ORG_KDE_PLASMA_WINDOW_STATE_FULLSCREEN) != 0;
++    window->is_active = (set & ORG_KDE_PLASMA_WINDOW_STATE_ACTIVE) != 0;
++
++    // Check if this is our target window
++    if (target_info.title && window->title && strcmp(window->title, target_info.title) == 0)
++    {
++        target_info.is_fullscreen = window->is_fullscreen;
++        target_info.is_focused = window->is_active;
++
++        // Handle fullscreen changes
++        if (was_fullscreen != window->is_fullscreen)
++        {
++            struct ow_event e = {
++                .type = OW_FULLSCREEN,
++                .data.fullscreen = {
++                    .is_fullscreen = window->is_fullscreen}};
++            ow_emit_event(&e);
++        }
++
++        // Handle focus changes
++        if (was_active != window->is_active)
++        {
++            struct ow_event e = {
++                .type = window->is_active ? OW_FOCUS : OW_BLUR};
++            ow_emit_event(&e);
++        }
++    }
++}
++
++static void plasma_window_handle_geometry(void *data,
++                                          struct org_kde_plasma_window *org_kde_plasma_window,
++                                          int32_t x,
++                                          int32_t y,
++                                          uint32_t width,
++                                          uint32_t height)
++{
++    struct wayland_window *window = (struct wayland_window *)data;
++
++    // Update window geometry
++    window->bounds.x = x;
++    window->bounds.y = y;
++    window->bounds.width = width;
++    window->bounds.height = height;
++
++    // Check if this is our target window
++    if (target_info.title && window->title && strcmp(window->title, target_info.title) == 0)
++    {
++        struct ow_event e = {
++            .type = OW_MOVERESIZE,
++            .data.moveresize = {
++                .bounds = window->bounds}};
++        ow_emit_event(&e);
++    }
++}
++
++static void plasma_window_handle_unmapped(void *data,
++                                          struct org_kde_plasma_window *org_kde_plasma_window)
++{
++    struct wayland_window *window = (struct wayland_window *)data;
++
++    // Check if this is our target window
++    if (target_info.title && window->title && strcmp(window->title, target_info.title) == 0)
++    {
++        struct ow_event e = {.type = OW_DETACH};
++        ow_emit_event(&e);
++    }
++
++    remove_window(org_kde_plasma_window);
++}
++
++static void plasma_window_handle_mapped(void *data,
++                                        struct org_kde_plasma_window *org_kde_plasma_window)
++{
++    // Window mapped - no specific action needed
++}
++
++static void plasma_window_handle_active_changed(void *data,
++                                                struct org_kde_plasma_window *org_kde_plasma_window)
++{
++    struct wayland_window *window = (struct wayland_window *)data;
++
++    // Check if this is our target window
++    if (target_info.title && window->title && strcmp(window->title, target_info.title) == 0)
++    {
++        struct ow_event e = {
++            .type = window->is_active ? OW_FOCUS : OW_BLUR};
++        ow_emit_event(&e);
++    }
++}
++
++static bool detect_wayland_environment()
++{
++    const char *wayland_display = getenv("WAYLAND_DISPLAY");
++    const char *xdg_session_type = getenv("XDG_SESSION_TYPE");
++
++    return (wayland_display != NULL && strlen(wayland_display) > 0) ||
++           (xdg_session_type != NULL && strcmp(xdg_session_type, "wayland") == 0);
++}
++
++static void wayland_cleanup()
++{
++    // Clean up windows
++    for (size_t i = 0; i < window_count; i++)
++    {
++        if (windows[i].title)
++        {
++            free(windows[i].title);
++        }
++    }
++    if (windows)
++    {
++        free(windows);
++        windows = NULL;
++    }
++    window_count = 0;
++    window_capacity = 0;
++
++    if (plasma_window)
++    {
++        org_kde_plasma_window_destroy(plasma_window);
++        plasma_window = NULL;
++    }
++
++    if (plasma_window_management)
++    {
++        org_kde_plasma_window_management_destroy(plasma_window_management);
++        plasma_window_management = NULL;
++    }
++
++    if (shell)
++    {
++        wl_shell_destroy(shell);
++        shell = NULL;
++    }
++
++    if (compositor)
++    {
++        wl_compositor_destroy(compositor);
++        compositor = NULL;
++    }
++
++    if (registry)
++    {
++        wl_registry_destroy(registry);
++        registry = NULL;
++    }
++
++    if (display)
++    {
++        wl_display_disconnect(display);
++        display = NULL;
++    }
++}
++
++static void hook_thread(void *_arg)
++{
++    if (!detect_wayland_environment())
++    {
++        // Not running on Wayland, exit
++        return;
++    }
++
++    display = wl_display_connect(NULL);
++    if (!display)
++    {
++        fprintf(stderr, "Failed to connect to Wayland display\n");
++        return;
++    }
++
++    registry = wl_display_get_registry(display);
++    wl_registry_add_listener(registry, &registry_listener, NULL);
++
++    wl_display_roundtrip(display);
++
++    if (!compositor)
++    {
++        fprintf(stderr, "No compositor found\n");
++        wayland_cleanup();
++        return;
++    }
++
++    // Try to get KDE Plasma window management
++    if (plasma_window_management)
++    {
++        org_kde_plasma_window_management_add_listener(plasma_window_management,
++                                                      &plasma_window_management_listener, NULL);
++    }
++
++    // Main event loop
++    while (wl_display_dispatch(display) != -1)
++    {
++        // Continue processing events
++    }
++
++    wayland_cleanup();
++}
++
++void ow_wayland_start_hook(char *target_window_title, void *overlay_window_id)
++{
++    if (!detect_wayland_environment())
++    {
++        // Fall back to X11 or other backend
++        return;
++    }
++
++    target_info.title = strdup(target_window_title);
++    if (overlay_window_id)
++    {
++        overlay_info.window_id = *(uint32_t *)overlay_window_id;
++    }
++
++    uv_thread_create(&hook_tid, hook_thread, NULL);
++}
++
++void ow_wayland_activate_overlay()
++{
++    // Activate overlay window on Wayland
++    // Implementation depends on specific window management protocol
++}
++
++void ow_wayland_focus_target()
++{
++    // Focus target window on Wayland
++    // Implementation depends on specific window management protocol
++}
++
++void ow_wayland_screenshot(uint8_t *out, uint32_t width, uint32_t height)
++{
++    // Screenshot functionality on Wayland
++    // Not implemented yet
++}
+\ No newline at end of file
+diff --git a/node_modules/electron-overlay-window/src/lib/x11.c b/node_modules/electron-overlay-window/src/lib/x11.c
+index f580f68..61de26b 100644
+--- a/node_modules/electron-overlay-window/src/lib/x11.c
++++ b/node_modules/electron-overlay-window/src/lib/x11.c
+@@ -313,7 +313,7 @@ static void hook_thread(void* _arg) {
+   }
+ }
+ 
+-void ow_start_hook(char* target_window_title, void* overlay_window_id) {
++void ow_x11_start_hook(char *target_window_title, void *overlay_window_id){
+   target_info.title = target_window_title;
+   if (overlay_window_id != NULL) {
+     overlay_info.window_id = *((xcb_window_t*)overlay_window_id);
+@@ -321,11 +321,11 @@ void ow_start_hook(char* target_window_title, void* overlay_window_id) {
+   uv_thread_create(&hook_tid, hook_thread, NULL);
+ }
+ 
+-void ow_activate_overlay() {
++void ow_x11_activate_overlay() {
+   // noop
+ }
+ 
+-void ow_focus_target() {
++void ow_x11_focus_target() {
+   xcb_client_message_event_t* event = calloc(32, 1);
+   event->response_type = XCB_CLIENT_MESSAGE;
+   event->type = ATOM_NET_ACTIVE_WINDOW;
