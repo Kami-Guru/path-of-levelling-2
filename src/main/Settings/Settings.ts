@@ -1,9 +1,8 @@
 import { BrowserWindow } from 'electron';
 import Store from 'electron-store';
-import fs from 'fs';
 import path from 'path';
 import { LogWatcher } from '../LogWatcher.js';
-import { getClientTxtPath, getDefaultSettingsPath } from '../pathResolver.js';
+import { guessClientTxtPath } from '../pathResolver.js';
 import defaultSettings from './defaultSettings.json' with { type: "json" };
 
 export class Settings {
@@ -11,7 +10,9 @@ export class Settings {
 
 	constructor() {
 		this.store = new Store();
+	}
 
+	async fillMissingSettingsWithDefaults() {
 		// Ensure that the settings store doesn't return undefined everywhere by
 		// copying from a default settings.
 		// !Keep the default settings updated!
@@ -19,7 +20,7 @@ export class Settings {
 		// TODO Yes yes this is terrible I'll do it recursively later
 		var test = this.store.get('clientTxtPath');
 		if (!this.store.get('clientTxtPath')) {
-			this.store.set('clientTxtPath', getClientTxtPath());
+			this.store.set('clientTxtPath', await guessClientTxtPath());
 		}
 		if (!this.store.get('buildFolder')) {
 			this.store.set('buildFolder', defaultSettings.buildFolder);

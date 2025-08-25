@@ -1,6 +1,7 @@
 import { app } from 'electron';
 import path from 'path';
 import { isDev } from './util.js';
+import fs from 'fs/promises';
 
 export function getPreloadPath() {
 	return path.join(
@@ -40,21 +41,41 @@ export function getDefaultSettingsPath() {
 	);
 }
 
-export function getClientTxtPath(): string {
-	return process.platform === "win32" ? getClientTxtPathWindows() : getClientTxtPathLinux();
+export async function guessClientTxtPath(): Promise<string> {
+	var pathGuesses: Array<string> = process.platform === "win32"
+		? [
+			path.join('C:/Program Files (x86)/Steam/steamapps/common/Path of Exile 2/logs/Client.txt'),
+			path.join('D:/SteamLibrary/steamapps/common/Path of Exile 2/logs/Client.txt')
+		]
+		: [
+			path.join(app.getPath('home'), '/.steam/root/steamapps/common/Path of Exile 2/logs/Client.txt'),
+		]
+	
+	var foundPath: string | undefined = undefined
+	for (var pathGuess in pathGuesses) {
+		try {
+			await fs.access(pathGuess, fs.constants.R_OK)
+
+			// If we made it here, .access didn't error so we have a valid path.
+			foundPath = pathGuess;
+		}
+		catch { }
+
+		if (foundPath) break;
+	}
+
+	return foundPath ?? getDefaultClientTxtPath();
 }
 
-export function getClientTxtPathWSL() {
-	return path.join(
-		'/mnt/d/SteamLibrary/steamapps/common/Path of Exile 2/logs/Client.txt'
-	);
+export function getDefaultClientTxtPath(): string {
+	return process.platform === "win32" ? getDefaultClientTxtPathWindows() : getDefaultClientTxtPathLinux();
 }
 
-export function getClientTxtPathWindows() {
-	return path.join('D:/SteamLibrary/steamapps/common/Path of Exile 2/logs/Client.txt');
+export function getDefaultClientTxtPathWindows() {
+	return path.join('C:/Program Files (x86)/Steam/steamapps/common/Path of Exile 2/logs/Client.txt');
 }
 
-export function getClientTxtPathLinux() {
+export function getDefaultClientTxtPathLinux() {
 	return path.join('/home/punchingbag/.steam/root/steamapps/common/Path of Exile 2/logs/Client.txt');
 }
 
