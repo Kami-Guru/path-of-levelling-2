@@ -45,7 +45,7 @@ log.info('App starting...');
 app.commandLine.appendSwitch('high-dpi-support', '1');
 app.commandLine.appendSwitch('force-device-scale-factor', '1');
 
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
 	setTimeout(
 		createWindow,
 		process.platform === 'linux' ? 1000 : 0 // https://github.com/electron/electron/issues/16809
@@ -60,7 +60,7 @@ getAutoUpdater().on('update-available', (message) => {
 	log.info('Checked for update, received:', message);
 });
 
-function createWindow() {
+async function createWindow() {
 	// Set up the tray
 	const trayImage = nativeImage.createFromPath(getDesktopIconPath());
 	if (trayImage.isEmpty()) console.log('Tray image failed to load, tray icon will not display!');
@@ -104,6 +104,7 @@ function createWindow() {
 	// cringe to use global variables but this makes it really easy to pass around state
 	// so whatever. State constructor relies on global settings existing.
 	globalThis.settings = new Settings();
+	await globalThis.settings.fillMissingSettingsWithDefaults();
 	globalThis.mainState = new StateTracker();
 
 	// This basically runs the loop of read lines, save state, post state to renderer,
@@ -122,7 +123,6 @@ function createWindow() {
 function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatcher) {
 	ipcMain.handle('getFontScalingFactor', async (event) => {
 		const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-		console.log('Main monitor width and height', width, height);
 		return height / 1080; // return a scaling factor to scale up text with resolution
 	});
 
