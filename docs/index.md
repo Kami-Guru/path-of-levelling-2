@@ -5,16 +5,48 @@ title: Download - Path of Levelling 2
 
 <script setup>
 import { data } from '/reference.data.js'
+const VITE_APP_VERSION = import.meta.env.VITE_APP_VERSION;
 </script>
 
 # Download
 You can download Path of Levelling 2 on the following platforms:
 
-| PLatform             | Automatic Updates |
-| -------------------- | ----------------- |
-| <a :href="`${data.github.releasesUrl}/download/v${data.appVersion}/Path-of-Levelling-2-Setup-${data.appVersion}.exe`">Windows 10+ (installer)</a>   | ✅                |
-| Windows (portable)   | ❌                |
-| Linux (AppImage)     | ✅                |
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Platform</th>
+        <th>Automatic Updates</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <a :href="`${data.github.releasesUrl}/download/v${VITE_APP_VERSION}/Path-Of-Levelling-2-Setup-${VITE_APP_VERSION}.exe`">
+            Windows 10 (installer)
+          </a>
+        </td>
+        <td>✅</td>
+      </tr>
+      <tr>
+        <td>
+          <a :href="`${data.github.releasesUrl}/download/v${VITE_APP_VERSION}/Path-Of-Levelling-2-${VITE_APP_VERSION}.exe`">
+            Windows (portable)
+          </a>
+        </td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <td>
+          <a :href="`${data.github.releasesUrl}/download/v${VITE_APP_VERSION}/Path-Of-Levelling-2-${VITE_APP_VERSION}.AppImage`">
+            Linux X11 (AppImage)
+          </a>
+        </td>
+        <td>✅</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 *Note that the Windows installer is unsigned, so you will have to bypass a security check the first time you run the application.
 
