@@ -93,16 +93,49 @@ index 0000000..9da3a43
 +/home/punchingbag/.electron-gyp/37.3.1/include/node/uv/linux.h:
 diff --git a/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/addon.o b/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/addon.o
 new file mode 100644
-index 0000000..0e1cbe0
-Binary files /dev/null and b/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/addon.o differ
+index 0000000..e69de29
 diff --git a/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/napi_helpers.o b/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/napi_helpers.o
 new file mode 100644
-index 0000000..2914274
-Binary files /dev/null and b/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/napi_helpers.o differ
+index 0000000..e69de29
 diff --git a/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/x11.o b/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/x11.o
 new file mode 100644
-index 0000000..df32d07
-Binary files /dev/null and b/node_modules/electron-overlay-window/build/Release/obj.target/overlay_window/src/lib/x11.o differ
+index 0000000..e69de29
+diff --git a/node_modules/electron-overlay-window/dist/index.js b/node_modules/electron-overlay-window/dist/index.js
+index b02733f..3525b7a 100644
+--- a/node_modules/electron-overlay-window/dist/index.js
++++ b/node_modules/electron-overlay-window/dist/index.js
+@@ -50,7 +50,7 @@ class OverlayControllerGlobal {
+                 this.electronWindow.setAlwaysOnTop(true, 'screen-saver');
+             }
+             if (e.isFullscreen !== undefined) {
+-                this.handleFullscreen(e.isFullscreen);
++                this.handleFullscreen(e.isFullscreen, e);
+             }
+             this.targetBounds = e;
+             this.updateOverlayBounds();
+@@ -87,7 +87,7 @@ class OverlayControllerGlobal {
+             }
+         });
+     }
+-    async handleFullscreen(isFullscreen) {
++    async handleFullscreen(isFullscreen, newBounds = undefined) {
+         if (!this.electronWindow)
+             return;
+         if (isMac) {
+@@ -106,6 +106,13 @@ class OverlayControllerGlobal {
+             }
+         }
+         else {
++            // Update bounds to match target, so that overlay enters fullscreen on correct monitor in
++            // multi-monitor configurations. newBounds is true when trigger is 'attach' event, solves
++            // fullscreen attach when target window us running before overlay (see issue #44, pr #45).
++            if (newBounds !== undefined) {
++                this.targetBounds = newBounds
++                this.updateOverlayBounds()
++            }
+             this.electronWindow.setFullScreen(isFullscreen);
+         }
+     }
 diff --git a/node_modules/electron-overlay-window/src/lib/addon.c b/node_modules/electron-overlay-window/src/lib/addon.c
 index 10ad0d8..9dc195b 100644
 --- a/node_modules/electron-overlay-window/src/lib/addon.c
