@@ -23,7 +23,7 @@ You can download Path of Levelling 2 on the following platforms:
       <tr>
         <td>
           <a :href="`${data.github.releasesUrl}/download/v${VITE_APP_VERSION}/Path-Of-Levelling-2-Setup-${VITE_APP_VERSION}.exe`">
-            Windows 10 (installer)
+            Windows 10 (Installer)
           </a>
         </td>
         <td>✅</td>
@@ -31,7 +31,7 @@ You can download Path of Levelling 2 on the following platforms:
       <tr>
         <td>
           <a :href="`${data.github.releasesUrl}/download/v${VITE_APP_VERSION}/Path-Of-Levelling-2-${VITE_APP_VERSION}.exe`">
-            Windows (portable)
+            Windows (Portable)
           </a>
         </td>
         <td>❌</td>
@@ -39,7 +39,7 @@ You can download Path of Levelling 2 on the following platforms:
       <tr>
         <td>
           <a :href="`${data.github.releasesUrl}/download/v${VITE_APP_VERSION}/Path-Of-Levelling-2-${VITE_APP_VERSION}.AppImage`">
-            Linux X11 (AppImage)
+            Linux X11, experimental support for Wayland (AppImage)
           </a>
         </td>
         <td>✅</td>
