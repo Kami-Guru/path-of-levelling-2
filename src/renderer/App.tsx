@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { GemTrackerComponent } from './Components/GemTrackerComponent';
 import { LevelTrackerComponent } from './Components/LevelTrackerComponent';
-import { SettingsComponent } from './Components/SettingsComponent';
+import { SettingsComponent } from './Components/Settings/SettingsComponent';
 import { ZoneNotesComponent } from './Components/ZoneTracker/ZoneNotesComponent';
 import { ZoneTrackerComponent } from './Components/ZoneTracker/ZoneTrackerComponent';
 

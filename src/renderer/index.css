@@ -4,8 +4,10 @@
 }
 
 ::-webkit-scrollbar {
-	width: 0; /* Remove scrollbar space */
-	background: transparent; /* Optional: just make scrollbar invisible */
+	width: 0;
+	/* Remove scrollbar space */
+	background: transparent;
+	/* Optional: just make scrollbar invisible */
 }
 
 html {
@@ -17,6 +19,14 @@ body {
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
+}
+
+/* Stop default style overrides */
+button,
+input {
+	font-size: inherit;
+	font-family: inherit;
+	font-weight: inherit;
 }
 
 #root {
@@ -58,26 +68,153 @@ react-draggable {
 	background-color: rgba(50, 50, 50, 0.7);
 }
 
+/* Settings Overlay */
 .SettingsOverlay {
 	position: absolute;
-	top: 0;
-	left: 0;
-
 	width: 100%;
 	height: 100%;
 	color: white;
 	background-color: rgba(50, 50, 50);
-
 	display: block;
 }
 
-.SettingsOverlay * {
+.SettingsOverlay p {
+	
+	margin-left: 12px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+/* Settings Banner */
+.SettingsBanner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 40px;
+	background: #23293a;
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	padding-left: 24px;
+	z-index: 10;
+	border-bottom: 2px solid #222;
+	box-sizing: border-box;
+	justify-content: space-between;
+}
+
+/* Settings Sidebar */
+.SettingsSidebar {
+	position: absolute;
+	top: 40px;
+	width: 120px;
+	height: calc(100% - 40px);
+	background: transparent;
+
+	padding-top: 5px;
+}
+
+.SidebarTab {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+	font-weight: bold;
+	color: inherit;
+	text-align: right;
+	display: block;
+	width: 100%;
+	border-radius: 8px;
+
+	margin-left: 5px;
+	padding-right: 20px;
+}
+
+.SidebarTab h3 {
+	line-height: 70%;
+}
+
+.SidebarTab.Active {
+	background: #23293a;
+	border-right: none;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	color: #fff;
+	box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+	margin-right: -1px;
+	position: relative;
+	z-index: 2;
+}
+
+/* Settings Move Button */
+.SettingsMenu {
+	position: absolute;
+	top: 0;
+	right: 16px;
+	height: 40px;
+	background: none;
+	box-shadow: none;
+	display: flex;
+	align-items: center;
+	z-index: 101;
+	padding: 0;
+}
+
+.SettingsMenu button {
+	background: #353e54;
+	color: #fff;
+	border: none;
+	border-radius: 2px;
+	padding: 4px 8px;
+	margin: 0;
+	cursor: pointer;
+	font-size: 14px;
+	height: 28px;
+	align-self: center;
+}
+
+/* Settings Main Content Components */
+.SettingsPageContent {
+	position: absolute;
+	background: #23293a;
+	top: 40px;
+	left: 120px;
+	width: calc(100% - 120px);
+	height: calc(100% - 40px);
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.SettingsPageContent::-webkit-scrollbar {
+	width: 8px;
+	background: #23293a;
+}
+
+.SettingsPageContent::-webkit-scrollbar-thumb {
+	background: #353e54;
+	border-radius: 4px;
+}
+
+.GeneralSettingsComponent {
+	position:absolute;
+	height:100%;
+	color: white;
+	box-sizing: border-box;
+	display: block;
+
+	margin-left: 20px;
+}
+
+.GeneralSettingsComponent * {
 	text-align: left;
-	padding-left: 15px;
 }
 
 .SettingsLabel {
 	float: left;
+	margin-left: 12px;
 }
 
 .ClientPathInput {
@@ -95,6 +232,7 @@ react-draggable {
 	color: red;
 }
 
+/* Zone Notes Overlay */
 .ZoneNotes {
 	position: absolute;
 	top: 0;
@@ -112,7 +250,8 @@ react-draggable {
 .ZoneNotes * {
 	margin: 0;
 	padding-left: 5px;
-	width: 100%-10px; /*Account for padding*/
+	width: 100%-10px;
+	/*Account for padding*/
 	flex-grow: 1;
 
 	position: relative;
@@ -188,7 +327,8 @@ react-draggable {
 .LevelTracker * {
 	margin: 0;
 	padding-left: 5px;
-	width: 100%-10px; /*Account for padding*/
+	width: 100%-10px;
+	/*Account for padding*/
 	min-height: auto;
 	flex-grow: 1;
 
@@ -222,7 +362,8 @@ react-draggable {
 .GemTracker * {
 	margin: 0;
 	padding-left: 5px;
-	width: 100%-10px; /*Account for padding*/
+	width: 100%-10px;
+	/*Account for padding*/
 	flex-grow: 1;
 
 	position: relative;
