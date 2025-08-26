@@ -4,7 +4,7 @@
 	"author": "Kami Guru",
 	"repository": "https://github.com/JaredRabie/path-of-levelling-2",
 	"private": true,
-	"version": "0.1.33",
+	"version": "0.1.34",
 	"type": "module",
 	"main": "dist-electron/main.js",
 	"postinstall": "electron-builder install-app-deps",
@@ -22,16 +22,18 @@
 		"preview": "vite preview",
 		"dist:win": "npm run transpile:electron && npm run build && electron-builder --win --x64 -p always",
 		"dist:linux": "npm run transpile:electron && npm run build && electron-builder --linux --x64 -p always",
+		"postInstall": "patch-package",
 		"docs:dev": "VITE_APP_VERSION=$(npm pkg get version | sed 's/\"//g') vitepress dev docs",
 		"docs:build": "VITE_APP_VERSION=$(npm pkg get version | sed 's/\"//g') vitepress build docs",
 		"docs:preview": "VITE_APP_VERSION=$(npm pkg get version | sed 's/\"//g') vitepress preview docs"
 	},
 	"dependencies": {
 		"electron-log": "^5.3.3",
-		"electron-overlay-window": "^3.3.1",
+		"electron-overlay-window": "3.3.0",
 		"electron-store": "^10.0.1",
 		"electron-updater": "^6.6.2",
 		"npm": "^11.2.0",
+		"patch-package": "^8.0.0",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"react-rnd": "^10.5.2"
