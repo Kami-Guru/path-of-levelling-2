@@ -5,13 +5,6 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Python Debugger: Current File",
-			"type": "debugpy",
-			"request": "launch",
-			"program": "${file}",
-			"console": "integratedTerminal"
-		},
-		{
 			"type": "node",
 			"request": "launch",
 			"name": "Electron: Main",
@@ -22,6 +15,13 @@
 			},
 			"preLaunchTask": "npm: transpile:electron",
 			"env": { "NODE_ENV": "development" }
+		},
+		{
+			"name": "Python Debugger: Current File",
+			"type": "debugpy",
+			"request": "launch",
+			"program": "${file}",
+			"console": "integratedTerminal"
 		}
 	]
 }

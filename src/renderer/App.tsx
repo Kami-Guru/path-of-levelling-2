@@ -11,8 +11,7 @@ function App() {
 	const [zoneNotesActive, setZoneNotesActive] = useState(true);
 	const [layoutImagesActive, setLayoutImagesActive] = useState(true);
 	const [levelTrackerActive, setLevelTrackerActive] = useState(true);
-	//NOT IMPLEMENTED SO ALWAYS FALSE
-	const [gemTrackerActive, setGemTrackerActive] = useState(false);
+	const [gemTrackerActive, setGemTrackerActive] = useState(true);
 
 	const [fontSize, setFontSize] = useState(11);
 
@@ -30,6 +29,9 @@ function App() {
 			}
 			if (hotkeyEvent.Hotkey == 'ToggleLevelTracker') {
 				setLevelTrackerActive(hotkeyEvent.value);
+			}
+			if (hotkeyEvent.Hotkey == 'ToggleGemTracker') {
+				setGemTrackerActive(hotkeyEvent.value);
 			}
 		});
 	}, []);
@@ -53,7 +55,6 @@ function App() {
 	useEffect(() => {
 		//@ts-ignore
 		window.electron.getFontScalingFactor().then((fontScale: any) => {
-			console.log('got font scale', fontScale)
 			setFontSize(Math.ceil(11 * fontScale));
 		});
 	}, []);
@@ -66,6 +67,7 @@ function App() {
 			}
 		>
 			{conditionalRenderSettings()}
+			{/* Zone tracker component set up a little different becuase zone & layout are coupled */}
 			<ZoneTrackerComponent
 				zoneNotesActive={zoneNotesActive}
 				layoutImagesActive={layoutImagesActive}

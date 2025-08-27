@@ -49,7 +49,9 @@ export function GemTrackerComponent() {
 		});
 	};
 
-	// Setting up the deggable/resizable state
+	// Setting up the draggable/resizable state
+	const [moveMode, setMoveMode] = useState(false);
+	const [isHovered, setIsHovered] = useState(false);
 	const [rndState, setRndState] = useState({
 		x: 0,
 		y: 0,
@@ -107,16 +109,17 @@ export function GemTrackerComponent() {
 
 	const getGemLevelDisplayString = (gemSetupLevel: any, index: number) => {
 		if (index == gemDropdown.allGemSetupLevels.length - 1) {
-			return 'Level: ' + gemSetupLevel.toString() + '-';
+			return 'Level: ' + gemSetupLevel.toString() + '+';
 		} else {
 			return (
 				'Level: ' +
 				gemSetupLevel.toString() +
-				'-' +
+				' to ' +
 				gemDropdown.allGemSetupLevels[index + 1].toString()
 			);
 		}
 	};
+
 	return (
 		<Rnd
 			size={{ width: rndState.width, height: rndState.height }}
@@ -126,10 +129,25 @@ export function GemTrackerComponent() {
 				handleResize(e, direction, ref, delta, position)
 			}
 			bounds="parent"
+			disableDragging={!moveMode}
+			enableResizing={moveMode}
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
 		>
+			{/* Move/Resize button just to the right */}
+			{isHovered && !moveMode && (
+				<div className="TrackerMoveResizeButtonContainer">
+					<button onClick={() => setMoveMode(true)}>Move/Resize</button>
+				</div>
+			)}
+			{moveMode && (
+				<div className="TrackerMoveResizeButtonContainer">
+					<button onClick={() => setMoveMode(false)}>Done</button>
+				</div>
+			)}
 			<div className="GemTracker">
 				<select
-					className="gemDropdown"
+					className="GemDropdown"
 					name="gemLevelSelected"
 					value={gemDropdown.playerLevelSelected}
 					onChange={(gemSetupLevel) => {
@@ -152,19 +170,20 @@ export function GemTrackerComponent() {
 						);
 					})}
 				</select>
-				<div className="gemLinksDiv">
+				<div className="GemLinksDiv">
 					{gemDropdown.gemLinks?.map(function (gemLink: string) {
-						return <p className="gemLinks">{gemLink}</p>;
+						return <p className="GemLinks">{gemLink}</p>;
 					})}
-					<p className="gemLinks"> </p>
+					<p className="GemLinks"> </p>
 					{/*  TODO: This is a newline basically, I proooobably shouldn't be doing this lol */}
 				</div>
-				<div className="gemSourcesDiv">
+				<div className="GemSourcesDiv">
 					{gemDropdown.gemSources?.map(function (gemSource: string) {
-						return <p className="gemSources">{gemSource}</p>;
+						return <p className="GemSources">{gemSource}</p>;
 					})}
 				</div>
 			</div>
 		</Rnd>
+
 	);
 }

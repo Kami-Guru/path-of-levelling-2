@@ -143,7 +143,7 @@ react-draggable {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 	color: #fff;
-	box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+	box-shadow: -2px 0 8px rgba(0, 0, 0, 0.08);
 	margin-right: -1px;
 	position: relative;
 	z-index: 2;
@@ -176,7 +176,7 @@ react-draggable {
 	align-self: center;
 }
 
-/* Settings Main Content Components */
+/* Settings Main Content (Components) */
 .SettingsPageContent {
 	position: absolute;
 	background: #23293a;
@@ -198,6 +198,7 @@ react-draggable {
 	border-radius: 4px;
 }
 
+/* General Settings Page Content */
 .GeneralSettingsComponent {
 	position:absolute;
 	height:100%;
@@ -232,6 +233,82 @@ react-draggable {
 	color: red;
 }
 
+/* Gem Settings Page Content */
+.GemSettingsComponent {
+	position: absolute;
+	height: 100%;
+	color: white;
+	box-sizing: border-box;
+	display: block;
+
+	margin-left: 20px;
+}
+
+.GemSettingsComponent * {
+	text-align: left;
+}
+
+.GemSettingsComponent label {
+	font-weight: bold;
+	margin-right: 8px;
+	color: #fff;
+}
+
+.GemSettingsComponent select {
+	background: #23293a;
+	color: #fff;
+	border: 1px solid #353e54;
+	border-radius: 4px;
+	padding: 6px 12px;
+	font-size: 16px;
+	outline: none;
+	transition: border-color 0.2s;
+	margin-left: 0px;
+	margin-bottom: 0px;
+}
+
+.GemSettingsComponent select:focus {
+	border-color: #f9caca;
+}
+
+/* Tracker Overlays ------------------- */
+/* Move/Resize Button Styles for Overlays */
+.TrackerMoveResizeButtonContainer {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	z-index: 10;
+}
+
+.RndResizeCircleHandle {
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #353e54;
+	border: 2px solid #fff;
+	position: absolute;
+
+	cursor: se-resize;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 999;
+}
+
+.TrackerMoveResizeButtonContainer button {
+	background: #353e54;
+	color: #fff;
+	border: none;
+	border-radius: 2px;
+	padding: 4px 8px;
+	margin: 0;
+	cursor: pointer;
+	font-size: 14px;
+	height: 28px;
+	align-self: center;
+}
+
 /* Zone Notes Overlay */
 .ZoneNotes {
 	position: absolute;
@@ -262,6 +339,29 @@ react-draggable {
 	white-space: pre-wrap;
 }
 
+.ZoneDropdown {
+	/*Select tags don't make the boxes bigger with padding, so we have to
+	increase width here to match the <p> tags*/
+	width: 100%;
+	height: auto;
+	flex-grow: 0;
+	padding-left: 0px;
+	padding-top: 6px;
+	padding-bottom: 4px;
+	font-family: 'Jetbrains Mono Regular';
+	font-size: 18px;
+
+	text-align: center;
+
+	appearance: none;
+	background-color: rgba(50, 50, 50);
+	border: 0px;
+}
+
+.ZoneOrActNotes {
+	text-align: start;
+}
+
 .LayoutImages {
 	position: absolute;
 	top: 0;
@@ -285,29 +385,6 @@ react-draggable {
 	height: 100%;
 
 	object-fit: contain;
-}
-
-.ZoneDropdown {
-	/*Select tags don't make the boxes bigger with padding, so we have to
-	increase width here to match the <p> tags*/
-	width: 100%;
-	height: auto;
-	flex-grow: 0;
-	padding-left: 0px;
-	padding-top: 6px;
-	padding-bottom: 4px;
-	font-family: 'Jetbrains Mono Regular';
-	font-size: 18px;
-
-	text-align: center;
-
-	appearance: none;
-	background-color: rgba(50, 50, 50);
-	border: 0px;
-}
-
-.ZoneOrActNotes {
-	text-align: start;
 }
 
 .LevelTracker {
@@ -375,7 +452,7 @@ react-draggable {
 	white-space: pre-wrap;
 }
 
-.gemDropdown {
+.GemDropdown {
 	/*Select tags don't make the boxes bigger with padding, so we have to
 	increase width here to match the <p> tags*/
 	width: 100%;
@@ -387,12 +464,14 @@ react-draggable {
 	font-family: 'Jetbrains Mono Regular';
 	font-size: 16px;
 
+	text-align: center;
+
 	appearance: none;
 	background-color: rgba(50, 50, 50);
 	border: 0px;
 }
 
-.gemSources,
-.gemLinks {
+.GemSources,
+.GemLinks {
 	background-color: rgb(0, 0, 0, 0);
 }

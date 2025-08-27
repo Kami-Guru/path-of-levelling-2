@@ -63,7 +63,7 @@ getAutoUpdater().on('update-available', (message) => {
 async function createWindow() {
 	// Set up the tray
 	const trayImage = nativeImage.createFromPath(getDesktopIconPath());
-	if (trayImage.isEmpty()) console.log('Tray image failed to load, tray icon will not display!');
+	if (trayImage.isEmpty()) log.info('Tray image failed to load, tray icon will not display!');
 
 	const tray = new Tray(trayImage);
 	tray.setToolTip(`Path Of Levelling 2 v${app.getVersion()}`);
@@ -83,7 +83,6 @@ async function createWindow() {
 		...OVERLAY_WINDOW_OPTS,
 		icon: trayImage,
 		webPreferences: {
-			//nodeIntegration: true,
 			preload: path.join(getPreloadPath()),
 		},
 	});
@@ -102,10 +101,12 @@ async function createWindow() {
 
 	// Declare global singletons
 	// cringe to use global variables but this makes it really easy to pass around state
-	// so whatever. State constructor relies on global settings existing.
+	// so whatever. global mainState OTS relies on global settings existing.
 	globalThis.settings = new Settings();
 	await globalThis.settings.fillMissingSettingsWithDefaults();
+
 	globalThis.mainState = new StateTracker();
+	await globalThis.mainState.oneTimeSetup();
 
 	// This basically runs the loop of read lines, save state, post state to renderer,
 	// rinse and repeat.
@@ -115,6 +116,14 @@ async function createWindow() {
 	createIPCEventListeners(mainWindow, logWatcher);
 
 	registerGlobalHotkeys(mainWindow);
+
+	OverlayController.events.addListener('focus', async () => {
+		// When the overlay gains focus, if the user had settings open (i.e. window
+		// is interactable), the overlay will be recreated WITHOUT interaction.
+		// So, we sleep to wait for window to be created then enable interaction.
+		await new Promise(f => setTimeout(f, 100));
+		mainWindow.setIgnoreMouseEvents(!mainState.settingsOpen);
+	});
 
 	// Uh still unfamiliar with this package so just logging all events
 	if (isDev()) LogOverlayEventCalls(mainWindow);
@@ -126,10 +135,11 @@ function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatch
 		return height / 1080; // return a scaling factor to scale up text with resolution
 	});
 
-	// Handle events from the settings overlay
+	// Handle events from the General Settings overlay
 	ipcMain.handle('getClientPath', async (event) => {
 		return settings.getClientTxtPath();
 	});
+
 	ipcMain.handle('saveClientPath', async (event, clientTxtPath: string) => {
 		var result = settings.saveClientTxtPath(clientTxtPath, mainWindow, logWatcher);
 		return result;
@@ -139,7 +149,7 @@ function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatch
 		return mainState.getIsClientWatcherActive();
 	});
 
-	// Handle events from the zone tracker
+	// Handle events from the Zone Tracker
 	ipcMain.handle('getZoneState', async (event, args) => {
 		mainWindow.webContents.send(
 			'zoneLayoutImageUpdates',
@@ -183,12 +193,39 @@ function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatch
 
 	// Handle events from the gem tracker
 	ipcMain.handle('getGemState', async (event, args) => {
-		return mainState.GemTracker;
+		return {
+			gemSetup: mainState.GemTracker.gemSetup,
+			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+		};
 	});
 
 	ipcMain.handle('postGemLevelSelected', async (event, gemLevelSelected: number) => {
 		mainState.GemTracker.saveGemSetupFromPlayerLevel(gemLevelSelected);
-		return mainState.GemTracker;
+		return {
+			gemSetup: mainState.GemTracker.gemSetup,
+			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+		};
+	});
+
+	// Handle events from the gem SETTINGS
+	ipcMain.handle('postBuildSelected', async (event, buildName: string) => {
+		settings.saveBuildName(buildName);
+		mainState.GemTracker.loadGemSetup(buildName);
+		return {
+			buildName: mainState.GemTracker.buildName,
+			allBuildNames: mainState.GemTracker.allBuildNames,
+			gemSetup: mainState.GemTracker.gemSetup,
+			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+		};
+	});
+
+	ipcMain.handle('getGemSettingsState', async (event, args) => {
+		return {
+			buildName: mainState.GemTracker.buildName,
+			allBuildNames: mainState.GemTracker.allBuildNames,
+			gemSetup: mainState.GemTracker.gemSetup,
+			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+		};
 	});
 
 	// Handle UI window position events
@@ -274,7 +311,14 @@ function registerGlobalHotkeys(mainWindow: BrowserWindow) {
 			value: mainState.levelTrackerOpen,
 		});
 	});
-	//TODO add gems hotkey when it works :))
+	//Show/hide level tracker - default shown
+	globalShortcut.register('Ctrl+Alt+g', () => {
+		mainState.gemTrackerOpen = !mainState.gemTrackerOpen;
+		mainWindow.webContents.send('Hotkeys', {
+			Hotkey: 'ToggleGemTracker',
+			value: mainState.gemTrackerOpen,
+		});
+	});
 }
 
 //-----------------------testing

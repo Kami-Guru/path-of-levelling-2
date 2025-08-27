@@ -77,6 +77,7 @@ export function SettingsComponent() {
 			style={{ backgroundColor: 'rgba(50, 50, 50, 0.7)' }}
 			bounds="parent"
 			disableDragging={!moveMode}
+			enableResizing={moveMode}
 		>
 			<div className="SettingsOverlay"
 				onMouseEnter={() => setIsHovered(true)}
@@ -88,7 +89,7 @@ export function SettingsComponent() {
 					{/* Hidden Move Button */}
 					{isHovered && !moveMode && (
 						<div className="SettingsMenu">
-							<button onClick={() => setMoveMode(true)}>Move</button>
+							<button onClick={() => setMoveMode(true)}>Move/Resize</button>
 						</div>
 					)}
 					{moveMode && (
@@ -100,26 +101,26 @@ export function SettingsComponent() {
 				{/* Sidebar*/}
 				<div className="SettingsSidebar">
 					<button
-                        className={`SidebarTab${activePage === 'General' ? ' Active' : ''}`}
-                        onClick={() => setActivePage('General')}
-                    >
+						className={`SidebarTab${activePage === 'General' ? ' Active' : ''}`}
+						onClick={() => setActivePage('General')}
+					>
 						<h3>General</h3>
-                    </button>
-                    <button
-                        className={`SidebarTab${activePage === 'Gems' ? ' Active' : ''}`}
-                        onClick={() => setActivePage('Gems')}
-                    >
+					</button>
+					<button
+						className={`SidebarTab${activePage === 'Gems' ? ' Active' : ''}`}
+						onClick={() => setActivePage('Gems')}
+					>
 						<h3>Gems</h3>
-                    </button>
-                    <button
-                        className={`SidebarTab${activePage === 'About' ? ' Active' : ''}`}
-                        onClick={() => setActivePage('About')}
-                    >
+					</button>
+					<button
+						className={`SidebarTab${activePage === 'About' ? ' Active' : ''}`}
+						onClick={() => setActivePage('About')}
+					>
 						<h3>About</h3>
-                    </button>
-                </div>
-                {/* Main Content */}
-                <div className="SettingsPageContent">
+					</button>
+				</div>
+				{/* Main Content */}
+				<div className="SettingsPageContent">
 					{activePage === 'General' && <GeneralSettingsComponent />}
 					{activePage === 'Gems' && <GemSettingsComponent />}
 					{activePage === 'About' && <AboutSettingsComponent />}
