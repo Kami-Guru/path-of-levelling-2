@@ -31,12 +31,12 @@ export function getBuildsRootPath() {
 	);
 }
 
-export function getBuildPath(buildFolder: string) {
+export function getBuildPath(buildName: string) {
 	return path.join(
 		app.getAppPath(),
 		isDev() ? '.' : '..',
 		'src/main/Builds',
-		buildFolder
+		buildName
 	);
 }
 

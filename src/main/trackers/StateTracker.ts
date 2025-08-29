@@ -62,7 +62,7 @@ export class StateTracker {
 
 		await this.GemTracker.fillMissingBuildsWithDefaults();
 		this.GemTracker.loadGemSetup(settings.getBuildName())
-		this.GemTracker.saveGemSetupFromPlayerLevel(this.LevelTracker.playerLevel);
+		this.GemTracker.setGemSetupFromPlayerLevel(this.LevelTracker.playerLevel);
 	}
 
 	//TODO doing all in one go is a holdover from old architecture, I can do it one by

@@ -65,7 +65,7 @@ export function ZoneNotesComponent(props: {
 				});
 		}
 
-		//Update the dropdown selection
+		// Update the dropdown selection
 		setZoneDropdown({
 			...zoneDropdown,
 			[event.target.name]: event.target.value,

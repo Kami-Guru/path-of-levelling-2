@@ -69,7 +69,7 @@ export class LogWatcher {
 			var shouldUpdateGemTracker;
 			if (data.playerLevel > 0) {
 				shouldUpdateGemTracker = true;
-				mainState.GemTracker.saveGemSetupFromPlayerLevel(data.playerLevel);
+				mainState.GemTracker.setGemSetupFromPlayerLevel(data.playerLevel);
 			}
 
 			//send data to the renderer
@@ -91,7 +91,11 @@ export class LogWatcher {
 			if (shouldUpdateGemTracker) {
 				mainWindow.webContents.send(
 					'subscribeToGemUpdates',
-					mainState.GemTracker
+					{
+						allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+						selectedLevel: mainState.GemTracker.gemSetup.level,
+						gemLinks: mainState.GemTracker.gemSetup.gemLinks
+					}
 				);
 			}
 		});

@@ -78,11 +78,30 @@ export function SettingsComponent() {
 			bounds="parent"
 			disableDragging={!moveMode}
 			enableResizing={moveMode}
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
+			resizeHandleComponent={
+				moveMode
+					? {
+						bottomRight: (
+							<div className="RndResizeCircleHandle"></div>
+						),
+					}
+					: {}
+			}
 		>
-			<div className="SettingsOverlay"
-				onMouseEnter={() => setIsHovered(true)}
-				onMouseLeave={() => { setIsHovered(false); setMoveMode(false); }}
-			>
+			{/* Move/Resize button just to the right */}
+			{isHovered && !moveMode && (
+				<div className="TrackerMoveResizeButtonContainer">
+					<button onClick={() => setMoveMode(true)}>Move/Resize</button>
+				</div>
+			)}
+			{moveMode && (
+				<div className="TrackerMoveResizeButtonContainer">
+					<button onClick={() => setMoveMode(false)}>Done</button>
+				</div>
+			)}
+			<div className="SettingsOverlay">
 				{/* Banner */}
 				<div className="SettingsBanner">
 					Settings - Path of Levelling 2

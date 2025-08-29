@@ -98,4 +98,8 @@ electron.contextBridge.exposeInMainWorld('electron', {
 	getGemSettingsState: async () => electron.ipcRenderer.invoke('getGemSettingsState'),
 	postBuildSelected: async (buildName: string) =>
 		electron.ipcRenderer.invoke('postBuildSelected', buildName),
+	postAddNewBuild: async (buildName: string) =>
+		electron.ipcRenderer.invoke('postAddNewBuild', buildName),
+	saveGemSetupsForBuild: async (response: any) =>
+		electron.ipcRenderer.invoke('saveGemSetupsForBuild', response),
 });

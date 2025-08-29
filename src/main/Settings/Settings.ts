@@ -109,20 +109,12 @@ export class Settings {
 	}
 
 	getBuildName(): string {
-		return this.store.get('buildFolder') as string;
+		return this.store.get('buildName') as string;
 	}
 
 	saveBuildName(buildName: string) {
 		console.log('Saving build name', buildName);
 		this.store.set('buildName', buildName);
-	}
-
-	getBuildFolder(): string {
-		return path.join(this.store.get('buildFolder') as string);
-	}
-
-	saveBuildFolder(buildFolder: string) {
-		this.store.set('buildFolder', buildFolder);
 	}
 
 	getSettingsOverlayPositionSettings(): any {

@@ -3,34 +3,32 @@ import { DraggableData, Rnd } from 'react-rnd';
 
 export function GemTrackerComponent() {
 	const [gemDropdown, setGemDropdown] = useState({
-		playerLevelSelected: 0,
+		selectedLevel: 0,
 		gemLinks: [''],
-		gemSources: [''],
 		allGemSetupLevels: [''],
 	});
 
-	const setGemDropdownFromTracker = (gemTracker: any) => {
+	const setGemDropdownFromClientResponse = (response: any) => {
 		setGemDropdown({
-			allGemSetupLevels: gemTracker.allGemSetupLevels,
-			playerLevelSelected: gemTracker.gemSetup.level,
-			gemLinks: gemTracker.gemSetup.gemLinks,
-			gemSources: gemTracker.gemSetup.gemSources,
+			allGemSetupLevels: response.allGemSetupLevels,
+			selectedLevel: response.selectedLevel,
+			gemLinks: response.gemLinks,
 		});
 	};
 
-	// Subscribe to the gem updates pushed from log tracker
+	// Subscribe to the gem updates pushed from main
 	useEffect(() => {
 		//@ts-ignore
-		window.electron.subscribeToGemUpdates((gemTracker) => {
-			setGemDropdownFromTracker(gemTracker);
+		window.electron.subscribeToGemUpdates((reponse) => {
+			setGemDropdownFromClientResponse(reponse);
 		});
 	}, []);
 
 	// Get initial state for gem dropdown
 	useEffect(() => {
 		//@ts-ignore
-		window.electron.getGemState().then((gemTracker) => {
-			setGemDropdownFromTracker(gemTracker);
+		window.electron.getGemState().then((reponse) => {
+			setGemDropdownFromClientResponse(reponse);
 		});
 	}, []);
 
@@ -38,17 +36,32 @@ export function GemTrackerComponent() {
 	const handleGemDropdownSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		// Post the change to main process and await
 		//@ts-ignore
-		window.electron.postGemLevelSelected(event.target.value).then((gemTracker) => {
-			setGemDropdownFromTracker(gemTracker);
+		window.electron.postGemLevelSelected(event.target.value).then((reponse) => {
+			console.log('Received', reponse);
+			setGemDropdownFromClientResponse(reponse);
 		});
 
 		//Update the dropdown selection
-		setGemDropdown({
-			...gemDropdown,
-			playerLevelSelected: parseInt(event.target.value),
-		});
+		// setGemDropdown({
+		// 	...gemDropdown,
+		// 	selectedLevel: parseInt(event.target.value),
+		// });
 	};
 
+	const getGemLevelDisplayString = (gemSetupLevel: any, index: number) => {
+		if (index == gemDropdown.allGemSetupLevels.length - 1) {
+			return 'Level: ' + gemSetupLevel.toString() + '+';
+		} else {
+			return (
+				'Level: ' +
+				gemSetupLevel.toString() +
+				' to ' +
+				gemDropdown.allGemSetupLevels[index + 1].toString()
+			);
+		}
+	};
+
+	//#region Draggable/Resizable
 	// Setting up the draggable/resizable state
 	const [moveMode, setMoveMode] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
@@ -106,19 +119,7 @@ export function GemTrackerComponent() {
 			width: ref.style.width,
 		});
 	};
-
-	const getGemLevelDisplayString = (gemSetupLevel: any, index: number) => {
-		if (index == gemDropdown.allGemSetupLevels.length - 1) {
-			return 'Level: ' + gemSetupLevel.toString() + '+';
-		} else {
-			return (
-				'Level: ' +
-				gemSetupLevel.toString() +
-				' to ' +
-				gemDropdown.allGemSetupLevels[index + 1].toString()
-			);
-		}
-	};
+	//#endregion
 
 	return (
 		<Rnd
@@ -133,6 +134,15 @@ export function GemTrackerComponent() {
 			enableResizing={moveMode}
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}
+			resizeHandleComponent={
+				moveMode
+					? {
+						bottomRight: (
+							<div className="RndResizeCircleHandle"></div>
+						),
+					}
+					: {}
+			}
 		>
 			{/* Move/Resize button just to the right */}
 			{isHovered && !moveMode && (
@@ -149,7 +159,7 @@ export function GemTrackerComponent() {
 				<select
 					className="GemDropdown"
 					name="gemLevelSelected"
-					value={gemDropdown.playerLevelSelected}
+					value={gemDropdown.selectedLevel}
 					onChange={(gemSetupLevel) => {
 						handleGemDropdownSelection(gemSetupLevel);
 					}}
@@ -162,13 +172,13 @@ export function GemTrackerComponent() {
 							<option
 								value={gemSetupLevel}
 								selected={
-									gemSetupLevel == gemDropdown.playerLevelSelected
+									gemSetupLevel == gemDropdown.selectedLevel
 								}
 							>
 								{getGemLevelDisplayString(gemSetupLevel, index)}
 							</option>
 						);
-					})}
+					})}				
 				</select>
 				<div className="GemLinksDiv">
 					{gemDropdown.gemLinks?.map(function (gemLink: string) {
@@ -177,11 +187,11 @@ export function GemTrackerComponent() {
 					<p className="GemLinks"> </p>
 					{/*  TODO: This is a newline basically, I proooobably shouldn't be doing this lol */}
 				</div>
-				<div className="GemSourcesDiv">
+				{/* <div className="GemSourcesDiv">
 					{gemDropdown.gemSources?.map(function (gemSource: string) {
 						return <p className="GemSources">{gemSource}</p>;
 					})}
-				</div>
+				</div> */}
 			</div>
 		</Rnd>
 

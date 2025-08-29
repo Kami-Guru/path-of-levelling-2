@@ -42,6 +42,8 @@ export function LevelTrackerComponent() {
 	}
 
 	// Setting up the deggable/resizable state
+	const [moveMode, setMoveMode] = useState(false);
+	const [isHovered, setIsHovered] = useState(false);
 	const [rndState, setRndState] = useState({
 		x: 0,
 		y: 0,
@@ -105,17 +107,30 @@ export function LevelTrackerComponent() {
 			onResizeStop={(e, direction, ref, delta, position) =>
 				handleResize(e, direction, ref, delta, position)
 			}
+			
+			bounds="parent"
+			disableDragging={!moveMode}
 			enableResizing={{
 				top: false,
-				right: true,
+				right: moveMode,
 				bottom: false,
-				left: true,
+				left: moveMode,
 				topRight: false,
 				bottomRight: false,
 				bottomLeft: false,
 				topLeft: false,
 			}}
-			bounds="parent"
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
+			resizeHandleComponent={
+				moveMode
+					? {
+						bottomRight: (
+							<div className="RndResizeCircleHandle"></div>
+						),
+					}
+					: {}
+			}
 		>
 			<div className="LevelTracker">
 				<p>{getDiffLine()}</p>

@@ -17,6 +17,7 @@ import { getDesktopIconPath, getPreloadPath, getUIPath } from './pathResolver.js
 import { Settings } from './Settings/Settings.js';
 import { StateTracker } from './trackers/StateTracker.js';
 import { isDev } from './util.js';
+import { GemSetup } from './trackers/GemTracker.js';
 
 declare global {
 	var settings: Settings;
@@ -25,6 +26,7 @@ declare global {
 
 // Only allow one instance of the app
 if (!app.requestSingleInstanceLock()) {
+	log.info('Another instance of the app is already running, quitting this one.');
 	app.quit();
 }
 
@@ -194,37 +196,96 @@ function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatch
 	// Handle events from the gem tracker
 	ipcMain.handle('getGemState', async (event, args) => {
 		return {
-			gemSetup: mainState.GemTracker.gemSetup,
 			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+			selectedLevel: mainState.GemTracker.gemSetup.level,
+			gemLinks: mainState.GemTracker.gemSetup.gemLinks
 		};
 	});
 
 	ipcMain.handle('postGemLevelSelected', async (event, gemLevelSelected: number) => {
-		mainState.GemTracker.saveGemSetupFromPlayerLevel(gemLevelSelected);
+		mainState.GemTracker.setGemSetupFromPlayerLevel(gemLevelSelected);
 		return {
-			gemSetup: mainState.GemTracker.gemSetup,
 			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+			selectedLevel: mainState.GemTracker.gemSetup.level,
+			gemLinks: mainState.GemTracker.gemSetup.gemLinks
 		};
 	});
 
 	// Handle events from the gem SETTINGS
+	ipcMain.handle('getGemSettingsState', async (event, args) => {
+		return {
+			buildName: mainState.GemTracker.buildName,
+			allBuildNames: mainState.GemTracker.allBuildNames,
+			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+			allGemSetups: mainState.GemTracker.allGemSetups,
+		};
+	});
+
 	ipcMain.handle('postBuildSelected', async (event, buildName: string) => {
 		settings.saveBuildName(buildName);
 		mainState.GemTracker.loadGemSetup(buildName);
 		return {
 			buildName: mainState.GemTracker.buildName,
 			allBuildNames: mainState.GemTracker.allBuildNames,
-			gemSetup: mainState.GemTracker.gemSetup,
 			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+			allGemSetups: mainState.GemTracker.allGemSetups,
 		};
 	});
 
-	ipcMain.handle('getGemSettingsState', async (event, args) => {
+	ipcMain.handle('postAddNewBuild', async (event, buildName: string) => {
+		// Set the current build
+		settings.saveBuildName(buildName);
+
+		// Save the new build & load it
+		mainState.GemTracker.saveNewBuild(buildName);
+		mainState.GemTracker.loadGemSetup(buildName);
+		mainState.GemTracker.setGemSetupFromPlayerLevel(mainState.LevelTracker.playerLevel);
+
+
+		// Send the updated state to the Gem Tracker component
+		mainWindow.webContents.send(
+			'subscribeToGemUpdates',
+			{
+				allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+				selectedLevel: mainState.GemTracker.gemSetup.level,
+				gemLinks: mainState.GemTracker.gemSetup.gemLinks
+			}
+		);
+
+		// Return the updated state to Gem Tracker Settings component
 		return {
 			buildName: mainState.GemTracker.buildName,
 			allBuildNames: mainState.GemTracker.allBuildNames,
-			gemSetup: mainState.GemTracker.gemSetup,
 			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+			allGemSetups: mainState.GemTracker.allGemSetups,
+		};
+	});
+
+	ipcMain.handle('saveGemSetupsForBuild', async (event, response: { buildName: string, allGemSetups: GemSetup[] }) => {
+		// Set the current build
+		settings.saveBuildName(response.buildName);
+
+		// Save the new build
+		mainState.GemTracker.saveGemBuild(response.buildName, response.allGemSetups);
+		mainState.GemTracker.loadGemSetup(response.buildName);
+		mainState.GemTracker.setGemSetupFromPlayerLevel(mainState.LevelTracker.playerLevel);
+
+		// Send the updated state to the Gem Tracker component
+		mainWindow.webContents.send(
+			'subscribeToGemUpdates',
+			{
+				allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+				selectedLevel: mainState.GemTracker.gemSetup.level,
+				gemLinks: mainState.GemTracker.gemSetup.gemLinks
+			}
+		);
+
+		// Return the updated state to Gem Tracker Settings component		
+		return {
+			buildName: mainState.GemTracker.buildName,
+			allBuildNames: mainState.GemTracker.allBuildNames,
+			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+			allGemSetups: mainState.GemTracker.allGemSetups,
 		};
 	});
 
