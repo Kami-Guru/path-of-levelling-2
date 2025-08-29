@@ -22,8 +22,15 @@ export class Settings {
 		if (!this.store.get('clientTxtPath')) {
 			this.store.set('clientTxtPath', await guessClientTxtPath());
 		}
-		if (!this.store.get('buildFolder')) {
-			this.store.set('buildFolder', defaultSettings.buildFolder);
+
+		if (!this.store.get('buildName')) {
+			this.store.set('buildName', defaultSettings.buildName);
+		}
+
+		// Previously 'buildName' was 'buildFolder', so do a migration here
+		if (this.store.get('buildFolder')) {
+			this.store.set('buildName', this.store.get('buildFolder'));
+			this.store.delete('buildFolder');
 		}
 
 		// Get last session state
@@ -101,12 +108,12 @@ export class Settings {
 		return mainState.logWatcherActive;
 	}
 
-	getBuildFolder(): string {
-		return path.join(this.store.get('buildFolder') as string);
+	getBuildName(): string {
+		return this.store.get('buildName') as string;
 	}
 
-	saveBuildFolder(buildFolder: string) {
-		this.store.set('buildFolder', buildFolder);
+	saveBuildName(buildName: string) {
+		this.store.set('buildName', buildName);
 	}
 
 	getSettingsOverlayPositionSettings(): any {

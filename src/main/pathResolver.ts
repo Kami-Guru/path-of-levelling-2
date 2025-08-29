@@ -23,12 +23,20 @@ export function getDesktopIconPath() {
 	);
 }
 
-export function getBuildPath(buildFolder: string) {
+export function getBuildsRootPath() {
+	return path.join(
+		app.getAppPath(),
+		isDev() ? '.' : '..',
+		'src/main/Builds'
+	);
+}
+
+export function getBuildPath(buildName: string) {
 	return path.join(
 		app.getAppPath(),
 		isDev() ? '.' : '..',
 		'src/main/Builds',
-		buildFolder
+		buildName
 	);
 }
 

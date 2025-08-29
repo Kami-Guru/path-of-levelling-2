@@ -65,14 +65,16 @@ export function ZoneNotesComponent(props: {
 				});
 		}
 
-		//Update the dropdown selection
+		// Update the dropdown selection
 		setZoneDropdown({
 			...zoneDropdown,
 			[event.target.name]: event.target.value,
 		});
 	};
 
-	// Setting up the deggable/resizable state
+	// Setting up the draggable/resizable state
+	const [moveMode, setMoveMode] = useState(false);
+	const [isHovered, setIsHovered] = useState(false);
 	const [rndState, setRndState] = useState({
 		x: 0,
 		y: 0,
@@ -137,7 +139,31 @@ export function ZoneNotesComponent(props: {
 				handleResize(e, direction, ref, delta, position)
 			}
 			bounds="parent"
+			disableDragging={!moveMode}
+			enableResizing={moveMode}
+			onMouseEnter={() => setIsHovered(true)}
+			onMouseLeave={() => setIsHovered(false)}
+			resizeHandleComponent={
+				moveMode
+					? {
+						bottomRight: (
+							<div className="RndResizeCircleHandle"></div>
+						),
+					}
+					: {}
+			}
 		>
+			{/* Move/Resize button just to the right */}
+			{isHovered && !moveMode && (
+				<div className="TrackerMoveResizeButtonContainer">
+					<button onClick={() => setMoveMode(true)}>Move/Resize</button>
+				</div>
+			)}
+			{moveMode && (
+				<div className="TrackerMoveResizeButtonContainer">
+					<button onClick={() => setMoveMode(false)}>Done</button>
+				</div>
+			)}
 			<div className="ZoneNotes">
 				<select
 					className="ZoneDropdown"

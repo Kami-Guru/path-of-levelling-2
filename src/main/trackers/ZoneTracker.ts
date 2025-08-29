@@ -38,16 +38,8 @@ export class ZoneTracker {
 		this.allZoneNotes = Object();
 
 		this.allActs = zoneReferenceData.acts.map((act) =>  act.name );
-
-		//TODO: Uh, this doesn't do anything? was I going to do something here? 
-		// If there is a build selected and that build has saved state, read it.
-		path.join(
-			getBuildPath(settings.getBuildFolder()),
-			'savedState.json'
-		);
 	}
 
-	// TODO: This should be part of constructor, I forgot why it isn't.
 	loadAllZoneNotes(allZoneNotesPath: string) {
 		log.info('Trying to load zone notes at path', allZoneNotesPath);
 
@@ -148,14 +140,8 @@ export class ZoneTracker {
 		//This will turn eg C_G1_1_1 -> ["C", "G1", "1", "1"]
 		var zoneCodeData = zoneCode.split('_');
 
-		var actNumber = 0;
-		if (zoneCodeData[0] == 'C') {
-			actNumber += 3;
-			zoneCodeData.shift(); // We don't need the 'C' again
-		}
-
 		//This will look like "G1", so turn it into 1
-		actNumber += parseInt(zoneCodeData[0].substring(1));
+		var actNumber = parseInt(zoneCodeData[0].substring(1));
 
 		var actReference = zoneReferenceData.acts.find((act) => {
 			return act.name == 'Act '.concat(actNumber.toString());
@@ -185,7 +171,6 @@ export class ZoneTracker {
 	}
 
 	setZoneNotes() {
-		//TODO ahhhhh I have so much typing do to
 		//@ts-ignore
 		var actNotes = this.allZoneNotes.actNotes.find((actNotes) => {
 			return actNotes.act == this.act;
@@ -195,16 +180,9 @@ export class ZoneTracker {
 
 		this.actNotes = actNotes.notes;
 
-		// Reuse Normal difficulty zone notes for Cruel
-		// TODO: Uh can I do this? I think cruel is a little different right
-		var zoneCodeNoCruel = this.zoneCode
-		if (zoneCodeNoCruel.substring(0, 2) == 'C_') {
-			zoneCodeNoCruel = zoneCodeNoCruel.substring(2);
-		}
-
 		//@ts-ignore
 		var zoneNotes = this.allZoneNotes.zoneNotes.find((zoneNotes) => {
-			return zoneNotes.code == zoneCodeNoCruel;
+			return zoneNotes.code == this.zoneCode;
 		});
 
 		// This basically gives users the option to not set notes for a zone
@@ -222,17 +200,10 @@ export class ZoneTracker {
 	//TODO changed, but am I ok with these being so coupled? I guess it isn't really coupling
 	//TODO if it's all the same state on the same class. 
 	setZoneLayoutImagePaths(zoneCode: string): Boolean {
-		// Halve the number of photos we have to hold by just getting the normal
-		// difficulty images for Cruel acts
-		if (zoneCode.substring(0, 2) == 'C_') {
-			zoneCode = zoneCode.substring(2);
-		}
-
 		log.info('Trying to get zone image paths for zone code', zoneCode)
 		const directories = fs.readdirSync(getZoneLayoutImagesAbsolutePath());
 
 		// Note we HAVE to use find since G1_1 also matches G1_15
-		// This was a problem before I just reused normal diff images for cruel
 		const requiredDirectory = directories.find((directory) => {
 			return directory.includes(zoneCode);
 		})

@@ -1,0 +1,51 @@
+{
+	"buildName": "0.3.0 Fubgun's LA Deadeye",
+	"gemBuild": {
+		"changedByUser": false,
+		"gemSetups": [
+			{
+				"level": 1,
+				"gemLinks": [
+					"Lightning Arrow - Rapid Attacks - Lightning Attunement",
+					"Lightning Rod",
+					"Contagion"
+				],
+				"sources": []
+			},
+			{
+				"level": 6,
+				"gemLinks": [
+					"Stormcaller Arrow - Rapid Attacks - Concentrated Area",
+					"Freezing Salvo - Hourglass - Magnified Area",
+					"Herald of Thunder - Innervate",
+					"Frost Bomb - Arcane Tempo - Rapid Casting"
+				],
+				"gemSources": []
+			},
+			{
+				"level": 15,
+				"gemLinks": [
+					"Stormcaller Arrow - Rapid Attacks - Concentrated Area",
+					"Freezing Salvo - Hourglass - Magnified Area",
+					"Herald of Thunder - Innervate",
+					"Barrage - Premeditation",
+					"Frost Bomb - Arcane Tempo - Rapid Casting"
+				],
+				"gemSources": []
+			},
+			{
+				"level": 28,
+				"gemLinks": [
+					"Lightning Arrow - Rapid Attacks - Elemental Armament",
+					"Lightning Rod - Concentrated Area - Elemental Armament - Lightning Infusion",
+					"Freezing Salvo - Hourglass - Elemental Armament - Magnified Area",
+					"Herald of Thunder - Innervate - Lightning Attunement",
+					"Tame Beast - Meat Shield - Elemental Army",
+					"Barrage - Premeditation",
+					"Frost Bomb"
+				],
+				"gemSources": []
+			}
+		]
+	}
+}

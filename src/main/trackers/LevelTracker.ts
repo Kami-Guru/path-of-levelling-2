@@ -94,6 +94,6 @@ export class LevelTracker {
 			expMulti = 0.01;
 		}
 
-		this.expMulti = expMulti;
+		this.expMulti = (Math.round(expMulti * 100) / 100);
 	}
 }

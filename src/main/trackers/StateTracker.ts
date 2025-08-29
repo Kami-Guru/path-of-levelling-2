@@ -16,52 +16,35 @@ export class StateTracker {
 
 	store: Store;
 
-	savedStatePath: string;
-	zoneNotesPath: string;
-	gemSetupPath: string;
-
 	settingsOpen: boolean = false;
 	zoneNotesOpen: boolean = true;
 	layoutImagesOpen: boolean = true;
 	levelTrackerOpen: boolean = true;
-	gemNotesOpen: boolean = false; // TODO make true once this is implemented
+	gemTrackerOpen: boolean = true;
 
 	logWatcherActive: boolean = false;
 
 	constructor() {
 		// need to read some level of state from here. probably have to write it into the
 		// builds folder? maybe need a state tracker that just tracks the build
-		// get zone notes path
+		// Get zone notes path
 		this.store = new Store();
 
 		this.ZoneTracker = new ZoneTracker();
 		this.LevelTracker = new LevelTracker();
 		this.GemTracker = new GemTracker();
+	}
 
-		this.savedStatePath = ''; //this just gets rid of the warning
-		this.zoneNotesPath = '';
-		this.gemSetupPath = '';
-
-		if (settings.getBuildFolder() == null) {
-			return;
-		}
-
-		this.savedStatePath = path.join(
-			getBuildPath(settings.getBuildFolder()),
-			'savedState.json'
-		);
-		this.zoneNotesPath = path.join(
-			getBuildPath(settings.getBuildFolder()),
+	async oneTimeSetup() {
+		// Read zone notes from file
+		var zoneNotesPath = path.join(
+			getBuildPath('Default'),
 			'zoneNotes.json'
-		);
-		this.gemSetupPath = path.join(
-			getBuildPath(settings.getBuildFolder()),
-			'gemSetup.json'
 		);
 
 		try {
-			log.info('Loading notes from path', this.zoneNotesPath);
-			this.ZoneTracker.loadAllZoneNotes(this.zoneNotesPath);
+			log.info('Loading notes from path', zoneNotesPath);
+			this.ZoneTracker.loadAllZoneNotes(zoneNotesPath);
 			this.ZoneTracker.saveZoneFromCode(
 				this.store.get('lastSessionState.zoneCode') as string,
 				true
@@ -72,16 +55,14 @@ export class StateTracker {
 				this.store.get('lastSessionState.monsterLevel') as number,
 				true
 			);
-
-			this.GemTracker.loadGemSetups(this.gemSetupPath);
-			this.GemTracker.saveGemSetupFromPlayerLevel(
-				this.store.get('lastSessionState.playerLevel') as number
-			);
 		} catch (error) {
-			//TODO: Do I even need to do anything here? This feature is not important
 			log.info('Could not load saved state, with error:');
 			log.info(error);
 		}
+
+		await this.GemTracker.fillMissingBuildsWithDefaults();
+		this.GemTracker.loadGemSetup(settings.getBuildName())
+		this.GemTracker.setGemSetupFromPlayerLevel(this.LevelTracker.playerLevel);
 	}
 
 	//TODO doing all in one go is a holdover from old architecture, I can do it one by

@@ -1,4 +1,5 @@
-clientTxtFile = open('/mnt/d/SteamLibrary/steamapps/common/Path of Exile 2/logs/Client.txt', "a")
+clientTxtFile = open('/home/punchingbag/.steam/root/steamapps/common/Path of Exile 2/logs/Client.txt', "a")
+
 
 #Insert a line to the client file - simulate changing zone.
 zoneCode = input("Enter zone code:")

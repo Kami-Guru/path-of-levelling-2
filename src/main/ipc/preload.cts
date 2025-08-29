@@ -81,7 +81,7 @@ electron.contextBridge.exposeInMainWorld('electron', {
 	},
 	getLevelState: async () => electron.ipcRenderer.invoke('getLevelState'),
 
-	// Methods for the gem tracker
+	// Methods for the gem TRACKER
 	subscribeToGemUpdates: (callback: any) => {
 		return electron.ipcRenderer.on(
 			'subscribeToGemUpdates',
@@ -93,4 +93,13 @@ electron.contextBridge.exposeInMainWorld('electron', {
 	getGemState: async () => electron.ipcRenderer.invoke('getGemState'),
 	postGemLevelSelected: async (gemLevelSelected: number) =>
 		electron.ipcRenderer.invoke('postGemLevelSelected', gemLevelSelected),
+
+	// Methods for the gem SETTINGS
+	getGemSettingsState: async () => electron.ipcRenderer.invoke('getGemSettingsState'),
+	postBuildSelected: async (buildName: string) =>
+		electron.ipcRenderer.invoke('postBuildSelected', buildName),
+	postAddNewBuild: async (buildName: string) =>
+		electron.ipcRenderer.invoke('postAddNewBuild', buildName),
+	saveGemSetupsForBuild: async (response: any) =>
+		electron.ipcRenderer.invoke('saveGemSetupsForBuild', response),
 });
