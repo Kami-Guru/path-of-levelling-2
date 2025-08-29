@@ -275,6 +275,8 @@ react-draggable {
 
 .GemSettingsBlocksContainer {
 	margin-top: 24px;
+	/* need padding so that banner doesn't cover Add Gem Setup button */
+	padding-bottom: 48px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -282,6 +284,7 @@ react-draggable {
 }
 
 .GemSettingsBlock {
+	position: relative;
 	width: calc(100% - 40px);
 	/* Add horizontal padding */
 	margin-left: 0;
@@ -308,6 +311,34 @@ react-draggable {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.GemSettingsRemoveBlockButton {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	background: #353e54;
+	color: #fff;
+	border: none;
+	border-radius: 50%;
+	width: 28px;
+	height: 28px;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.2s;
+	margin: 0;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	line-height: 1;
+}
+
+.GemSettingsRemoveBlockButton:hover {
+	background: #d9534f;
+	color: #fff;
 }
 
 .GemSettingsLevelInput {

@@ -156,6 +156,15 @@ export function GemSettingsComponent() {
                                 className="GemSettingsLinksTextarea"
                             />
                         </label>
+                        <button
+                            className="GemSettingsRemoveBlockButton"
+                            onClick={() => {
+                                setEditableGemSetups(editableGemSetups.filter((_, i) => i !== idx));
+                            }}
+                            title="Remove block"
+                        >
+                            &times;
+                        </button>
                     </div>
                 ))}
                 <button
@@ -170,7 +179,7 @@ export function GemSettingsComponent() {
                         ]);
                     }}
                 >
-                    + Add Block
+                    + Add Gem Setup
                 </button>
             </div>
             <div className="GemSettingsBanner">
