@@ -162,7 +162,7 @@
 		{
 			"code": "G2_10_2",
 			"name": "Mawdun Mine",
-			"notes": "Boss is usually directly north from entrance\n\nRECOMMEND Fire Res, boss can deal a lot of damage. Watch out for mines\n\nExit > Traitor's Passage"
+			"notes": "Boss is usually directly north from entrance\n\nRECOMMEND Fire Res, boss can deal a lot of damage. Watch out for mines\n\nTP > Town then Caravan > Traitor's Passage"
 		},
 		{
 			"code": "G2_12_1",
@@ -192,7 +192,7 @@
 		{
 			"code": "G3_3",
 			"name": "Jungle Ruins",
-			"notes": "Three main locations:\n1) Infested Barrens - opposite wall from entrance\n2) Venom Crypts - in one of 9 places arranged in a grid\n3) Silverfist - usually top third of zone, occasionally in the middle\n\nIf you find Venom Crypts go in, get waypoint, come back\nSteps:\n1. Start following the downward wall and around to find 2) or 3)\n2. From opposite side checkpoint > start and wall follow the other way to find 1)\n3. If you have found all 3 locations then Exit > Infested Barrens, else\n4. Scan back and forth through the zone starting from top/left third of map\n\nExit > Infested Barrens"
+			"notes": "Three main locations:\n1) Infested Barrens - opposite wall from entrance\n2) Venom Crypts - in one of 9 places arranged in a grid\n3) Silverfist - usually top third of zone, occasionally in the middle\n\nMAKE SURE YOU GET WAYPOINT\nSteps:\n1. Start following the downward wall and around to find 2) or 3)\n2. From opposite side checkpoint > start and wall follow the other way to find 1)\n3. If you have found all 3 locations then Exit > Infested Barrens, else\n4. Scan back and forth through the zone starting from top/left third of map\n\nExit > Infested Barrens"
 		},
 		{
 			"code": "G3_4",

@@ -4,7 +4,7 @@
 	"author": "Kami Guru",
 	"repository": "https://github.com/JaredRabie/path-of-levelling-2",
 	"private": true,
-	"version": "0.1.36",
+	"version": "0.1.37",
 	"type": "module",
 	"main": "dist-electron/main.js",
 	"postinstall": "electron-builder install-app-deps",
