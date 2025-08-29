@@ -18,3 +18,18 @@ Windows: `steamapps\common\Path of Exile 2\logs\Client.txt`
 Linux: `.steam/root/steamapps/common/Path of Exile 2/logs/Client.txt`
 
 Paste the full path (from `C:` or `~/`) in the text box to update the Client.txt path to enable tracking.
+
+## Creating A Gem Setup
+Hit `Ctrl+Alt+S` to open the settings and click Gems on the left - you should see something like this:
+
+![Gems Settings Screen](/images/gems-settings-screen.png)
+
+Up the top is a dropdown that lets you select from a few built-in builds:
+
+![Gems Settings Screen Select Build](/images/gems-settings-screen-select-build.png)
+
+Hit 'Add build...' and give a name for your build to create your own!
+
+![Gems Settings Screen Select Build](/images/gems-settings-screen-example-new-build.png)
+
+On every build you can add and remove new gem setups, adjust the level that each setup will display (switches automatically!), and type in whatever gem setup you need.
