@@ -79,7 +79,7 @@ react-draggable {
 }
 
 .SettingsOverlay p {
-	
+
 	margin-left: 12px;
 	margin-top: 5px;
 	margin-bottom: 5px;
@@ -200,8 +200,8 @@ react-draggable {
 
 /* General Settings Page Content */
 .GeneralSettingsComponent {
-	position:absolute;
-	height:100%;
+	position: absolute;
+	height: 100%;
 	color: white;
 	box-sizing: border-box;
 	display: block;
@@ -381,6 +381,21 @@ react-draggable {
 	margin-left: 16px;
 }
 
+.AboutSettingsWrapper a {
+	color: #7fc7ff;
+	text-decoration: underline;
+	transition: color 0.2s, text-decoration-thickness 0.2s;
+	text-decoration-thickness: 1px;
+}
+
+.AboutSettingsWrapper a:hover,
+.AboutSettingsWrapper a:focus {
+	color: #b3e3ff;
+	text-decoration-thickness: 2px;
+	text-decoration: underline;
+	outline: none;
+}
+
 /* Tracker Overlays ------------------- */
 /* Move/Resize Button Styles for Overlays */
 .TrackerMoveResizeButtonContainer {
@@ -487,14 +502,15 @@ react-draggable {
 }
 
 .LayoutImageContainer {
-	margin-left: 15px;
+	flex: 0 0 auto;
+	display: flex;
 }
 
 .LayoutImage {
-	width: 100%;
 	height: 100%;
-
+	width: auto;
 	object-fit: contain;
+	display: block;
 }
 
 /* Level Tracker */
