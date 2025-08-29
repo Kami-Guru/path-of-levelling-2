@@ -100,6 +100,8 @@ electron.contextBridge.exposeInMainWorld('electron', {
 		electron.ipcRenderer.invoke('postBuildSelected', buildName),
 	postAddNewBuild: async (buildName: string) =>
 		electron.ipcRenderer.invoke('postAddNewBuild', buildName),
+	postDeleteBuild: async (buildName: string) =>
+		electron.ipcRenderer.invoke('postDeleteBuild', buildName),
 	saveGemSetupsForBuild: async (response: any) =>
 		electron.ipcRenderer.invoke('saveGemSetupsForBuild', response),
 });

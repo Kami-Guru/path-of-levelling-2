@@ -64,25 +64,8 @@ export function GemSettingsComponent() {
         });
     };
 
-    // Handle edits to level
-    const handleLevelChange = (index: number, value: number) => {
-        const newSetups = editableGemSetups.map((setup, i) =>
-            i === index ? { ...setup, level: value } : setup
-        );
-        setEditableGemSetups(newSetups);
-    };
-
-    // Handle edits to gemLinks
-    const handleGemLinksChange = (index: number, value: string) => {
-        const linksArray = value.split('\n');
-        const newSetups = editableGemSetups.map((setup, i) =>
-            i === index ? { ...setup, gemLinks: linksArray } : setup
-        );
-        setEditableGemSetups(newSetups);
-    };
-
     // Save handler for the banner button
-    const handleSave = () => {
+    const handleSaveBuild = () => {
         const response = {
             buildName: selectedBuild,
             allGemSetups: editableGemSetups,
@@ -100,24 +83,70 @@ export function GemSettingsComponent() {
             })));
         });
     };
-    
+
+    const handleDeleteBuild = () => {
+        if (
+            selectedBuild &&
+            window.confirm(`Are you sure you want to delete build "${selectedBuild}"?`)
+        ) {
+            //@ts-ignore
+            window.electron.postDeleteBuild(selectedBuild).then((response) => {
+                setSelectedBuild(response.buildName);
+                setAllBuildNames(response.allBuildNames);
+                setallGemSetups(response.allGemSetups);
+                setEditableGemSetups(response.allGemSetups.map((setup: GemSetup) => ({
+                    ...setup,
+                    gemLinks: [...setup.gemLinks],
+                })));
+            });
+        }
+    };
+
+    // Handle edits to level
+    const handleLevelChange = (index: number, value: number) => {
+        const newSetups = editableGemSetups.map((setup, i) =>
+            i === index ? { ...setup, level: value } : setup
+        );
+        setEditableGemSetups(newSetups);
+    };
+
+    // Handle edits to gemLinks
+    const handleGemLinksChange = (index: number, value: string) => {
+        const linksArray = value.split('\n');
+        const newSetups = editableGemSetups.map((setup, i) =>
+            i === index ? { ...setup, gemLinks: linksArray } : setup
+        );
+        setEditableGemSetups(newSetups);
+    };
+
     return (
         <div className="GemSettingsComponent">
             <h3>Gems Settings</h3>
-            <label htmlFor="build-select">Select Build:</label>
-            <select
-                id="build-select"
-                value={selectedBuild}
-                onChange={handleGemDropdownSelection}
-                className="GemSettingsBuildSelect"
-            >
-                {allBuildNames.map((buildName) => (
-                    <option key={buildName} value={buildName}>
-                        {buildName}
-                    </option>
-                ))}
-                <option value="__add__">Add build...</option>
-            </select>
+            <div className="GemSettingsBuildRow">
+                <label htmlFor="build-select">Select Build:</label>
+                <select
+                    id="build-select"
+                    value={addingBuild ? '__add__' : selectedBuild}
+                    onChange={handleGemDropdownSelection}
+                    className="GemSettingsBuildSelect"
+                >
+                    {allBuildNames.map((buildName) => (
+                        <option key={buildName} value={buildName}>
+                            {buildName}
+                        </option>
+                    ))}
+                    <option value="__add__">Add build...</option>
+                </select>
+                {!addingBuild && (
+                    <button
+                        className="GemSettingsDeleteBuildButton"
+                        onClick={handleDeleteBuild}
+                        title="Delete current build"
+                    >
+                        Delete Build
+                    </button>
+                )}
+            </div>
             {addingBuild && (
                 <div className="GemSettingsAddBuildContainer">
                     <input
@@ -156,6 +185,15 @@ export function GemSettingsComponent() {
                                 className="GemSettingsLinksTextarea"
                             />
                         </label>
+                        <button
+                            className="GemSettingsRemoveBlockButton"
+                            onClick={() => {
+                                setEditableGemSetups(editableGemSetups.filter((_, i) => i !== idx));
+                            }}
+                            title="Remove block"
+                        >
+                            &times;
+                        </button>
                     </div>
                 ))}
                 <button
@@ -170,11 +208,11 @@ export function GemSettingsComponent() {
                         ]);
                     }}
                 >
-                    + Add Block
+                    + Add Gem Setup
                 </button>
             </div>
             <div className="GemSettingsBanner">
-                <button className="GemSettingsSaveButton" onClick={handleSave}>Save</button>
+                <button className="GemSettingsSaveButton" onClick={handleSaveBuild}>Save</button>
             </div>
         </div>
     );
