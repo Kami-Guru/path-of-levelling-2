@@ -8,7 +8,7 @@
 				"gemLinks": [
 					"Spark - Unleash - Controlled Destruction",
 					"Flame Wall - Fortress",
-					"Frost Bomb - Magnified Effect - Persistence",
+					"Frost Bomb - Magnified Area - Prolonged Duration",
 					"Arctic Armour"
 				],
 				"sources": []
@@ -16,38 +16,38 @@
 			{
 				"level": 15,
 				"gemLinks": [
-					"Frostbolt - Scattershot - Controlled Destruction",
-					"Snap - Concentrated Effect - Spell Cascade",
+					"Frostbolt - Multishot - Controlled Destruction",
+					"Snap - Concentrated Area - Spell Cascade",
 					"Ice Nova - Unleash - Controlled Destruction",
-					"Elemental Weakness - Persistence - Heightened Curse",
+					"Elemental Weakness - Prolonged Duration - Heightened Curse",
 					"Arctic Armour",
-					"Frost Bomb - Magnified Effect - Persistence"
+					"Frost Bomb - Magnified Area - Prolonged Duration"
 				],
 				"gemSources": []
 			},
 			{
 				"level": 33,
 				"gemLinks": [
-					"Frostbolt - Scattershot - Controlled Destruction",
-					"Snap - Concentrated Effect - Spell Cascade",
+					"Frostbolt - Multishot - Controlled Destruction",
+					"Snap - Concentrated Area - Spell Cascade",
 					"Ice Nova - Unleash - Controlled Destruction",
-					"Frost Wall - Icicle - Spell Cascade - Ingenuity",
-					"Elemental Weakness - Persistence - Heightened Curse",
+					"Frost Wall - Icicle - Spell Cascade - Cooldown Recovery",
+					"Elemental Weakness - Prolonged Duration - Heightened Curse",
 					"Arctic Armour - Clarity",
-					"Frost Bomb - Magnified Effect - Strip Away"
+					"Frost Bomb - Magnified Area - Potent Exposure"
 				],
 				"gemSources": []
 			},
 			{
 				"level": 55,
 				"gemLinks": [
-					"Frostbolt - Scattershot - Controlled Destruction - Arcane Tempo",
-					"Snap - Concentrated Effect - Spell Cascade",
+					"Frostbolt - Multishot - Controlled Destruction - Arcane Tempo",
+					"Snap - Concentrated Area - Spell Cascade",
 					"Ice Nova - Unleash - Controlled Destruction",
-					"Frost Wall - Icicle - Spell Cascade - Ingenuity",
-					"Elemental Weakness - Persistence - Heightened Curse",
+					"Frost Wall - Icicle - Spell Cascade - Cooldown Recovery",
+					"Elemental Weakness - Prolonged Duration - Heightened Curse",
 					"Arctic Armour - Clarity",
-					"Frost Bomb - Magnified Effect - Strip Away"
+					"Frost Bomb - Magnified Area - Potent Exposure"
 				],
 				"gemSources": []
 			}

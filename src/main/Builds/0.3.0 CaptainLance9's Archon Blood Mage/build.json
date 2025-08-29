@@ -1,0 +1,18 @@
+{
+	"buildName": "0.3.0 CaptainLance9's Archon Blood Mage",
+	"gemBuild": {
+		"changedByUser": false,
+		"gemSetups": [
+			{
+				"level": 1,
+				"gemLinks": [
+					"Essence Drain - Chain - Swift Affliction - Zenith - Considered Casting",
+					"Contagion - Rapid Casting - Unleash - Magnified Area",
+					"Withering Prescence - Prolonged Duration",
+					"Despair - Heightened Curse"
+				],
+				"sources": []
+			}
+		]
+	}
+}
