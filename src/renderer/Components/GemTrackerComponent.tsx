@@ -37,15 +37,8 @@ export function GemTrackerComponent() {
 		// Post the change to main process and await
 		//@ts-ignore
 		window.electron.postGemLevelSelected(event.target.value).then((reponse) => {
-			console.log('Received', reponse);
 			setGemDropdownFromClientResponse(reponse);
 		});
-
-		//Update the dropdown selection
-		// setGemDropdown({
-		// 	...gemDropdown,
-		// 	selectedLevel: parseInt(event.target.value),
-		// });
 	};
 
 	const getGemLevelDisplayString = (gemSetupLevel: any, index: number) => {

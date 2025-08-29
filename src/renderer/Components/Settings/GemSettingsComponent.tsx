@@ -37,7 +37,6 @@ export function GemSettingsComponent() {
             // Post the change to main process and get back the new build selected
             //@ts-ignore
             window.electron.postBuildSelected(event.target.value).then((response) => {
-                console.log('Changed build, received: ', response);
                 setSelectedBuild(response.buildName);
                 setAllBuildNames(response.allBuildNames);
                 setallGemSetups(response.allGemSetups);
@@ -89,12 +88,9 @@ export function GemSettingsComponent() {
             allGemSetups: editableGemSetups,
         };
 
-        console.log('Saving gem setups ', response);
-
         // Send updated gem setups and reload
         //@ts-ignore
         window.electron.saveGemSetupsForBuild(response).then((response) => {
-            console.log('Saved gem setups, received: ', response);
             setSelectedBuild(response.buildName);
             setAllBuildNames(response.allBuildNames);
             setallGemSetups(response.allGemSetups);

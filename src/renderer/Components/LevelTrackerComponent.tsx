@@ -107,7 +107,7 @@ export function LevelTrackerComponent() {
 			onResizeStop={(e, direction, ref, delta, position) =>
 				handleResize(e, direction, ref, delta, position)
 			}
-			
+
 			bounds="parent"
 			disableDragging={!moveMode}
 			enableResizing={{
@@ -132,6 +132,17 @@ export function LevelTrackerComponent() {
 					: {}
 			}
 		>
+			{/* Move/Resize button just to the right */}
+			{isHovered && !moveMode && (
+				<div className="TrackerMoveResizeButtonContainer">
+					<button onClick={() => setMoveMode(true)}>Move/Resize</button>
+				</div>
+			)}
+			{moveMode && (
+				<div className="TrackerMoveResizeButtonContainer">
+					<button onClick={() => setMoveMode(false)}>Done</button>
+				</div>
+			)}
 			<div className="LevelTracker">
 				<p>{getDiffLine()}</p>
 				<p className="ExpMulti">Exp Multi: {levelDropdown.expMulti.toString()}</p>

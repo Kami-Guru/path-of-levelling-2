@@ -1,0 +1,56 @@
+{
+	"buildName": "0.3.0 ZenM Frostbolt Sorceress",
+	"gemBuild": {
+		"changedByUser": false,
+		"gemSetups": [
+			{
+				"level": 1,
+				"gemLinks": [
+					"Spark - Unleash - Controlled Destruction",
+					"Flame Wall - Fortress",
+					"Frost Bomb - Magnified Effect - Persistence",
+					"Arctic Armour"
+				],
+				"sources": []
+			},
+			{
+				"level": 15,
+				"gemLinks": [
+					"Frostbolt - Scattershot - Controlled Destruction",
+					"Snap - Concentrated Effect - Spell Cascade",
+					"Ice Nova - Unleash - Controlled Destruction",
+					"Elemental Weakness - Persistence - Heightened Curse",
+					"Arctic Armour",
+					"Frost Bomb - Magnified Effect - Persistence"
+				],
+				"gemSources": []
+			},
+			{
+				"level": 33,
+				"gemLinks": [
+					"Frostbolt - Scattershot - Controlled Destruction",
+					"Snap - Concentrated Effect - Spell Cascade",
+					"Ice Nova - Unleash - Controlled Destruction",
+					"Frost Wall - Icicle - Spell Cascade - Ingenuity",
+					"Elemental Weakness - Persistence - Heightened Curse",
+					"Arctic Armour - Clarity",
+					"Frost Bomb - Magnified Effect - Strip Away"
+				],
+				"gemSources": []
+			},
+			{
+				"level": 55,
+				"gemLinks": [
+					"Frostbolt - Scattershot - Controlled Destruction - Arcane Tempo",
+					"Snap - Concentrated Effect - Spell Cascade",
+					"Ice Nova - Unleash - Controlled Destruction",
+					"Frost Wall - Icicle - Spell Cascade - Ingenuity",
+					"Elemental Weakness - Persistence - Heightened Curse",
+					"Arctic Armour - Clarity",
+					"Frost Bomb - Magnified Effect - Strip Away"
+				],
+				"gemSources": []
+			}
+		]
+	}
+}

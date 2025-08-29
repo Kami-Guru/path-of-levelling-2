@@ -113,7 +113,6 @@ export class Settings {
 	}
 
 	saveBuildName(buildName: string) {
-		console.log('Saving build name', buildName);
 		this.store.set('buildName', buildName);
 	}
 

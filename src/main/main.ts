@@ -224,6 +224,19 @@ function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatch
 	ipcMain.handle('postBuildSelected', async (event, buildName: string) => {
 		settings.saveBuildName(buildName);
 		mainState.GemTracker.loadGemSetup(buildName);
+		mainState.GemTracker.setGemSetupFromPlayerLevel(mainState.LevelTracker.playerLevel);
+
+		// Send the updated state to the Gem Tracker component
+		mainWindow.webContents.send(
+			'subscribeToGemUpdates',
+			{
+				allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+				selectedLevel: mainState.GemTracker.gemSetup.level,
+				gemLinks: mainState.GemTracker.gemSetup.gemLinks
+			}
+		);
+
+		// Return the updated state to Gem Tracker Settings component
 		return {
 			buildName: mainState.GemTracker.buildName,
 			allBuildNames: mainState.GemTracker.allBuildNames,
