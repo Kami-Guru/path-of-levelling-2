@@ -79,6 +79,17 @@ export class GemTracker {
 		this.store.set(newBuildName, newBuild);
 	}
 
+	deleteBuild(buildName: string) {
+		log.info('Deleting build:', buildName);
+
+		if (!this.store.get(buildName)) {
+			log.warn('Build does not exist, not deleting:', buildName);
+			return;
+		}
+
+		this.store.delete(buildName);
+	}
+
 	loadGemSetup(buildName: string) {
 		log.info('Trying to load gem setups');
 

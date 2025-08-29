@@ -274,6 +274,35 @@ function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatch
 		};
 	});
 
+	ipcMain.handle('postDeleteBuild', async (event, buildName: string) => {
+		// Set to default
+		settings.saveBuildName('Default');
+
+		// Delete the build & load Default
+		mainState.GemTracker.deleteBuild(buildName);
+		mainState.GemTracker.loadGemSetup('Default');
+		mainState.GemTracker.setGemSetupFromPlayerLevel(mainState.LevelTracker.playerLevel);
+
+
+		// Send the updated state to the Gem Tracker component
+		mainWindow.webContents.send(
+			'subscribeToGemUpdates',
+			{
+				allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+				selectedLevel: mainState.GemTracker.gemSetup.level,
+				gemLinks: mainState.GemTracker.gemSetup.gemLinks
+			}
+		);
+
+		// Return the updated state to Gem Tracker Settings component
+		return {
+			buildName: mainState.GemTracker.buildName,
+			allBuildNames: mainState.GemTracker.allBuildNames,
+			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
+			allGemSetups: mainState.GemTracker.allGemSetups,
+		};
+	});
+
 	ipcMain.handle('saveGemSetupsForBuild', async (event, response: { buildName: string, allGemSetups: GemSetup[] }) => {
 		// Set the current build
 		settings.saveBuildName(response.buildName);
