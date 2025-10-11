@@ -12,16 +12,22 @@ import log from 'electron-log';
 import { AttachEvent, OVERLAY_WINDOW_OPTS, OverlayController } from 'electron-overlay-window';
 import electronUpdater, { type AppUpdater } from 'electron-updater';
 import path from 'path';
-import { LogWatcher } from './LogWatcher.js';
-import { getDesktopIconPath, getPreloadPath, getUIPath } from './pathResolver.js';
-import { Settings } from './Settings/Settings.js';
+import { LogWatcherService } from './services/LogWatcherService.js';
+import { getDesktopIconPath, getPreloadPath, getUIPath, guessClientTxtPath } from './pathResolver.js';
+import { Settings } from './services/Settings.js';
 import { StateTracker } from './trackers/StateTracker.js';
 import { isDev } from './util.js';
 import { GemSetup } from './trackers/GemTracker.js';
+import { StoreService } from './services/StoreService.js';
+import { MigrationService } from './services/MigrationService.js';
+import { GameProfile, getProfile } from './profiles/profiles.js';
 
 declare global {
 	var settings: Settings;
 	var mainState: StateTracker;
+	var storeService: StoreService;
+	var migrationService: MigrationService;
+	var selectedProfile: GameProfile;
 }
 
 // Only allow one instance of the app
@@ -104,15 +110,22 @@ async function createWindow() {
 	// Declare global singletons
 	// cringe to use global variables but this makes it really easy to pass around state
 	// so whatever. global mainState OTS relies on global settings existing.
+	globalThis.storeService = new StoreService();
+	globalThis.storeService.switchProfile(globalThis.storeService.getSelectedProfileId())
+
+	globalThis.selectedProfile = getProfile(globalThis.storeService.getSelectedProfileId());
+
+	globalThis.migrationService = new MigrationService();
+	globalThis.migrationService.MigrationOnStartup();
+
 	globalThis.settings = new Settings();
-	await globalThis.settings.fillMissingSettingsWithDefaults();
 
 	globalThis.mainState = new StateTracker();
 	await globalThis.mainState.oneTimeSetup();
 
 	// This basically runs the loop of read lines, save state, post state to renderer,
 	// rinse and repeat.
-	const logWatcher = new LogWatcher();
+	const logWatcher = new LogWatcherService();
 	logWatcher.watchClientTxt(mainWindow);
 
 	createIPCEventListeners(mainWindow, logWatcher);
@@ -131,7 +144,7 @@ async function createWindow() {
 	if (isDev()) LogOverlayEventCalls(mainWindow);
 }
 
-function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatcher) {
+function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatcherService) {
 	ipcMain.handle('getFontScalingFactor', async (event) => {
 		const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 		return height / 1080; // return a scaling factor to scale up text with resolution

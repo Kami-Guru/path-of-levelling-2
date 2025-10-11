@@ -32,7 +32,7 @@ export class GemTracker {
 		this.gemSetup = Object();
 	}
 
-	// Crawls the src/main/Builds folder for default builds, and if the user does not have it in their
+	// Crawls the Builds folder for default builds, and if the user does not have it in their
 	// builds.json Store, add it there.
 	async fillMissingBuildsWithDefaults() {
 		const buildsDir = getBuildsRootPath();

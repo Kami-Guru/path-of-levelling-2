@@ -2,7 +2,7 @@ import { BrowserWindow } from 'electron';
 import log from 'electron-log';
 import fs from 'fs';
 
-export class LogWatcher {
+export class LogWatcherService {
 	newZoneRegex: RegExp;
 	levelUpRegex: RegExp;
 	previousFileSize: number;

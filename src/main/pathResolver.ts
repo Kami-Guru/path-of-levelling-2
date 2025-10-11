@@ -2,6 +2,7 @@ import { app } from 'electron';
 import path from 'path';
 import { isDev } from './util.js';
 import fs from 'fs/promises';
+import { profile } from 'console';
 
 export function getPreloadPath() {
 	return path.join(
@@ -23,20 +24,23 @@ export function getDesktopIconPath() {
 	);
 }
 
-export function getBuildsRootPath() {
-	return path.join(
-		app.getAppPath(),
-		isDev() ? '.' : '..',
-		'src/main/Builds'
-	);
-}
-
+//TODO BROKEN FIX THIS
 export function getBuildPath(buildName: string) {
 	return path.join(
 		app.getAppPath(),
 		isDev() ? '.' : '..',
 		'src/main/Builds',
 		buildName
+	);
+}
+
+export function getBuildsRootPath(profileId: "poe1" | "poe2") {
+	return path.join(
+		app.getAppPath(),
+		isDev() ? '.' : '..',
+		'src/main/profiles/',
+		profileId,
+		'/Builds',
 	);
 }
 

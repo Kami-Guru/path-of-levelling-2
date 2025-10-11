@@ -1,89 +1,15 @@
 import { BrowserWindow } from 'electron';
 import Store from 'electron-store';
 import path from 'path';
-import { LogWatcher } from '../LogWatcher.js';
+import { LogWatcherService } from './LogWatcherService.js';
 import { guessClientTxtPath } from '../pathResolver.js';
-import defaultSettings from './defaultSettings.json' with { type: "json" };
+import defaultSettings from '../profiles/poe2/Settings/defaultSettings.json' with { type: "json" };
 
 export class Settings {
 	store: Store;
 
 	constructor() {
 		this.store = new Store();
-	}
-
-	async fillMissingSettingsWithDefaults() {
-		// Ensure that the settings store doesn't return undefined everywhere by
-		// copying from a default settings.
-		// !Keep the default settings updated!
-
-		// TODO Yes yes this is terrible I'll do it recursively later
-		var test = this.store.get('clientTxtPath');
-		if (!this.store.get('clientTxtPath')) {
-			this.store.set('clientTxtPath', await guessClientTxtPath());
-		}
-
-		if (!this.store.get('buildName')) {
-			this.store.set('buildName', defaultSettings.buildName);
-		}
-
-		// Previously 'buildName' was 'buildFolder', so do a migration here
-		if (this.store.get('buildFolder')) {
-			this.store.set('buildName', this.store.get('buildFolder'));
-			this.store.delete('buildFolder');
-		}
-
-		// Get last session state
-		if (!this.store.get('lastSessionState.zoneCode')) {
-			this.store.set(
-				'lastSessionState.zoneCode',
-				defaultSettings.lastSessionState.zoneCode
-			);
-		}
-		if (!this.store.get('lastSessionState.playerLevel')) {
-			this.store.set(
-				'lastSessionState.playerLevel',
-				defaultSettings.lastSessionState.playerLevel
-			);
-		}
-		if (!this.store.get('lastSessionState.monsterLevel')) {
-			this.store.set(
-				'lastSessionState.monsterLevel',
-				defaultSettings.lastSessionState.monsterLevel
-			);
-		}
-
-		// Get UI positions
-		if (!this.store.get('uiSettings.settingsOverlayPosition')) {
-			this.store.set(
-				'uiSettings.settingsOverlayPosition',
-				defaultSettings.uiSettings.settingsOverlayPosition
-			);
-		}
-		if (!this.store.get('uiSettings.zoneTrackerPosition')) {
-			this.store.set(
-				'uiSettings.zoneTrackerPosition',
-				defaultSettings.uiSettings.zoneTrackerPosition
-			);
-		}
-		if (!this.store.get('uiSettings.layoutImagesTrackerPosition')) {
-			this.store.set(
-				'uiSettings.layoutImagesTrackerPosition',
-				defaultSettings.uiSettings.layoutImagesTrackerPosition
-			);
-		}
-		if (!this.store.get('uiSettings.levelTrackerPosition')) {
-			this.store.set(
-				'uiSettings.levelTrackerPosition',
-				defaultSettings.uiSettings.levelTrackerPosition
-			);
-		}
-		if (!this.store.get('uiSettings.gemTrackerPosition')) {
-			this.store.set(
-				'uiSettings.gemTrackerPosition',
-				defaultSettings.uiSettings.gemTrackerPosition
-			);
-		}
 	}
 
 	getClientTxtPath(): string {
@@ -93,7 +19,7 @@ export class Settings {
 	saveClientTxtPath(
 		newPath: string,
 		mainWindow: BrowserWindow,
-		logWatcher: LogWatcher
+		logWatcher: LogWatcherService
 	): boolean {
 		this.store.set('clientTxtPath', newPath);
 
