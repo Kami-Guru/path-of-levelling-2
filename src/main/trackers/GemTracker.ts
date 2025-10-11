@@ -32,27 +32,6 @@ export class GemTracker {
 		this.gemSetup = Object();
 	}
 
-	// Crawls the Builds folder for default builds, and if the user does not have it in their
-	// builds.json Store, add it there.
-	async fillMissingBuildsWithDefaults() {
-		const buildsDir = getBuildsRootPath();
-		const buildFolders = fs.readdirSync(buildsDir, { withFileTypes: true })
-			.filter(dirent => dirent.isDirectory()
-				&& dirent.name !== "template")
-			.map(dirent => dirent.name);
-
-		for (const folder of buildFolders) {
-			const buildPath = path.join(buildsDir, folder, 'build.json');
-			if (!fs.existsSync(buildPath)) continue;
-
-			const buildData = JSON.parse(fs.readFileSync(buildPath, 'utf-8'));
-			const buildName = buildData.buildName;
-			if (!this.store.get(buildName)) {
-				this.store.set(buildName, buildData);
-			}
-		}
-	}
-
 	//TODO Seriously I need to get all this build stuff out of gem tracker
 	saveNewBuild(newBuildName: string) {
 		log.info('Saving new build:', newBuildName);

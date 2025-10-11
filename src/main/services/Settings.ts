@@ -1,19 +1,13 @@
 import { BrowserWindow } from 'electron';
-import Store from 'electron-store';
-import path from 'path';
 import { LogWatcherService } from './LogWatcherService.js';
-import { guessClientTxtPath } from '../pathResolver.js';
-import defaultSettings from '../profiles/poe2/Settings/defaultSettings.json' with { type: "json" };
+import { OverlayPosition, UiSettings } from '../zodSchemas/schemas.js';
 
 export class Settings {
-	store: Store;
 
-	constructor() {
-		this.store = new Store();
-	}
+	constructor() {}
 
 	getClientTxtPath(): string {
-		return this.store.get('clientTxtPath') as string;
+		return storeService.getGameSetting('clientTxtPath') as string;
 	}
 
 	saveClientTxtPath(
@@ -21,7 +15,7 @@ export class Settings {
 		mainWindow: BrowserWindow,
 		logWatcher: LogWatcherService
 	): boolean {
-		this.store.set('clientTxtPath', newPath);
+		storeService.setGameSetting('clientTxtPath', newPath);
 
 		// Attempt to subscribe to the log watcher again.
 		//TODO there is a case here when someone has a valid path, changes it, then their
@@ -35,68 +29,50 @@ export class Settings {
 	}
 
 	getBuildName(): string {
-		return this.store.get('buildName') as string;
+		return storeService.getGameSetting('buildName') as string;
 	}
 
 	saveBuildName(buildName: string) {
-		this.store.set('buildName', buildName);
+		storeService.setGameSetting('buildName', buildName);
 	}
 
-	getSettingsOverlayPositionSettings(): any {
-		return this.store.get('uiSettings.settingsOverlayPosition');
+	getSettingsOverlayPositionSettings(): OverlayPosition {
+		return storeService.getGameSetting('uiSettings').settingsOverlayPosition;
 	}
 
-	saveSettingsOverlayPositionSettings(newSettings: any) {
-		this.store.set('uiSettings.settingsOverlayPosition.x', newSettings.x);
-		this.store.set('uiSettings.settingsOverlayPosition.y', newSettings.y);
-		this.store.set('uiSettings.settingsOverlayPosition.height', newSettings.height);
-		this.store.set('uiSettings.settingsOverlayPosition.width', newSettings.width);
+	saveSettingsOverlayPositionSettings(newSettings: OverlayPosition) {
+		storeService.setGameSetting('uiSettings.settingsOverlayPosition', newSettings);
 	}
 
-	getZoneOverlayPositionSettings(): any {
-		return this.store.get('uiSettings.zoneTrackerPosition');
+	getZoneOverlayPositionSettings(): OverlayPosition {
+		return storeService.getGameSetting('uiSettings.zoneTrackerPosition');
 	}
 
-	saveZoneOverlayPositionSettings(newSettings: any) {
-		this.store.set('uiSettings.zoneTrackerPosition.x', newSettings.x);
-		this.store.set('uiSettings.zoneTrackerPosition.y', newSettings.y);
-		this.store.set('uiSettings.zoneTrackerPosition.height', newSettings.height);
-		this.store.set('uiSettings.zoneTrackerPosition.width', newSettings.width);
+	saveZoneOverlayPositionSettings(newSettings: OverlayPosition) {
+		storeService.setGameSetting('uiSettings.zoneTrackerPosition', newSettings);
 	}
 
-	getLayoutImagesOverlayPositionSettings(): any {
-		return this.store.get('uiSettings.layoutImagesTrackerPosition');
+	getLayoutImagesOverlayPositionSettings(): OverlayPosition {
+		return storeService.getGameSetting('uiSettings.layoutImagesTrackerPosition');
 	}
 
-	saveLayoutImagesOverlayPositionSettings(newSettings: any) {
-		this.store.set('uiSettings.layoutImagesTrackerPosition.x', newSettings.x);
-		this.store.set('uiSettings.layoutImagesTrackerPosition.y', newSettings.y);
-		this.store.set(
-			'uiSettings.layoutImagesTrackerPosition.height',
-			newSettings.height
-		);
-		this.store.set('uiSettings.layoutImagesTrackerPosition.width', newSettings.width);
+	saveLayoutImagesOverlayPositionSettings(newSettings: OverlayPosition) {
+		storeService.setGameSetting('uiSettings.layoutImagesTrackerPosition', newSettings);
 	}
 
-	getLevelOverlayPositionSettings(): any {
-		return this.store.get('uiSettings.levelTrackerPosition');
+	getLevelOverlayPositionSettings(): OverlayPosition {
+		return storeService.getGameSetting('uiSettings.levelTrackerPosition');
 	}
 
-	saveLevelOverlayPositionSettings(newSettings: any) {
-		this.store.set('uiSettings.levelTrackerPosition.x', newSettings.x);
-		this.store.set('uiSettings.levelTrackerPosition.y', newSettings.y);
-		this.store.set('uiSettings.levelTrackerPosition.height', newSettings.height);
-		this.store.set('uiSettings.levelTrackerPosition.width', newSettings.width);
+	saveLevelOverlayPositionSettings(newSettings: OverlayPosition) {
+		storeService.setGameSetting('uiSettings.levelTrackerPosition', newSettings);
 	}
 
-	getGemOverlayPositionSettings(): any {
-		return this.store.get('uiSettings.gemTrackerPosition');
+	getGemOverlayPositionSettings(): OverlayPosition {
+		return storeService.getGameSetting('uiSettings.gemTrackerPosition');
 	}
 
-	saveGemOverlayPositionSettings(newSettings: any) {
-		this.store.set('uiSettings.gemTrackerPosition.x', newSettings.x);
-		this.store.set('uiSettings.gemTrackerPosition.y', newSettings.y);
-		this.store.set('uiSettings.gemTrackerPosition.height', newSettings.height);
-		this.store.set('uiSettings.gemTrackerPosition.width', newSettings.width);
+	saveGemOverlayPositionSettings(newSettings: OverlayPosition) {
+		storeService.setGameSetting('uiSettings.gemTrackerPosition', newSettings);
 	}
 }

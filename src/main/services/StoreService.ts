@@ -3,7 +3,7 @@ import path from 'path';
 import { z } from 'zod';
 import { app } from 'electron';
 import { GameProfile, getProfile } from "../profiles/profiles.js";
-import { BuildStore as Builds, GameSettings, GlobalSettings } from "../zodSchemas/schemas.js"
+import { BuildStore as Builds, DeepValue, GameSettings, GlobalSettings, NestedKeys } from "../zodSchemas/schemas.js"
 import { Build } from "../trackers/GemTracker.js";
 
 // StoreService is used to interface with the various electron stores the app uses.
@@ -47,20 +47,24 @@ export class StoreService {
         });
     }
 
-    getGlobalSetting<K extends keyof GlobalSettings>(key: K): GlobalSettings[K] {
-        return this.globalSettingsStore.get(key) as GlobalSettings[K]
+    getGlobalSetting<K extends NestedKeys<GlobalSettings>>(key: K): DeepValue<GlobalSettings, K> {
+        if (!this.gameSettingsStore) throw new Error("Profile not initialized");
+        return this.globalSettingsStore.get(key) as DeepValue<GlobalSettings, K>
     }
 
-    setGlobalSetting<K extends keyof GlobalSettings>(key: K, value: GlobalSettings[K]) : void {
+    setGlobalSetting<K extends NestedKeys<GlobalSettings>>(key: K, value: DeepValue<GlobalSettings, K>)
+        : void {
+        if (!this.gameSettingsStore) throw new Error("Profile not initialized");
         this.globalSettingsStore.set(key, value);
     }
 
-    getGameSetting<K extends keyof GameSettings>(key: K) : GameSettings[K] {
+    getGameSetting<K extends NestedKeys<GameSettings>>(key: K) : DeepValue<GameSettings, K> {
         if (!this.gameSettingsStore) throw new Error("Profile not initialized");
-        return this.gameSettingsStore.get(key) as GameSettings[K]
+        return this.gameSettingsStore.get(key) as DeepValue<GameSettings, K>
     }
 
-    setGameSetting<K extends keyof GameSettings>(key: K, value: GameSettings[K]) : void {
+    setGameSetting<K extends NestedKeys<GameSettings>>(key: K, value: DeepValue<GameSettings, K>)
+        : void {
         if (!this.gameSettingsStore) throw new Error("Profile not initialized");
         this.gameSettingsStore.set(key, value);
     }
@@ -71,7 +75,7 @@ export class StoreService {
     }
 
     // Can't have the same type safety accessing the Builds store since builds are stored
-    // in a dicitonary, and we can't know the keys at compile time.
+    // in a dictionary, and we can't know the keys of that dictionary at compile time.
     getBuild(buildName: string): Build | undefined {
         if (!this.buildsStore) throw new Error("Profile not initialized");
 

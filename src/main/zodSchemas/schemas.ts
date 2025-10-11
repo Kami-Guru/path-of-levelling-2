@@ -5,6 +5,43 @@ import { z } from 'zod';
 // everywhere (eg StoreService's getSetting() has type safety on the key provided
 // and output)
 
+// --- Type nesting helper --- //
+// Since nested keys in stores are accessed with dot notation (eg .get('key.subkey')) this wrapper
+// allows the user to get a collection of all keys in the store, including nested keys, for type
+// checking. 
+
+// Limit recursion depth to prevent TS from infinite expansion
+type DecrementDepth<D extends number> =
+    D extends 5 ? 4 :
+    D extends 4 ? 3 :
+    D extends 3 ? 2 :
+    D extends 2 ? 1 :
+    D extends 1 ? 0 : 0;
+
+// Recursive helper: build dot-separated key paths up to Depth
+export type NestedKeys<T, Depth extends number = 3> = (
+    [Depth] extends [never]
+    ? never
+    : T extends object
+    ? {
+        [K in keyof T & string]:
+        | K
+        | (T[K] extends object
+            ? `${K}.${NestedKeys<T[K], DecrementDepth<Depth>>}`
+            : never);
+    }[keyof T & string]
+    : never
+);
+
+// Resolve type of a dot path
+export type DeepValue<T, Path extends string> =
+    Path extends `${infer K}.${infer Rest}`
+    ? K extends keyof T
+    ? DeepValue<T[K], Rest>
+    : never
+    : Path extends keyof T
+    ? T[Path]
+    : never;
 
 // --- Type schemas for the GlobalSettings store --- //
 export const GlobalSettingsZodSchema = z.object({
