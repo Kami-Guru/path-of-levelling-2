@@ -1,10 +1,12 @@
+import { ProfileId } from "../zodSchemas/schemas.js";
 import { poe1Profile } from "./poe1/PoE1Profile.js";
 import { poe2Profile } from "./poe2/PoE2Profile.js";
 
 export interface GameProfile {
-    Id: "poe1" | "poe2";
+    Id: ProfileId;
     windowName: "Path of Exile 1" | "Path of Exile 2"
     // Paths
+    defaultLogFilePath: string;
     logFilePathGuesses: string[];
     assetDir: string;
     configFile: string;
@@ -12,11 +14,12 @@ export interface GameProfile {
     // Optional: profile-specific log line parsing
 }
 
-const profiles: Record<string, GameProfile> = {
+const profiles: Record<ProfileId, GameProfile> = {
     poe1: poe1Profile,
     poe2: poe2Profile
 }
 
-export function getProfile(id: string): GameProfile {
-    return profiles[id] ?? poe2Profile
+/** Returns the current profile, or the profile corresponding to ProfileId if provided */
+export function getProfile(id: ProfileId | null = null): GameProfile {
+    return profiles[id ?? storeService.getSelectedProfileId()]
 }

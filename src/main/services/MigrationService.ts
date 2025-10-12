@@ -6,13 +6,13 @@ import { z } from 'zod';
 import poe1DefaultSettings from '../profiles/poe1/defaultUnversionedSettings.json' with { type: "json" };
 import poe2DefaultSettings from '../profiles/poe2/defaultUnversionedSettings.json' with { type: "json" };
 import { Build, DefaultPoE1GameSettings, DefaultPoE2GameSettings, GameSettings, GameSettingsZodSchema, GlobalSettings, GlobalSettingsZodSchema } from "../zodSchemas/schemas.js";
-import { getBuildsRootPath, guessClientTxtPath } from "../pathResolver.js";
+import { getBuildsRootPath, guessClientTxtPathForProfileId as guessClientTxtPathForProfileId } from "../pathResolver.js";
 
 // Used on startup to migrate any old configuration files to new schemas
 export class MigrationService {
 
     constructor() { }
-    
+
     // Run this method every time on startup - runs a migration from old configuration schemas
     // to new configuration schemas, and fills in missing fields.
     MigrationOnStartup() {
@@ -42,14 +42,12 @@ export class MigrationService {
         */
 
         // Do some zod schema validation to fill in missing settings with defaults
-        const globalSettingsStore = new Store<GlobalSettings>({
-            name: "globalSettings"
-        });
+        const globalSettings = storeService.getAllGlobalSettings();
 
         const result = GlobalSettingsZodSchema.safeParse({
             ...GlobalSettingsZodSchema.safeParse({}), // defaults from Zod
-            ...globalSettingsStore.store
-        })
+            ...globalSettings
+        });
 
         if (!result.success) {
             // To have type safety everywhere we need to ensure the global settings conforms to Zod
@@ -57,24 +55,27 @@ export class MigrationService {
             log.warn("Failed schema validation on Global Settings with error:",
                 z.treeifyError(result.error));
 
-            log.warn("Resetting Global Settings to defaults")
-            globalSettingsStore.store = GlobalSettingsZodSchema.parse({})
+            log.warn("Resetting Global Settings to defaults");
+            storeService.setAllGlobalSettings(GlobalSettingsZodSchema.parse({}));
         } else {
-            globalSettingsStore.store = result.data
+            storeService.setAllGlobalSettings(result.data);
         }
     }
 
-    private MigratePoE1GameSettings() {
+    private async MigratePoE1GameSettings() {
         // Only have version 1 right now so no migration required yet
 
-        // Fill missing settings with defaults from zod schema
-        const poe1GameSettingsStore = new Store<GameSettings>({
-            name: "poe1-gameSettings"
-        })
+        // --- Fill missing settings with defaults from zod schema --- //
+        const poe1GameSettings = storeService.getAllGameSettingsForProfileId("poe1");
+
+        // When filling in missing client txt path, make a few guesses first.
+        const clientTxtPath = storeService.getGameSettingForProfileId("poe1", "clientTxtPath")
+            ?? await guessClientTxtPathForProfileId("poe1");
 
         const result = GameSettingsZodSchema.safeParse({
             ...DefaultPoE1GameSettings,
-            ...poe1GameSettingsStore.store
+            ...poe1GameSettings,
+            clientTxtPath: clientTxtPath
         })
 
         if (!result.success) {
@@ -84,9 +85,9 @@ export class MigrationService {
                 z.treeifyError(result.error));
 
             log.warn("Resetting PoE1 Game Settings to defaults")
-            poe1GameSettingsStore.store = DefaultPoE1GameSettings.parse({})
+            storeService.setAllGameSettingsForProfileId("poe1", DefaultPoE1GameSettings.parse({}))
         } else {
-            poe1GameSettingsStore.store = result.data
+            storeService.setAllGameSettingsForProfileId("poe1", result.data)
         }
     }
 
@@ -94,17 +95,15 @@ export class MigrationService {
         // Only have version 1 right now so no migration required yet
 
         // Fill missing settings with defaults from zod schema
-        const poe2GameSettingsStore = new Store<GameSettings>({
-            name: "poe2-gameSettings"
-        })
+        const poe2GameSettings = storeService.getAllGameSettingsForProfileId("poe2");
 
-        // When filling in missing client txt path, make a few guesses.
-        const clientTxtPath = poe2GameSettingsStore.get("clientTxtPath")
-            ?? await guessClientTxtPath(); 
+        // When filling in missing client txt path, make a few guesses first.
+        const clientTxtPath = storeService.getGameSettingForProfileId("poe2", "clientTxtPath")
+            ?? await guessClientTxtPathForProfileId("poe2");
 
         const result = GameSettingsZodSchema.safeParse({
             ...DefaultPoE2GameSettings,
-            ...poe2GameSettingsStore.store,
+            ...poe2GameSettings,
             clientTxtPath: clientTxtPath
         })
 
@@ -115,9 +114,9 @@ export class MigrationService {
                 z.treeifyError(result.error));
 
             log.warn("Resetting PoE2 Game Settings to defaults")
-            poe2GameSettingsStore.store = DefaultPoE2GameSettings.parse({})
+            storeService.setAllGameSettingsForProfileId("poe2", DefaultPoE2GameSettings.parse({}))
         } else {
-            poe2GameSettingsStore.store = result.data
+            storeService.setAllGameSettingsForProfileId("poe2", result.data)
         }
     }
 

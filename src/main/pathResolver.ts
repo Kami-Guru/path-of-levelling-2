@@ -2,7 +2,8 @@ import { app } from 'electron';
 import path from 'path';
 import { isDev } from './util.js';
 import fs from 'fs/promises';
-import { profile } from 'console';
+import { ProfileId } from './zodSchemas/schemas.js';
+import { getProfile } from './profiles/profiles.js';
 
 export function getPreloadPath() {
 	return path.join(
@@ -34,7 +35,7 @@ export function getBuildPath(buildName: string) {
 	);
 }
 
-export function getBuildsRootPath(profileId: "poe1" | "poe2") {
+export function getBuildsRootPath(profileId: ProfileId) {
 	return path.join(
 		app.getAppPath(),
 		isDev() ? '.' : '..',
@@ -53,16 +54,9 @@ export function getDefaultSettingsPath() {
 	);
 }
 
-export async function guessClientTxtPath(): Promise<string> {
-	var pathGuesses: Array<string> = process.platform === "win32"
-		? [
-			path.join('C:/Program Files (x86)/Steam/steamapps/common/Path of Exile 2/logs/Client.txt'),
-			path.join('D:/SteamLibrary/steamapps/common/Path of Exile 2/logs/Client.txt')
-		]
-		: [
-			path.join(app.getPath('home'), '/.steam/root/steamapps/common/Path of Exile 2/logs/Client.txt'),
-		]
-	
+export async function guessClientTxtPathForProfileId(profileId: ProfileId): Promise<string> {
+	const pathGuesses = getProfile(profileId).logFilePathGuesses;
+
 	var foundPath: string | undefined = undefined
 	for (var pathGuess in pathGuesses) {
 		try {
@@ -71,26 +65,18 @@ export async function guessClientTxtPath(): Promise<string> {
 			// If we made it here, .access didn't error so we have a valid path.
 			foundPath = pathGuess;
 		}
-		catch { }
+		catch {
+			// fs.access threw so that path is invalid, continue guessing
+			continue;
+		}
 
 		if (foundPath) break;
 	}
 
-	return foundPath ?? getDefaultClientTxtPath();
+	return foundPath ?? getProfile(profileId).defaultLogFilePath;
 }
 
-export function getDefaultClientTxtPath(): string {
-	return process.platform === "win32" ? getDefaultClientTxtPathWindows() : getDefaultClientTxtPathLinux();
-}
-
-export function getDefaultClientTxtPathWindows() {
-	return path.join('C:/Program Files (x86)/Steam/steamapps/common/Path of Exile 2/logs/Client.txt');
-}
-
-export function getDefaultClientTxtPathLinux() {
-	return path.join('/home/punchingbag/.steam/root/steamapps/common/Path of Exile 2/logs/Client.txt');
-}
-
+//TODO BROKEN FIX THIS
 export function getZoneLayoutImagesAbsolutePath() {
 	return path.join(
 		app.getAppPath(),

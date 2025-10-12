@@ -44,12 +44,15 @@ export type DeepValue<T, Path extends string> =
     : never;
 
 // --- Type schemas for the GlobalSettings store --- //
+export const ProfileId = z.enum(["poe1", "poe2"]);
+
 export const GlobalSettingsZodSchema = z.object({
     version: z.number().default(1),
     selectedProfile: z.enum(["poe1", "poe2"]).default("poe2"),
 })
 
 export type GlobalSettings = z.infer<typeof GlobalSettingsZodSchema>;
+export type ProfileId = z.infer<typeof ProfileId>;
 
 
 // --- Type schemas for the GameSettings store --- //

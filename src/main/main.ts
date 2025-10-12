@@ -13,7 +13,7 @@ import { AttachEvent, OVERLAY_WINDOW_OPTS, OverlayController } from 'electron-ov
 import electronUpdater, { type AppUpdater } from 'electron-updater';
 import path from 'path';
 import { LogWatcherService } from './services/LogWatcherService.js';
-import { getDesktopIconPath, getPreloadPath, getUIPath, guessClientTxtPath } from './pathResolver.js';
+import { getDesktopIconPath, getPreloadPath, getUIPath, guessClientTxtPathForProfileId } from './pathResolver.js';
 import { Settings } from './services/Settings.js';
 import { StateTracker } from './trackers/StateTracker.js';
 import { isDev } from './util.js';
@@ -102,18 +102,18 @@ async function createWindow() {
 		mainWindow.loadFile(path.join(getUIPath()));
 	}
 
+	// Start up the store service so we can get selected profile to get window name. 
+	globalThis.storeService = new StoreService();
+
 	OverlayController.attachByTitle(
 		mainWindow,
-		"Path of Exile 2"
+		getProfile().windowName
 	);
 
-	// Declare global singletons
+	// Declare & initialise global singletons
 	// cringe to use global variables but this makes it really easy to pass around state
 	// so whatever. global mainState OTS relies on global settings existing.
-	globalThis.storeService = new StoreService();
-	globalThis.storeService.switchProfile(globalThis.storeService.getSelectedProfileId())
-
-	globalThis.selectedProfile = getProfile(globalThis.storeService.getSelectedProfileId());
+	globalThis.selectedProfile = getProfile();
 
 	globalThis.migrationService = new MigrationService();
 	globalThis.migrationService.MigrationOnStartup();

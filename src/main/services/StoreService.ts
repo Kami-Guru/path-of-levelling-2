@@ -1,64 +1,79 @@
 import Store from "electron-store";
-import path from 'path';
-import { z } from 'zod';
-import { app } from 'electron';
-import { GameProfile, getProfile } from "../profiles/profiles.js";
-import { BuildStore as Builds, DeepValue, GameSettings, GlobalSettings, NestedKeys } from "../zodSchemas/schemas.js"
+import { BuildStore, DeepValue, GameSettings, GlobalSettings, NestedKeys, ProfileId } from "../zodSchemas/schemas.js"
 import { Build } from "../trackers/GemTracker.js";
 
 // StoreService is used to interface with the various electron stores the app uses.
 // Includes wrappers to add type safety to get and set calls, as well as abstractions to
 // hide which game is currently being accessed.
 export class StoreService {
-    globalSettingsStore: Store<GlobalSettings>;
+    private globalSettingsStore: Store<GlobalSettings>;
 
-    // These are only undefined after constructor, we should immediately call switchProfile
-    // to load these stores.
-    gameSettingsStore: Store<GameSettings> | undefined;
-    buildsStore: Store<Builds> | undefined;
+    //@ts-ignore - ignore ts(2564) these are set in switchProfile in the ctor
+    private gameSettingsStore: Store<GameSettings>;
+    //@ts-ignore - ignore ts(2564) these are set in switchProfile in the ctor
+    private buildsStore: Store<BuildStore>;
 
     constructor() {
         this.globalSettingsStore = new Store<GlobalSettings>({
             name: "globalSettings"
         });
+
+        this.switchProfile(this.getSelectedProfileId())
     }
 
-    getSelectedProfileId(): "poe1" | "poe2" {
+    getSelectedProfileId(): ProfileId {
         return this.getGlobalSetting("selectedProfile");
     }
 
-    switchProfile(profileId: "poe1" | "poe2") {
+    switchProfile(profileId: ProfileId) {
         this.setGlobalSetting("selectedProfile", profileId);
 
         this.gameSettingsStore = this.getGameSettingsStoreForProfileId(profileId);
         this.buildsStore = this.getBuildsStoreForProfileId(profileId)
     }
 
-    // Stores are prefixed with the profile they are for; eg poe1-settings.json or poe2-builds.json
-    private getGameSettingsStoreForProfileId(profileId: "poe1" | "poe2"): Store<GameSettings> {
+    private getGameSettingsStoreForProfileId(profileId: ProfileId): Store<GameSettings> {
         return new Store<GameSettings>({
             name: `${profileId}-gameSettings`
         });
     }
 
-    private getBuildsStoreForProfileId(profileId: "poe1" | "poe2") : Store<Builds> {
-        return new Store<Builds>({
+    private getBuildsStoreForProfileId(profileId: ProfileId): Store<BuildStore> {
+        return new Store<BuildStore>({
             name: `${profileId}-builds`
         });
     }
 
+    // --- Typed getter/setters wrappers for stores --- //
+
+    getAllGlobalSettings(): GlobalSettings {
+        return this.globalSettingsStore.store;
+    }
+
+    setAllGlobalSettings(settings: GlobalSettings): void {
+        this.globalSettingsStore.store = settings
+    }
+
     getGlobalSetting<K extends NestedKeys<GlobalSettings>>(key: K): DeepValue<GlobalSettings, K> {
-        if (!this.gameSettingsStore) throw new Error("Profile not initialized");
         return this.globalSettingsStore.get(key) as DeepValue<GlobalSettings, K>
     }
 
-    setGlobalSetting<K extends NestedKeys<GlobalSettings>>(key: K, value: DeepValue<GlobalSettings, K>)
-        : void {
-        if (!this.gameSettingsStore) throw new Error("Profile not initialized");
+    setGlobalSetting<K extends NestedKeys<GlobalSettings>>
+        (key: K, value: DeepValue<GlobalSettings, K>): void {
         this.globalSettingsStore.set(key, value);
     }
 
-    getGameSetting<K extends NestedKeys<GameSettings>>(key: K) : DeepValue<GameSettings, K> {
+    getAllGameSettings(): GameSettings {
+        if (!this.gameSettingsStore) throw new Error("Profile not initialized");
+        return this.gameSettingsStore.store;
+    }
+
+    setAllGameSettings(settings: GameSettings): void {
+        if (!this.gameSettingsStore) throw new Error("Profile not initialized");
+        this.gameSettingsStore.store = settings;
+    }
+
+    getGameSetting<K extends NestedKeys<GameSettings>>(key: K): DeepValue<GameSettings, K> {
         if (!this.gameSettingsStore) throw new Error("Profile not initialized");
         return this.gameSettingsStore.get(key) as DeepValue<GameSettings, K>
     }
@@ -79,29 +94,49 @@ export class StoreService {
     getBuild(buildName: string): Build | undefined {
         if (!this.buildsStore) throw new Error("Profile not initialized");
 
-        const allBuilds = this.buildsStore.get("builds") as Builds["builds"];
+        const allBuilds = this.buildsStore.get("builds") as BuildStore["builds"];
         return allBuilds[buildName];
     }
 
     setBuild(buildName: string, build: Build): void {
         if (!this.buildsStore) throw new Error("Profile not initialized");
 
-        const allBuilds = this.buildsStore.get("builds") as Builds["builds"];
+        const allBuilds = this.buildsStore.get("builds") as BuildStore["builds"];
         allBuilds[buildName] = build; // Upsert the build to the dict
         this.buildsStore.set("builds", allBuilds);
     }
 
+    // --- Allow callers to access specific stores without having to switch profile --- //
+
+    getAllGameSettingsForProfileId(profileId: ProfileId): GameSettings {
+        return this.getGameSettingsStoreForProfileId(profileId).store;
+    }
+
+    setAllGameSettingsForProfileId(profileId: ProfileId, settings: GameSettings): void {
+        this.getGameSettingsStoreForProfileId(profileId).store = settings;
+    }
+
+    getGameSettingForProfileId<K extends NestedKeys<GameSettings>>(profileId: ProfileId, key: K)
+        : DeepValue<GameSettings, K> {
+        return this.getGameSettingsStoreForProfileId(profileId).get(key) as DeepValue<GameSettings, K>
+    }
+
+    setGameSettingForProfileId<K extends NestedKeys<GameSettings>>
+        (profileId: ProfileId, key: K, value: DeepValue<GameSettings, K>): void {
+        this.getGameSettingsStoreForProfileId(profileId).set(key, value);
+    }
+
     /** WARNING - you probably don't want this method! It has very limited use cases! */
-    getBuildForProfileId(profileId: "poe1" | "poe2", buildName: string): Build | undefined {
+    getBuildForProfileId(profileId: ProfileId, buildName: string): Build | undefined {
         const buildsStore = this.getBuildsStoreForProfileId(profileId);
-        const allBuilds = buildsStore.get("builds") as Builds["builds"];
+        const allBuilds = buildsStore.get("builds") as BuildStore["builds"];
         return allBuilds[buildName];
     }
 
     /** WARNING - you probably don't want this method! It has very limited use cases! */
-    setBuildForProfileId(profileId: "poe1" | "poe2", buildName: string, build: Build): void {
+    setBuildForProfileId(profileId: ProfileId, buildName: string, build: Build): void {
         const buildsStore = this.getBuildsStoreForProfileId(profileId);
-        const allBuilds = buildsStore.get("builds") as Builds["builds"];
+        const allBuilds = buildsStore.get("builds") as BuildStore["builds"];
         allBuilds[buildName] = build; // Upsert the build to the dict
         buildsStore.set("builds", allBuilds);
     }
