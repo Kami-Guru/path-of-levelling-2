@@ -1,9 +1,12 @@
 import { app } from 'electron';
 import path from 'path';
-import { isDev } from './util.js';
 import fs from 'fs/promises';
 import { ProfileId } from './zodSchemas/schemas.js';
 import { getProfile } from './profiles/profiles.js';
+
+export function isDev(): boolean {
+	return process.env.NODE_ENV === 'development';
+}
 
 export function getPreloadPath() {
 	return path.join(

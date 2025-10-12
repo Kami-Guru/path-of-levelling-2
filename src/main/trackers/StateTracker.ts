@@ -35,7 +35,9 @@ export class StateTracker {
 		this.GemTracker = new GemTracker();
 	}
 
-	async oneTimeSetup() {
+	init() {}
+
+	oneTimeSetup() {
 		// Read zone notes from file
 		var zoneNotesPath = path.join(
 			getBuildPath('Default'),
@@ -60,7 +62,6 @@ export class StateTracker {
 			log.info(error);
 		}
 
-		await this.GemTracker.fillMissingBuildsWithDefaults();
 		this.GemTracker.loadGemSetup(settings.getBuildName())
 		this.GemTracker.setGemSetupFromPlayerLevel(this.LevelTracker.playerLevel);
 	}

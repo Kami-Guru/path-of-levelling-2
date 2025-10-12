@@ -5,20 +5,27 @@ import path from 'path';
 import { z } from 'zod';
 import poe1DefaultSettings from '../profiles/poe1/defaultUnversionedSettings.json' with { type: "json" };
 import poe2DefaultSettings from '../profiles/poe2/defaultUnversionedSettings.json' with { type: "json" };
-import { Build, DefaultPoE1GameSettings, DefaultPoE2GameSettings, GameSettings, GameSettingsZodSchema, GlobalSettings, GlobalSettingsZodSchema } from "../zodSchemas/schemas.js";
-import { getBuildsRootPath, guessClientTxtPathForProfileId as guessClientTxtPathForProfileId } from "../pathResolver.js";
+import { Build, DefaultPoE1GameSettings, DefaultPoE2GameSettings, GameSettingsZodSchema, GlobalSettingsZodSchema } from "../zodSchemas/schemas.js";
+import { getBuildsRootPath, guessClientTxtPathForProfileId } from "../pathResolver.js";
+import { objectFactory } from "../objectFactory.js";
 
 // Used on startup to migrate any old configuration files to new schemas
 export class MigrationService {
 
-    constructor() { }
+    constructor() {
+        log.info("MigrationService constructed");
+    }
+
+    init() {
+        log.info("MigrationService initialised");
+    }
 
     // Run this method every time on startup - runs a migration from old configuration schemas
     // to new configuration schemas, and fills in missing fields.
-    MigrationOnStartup() {
+    async MigrateOnStartup() {
         this.MigrateGlobalSettings();
-        this.MigratePoE1GameSettings();
-        this.MigratePoE2GameSettings();
+        await this.MigratePoE1GameSettings();
+        await this.MigratePoE2GameSettings();
         this.MigrateBuilds();
     }
 
@@ -42,7 +49,7 @@ export class MigrationService {
         */
 
         // Do some zod schema validation to fill in missing settings with defaults
-        const globalSettings = storeService.getAllGlobalSettings();
+        const globalSettings = objectFactory.getStoreService().getAllGlobalSettings();
 
         const result = GlobalSettingsZodSchema.safeParse({
             ...GlobalSettingsZodSchema.safeParse({}), // defaults from Zod

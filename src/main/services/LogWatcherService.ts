@@ -12,6 +12,12 @@ export class LogWatcherService {
 		this.levelUpRegex = RegExp('is now level (.*)');
 
 		this.previousFileSize = 0;
+
+		log.info("LogWatcherService constructed");
+	}
+
+	init() {
+		log.info("LogWatcherService initialised");
 	}
 
 	// The fs.watchFile is the watcher that gets changes from client.txt
@@ -19,7 +25,7 @@ export class LogWatcherService {
 		log.info('Trying to subscribe to Client.txt');
 		try {
 			this.previousFileSize = fs.statSync(settings.getClientTxtPath()).size;
-		} catch (e: any) {
+		} catch (e: any) { // TODO shouldn't I just catch whatever error ENONET is separately?
 			// This flag basically displays a warning on the UI telling the user to
 			// update their client txt path.
 			mainState.logWatcherActive = false;
@@ -101,6 +107,12 @@ export class LogWatcherService {
 		});
 	}
 
+	// TODO fix this! Should be storing the path that is actually being watched not hoping that
+	// TODO this is up to date when we want to stop watching
+	stopTracking() {
+		fs.unwatchFile(settings.getClientTxtPath());
+	}
+
 	readNewLines(current: fs.Stats, previous: fs.Stats) {
 		//mtime is I think last changed time?
 		if (current.mtime <= previous.mtime) {
@@ -155,9 +167,5 @@ export class LogWatcherService {
 		}
 
 		return { playerLevel, monsterLevel, zoneCode };
-	}
-
-	stopTracking() {
-		fs.unwatchFile(settings.getClientTxtPath());
 	}
 }

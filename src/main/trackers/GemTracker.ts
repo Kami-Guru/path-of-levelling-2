@@ -32,6 +32,8 @@ export class GemTracker {
 		this.gemSetup = Object();
 	}
 
+	init() { }
+
 	//TODO Seriously I need to get all this build stuff out of gem tracker
 	saveNewBuild(newBuildName: string) {
 		log.info('Saving new build:', newBuildName);

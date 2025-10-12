@@ -11,6 +11,8 @@ export class LevelTracker {
 		this.expMulti = 0;
 	}
 
+	init() { }
+
 	// It's a huge pain to have a bunch of ifs all over the place to update monster and
 	// player level separately, so I just made this method work whenever you need it to.
 	// Just pass 0 or don't pass anything at all if you don't want to update one of them.

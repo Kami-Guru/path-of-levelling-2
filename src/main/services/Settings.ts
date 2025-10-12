@@ -2,9 +2,11 @@ import { BrowserWindow } from 'electron';
 import { LogWatcherService } from './LogWatcherService.js';
 import { OverlayPosition, UiSettings } from '../zodSchemas/schemas.js';
 
-export class Settings {
+export class SettingsService {
 
-	constructor() {}
+	constructor() { }
+
+	init() {}
 
 	getClientTxtPath(): string {
 		return storeService.getGameSetting('clientTxtPath') as string;

@@ -13,17 +13,16 @@ import { AttachEvent, OVERLAY_WINDOW_OPTS, OverlayController } from 'electron-ov
 import electronUpdater, { type AppUpdater } from 'electron-updater';
 import path from 'path';
 import { LogWatcherService } from './services/LogWatcherService.js';
-import { getDesktopIconPath, getPreloadPath, getUIPath, guessClientTxtPathForProfileId } from './pathResolver.js';
-import { Settings } from './services/Settings.js';
+import { getDesktopIconPath, getPreloadPath, getUIPath, guessClientTxtPathForProfileId, isDev } from './pathResolver.js';
+import { SettingsService } from './services/Settings.js';
 import { StateTracker } from './trackers/StateTracker.js';
-import { isDev } from './util.js';
 import { GemSetup } from './trackers/GemTracker.js';
 import { StoreService } from './services/StoreService.js';
 import { MigrationService } from './services/MigrationService.js';
 import { GameProfile, getProfile } from './profiles/profiles.js';
 
 declare global {
-	var settings: Settings;
+	var settings: SettingsService;
 	var mainState: StateTracker;
 	var storeService: StoreService;
 	var migrationService: MigrationService;
@@ -69,6 +68,9 @@ getAutoUpdater().on('update-available', (message) => {
 });
 
 async function createWindow() {
+	// Start up the store service so we can get selected profile
+	globalThis.storeService = new StoreService();
+
 	// Set up the tray
 	const trayImage = nativeImage.createFromPath(getDesktopIconPath());
 	if (trayImage.isEmpty()) log.info('Tray image failed to load, tray icon will not display!');
@@ -81,7 +83,21 @@ async function createWindow() {
 				label: 'Quit',
 				click: () => {
 					app.quit();
-				},
+				}
+			},
+			{
+				label: 'Switch To PoE1',
+				click: () => {
+					//TODO this is insufficient
+					storeService.switchProfile("poe1");
+				}
+			},
+			{
+				label: 'Switch To PoE2',
+				click: () => {
+					//TODO this is insufficient
+					storeService.switchProfile("poe2");
+				}
 			},
 		])
 	);
@@ -102,9 +118,6 @@ async function createWindow() {
 		mainWindow.loadFile(path.join(getUIPath()));
 	}
 
-	// Start up the store service so we can get selected profile to get window name. 
-	globalThis.storeService = new StoreService();
-
 	OverlayController.attachByTitle(
 		mainWindow,
 		getProfile().windowName
@@ -113,12 +126,10 @@ async function createWindow() {
 	// Declare & initialise global singletons
 	// cringe to use global variables but this makes it really easy to pass around state
 	// so whatever. global mainState OTS relies on global settings existing.
-	globalThis.selectedProfile = getProfile();
-
 	globalThis.migrationService = new MigrationService();
-	globalThis.migrationService.MigrationOnStartup();
+	await globalThis.migrationService.MigrateOnStartup();
 
-	globalThis.settings = new Settings();
+	globalThis.settings = new SettingsService();
 
 	globalThis.mainState = new StateTracker();
 	await globalThis.mainState.oneTimeSetup();

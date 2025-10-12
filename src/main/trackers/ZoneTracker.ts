@@ -2,7 +2,7 @@ import log from 'electron-log';
 import fs from 'fs';
 import path from 'path';
 import { getBuildPath, getZoneLayoutImagesAbsolutePath } from '../pathResolver.js';
-import zoneReferenceData from '../referenceData/zoneReferenceData.json' with { type: "json" };
+import zoneReferenceData from '../profiles/poe2/referenceData/zoneReferenceData.json' with { type: "json" };
 
 export class ZoneTracker {
 	act: string;
@@ -39,6 +39,8 @@ export class ZoneTracker {
 
 		this.allActs = zoneReferenceData.acts.map((act) =>  act.name );
 	}
+
+	init() { }
 
 	loadAllZoneNotes(allZoneNotesPath: string) {
 		log.info('Trying to load zone notes at path', allZoneNotesPath);

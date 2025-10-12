@@ -8,8 +8,6 @@ export interface GameProfile {
     // Paths
     defaultLogFilePath: string;
     logFilePathGuesses: string[];
-    assetDir: string;
-    configFile: string;
 
     // Optional: profile-specific log line parsing
 }

@@ -1,6 +1,7 @@
 import Store from "electron-store";
 import { BuildStore, DeepValue, GameSettings, GlobalSettings, NestedKeys, ProfileId } from "../zodSchemas/schemas.js"
 import { Build } from "../trackers/GemTracker.js";
+import log from "electron-log";
 
 // StoreService is used to interface with the various electron stores the app uses.
 // Includes wrappers to add type safety to get and set calls, as well as abstractions to
@@ -19,6 +20,12 @@ export class StoreService {
         });
 
         this.switchProfile(this.getSelectedProfileId())
+
+        log.info("StoreService constructed");
+    }
+
+    init() { 
+        log.info("StoreService initialised");
     }
 
     getSelectedProfileId(): ProfileId {
