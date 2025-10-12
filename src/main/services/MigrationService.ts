@@ -63,9 +63,9 @@ export class MigrationService {
                 z.treeifyError(result.error));
 
             log.warn("Resetting Global Settings to defaults");
-            storeService.setAllGlobalSettings(GlobalSettingsZodSchema.parse({}));
+            objectFactory.getStoreService().setAllGlobalSettings(GlobalSettingsZodSchema.parse({}));
         } else {
-            storeService.setAllGlobalSettings(result.data);
+            objectFactory.getStoreService().setAllGlobalSettings(result.data);
         }
     }
 
@@ -73,10 +73,10 @@ export class MigrationService {
         // Only have version 1 right now so no migration required yet
 
         // --- Fill missing settings with defaults from zod schema --- //
-        const poe1GameSettings = storeService.getAllGameSettingsForProfileId("poe1");
+        const poe1GameSettings = objectFactory.getStoreService().getAllGameSettingsForProfileId("poe1");
 
         // When filling in missing client txt path, make a few guesses first.
-        const clientTxtPath = storeService.getGameSettingForProfileId("poe1", "clientTxtPath")
+        const clientTxtPath = objectFactory.getStoreService().getGameSettingForProfileId("poe1", "clientTxtPath")
             ?? await guessClientTxtPathForProfileId("poe1");
 
         const result = GameSettingsZodSchema.safeParse({
@@ -92,9 +92,9 @@ export class MigrationService {
                 z.treeifyError(result.error));
 
             log.warn("Resetting PoE1 Game Settings to defaults")
-            storeService.setAllGameSettingsForProfileId("poe1", DefaultPoE1GameSettings.parse({}))
+            objectFactory.getStoreService().setAllGameSettingsForProfileId("poe1", DefaultPoE1GameSettings.parse({}))
         } else {
-            storeService.setAllGameSettingsForProfileId("poe1", result.data)
+            objectFactory.getStoreService().setAllGameSettingsForProfileId("poe1", result.data)
         }
     }
 
@@ -102,10 +102,10 @@ export class MigrationService {
         // Only have version 1 right now so no migration required yet
 
         // Fill missing settings with defaults from zod schema
-        const poe2GameSettings = storeService.getAllGameSettingsForProfileId("poe2");
+        const poe2GameSettings = objectFactory.getStoreService().getAllGameSettingsForProfileId("poe2");
 
         // When filling in missing client txt path, make a few guesses first.
-        const clientTxtPath = storeService.getGameSettingForProfileId("poe2", "clientTxtPath")
+        const clientTxtPath = objectFactory.getStoreService().getGameSettingForProfileId("poe2", "clientTxtPath")
             ?? await guessClientTxtPathForProfileId("poe2");
 
         const result = GameSettingsZodSchema.safeParse({
@@ -121,9 +121,9 @@ export class MigrationService {
                 z.treeifyError(result.error));
 
             log.warn("Resetting PoE2 Game Settings to defaults")
-            storeService.setAllGameSettingsForProfileId("poe2", DefaultPoE2GameSettings.parse({}))
+            objectFactory.getStoreService().setAllGameSettingsForProfileId("poe2", DefaultPoE2GameSettings.parse({}))
         } else {
-            storeService.setAllGameSettingsForProfileId("poe2", result.data)
+            objectFactory.getStoreService().setAllGameSettingsForProfileId("poe2", result.data)
         }
     }
 
@@ -143,8 +143,8 @@ export class MigrationService {
 
             const buildData = JSON.parse(fs.readFileSync(buildPath, 'utf-8')) as Build;
             const buildName = buildData.buildName;
-            if (!storeService.getBuildForProfileId("poe1", buildName)) {
-                storeService.setBuildForProfileId("poe1", buildName, buildData);
+            if (!objectFactory.getStoreService().getBuildForProfileId("poe1", buildName)) {
+                objectFactory.getStoreService().setBuildForProfileId("poe1", buildName, buildData);
             }
         }
 
@@ -161,8 +161,8 @@ export class MigrationService {
 
             const buildData = JSON.parse(fs.readFileSync(buildPath, 'utf-8')) as Build;
             const buildName = buildData.buildName;
-            if (!storeService.getBuildForProfileId("poe2", buildName)) {
-                storeService.setBuildForProfileId("poe2", buildName, buildData);
+            if (!objectFactory.getStoreService().getBuildForProfileId("poe2", buildName)) {
+                objectFactory.getStoreService().setBuildForProfileId("poe2", buildName, buildData);
             }
         }
     }

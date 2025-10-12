@@ -28,6 +28,11 @@ export function getDesktopIconPath() {
 	);
 }
 
+export function getZoneNotesPath(): string {
+	// One day there will be per-build zone notes, but for now it's all in Default/zoneNotes.json
+	return path.join(getBuildPath('Default'), 'zoneNotes.json')
+}
+
 //TODO BROKEN FIX THIS
 export function getBuildPath(buildName: string) {
 	return path.join(

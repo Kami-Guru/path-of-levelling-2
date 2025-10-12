@@ -9,25 +9,14 @@ import {
 	nativeImage,
 } from 'electron';
 import log from 'electron-log';
-import { AttachEvent, OVERLAY_WINDOW_OPTS, OverlayController } from 'electron-overlay-window';
+import { OVERLAY_WINDOW_OPTS, OverlayController } from 'electron-overlay-window';
 import electronUpdater, { type AppUpdater } from 'electron-updater';
 import path from 'path';
 import { LogWatcherService } from './services/LogWatcherService.js';
-import { getDesktopIconPath, getPreloadPath, getUIPath, guessClientTxtPathForProfileId, isDev } from './pathResolver.js';
-import { SettingsService } from './services/Settings.js';
-import { StateTracker } from './trackers/StateTracker.js';
+import { getDesktopIconPath, getPreloadPath, getUIPath, isDev } from './pathResolver.js';
 import { GemSetup } from './trackers/GemTracker.js';
-import { StoreService } from './services/StoreService.js';
-import { MigrationService } from './services/MigrationService.js';
-import { GameProfile, getProfile } from './profiles/profiles.js';
-
-declare global {
-	var settings: SettingsService;
-	var mainState: StateTracker;
-	var storeService: StoreService;
-	var migrationService: MigrationService;
-	var selectedProfile: GameProfile;
-}
+import { objectFactory } from './objectFactory.js';
+import { getProfile } from './profiles/profiles.js';
 
 // Only allow one instance of the app
 if (!app.requestSingleInstanceLock()) {
@@ -53,6 +42,8 @@ app.commandLine.appendSwitch('high-dpi-support', '1');
 app.commandLine.appendSwitch('force-device-scale-factor', '1');
 
 app.whenReady().then(async () => {
+	await objectFactory.getMigrationService().MigrateOnStartup();
+
 	setTimeout(
 		createWindow,
 		process.platform === 'linux' ? 1000 : 0 // https://github.com/electron/electron/issues/16809
@@ -68,9 +59,6 @@ getAutoUpdater().on('update-available', (message) => {
 });
 
 async function createWindow() {
-	// Start up the store service so we can get selected profile
-	globalThis.storeService = new StoreService();
-
 	// Set up the tray
 	const trayImage = nativeImage.createFromPath(getDesktopIconPath());
 	if (trayImage.isEmpty()) log.info('Tray image failed to load, tray icon will not display!');
@@ -89,14 +77,14 @@ async function createWindow() {
 				label: 'Switch To PoE1',
 				click: () => {
 					//TODO this is insufficient
-					storeService.switchProfile("poe1");
+					objectFactory.getStoreService().switchProfile("poe1");
 				}
 			},
 			{
 				label: 'Switch To PoE2',
 				click: () => {
 					//TODO this is insufficient
-					storeService.switchProfile("poe2");
+					objectFactory.getStoreService().switchProfile("poe2");
 				}
 			},
 		])
@@ -123,23 +111,11 @@ async function createWindow() {
 		getProfile().windowName
 	);
 
-	// Declare & initialise global singletons
-	// cringe to use global variables but this makes it really easy to pass around state
-	// so whatever. global mainState OTS relies on global settings existing.
-	globalThis.migrationService = new MigrationService();
-	await globalThis.migrationService.MigrateOnStartup();
-
-	globalThis.settings = new SettingsService();
-
-	globalThis.mainState = new StateTracker();
-	await globalThis.mainState.oneTimeSetup();
-
 	// This basically runs the loop of read lines, save state, post state to renderer,
 	// rinse and repeat.
-	const logWatcher = new LogWatcherService();
-	logWatcher.watchClientTxt(mainWindow);
+	objectFactory.getLogWatcherService().watchClientTxt(mainWindow);
 
-	createIPCEventListeners(mainWindow, logWatcher);
+	createIPCEventListeners(mainWindow, objectFactory.getLogWatcherService());
 
 	registerGlobalHotkeys(mainWindow);
 
@@ -148,7 +124,7 @@ async function createWindow() {
 		// is interactable), the overlay will be recreated WITHOUT interaction.
 		// So, we sleep to wait for window to be created then enable interaction.
 		await new Promise(f => setTimeout(f, 100));
-		mainWindow.setIgnoreMouseEvents(!mainState.settingsOpen);
+		mainWindow.setIgnoreMouseEvents(!objectFactory.getStateTracker().settingsOpen);
 	});
 
 	// Uh still unfamiliar with this package so just logging all events
@@ -163,287 +139,287 @@ function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatch
 
 	// Handle events from the General Settings overlay
 	ipcMain.handle('getClientPath', async (event) => {
-		return settings.getClientTxtPath();
+		return objectFactory.getSettingsService().getClientTxtPath();
 	});
 
 	ipcMain.handle('saveClientPath', async (event, clientTxtPath: string) => {
-		var result = settings.saveClientTxtPath(clientTxtPath, mainWindow, logWatcher);
+		var result = objectFactory.getSettingsService().saveClientTxtPath(clientTxtPath, mainWindow, logWatcher);
 		return result;
 	});
 
 	ipcMain.handle('getIsClientWatcherActive', async (event) => {
-		return mainState.getIsClientWatcherActive();
+		return objectFactory.getStateTracker().getIsClientWatcherActive();
 	});
 
 	// Handle events from the Zone Tracker
 	ipcMain.handle('getZoneState', async (event, args) => {
 		mainWindow.webContents.send(
 			'zoneLayoutImageUpdates',
-			mainState.ZoneTracker.zoneImageFilePaths
+			objectFactory.getZoneTracker().zoneImageFilePaths
 		);
-		return mainState.ZoneTracker;
+		return objectFactory.getZoneTracker();
 	});
 
 	ipcMain.handle('postActSelected', async (event, actSelected: string) => {
-		mainState.ZoneTracker.saveZoneFromActName(actSelected);
+		objectFactory.getZoneTracker().saveZoneFromActName(actSelected);
 		mainWindow.webContents.send(
 			'zoneLayoutImageUpdates',
-			mainState.ZoneTracker.zoneImageFilePaths
+			objectFactory.getZoneTracker().zoneImageFilePaths
 		);
-		return mainState.ZoneTracker;
+		return objectFactory.getZoneTracker();
 	});
 
 	ipcMain.handle(
 		'postZoneSelected',
 		async (event, zoneSelected: string, actSelected: string) => {
-			mainState.ZoneTracker.saveZoneFromZoneNameAndActName(
+			objectFactory.getZoneTracker().saveZoneFromZoneNameAndActName(
 				zoneSelected,
 				actSelected
 			);
 			mainWindow.webContents.send(
 				'zoneLayoutImageUpdates',
-				mainState.ZoneTracker.zoneImageFilePaths
+				objectFactory.getZoneTracker().zoneImageFilePaths
 			);
-			return mainState.ZoneTracker;
+			return objectFactory.getZoneTracker();
 		}
 	);
 
 	ipcMain.handle('getLayoutImagePaths', async (event, args) => {
-		return mainState.ZoneTracker.zoneImageFilePaths;
+		return objectFactory.getZoneTracker().zoneImageFilePaths;
 	});
 
 	// Handle events from the level tracker
 	ipcMain.handle('getLevelState', async (event, args) => {
-		return mainState.LevelTracker;
+		return objectFactory.getLevelTracker();
 	});
 
 	// Handle events from the gem tracker
 	ipcMain.handle('getGemState', async (event, args) => {
 		return {
-			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
-			selectedLevel: mainState.GemTracker.gemSetup.level,
-			gemLinks: mainState.GemTracker.gemSetup.gemLinks
+			allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
+			selectedLevel: objectFactory.getGemTracker().gemSetup.level,
+			gemLinks: objectFactory.getGemTracker().gemSetup.gemLinks
 		};
 	});
 
 	ipcMain.handle('postGemLevelSelected', async (event, gemLevelSelected: number) => {
-		mainState.GemTracker.setGemSetupFromPlayerLevel(gemLevelSelected);
+		objectFactory.getGemTracker().setGemSetupFromPlayerLevel(gemLevelSelected);
 		return {
-			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
-			selectedLevel: mainState.GemTracker.gemSetup.level,
-			gemLinks: mainState.GemTracker.gemSetup.gemLinks
+			allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
+			selectedLevel: objectFactory.getGemTracker().gemSetup.level,
+			gemLinks: objectFactory.getGemTracker().gemSetup.gemLinks
 		};
 	});
 
 	// Handle events from the gem SETTINGS
 	ipcMain.handle('getGemSettingsState', async (event, args) => {
 		return {
-			buildName: mainState.GemTracker.buildName,
-			allBuildNames: mainState.GemTracker.allBuildNames,
-			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
-			allGemSetups: mainState.GemTracker.allGemSetups,
+			buildName: objectFactory.getGemTracker().buildName,
+			allBuildNames: objectFactory.getGemTracker().allBuildNames,
+			allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
+			allGemSetups: objectFactory.getGemTracker().allGemSetups,
 		};
 	});
 
 	ipcMain.handle('postBuildSelected', async (event, buildName: string) => {
-		settings.saveBuildName(buildName);
-		mainState.GemTracker.loadGemSetup(buildName);
-		mainState.GemTracker.setGemSetupFromPlayerLevel(mainState.LevelTracker.playerLevel);
+		objectFactory.getSettingsService().saveBuildName(buildName);
+		objectFactory.getGemTracker().loadGemSetup(buildName);
+		objectFactory.getGemTracker().setGemSetupFromPlayerLevel(objectFactory.getLevelTracker().playerLevel);
 
 		// Send the updated state to the Gem Tracker component
 		mainWindow.webContents.send(
 			'subscribeToGemUpdates',
 			{
-				allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
-				selectedLevel: mainState.GemTracker.gemSetup.level,
-				gemLinks: mainState.GemTracker.gemSetup.gemLinks
+				allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
+				selectedLevel: objectFactory.getGemTracker().gemSetup.level,
+				gemLinks: objectFactory.getGemTracker().gemSetup.gemLinks
 			}
 		);
 
 		// Return the updated state to Gem Tracker Settings component
 		return {
-			buildName: mainState.GemTracker.buildName,
-			allBuildNames: mainState.GemTracker.allBuildNames,
-			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
-			allGemSetups: mainState.GemTracker.allGemSetups,
+			buildName: objectFactory.getGemTracker().buildName,
+			allBuildNames: objectFactory.getGemTracker().allBuildNames,
+			allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
+			allGemSetups: objectFactory.getGemTracker().allGemSetups,
 		};
 	});
 
 	ipcMain.handle('postAddNewBuild', async (event, buildName: string) => {
 		// Set the current build
-		settings.saveBuildName(buildName);
+		objectFactory.getSettingsService().saveBuildName(buildName);
 
 		// Save the new build & load it
-		mainState.GemTracker.saveNewBuild(buildName);
-		mainState.GemTracker.loadGemSetup(buildName);
-		mainState.GemTracker.setGemSetupFromPlayerLevel(mainState.LevelTracker.playerLevel);
+		objectFactory.getGemTracker().saveNewBuild(buildName);
+		objectFactory.getGemTracker().loadGemSetup(buildName);
+		objectFactory.getGemTracker().setGemSetupFromPlayerLevel(objectFactory.getLevelTracker().playerLevel);
 
 
 		// Send the updated state to the Gem Tracker component
 		mainWindow.webContents.send(
 			'subscribeToGemUpdates',
 			{
-				allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
-				selectedLevel: mainState.GemTracker.gemSetup.level,
-				gemLinks: mainState.GemTracker.gemSetup.gemLinks
+				allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
+				selectedLevel: objectFactory.getGemTracker().gemSetup.level,
+				gemLinks: objectFactory.getGemTracker().gemSetup.gemLinks
 			}
 		);
 
 		// Return the updated state to Gem Tracker Settings component
 		return {
-			buildName: mainState.GemTracker.buildName,
-			allBuildNames: mainState.GemTracker.allBuildNames,
-			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
-			allGemSetups: mainState.GemTracker.allGemSetups,
+			buildName: objectFactory.getGemTracker().buildName,
+			allBuildNames: objectFactory.getGemTracker().allBuildNames,
+			allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
+			allGemSetups: objectFactory.getGemTracker().allGemSetups,
 		};
 	});
 
 	ipcMain.handle('postDeleteBuild', async (event, buildName: string) => {
 		// Set to default
-		settings.saveBuildName('Default');
+		objectFactory.getSettingsService().saveBuildName('Default');
 
 		// Delete the build & load Default
-		mainState.GemTracker.deleteBuild(buildName);
-		mainState.GemTracker.loadGemSetup('Default');
-		mainState.GemTracker.setGemSetupFromPlayerLevel(mainState.LevelTracker.playerLevel);
+		objectFactory.getGemTracker().deleteBuild(buildName);
+		objectFactory.getGemTracker().loadGemSetup('Default');
+		objectFactory.getGemTracker().setGemSetupFromPlayerLevel(objectFactory.getLevelTracker().playerLevel);
 
 
 		// Send the updated state to the Gem Tracker component
 		mainWindow.webContents.send(
 			'subscribeToGemUpdates',
 			{
-				allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
-				selectedLevel: mainState.GemTracker.gemSetup.level,
-				gemLinks: mainState.GemTracker.gemSetup.gemLinks
+				allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
+				selectedLevel: objectFactory.getGemTracker().gemSetup.level,
+				gemLinks: objectFactory.getGemTracker().gemSetup.gemLinks
 			}
 		);
 
 		// Return the updated state to Gem Tracker Settings component
 		return {
-			buildName: mainState.GemTracker.buildName,
-			allBuildNames: mainState.GemTracker.allBuildNames,
-			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
-			allGemSetups: mainState.GemTracker.allGemSetups,
+			buildName: objectFactory.getGemTracker().buildName,
+			allBuildNames: objectFactory.getGemTracker().allBuildNames,
+			allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
+			allGemSetups: objectFactory.getGemTracker().allGemSetups,
 		};
 	});
 
 	ipcMain.handle('saveGemSetupsForBuild', async (event, response: { buildName: string, allGemSetups: GemSetup[] }) => {
 		// Set the current build
-		settings.saveBuildName(response.buildName);
+		objectFactory.getSettingsService().saveBuildName(response.buildName);
 
 		// Save the new build
-		mainState.GemTracker.saveGemBuild(response.buildName, response.allGemSetups);
-		mainState.GemTracker.loadGemSetup(response.buildName);
-		mainState.GemTracker.setGemSetupFromPlayerLevel(mainState.LevelTracker.playerLevel);
+		objectFactory.getGemTracker().saveGemBuild(response.buildName, response.allGemSetups);
+		objectFactory.getGemTracker().loadGemSetup(response.buildName);
+		objectFactory.getGemTracker().setGemSetupFromPlayerLevel(objectFactory.getLevelTracker().playerLevel);
 
 		// Send the updated state to the Gem Tracker component
 		mainWindow.webContents.send(
 			'subscribeToGemUpdates',
 			{
-				allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
-				selectedLevel: mainState.GemTracker.gemSetup.level,
-				gemLinks: mainState.GemTracker.gemSetup.gemLinks
+				allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
+				selectedLevel: objectFactory.getGemTracker().gemSetup.level,
+				gemLinks: objectFactory.getGemTracker().gemSetup.gemLinks
 			}
 		);
 
 		// Return the updated state to Gem Tracker Settings component		
 		return {
-			buildName: mainState.GemTracker.buildName,
-			allBuildNames: mainState.GemTracker.allBuildNames,
-			allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
-			allGemSetups: mainState.GemTracker.allGemSetups,
+			buildName: objectFactory.getGemTracker().buildName,
+			allBuildNames: objectFactory.getGemTracker().allBuildNames,
+			allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
+			allGemSetups: objectFactory.getGemTracker().allGemSetups,
 		};
 	});
 
 	// Handle UI window position events
 	ipcMain.handle('getSettingsOverlayPositionSettings', async (event, args) => {
-		return settings.getSettingsOverlayPositionSettings();
+		return objectFactory.getSettingsService().getSettingsOverlayPositionSettings();
 	});
 
 	ipcMain.handle(
 		'saveSettingsOverlayPositionSettings',
 		async (event, settingsOverlaySettings) => {
-			settings.saveSettingsOverlayPositionSettings(settingsOverlaySettings);
+			objectFactory.getSettingsService().saveSettingsOverlayPositionSettings(settingsOverlaySettings);
 		}
 	);
 
 	ipcMain.handle('getZoneOverlayPositionSettings', async (event, args) => {
-		return settings.getZoneOverlayPositionSettings();
+		return objectFactory.getSettingsService().getZoneOverlayPositionSettings();
 	});
 
 	ipcMain.handle('saveZoneOverlayPositionSettings', async (event, zoneSettings) => {
-		settings.saveZoneOverlayPositionSettings(zoneSettings);
+		objectFactory.getSettingsService().saveZoneOverlayPositionSettings(zoneSettings);
 	});
 
 	ipcMain.handle('getLayoutImagesOverlayPositionSettings', async (event, args) => {
-		return settings.getLayoutImagesOverlayPositionSettings();
+		return objectFactory.getSettingsService().getLayoutImagesOverlayPositionSettings();
 	});
 
 	ipcMain.handle(
 		'saveLayoutImagesOverlayPositionSettings',
 		async (event, layoutImageSettings) => {
-			settings.saveLayoutImagesOverlayPositionSettings(layoutImageSettings);
+			objectFactory.getSettingsService().saveLayoutImagesOverlayPositionSettings(layoutImageSettings);
 		}
 	);
 
 	ipcMain.handle('getLevelOverlayPositionSettings', async (event, args) => {
-		return settings.getLevelOverlayPositionSettings();
+		return objectFactory.getSettingsService().getLevelOverlayPositionSettings();
 	});
 
 	ipcMain.handle('saveLevelOverlayPositionSettings', async (event, levelSettings) => {
-		settings.saveLevelOverlayPositionSettings(levelSettings);
+		objectFactory.getSettingsService().saveLevelOverlayPositionSettings(levelSettings);
 	});
 
 	ipcMain.handle('getGemOverlayPositionSettings', async (event, args) => {
-		return settings.getGemOverlayPositionSettings();
+		return objectFactory.getSettingsService().getGemOverlayPositionSettings();
 	});
 
 	ipcMain.handle('saveGemOverlayPositionSettings', async (event, gemSettings) => {
-		settings.saveGemOverlayPositionSettings(gemSettings);
+		objectFactory.getSettingsService().saveGemOverlayPositionSettings(gemSettings);
 	});
 }
 
 function registerGlobalHotkeys(mainWindow: BrowserWindow) {
 	//Show/hide settings - default hidden
 	globalShortcut.register('Ctrl+Alt+S', () => {
-		mainState.settingsOpen = !mainState.settingsOpen;
+		objectFactory.getStateTracker().settingsOpen = !objectFactory.getStateTracker().settingsOpen;
 		mainWindow.webContents.send('Hotkeys', {
 			Hotkey: 'ToggleSettings',
-			value: mainState.settingsOpen,
+			value: objectFactory.getStateTracker().settingsOpen,
 		});
 		// Enable clicks on overlay
-		mainWindow.setIgnoreMouseEvents(!mainState.settingsOpen);
+		mainWindow.setIgnoreMouseEvents(!objectFactory.getStateTracker().settingsOpen);
 	});
 	//Show/hide zone notes - default shown
 	globalShortcut.register('Ctrl+Alt+z', () => {
-		mainState.zoneNotesOpen = !mainState.zoneNotesOpen;
+		objectFactory.getStateTracker().zoneNotesOpen = !objectFactory.getStateTracker().zoneNotesOpen;
 		mainWindow.webContents.send('Hotkeys', {
 			Hotkey: 'ToggleZoneNotes',
-			value: mainState.zoneNotesOpen,
+			value: objectFactory.getStateTracker().zoneNotesOpen,
 		});
 	});
 	//Show/hide layout images - default shown
 	globalShortcut.register('Ctrl+Alt+i', () => {
-		mainState.layoutImagesOpen = !mainState.layoutImagesOpen;
+		objectFactory.getStateTracker().layoutImagesOpen = !objectFactory.getStateTracker().layoutImagesOpen;
 		mainWindow.webContents.send('Hotkeys', {
 			Hotkey: 'ToggleLayoutImages',
-			value: mainState.layoutImagesOpen,
+			value: objectFactory.getStateTracker().layoutImagesOpen,
 		});
 	});
 	//Show/hide level tracker - default shown
 	globalShortcut.register('Ctrl+Alt+l', () => {
-		mainState.levelTrackerOpen = !mainState.levelTrackerOpen;
+		objectFactory.getStateTracker().levelTrackerOpen = !objectFactory.getStateTracker().levelTrackerOpen;
 		mainWindow.webContents.send('Hotkeys', {
 			Hotkey: 'ToggleLevelTracker',
-			value: mainState.levelTrackerOpen,
+			value: objectFactory.getStateTracker().levelTrackerOpen,
 		});
 	});
 	//Show/hide level tracker - default shown
 	globalShortcut.register('Ctrl+Alt+g', () => {
-		mainState.gemTrackerOpen = !mainState.gemTrackerOpen;
+		objectFactory.getStateTracker().gemTrackerOpen = !objectFactory.getStateTracker().gemTrackerOpen;
 		mainWindow.webContents.send('Hotkeys', {
 			Hotkey: 'ToggleGemTracker',
-			value: mainState.gemTrackerOpen,
+			value: objectFactory.getStateTracker().gemTrackerOpen,
 		});
 	});
 }

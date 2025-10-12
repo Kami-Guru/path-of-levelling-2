@@ -1,6 +1,7 @@
 import { BrowserWindow } from 'electron';
 import { LogWatcherService } from './LogWatcherService.js';
 import { OverlayPosition, UiSettings } from '../zodSchemas/schemas.js';
+import { objectFactory } from '../objectFactory.js';
 
 export class SettingsService {
 
@@ -9,7 +10,7 @@ export class SettingsService {
 	init() {}
 
 	getClientTxtPath(): string {
-		return storeService.getGameSetting('clientTxtPath') as string;
+		return objectFactory.getStoreService().getGameSetting('clientTxtPath') as string;
 	}
 
 	saveClientTxtPath(
@@ -17,64 +18,64 @@ export class SettingsService {
 		mainWindow: BrowserWindow,
 		logWatcher: LogWatcherService
 	): boolean {
-		storeService.setGameSetting('clientTxtPath', newPath);
+		objectFactory.getStoreService().setGameSetting('clientTxtPath', newPath);
 
 		// Attempt to subscribe to the log watcher again.
 		//TODO there is a case here when someone has a valid path, changes it, then their
 		//TODO app still works until they log in next time. IDK what to do about that
-		if (!mainState.logWatcherActive) {
+		if (!objectFactory.getStateTracker().logWatcherActive) {
 			logWatcher.watchClientTxt(mainWindow);
 		}
 
 		//Return the result
-		return mainState.logWatcherActive;
+		return objectFactory.getStateTracker().logWatcherActive;
 	}
 
 	getBuildName(): string {
-		return storeService.getGameSetting('buildName') as string;
+		return objectFactory.getStoreService().getGameSetting('buildName') as string;
 	}
 
 	saveBuildName(buildName: string) {
-		storeService.setGameSetting('buildName', buildName);
+		objectFactory.getStoreService().setGameSetting('buildName', buildName);
 	}
 
 	getSettingsOverlayPositionSettings(): OverlayPosition {
-		return storeService.getGameSetting('uiSettings').settingsOverlayPosition;
+		return objectFactory.getStoreService().getGameSetting('uiSettings').settingsOverlayPosition;
 	}
 
 	saveSettingsOverlayPositionSettings(newSettings: OverlayPosition) {
-		storeService.setGameSetting('uiSettings.settingsOverlayPosition', newSettings);
+		objectFactory.getStoreService().setGameSetting('uiSettings.settingsOverlayPosition', newSettings);
 	}
 
 	getZoneOverlayPositionSettings(): OverlayPosition {
-		return storeService.getGameSetting('uiSettings.zoneTrackerPosition');
+		return objectFactory.getStoreService().getGameSetting('uiSettings.zoneTrackerPosition');
 	}
 
 	saveZoneOverlayPositionSettings(newSettings: OverlayPosition) {
-		storeService.setGameSetting('uiSettings.zoneTrackerPosition', newSettings);
+		objectFactory.getStoreService().setGameSetting('uiSettings.zoneTrackerPosition', newSettings);
 	}
 
 	getLayoutImagesOverlayPositionSettings(): OverlayPosition {
-		return storeService.getGameSetting('uiSettings.layoutImagesTrackerPosition');
+		return objectFactory.getStoreService().getGameSetting('uiSettings.layoutImagesTrackerPosition');
 	}
 
 	saveLayoutImagesOverlayPositionSettings(newSettings: OverlayPosition) {
-		storeService.setGameSetting('uiSettings.layoutImagesTrackerPosition', newSettings);
+		objectFactory.getStoreService().setGameSetting('uiSettings.layoutImagesTrackerPosition', newSettings);
 	}
 
 	getLevelOverlayPositionSettings(): OverlayPosition {
-		return storeService.getGameSetting('uiSettings.levelTrackerPosition');
+		return objectFactory.getStoreService().getGameSetting('uiSettings.levelTrackerPosition');
 	}
 
 	saveLevelOverlayPositionSettings(newSettings: OverlayPosition) {
-		storeService.setGameSetting('uiSettings.levelTrackerPosition', newSettings);
+		objectFactory.getStoreService().setGameSetting('uiSettings.levelTrackerPosition', newSettings);
 	}
 
 	getGemOverlayPositionSettings(): OverlayPosition {
-		return storeService.getGameSetting('uiSettings.gemTrackerPosition');
+		return objectFactory.getStoreService().getGameSetting('uiSettings.gemTrackerPosition');
 	}
 
 	saveGemOverlayPositionSettings(newSettings: OverlayPosition) {
-		storeService.setGameSetting('uiSettings.gemTrackerPosition', newSettings);
+		objectFactory.getStoreService().setGameSetting('uiSettings.gemTrackerPosition', newSettings);
 	}
 }

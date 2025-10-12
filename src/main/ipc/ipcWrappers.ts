@@ -1,7 +1,6 @@
-import { ipcMain, WebContents, webFrameMain, WebFrameMain } from 'electron';
+import { WebFrameMain } from 'electron';
 import url from 'url';
-import { getUIPath } from '../pathResolver.js';
-import { isDev } from '../util.js';
+import { getUIPath, isDev } from '../pathResolver.js';
 
 // if we're in the dev env check that we're receiving event from port we chose in vite
 // config if the frame did not come from our index.html then error this is not foolproof,

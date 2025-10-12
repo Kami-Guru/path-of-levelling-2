@@ -1,8 +1,10 @@
 import log from 'electron-log';
 import fs from 'fs';
 import path from 'path';
-import { getBuildPath, getZoneLayoutImagesAbsolutePath } from '../pathResolver.js';
+import { getBuildPath, getZoneLayoutImagesAbsolutePath, getZoneNotesPath } from '../pathResolver.js';
 import zoneReferenceData from '../profiles/poe2/referenceData/zoneReferenceData.json' with { type: "json" };
+import { objectFactory } from '../objectFactory.js';
+import { StoreService } from '../services/StoreService.js';
 
 export class ZoneTracker {
 	act: string;
@@ -23,7 +25,9 @@ export class ZoneTracker {
 	allZoneNotesPath: string
 	allZoneNotes: JSON
 
-	constructor() {
+	constructor(storeService: StoreService) {
+		//TODO This crap was just put here to get rid of ts warning, verify this is all initialised
+		//TODO and DELETE these, then //@ts-ignore the props
 		this.act = 'Act 1';
 		this.zone = 'The Riverwood';
 		this.zoneCode = 'G1_1';
@@ -37,10 +41,24 @@ export class ZoneTracker {
 		this.allZoneNotesPath = '';
 		this.allZoneNotes = Object();
 
-		this.allActs = zoneReferenceData.acts.map((act) =>  act.name );
+		this.allActs = zoneReferenceData.acts.map((act) => act.name);
+
+		var zoneNotesPath = getZoneNotesPath();
+
+		try {
+			log.info('Loading zone notes from path:', zoneNotesPath)
+			this.loadAllZoneNotes(zoneNotesPath);
+			this.saveZoneFromCode(
+				storeService.getGameSetting('lastSessionState.zoneCode'),
+				true
+			);
+		} catch (error) {
+			log.error('Could not construct ZoneTracker, with error:')
+			log.error(error)
+		}
 	}
 
-	init() { }
+	init() {}
 
 	loadAllZoneNotes(allZoneNotesPath: string) {
 		log.info('Trying to load zone notes at path', allZoneNotesPath);
@@ -70,7 +88,7 @@ export class ZoneTracker {
 		}
 
 		var allZonesInAct = actReference.zones.map((zoneObj) => zoneObj.name)
-		
+
 		this.act = actReference.name;
 		this.zone = actReference.zones[0].name;
 		this.zoneCode = actReference.zones[0].code;
@@ -80,7 +98,7 @@ export class ZoneTracker {
 
 		this.setZoneLayoutImagePaths(this.zoneCode);
 
-		mainState.writeStateToFile();
+		objectFactory.getStateTracker().saveSessionState();
 	}
 
 	// This is called when someone selects a zone in the dropdown in the UI
@@ -103,7 +121,7 @@ export class ZoneTracker {
 		}
 
 		var allZonesInAct = actReference.zones.map((zoneObj) => zoneObj.name)
-		
+
 		this.act = actReference.name;
 		this.zone = zoneReference.name;
 		this.zoneCode = zoneReference.code;
@@ -113,7 +131,7 @@ export class ZoneTracker {
 
 		this.setZoneLayoutImagePaths(this.zoneCode);
 
-		mainState.writeStateToFile();
+		objectFactory.getStateTracker().saveSessionState();
 	}
 
 	// This method takes a zoneCode and uses it to update the current state
@@ -131,7 +149,7 @@ export class ZoneTracker {
 		// There are a few reasons we want to update locally, but not save.
 		// Biggest example is when the app is first starting up and loading from file,
 		// don't need to immediately write to that file.
-		if (!updateOnly) mainState.writeStateToFile();
+		if (!updateOnly) objectFactory.getStateTracker().saveSessionState();
 
 		return true;
 	}
@@ -210,19 +228,24 @@ export class ZoneTracker {
 			return directory.includes(zoneCode);
 		})
 
-		// If we couldn't find layout images, do nothing.
-		// TODO This is kinda awkward since there will be notes from the previous zone
-		// TODO displayed.
-		if (requiredDirectory == null) return false;
+		// If we couldn't find layout images, clear the file paths (i.e. clear the layout images).
+		// This is useful for towns, or for areas that don't have layout images.
+		if (requiredDirectory == null) {
+			this.zoneImageFilePaths = [];
+			return false;
+		};
 
 		const fileNames = fs.readdirSync(path.join(getZoneLayoutImagesAbsolutePath(), requiredDirectory));
 
-		if (fileNames == null || fileNames.length == 0) return false;
+		if (fileNames == null || fileNames.length == 0) {
+			this.zoneImageFilePaths = [];
+			return false;
+		}
 
 		var filePaths = fileNames.map((fileName: string) => {
 			//TODO: I have to find a better way to store this ../ stuff, this needs to 
 			//TODO: send RELATIVE filepaths, and that is FROM LayoutImageComponent.tsx :(
-			return path.join( 'Layout Images', requiredDirectory, fileName)
+			return path.join('Layout Images', requiredDirectory, fileName)
 		})
 
 		this.zoneImageFilePaths = filePaths;

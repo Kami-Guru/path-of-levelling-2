@@ -1,3 +1,4 @@
+import { objectFactory } from "../objectFactory.js";
 import { ProfileId } from "../zodSchemas/schemas.js";
 import { poe1Profile } from "./poe1/PoE1Profile.js";
 import { poe2Profile } from "./poe2/PoE2Profile.js";
@@ -19,5 +20,5 @@ const profiles: Record<ProfileId, GameProfile> = {
 
 /** Returns the current profile, or the profile corresponding to ProfileId if provided */
 export function getProfile(id: ProfileId | null = null): GameProfile {
-    return profiles[id ?? storeService.getSelectedProfileId()]
+    return profiles[id ?? objectFactory.getStoreService().getSelectedProfileId()]
 }

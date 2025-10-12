@@ -3,6 +3,9 @@ import log from 'electron-log';
 import Store from 'electron-store';
 import path from 'path';
 import { getBuildsRootPath } from '../pathResolver.js';
+import { objectFactory } from '../objectFactory.js';
+import { SettingsService } from '../services/Settings.js';
+import { LevelTracker } from './LevelTracker.js';
 
 // TODO: GemTracker owns builds cuz I haven't added any build stuff to anything else.
 export class GemTracker {
@@ -18,9 +21,11 @@ export class GemTracker {
 	allGemSetups: GemSetup[];
 	allGemSetupLevels: number[];
 
-	constructor() {
+	constructor(settingsService: SettingsService, levelTracker: LevelTracker) {
 		this.store = new Store({ name: "builds", accessPropertiesByDotNotation: false });
 
+		//TODO This crap was just put here to get rid of ts warning, verify this is all initialised
+		//TODO and DELETE these, then //@ts-ignore the props
 		this.buildName = '';
 		this.allBuildNames = [];
 		this.gemBuild = Object();
@@ -30,9 +35,12 @@ export class GemTracker {
 
 		// Current setup
 		this.gemSetup = Object();
+
+		this.loadGemSetup(settingsService.getBuildName())
+		this.setGemSetupFromPlayerLevel(levelTracker.playerLevel);
 	}
 
-	init() { }
+	init() {}
 
 	//TODO Seriously I need to get all this build stuff out of gem tracker
 	saveNewBuild(newBuildName: string) {

@@ -1,6 +1,7 @@
 import { BrowserWindow } from 'electron';
 import log from 'electron-log';
 import fs from 'fs';
+import { objectFactory } from '../objectFactory.js';
 
 export class LogWatcherService {
 	newZoneRegex: RegExp;
@@ -24,11 +25,11 @@ export class LogWatcherService {
 	watchClientTxt(mainWindow: BrowserWindow) {
 		log.info('Trying to subscribe to Client.txt');
 		try {
-			this.previousFileSize = fs.statSync(settings.getClientTxtPath()).size;
+			this.previousFileSize = fs.statSync(objectFactory.getSettingsService().getClientTxtPath()).size;
 		} catch (e: any) { // TODO shouldn't I just catch whatever error ENONET is separately?
 			// This flag basically displays a warning on the UI telling the user to
 			// update their client txt path.
-			mainState.logWatcherActive = false;
+			objectFactory.getStateTracker().logWatcherActive = false;
 
 			if ((e.code = 'ENOENT')) {
 				//@ts-ignore
@@ -45,10 +46,10 @@ export class LogWatcherService {
 			return;
 		}
 
-		mainState.logWatcherActive = true;
+		objectFactory.getStateTracker().logWatcherActive = true;
 		log.info('Successfully subscribed to Client.txt');
 
-		fs.watchFile(settings.getClientTxtPath(), (current, previous) => {
+		fs.watchFile(objectFactory.getSettingsService().getClientTxtPath(), (current, previous) => {
 			var data = this.readNewLines(current, previous);
 
 			if (data == null) {
@@ -58,7 +59,7 @@ export class LogWatcherService {
 			var shouldUpdateZoneTracker = false;
 			// handle new zone code
 			if (data.zoneCode != '') {
-				shouldUpdateZoneTracker = mainState.ZoneTracker.saveZoneFromCode(
+				shouldUpdateZoneTracker = objectFactory.getZoneTracker().saveZoneFromCode(
 					data.zoneCode
 				);
 			}
@@ -66,7 +67,7 @@ export class LogWatcherService {
 			var shouldUpdateLevelTracker;
 			if (data.monsterLevel > 0 || data.playerLevel > 0) {
 				shouldUpdateLevelTracker = true;
-				mainState.LevelTracker.savePlayerOrMonsterLevel(
+				objectFactory.getLevelTracker().savePlayerOrMonsterLevel(
 					data.playerLevel,
 					data.monsterLevel
 				);
@@ -75,22 +76,22 @@ export class LogWatcherService {
 			var shouldUpdateGemTracker;
 			if (data.playerLevel > 0) {
 				shouldUpdateGemTracker = true;
-				mainState.GemTracker.setGemSetupFromPlayerLevel(data.playerLevel);
+				objectFactory.getGemTracker().setGemSetupFromPlayerLevel(data.playerLevel);
 			}
 
 			//send data to the renderer
 			if (shouldUpdateZoneTracker) {
-				mainWindow.webContents.send('zoneUpdatesFromLog', mainState.ZoneTracker);
+				mainWindow.webContents.send('zoneUpdatesFromLog', objectFactory.getZoneTracker());
 				mainWindow.webContents.send(
 					'zoneLayoutImageUpdates',
-					mainState.ZoneTracker.zoneImageFilePaths
+					objectFactory.getZoneTracker().zoneImageFilePaths
 				);
 			}
 
 			if (shouldUpdateLevelTracker) {
 				mainWindow.webContents.send(
 					'subscribeToLevelUpdates',
-					mainState.LevelTracker
+					objectFactory.getLevelTracker()
 				);
 			}
 
@@ -98,9 +99,9 @@ export class LogWatcherService {
 				mainWindow.webContents.send(
 					'subscribeToGemUpdates',
 					{
-						allGemSetupLevels: mainState.GemTracker.allGemSetupLevels,
-						selectedLevel: mainState.GemTracker.gemSetup.level,
-						gemLinks: mainState.GemTracker.gemSetup.gemLinks
+						allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
+						selectedLevel: objectFactory.getGemTracker().gemSetup.level,
+						gemLinks: objectFactory.getGemTracker().gemSetup.gemLinks
 					}
 				);
 			}
@@ -110,7 +111,7 @@ export class LogWatcherService {
 	// TODO fix this! Should be storing the path that is actually being watched not hoping that
 	// TODO this is up to date when we want to stop watching
 	stopTracking() {
-		fs.unwatchFile(settings.getClientTxtPath());
+		fs.unwatchFile(objectFactory.getSettingsService().getClientTxtPath());
 	}
 
 	readNewLines(current: fs.Stats, previous: fs.Stats) {
@@ -120,7 +121,7 @@ export class LogWatcherService {
 		}
 
 		// Figure out size of the buffer
-		var newFileSize: number = fs.statSync(settings.getClientTxtPath()).size;
+		var newFileSize: number = fs.statSync(objectFactory.getSettingsService().getClientTxtPath()).size;
 		var sizeDiff: number = newFileSize - this.previousFileSize;
 
 		//If we get a negative difference, the file was reset, so we read the whole
@@ -133,7 +134,7 @@ export class LogWatcherService {
 		var buffer = Buffer.alloc(sizeDiff);
 
 		//read the file and save our place
-		var fileDescriptor = fs.openSync(settings.getClientTxtPath(), 'r');
+		var fileDescriptor = fs.openSync(objectFactory.getSettingsService().getClientTxtPath(), 'r');
 		fs.readSync(fileDescriptor, buffer, 0, sizeDiff, this.previousFileSize);
 		fs.closeSync(fileDescriptor);
 

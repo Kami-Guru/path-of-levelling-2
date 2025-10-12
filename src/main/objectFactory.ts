@@ -47,7 +47,7 @@ class ObjectFactory {
     //     const someDependency = this.getDependency();
     //     return new SomeService(someDependency)
     // });
-    private getOrCreateService<K extends keyof ServicesAndTrackers>(
+    private getOrCreateObject<K extends keyof ServicesAndTrackers>(
         key: K,
         factory: () => ServicesAndTrackers[K]
     ): ServicesAndTrackers[K] {
@@ -59,19 +59,49 @@ class ObjectFactory {
         return this.objects[key]!;
     }
 
-    // --- StoreService --- //
+    // --- Services --- //
     getStoreService(): StoreService {
-        return this.getOrCreateService("storeService", () => new StoreService());
+        return this.getOrCreateObject("storeService", () => new StoreService());
     }
 
-    // --- MigrationService --- //
+    getSettingsService(): SettingsService {
+        return this.getOrCreateObject("settingsService", () => new SettingsService());
+    }
+
     getMigrationService(): MigrationService {
-        return this.getOrCreateService("migrationService", () => new MigrationService());
+        return this.getOrCreateObject("migrationService", () => new MigrationService());
     }
 
-    // --- LogWatcherService --- //
     getLogWatcherService(): LogWatcherService {
-        return this.getOrCreateService("logWatcherService", () => new LogWatcherService());
+        return this.getOrCreateObject("logWatcherService", () => new LogWatcherService());
+    }
+
+
+    // --- Trackers --- //
+    getStateTracker(): StateTracker {
+        return this.getOrCreateObject("stateTracker", () => new StateTracker());
+    }
+
+    getZoneTracker(): ZoneTracker {
+        return this.getOrCreateObject("zoneTracker", () => {
+            const storeService = this.getStoreService();
+            return new ZoneTracker(storeService)
+        })
+    }
+
+    getLevelTracker(): LevelTracker {
+        return this.getOrCreateObject("levelTracker", () => {
+            const storeService = this.getStoreService();
+            return new LevelTracker(storeService)
+        })
+    }
+
+    getGemTracker(): GemTracker {
+        return this.getOrCreateObject("gemTracker", () => {
+            const settingsService = this.getSettingsService();
+            const levelTracker = this.getLevelTracker();
+            return new GemTracker(settingsService, levelTracker)
+        })
     }
 }
 
