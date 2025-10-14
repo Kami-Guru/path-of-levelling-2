@@ -24,8 +24,8 @@ export class MigrationService {
     // to new configuration schemas, and fills in missing fields.
     async MigrateOnStartup() {
         this.MigrateGlobalSettings();
-        await this.MigratePoE1GameSettings();
-        await this.MigratePoE2GameSettings();
+        this.MigratePoE1GameSettings();
+        this.MigratePoE2GameSettings();
         this.MigrateBuilds();
     }
 
@@ -48,82 +48,72 @@ export class MigrationService {
             }
         */
 
-        // Do some zod schema validation to fill in missing settings with defaults
+        // --- Fill missing settings with defaults from zod schema --- //
         const globalSettings = objectFactory.getStoreService().getAllGlobalSettings();
 
-        const result = GlobalSettingsZodSchema.safeParse({
-            ...GlobalSettingsZodSchema.safeParse({}), // defaults from Zod
-            ...globalSettings
-        });
+        const dataValidationResult = this.FillWithDefaultsAndStrip(
+            GlobalSettingsZodSchema,
+            GlobalSettingsZodSchema.parse({}),
+            globalSettings
+        )
 
-        if (!result.success) {
-            // To have type safety everywhere we need to ensure the global settings conforms to Zod
-            // schema, so if safeParse fails log a warning and reset to defaults :(
-            log.warn("Failed schema validation on Global Settings with error:",
-                z.treeifyError(result.error));
+        if (!dataValidationResult) return; // No changes required
 
+        if (dataValidationResult.success) {
+            log.warn("Stripping unknown keys and filling missing Global Settings with defaults");
+            objectFactory.getStoreService().setAllGlobalSettings(dataValidationResult.data);
+            return;
+        } else {
             log.warn("Resetting Global Settings to defaults");
             objectFactory.getStoreService().setAllGlobalSettings(GlobalSettingsZodSchema.parse({}));
-        } else {
-            objectFactory.getStoreService().setAllGlobalSettings(result.data);
         }
     }
 
-    private async MigratePoE1GameSettings() {
+    private MigratePoE1GameSettings() {
         // Only have version 1 right now so no migration required yet
 
         // --- Fill missing settings with defaults from zod schema --- //
         const poe1GameSettings = objectFactory.getStoreService().getAllGameSettingsForProfileId("poe1");
 
-        // When filling in missing client txt path, make a few guesses first.
-        const clientTxtPath = objectFactory.getStoreService().getGameSettingForProfileId("poe1", "clientTxtPath")
-            ?? await guessClientTxtPathForProfileId("poe1");
+        const dataValidationResult = this.FillWithDefaultsAndStrip(
+            GameSettingsZodSchema,
+            DefaultPoE1GameSettings.parse({}),
+            poe1GameSettings
+        )
 
-        const result = GameSettingsZodSchema.safeParse({
-            ...DefaultPoE1GameSettings,
-            ...poe1GameSettings,
-            clientTxtPath: clientTxtPath
-        })
+        if (!dataValidationResult) return; // No changes required
 
-        if (!result.success) {
-            // To have type safety everywhere we need to ensure the PoE1 Game Settings conforms to 
-            // Zod schema, so if safeParse fails log a warning and reset to defaults :(
-            log.warn("Failed schema validation on PoE1 Game Settings with error:",
-                z.treeifyError(result.error));
-
-            log.warn("Resetting PoE1 Game Settings to defaults")
-            objectFactory.getStoreService().setAllGameSettingsForProfileId("poe1", DefaultPoE1GameSettings.parse({}))
+        // If the dataValidationResult.success is true, the data just needed to be filled with
+        // defaults and/or stripped of extra keys. If false, the data was too broken to fix.
+        if (dataValidationResult.success) {
+            log.warn("Filling missing PoE1 Game Settings with defaults");
+            objectFactory.getStoreService().setAllGameSettingsForProfileId("poe1", dataValidationResult.data);
         } else {
-            objectFactory.getStoreService().setAllGameSettingsForProfileId("poe1", result.data)
+            log.warn("Resetting PoE1 Game Settings to defaults");
+            objectFactory.getStoreService().setAllGameSettingsForProfileId("poe1", DefaultPoE1GameSettings.parse({}));
         }
     }
 
-    private async MigratePoE2GameSettings() {
+    private MigratePoE2GameSettings() {
         // Only have version 1 right now so no migration required yet
 
-        // Fill missing settings with defaults from zod schema
+        // --- Fill missing settings with defaults from zod schema --- //
         const poe2GameSettings = objectFactory.getStoreService().getAllGameSettingsForProfileId("poe2");
 
-        // When filling in missing client txt path, make a few guesses first.
-        const clientTxtPath = objectFactory.getStoreService().getGameSettingForProfileId("poe2", "clientTxtPath")
-            ?? await guessClientTxtPathForProfileId("poe2");
+        const dataValidationResult = this.FillWithDefaultsAndStrip(
+            GameSettingsZodSchema,
+            DefaultPoE2GameSettings.parse({}),
+            poe2GameSettings
+        )
 
-        const result = GameSettingsZodSchema.safeParse({
-            ...DefaultPoE2GameSettings,
-            ...poe2GameSettings,
-            clientTxtPath: clientTxtPath
-        })
+        if (!dataValidationResult) return; // No changes required
 
-        if (!result.success) {
-            // To have type safety everywhere we need to ensure the poe2 game settings conforms to 
-            // Zod schema, so if safeParse fails log a warning and reset to defaults :(
-            log.warn("Failed schema validation on PoE2 Game Settings with error:",
-                z.treeifyError(result.error));
-
-            log.warn("Resetting PoE2 Game Settings to defaults")
-            objectFactory.getStoreService().setAllGameSettingsForProfileId("poe2", DefaultPoE2GameSettings.parse({}))
+        if (dataValidationResult.success) {
+            log.warn("Filling missing PoE2 Game Settings with defaults");
+            objectFactory.getStoreService().setAllGameSettingsForProfileId("poe2", dataValidationResult.data);
         } else {
-            objectFactory.getStoreService().setAllGameSettingsForProfileId("poe2", result.data)
+            log.warn("Resetting PoE2 Game Settings to defaults");
+            objectFactory.getStoreService().setAllGameSettingsForProfileId("poe2", DefaultPoE2GameSettings.parse({}));
         }
     }
 
@@ -173,8 +163,7 @@ export class MigrationService {
         const oldData = oldSettingsStore.store;
 
         // If there are no old settings, no migration required.
-        // TODO not sold on the idea that !oldData is actually going to return false
-        if (!oldData)
+        if (!oldData || oldSettingsStore.size === 0)
             return;
 
         // Back in ye olde days 'buildName' was 'buildFolder'
@@ -201,10 +190,11 @@ export class MigrationService {
         poe2SettingsStore.set('uiSettings', oldSettingsStore.get('uiSettings') ?? poe2DefaultSettings.uiSettings);
 
         // poe1 settings we just fill with defaults
-        const poe1SettingsStore = new Store({ name: "poe2-gameSettings" })
+        const poe1SettingsStore = new Store({ name: "poe1-gameSettings" })
 
         poe1SettingsStore.set('version', 1);
-        poe1SettingsStore.set('clientTxtPath', poe1DefaultSettings.clientTxtPath);
+        // For clientTxtPath we try to make a few guesses before falling back to the default
+        poe1SettingsStore.set('clientTxtPath', guessClientTxtPathForProfileId("poe1"));
         poe1SettingsStore.set('buildName', poe1DefaultSettings.buildName)
         poe1SettingsStore.set('lastSessionState', poe1DefaultSettings.lastSessionState)
         poe1SettingsStore.set('uiSettings', poe1DefaultSettings.uiSettings)
@@ -219,10 +209,10 @@ export class MigrationService {
             name: "builds",
             accessPropertiesByDotNotation: false // So ppl can use . in build names (eg 3.27 LA)
         })
+        const oldData = oldBuildStore.store;
 
         // If there are no old settings, no migration required.
-        // TODO not sold on the idea that !oldData is actually going to return false
-        if (!oldBuildStore)
+        if (!oldData || oldBuildStore.size === 0)
             return;
 
         // Old build store was just a collection of properties named after the build whose values
@@ -248,7 +238,31 @@ export class MigrationService {
         newBuildStore.set('builds', migratedBuilds)
 
         // Clear the old builds store
-        oldBuildStore.clear
+        oldBuildStore.clear()
+    }
+
+    /** Checks existing settings, trims extra keys and fills defaults.
+     * Returns undefined if no changes are required.
+     */
+    private FillWithDefaultsAndStrip<T extends z.ZodObject<any>>(schema: T, defaults: z.infer<T>, current: object)
+        : z.ZodSafeParseResult<z.infer<T>> | undefined {
+
+        // First check that there are missing settings at all, or any extra keys
+        var alreadyValidCheck = schema.safeParse(current);
+        if (alreadyValidCheck.success && Object.keys(alreadyValidCheck.data).length === Object.keys(current).length)
+            return; // No missing settings or extra keys. yeah returning undefined is yuck, whatever
+
+        log.warn("Failed schema validation on Global Settings:",
+            alreadyValidCheck.error === undefined
+                ? "Unrecognised keys!"
+                : z.treeifyError(alreadyValidCheck.error));
+
+        // Fill in missing settings with defaults and strip extra keys at the same time.
+        // Return result of the safeParse - too hard to automate which store to write to 
+        return schema.safeParse({
+            ...defaults,
+            ...current
+        })
     }
 }
 

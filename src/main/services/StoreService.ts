@@ -19,12 +19,14 @@ export class StoreService {
             name: "globalSettings"
         });
 
-        this.switchProfile(this.getSelectedProfileId())
+        // StoreService is required for migration/validation/fixing all stores, so here we need to
+        // default to a profile if the local storage is empty or invalid.
+        this.switchProfile(this.getSelectedProfileId() ?? "poe2");
 
         log.info("StoreService constructed");
     }
 
-    init() { 
+    init() {
         log.info("StoreService initialised");
     }
 
@@ -56,7 +58,7 @@ export class StoreService {
     getAllGlobalSettings(): GlobalSettings {
         return this.globalSettingsStore.store;
     }
-
+    
     setAllGlobalSettings(settings: GlobalSettings): void {
         this.globalSettingsStore.store = settings
     }

@@ -49,7 +49,7 @@ export const ProfileId = z.enum(["poe1", "poe2"]);
 export const GlobalSettingsZodSchema = z.object({
     version: z.number().default(1),
     selectedProfile: z.enum(["poe1", "poe2"]).default("poe2"),
-})
+});
 
 export type GlobalSettings = z.infer<typeof GlobalSettingsZodSchema>;
 export type ProfileId = z.infer<typeof ProfileId>;
@@ -60,7 +60,7 @@ export const LastSessionStateZodSchema = z.object({
     zoneCode: z.string(),
     playerLevel: z.number(),
     monsterLevel: z.number()
-})
+});
 
 export const OverlayPositionZodSchema = z.object({
     x: z.number(),
@@ -83,8 +83,10 @@ export const GameSettingsZodSchema = z.object({
     buildName: z.string(),
     lastSessionState: LastSessionStateZodSchema,
     uiSettings: UiSettingsZodSchema,
-})
+});
 
+// Default settings for each profile
+// ! These need to basically be exactly the same shape as GameSettingsZodSchema !
 export const DefaultPoE1GameSettings = GameSettingsZodSchema.extend({
     version: z.number().default(1),
     clientTxtPath: z.string().default("C:/SteamLibrary/steamapps/common/Path of Exile 1/logs/Client.txt"),

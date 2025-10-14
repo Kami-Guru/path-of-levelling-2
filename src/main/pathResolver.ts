@@ -1,6 +1,6 @@
 import { app } from 'electron';
 import path from 'path';
-import fs from 'fs/promises';
+import fs from 'fs';
 import { ProfileId } from './zodSchemas/schemas.js';
 import { getProfile } from './profiles/profiles.js';
 
@@ -62,13 +62,14 @@ export function getDefaultSettingsPath() {
 	);
 }
 
-export async function guessClientTxtPathForProfileId(profileId: ProfileId): Promise<string> {
+/** Guesses a few file paths, if none are valid then return default */
+export function guessClientTxtPathForProfileId(profileId: ProfileId): string {
 	const pathGuesses = getProfile(profileId).logFilePathGuesses;
 
 	var foundPath: string | undefined = undefined
 	for (var pathGuess in pathGuesses) {
 		try {
-			await fs.access(pathGuess, fs.constants.R_OK)
+			fs.accessSync(pathGuess, fs.constants.R_OK)
 
 			// If we made it here, .access didn't error so we have a valid path.
 			foundPath = pathGuess;
@@ -81,7 +82,7 @@ export async function guessClientTxtPathForProfileId(profileId: ProfileId): Prom
 		if (foundPath) break;
 	}
 
-	return foundPath ?? getProfile(profileId).defaultLogFilePath;
+	return foundPath ?? getProfile(profileId).defaultClientTxtPath;
 }
 
 //TODO BROKEN FIX THIS

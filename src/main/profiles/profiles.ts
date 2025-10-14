@@ -7,7 +7,7 @@ export interface GameProfile {
     Id: ProfileId;
     windowName: "Path of Exile 1" | "Path of Exile 2"
     // Paths
-    defaultLogFilePath: string;
+    defaultClientTxtPath: string;
     logFilePathGuesses: string[];
 
     // Optional: profile-specific log line parsing
