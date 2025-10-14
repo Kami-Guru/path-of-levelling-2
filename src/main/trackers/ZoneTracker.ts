@@ -5,30 +5,30 @@ import { getBuildPath, getZoneLayoutImagesAbsolutePath, getZoneNotesPath } from 
 import zoneReferenceData from '../profiles/poe2/referenceData/zoneReferenceData.json' with { type: "json" };
 import { objectFactory } from '../objectFactory.js';
 import { StoreService } from '../services/StoreService.js';
+import { getProfile } from '../profiles/profiles.js';
 
 export class ZoneTracker {
-	act: string;
-	zone: string;
-	zoneCode: string;
+	act: string = "Act 1";
+	zone: string = "The Riverwood";
+	zoneCode: string = "G1_1";
 
 	// Used to populate the dropdowns in UI
-	allActs: string[];
-	allZonesInAct: string[]
+	allActs: string[] = [''];
+	allZonesInAct: string[] = [''];
 
 	// Used to populate zone layout images
 	zoneImageFilePaths: string[] = [''];
 
 	// Guide
-	actNotes: string;
-	zoneNotes: string;
+	actNotes: string = '';
+	zoneNotes: string = '';
 
-	allZoneNotesPath: string
-	allZoneNotes: JSON
+	allZoneNotesPath: string = '';
+	allZoneNotes: JSON = Object();
 
 	constructor(storeService: StoreService) {
 		//TODO This crap was just put here to get rid of ts warning, verify this is all initialised
 		//TODO and DELETE these, then //@ts-ignore the props
-		this.act = 'Act 1';
 		this.zone = 'The Riverwood';
 		this.zoneCode = 'G1_1';
 
@@ -138,7 +138,9 @@ export class ZoneTracker {
 	// Returns a boolean representing whether or not there was actually a change in zone
 	// !If a zone is not found with that code we just do nothing!
 	saveZoneFromCode(zoneCode: string, updateOnly: boolean = false): boolean {
-		var zoneChanged: boolean = this.setZoneFromCode(zoneCode);
+		var zoneChanged: boolean = getProfile().Id === "poe1"
+			? this.setZoneFromCode_PoE1(zoneCode)
+			: this.setZoneFromCode_PoE2(zoneCode);
 
 		if (!zoneChanged) return false;
 
@@ -154,9 +156,46 @@ export class ZoneTracker {
 		return true;
 	}
 
-	setZoneFromCode(zoneCode: string): boolean {
-		//TODO: Would [{Act 1, zoneCode, zoneName}] be better for the zone reference?
+	setZoneFromCode_PoE1(zoneCode: string): boolean {
+		// TODO: Zone reference data should probably just be {zoneCode: (Act Number, Zone Name)}
+		// TODO: Then it's just (actNumber, zoneName) = zoneReferenceData[zoneCode]
+		// TODO: and the reverse in the methods above is
+		// TODO: zoneReferenceData.find(value => value === (actNumber, zoneName))
+		
+		//This will turn eg 2_6_4_0 -> ["2", "6", "4", "0"]
+		var zoneCodeData = zoneCode.split('_');
 
+		//This will look like "G1", so turn it into 1
+		var actNumber = parseInt(zoneCodeData[0].substring(1));
+
+		var actReference = zoneReferenceData.acts.find((act) => {
+			return act.name == 'Act '.concat(actNumber.toString());
+		});
+
+		if (actReference == null) {
+			return false;
+		}
+
+		var allZonesInAct = actReference.zones.map((zoneObj) => zoneObj.name)
+
+		var zoneReference = actReference.zones.find((zone) => {
+			return zone.code == zoneCode;
+		});
+
+		if (zoneReference == null) {
+			return false;
+		}
+
+		//If we made it this far we can safely overwrite our current state
+		this.act = actReference.name;
+		this.zone = zoneReference.name;
+		this.zoneCode = zoneReference.code;
+		this.allZonesInAct = allZonesInAct;
+
+		return true;
+	}
+
+	setZoneFromCode_PoE2(zoneCode: string): boolean {
 		//This will turn eg C_G1_1_1 -> ["C", "G1", "1", "1"]
 		var zoneCodeData = zoneCode.split('_');
 

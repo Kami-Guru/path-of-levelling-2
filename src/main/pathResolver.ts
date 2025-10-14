@@ -38,7 +38,7 @@ export function getBuildPath(buildName: string) {
 	return path.join(
 		app.getAppPath(),
 		isDev() ? '.' : '..',
-		'src/main/Builds',
+		'src/main/builds',
 		buildName
 	);
 }
@@ -49,7 +49,7 @@ export function getBuildsRootPath(profileId: ProfileId) {
 		isDev() ? '.' : '..',
 		'src/main/profiles/',
 		profileId,
-		'/Builds',
+		'/builds',
 	);
 }
 

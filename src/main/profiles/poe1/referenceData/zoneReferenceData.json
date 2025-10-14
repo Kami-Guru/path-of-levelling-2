@@ -1,0 +1,21 @@
+{
+    "acts": [
+        {
+            "name": "Act 1",
+            "zones": [
+                {
+                    "code": "1_1_1",
+                    "name": "The Strand"
+                },
+                {
+                    "code": "1_1_2",
+                    "name": "The Coast"
+                },
+                {
+                    "code": "1_1_3",
+                    "name": "Mud Flats"
+                }
+            ]
+        }
+    ]
+}

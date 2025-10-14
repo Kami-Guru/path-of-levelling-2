@@ -139,13 +139,13 @@ export class StoreService {
     getBuildForProfileId(profileId: ProfileId, buildName: string): Build | undefined {
         const buildsStore = this.getBuildsStoreForProfileId(profileId);
         const allBuilds = buildsStore.get("builds") as BuildStore["builds"];
-        return allBuilds[buildName];
+        return allBuilds === undefined ? undefined : allBuilds[buildName];
     }
 
     /** WARNING - you probably don't want this method! It has very limited use cases! */
     setBuildForProfileId(profileId: ProfileId, buildName: string, build: Build): void {
         const buildsStore = this.getBuildsStoreForProfileId(profileId);
-        const allBuilds = buildsStore.get("builds") as BuildStore["builds"];
+        const allBuilds = buildsStore.get("builds") as BuildStore["builds"] ?? {};
         allBuilds[buildName] = build; // Upsert the build to the dict
         buildsStore.set("builds", allBuilds);
     }

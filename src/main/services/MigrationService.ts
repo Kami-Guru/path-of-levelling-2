@@ -222,12 +222,12 @@ export class MigrationService {
         // }
         // So we have to iterate through all the properties in the store and map those into the new
         // builds dict
-        const newBuildStore = new Store({
+        const poe2newBuildStore = new Store({
             name: "poe2-builds",
             accessPropertiesByDotNotation: false
         })
 
-        newBuildStore.set('version', 1);
+        poe2newBuildStore.set('version', 1);
 
         const migratedBuilds: Record<string, object> = {};
         // TODO need to test that this works, type hints say it does (buildName is a string)
@@ -235,7 +235,15 @@ export class MigrationService {
             migratedBuilds[buildName] = oldBuildStore.get(buildName) as object;
         }
 
-        newBuildStore.set('builds', migratedBuilds)
+        poe2newBuildStore.set('builds', migratedBuilds)
+
+        // There was never a poe1 builds store, so we just create an empty one
+        const poe1newBuildStore = new Store({
+            name: "poe1-builds",
+            accessPropertiesByDotNotation: false
+        })
+        poe1newBuildStore.set('version', 1);
+        poe1newBuildStore.set('builds', {});
 
         // Clear the old builds store
         oldBuildStore.clear()
