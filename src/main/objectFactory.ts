@@ -1,3 +1,5 @@
+import { app } from "electron";
+import { getProfile } from "./profiles/profiles.js";
 import { LogWatcherService } from "./services/LogWatcherService.js";
 import { MigrationService } from "./services/MigrationService.js";
 import { SettingsService } from "./services/Settings.js";
@@ -6,6 +8,9 @@ import { GemTracker } from "./trackers/GemTracker.js";
 import { LevelTracker } from "./trackers/LevelTracker.js";
 import { StateTracker } from "./trackers/StateTracker.js";
 import { ZoneTracker } from "./trackers/ZoneTracker.js";
+import { ProfileId } from "./zodSchemas/schemas.js";
+import log from 'electron-log';
+
 
 type Services = {
     storeService: StoreService;
@@ -57,6 +62,20 @@ class ObjectFactory {
             this.objects[key] = service;
         }
         return this.objects[key]!;
+    }
+
+    public switchProfile(profileId: ProfileId) {
+        // Check if we even need to change
+        if (profileId === getProfile().Id) {
+            return;
+        }
+
+        // Save the new profile then restart app
+        this.getStoreService().setGlobalSetting('selectedProfile', profileId);
+
+        log.info(`Switching profile to ${profileId}, restarting app...`);
+        app.relaunch();
+        app.exit(0);
     }
 
     // --- Services --- //

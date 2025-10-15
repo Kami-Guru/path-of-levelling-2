@@ -1,6 +1,5 @@
 import Store from "electron-store";
-import { BuildStore, DeepValue, GameSettings, GlobalSettings, NestedKeys, ProfileId } from "../zodSchemas/schemas.js"
-import { Build } from "../trackers/GemTracker.js";
+import { Build, BuildStore, DeepValue, GameSettings, GlobalSettings, NestedKeys, ProfileId } from "../zodSchemas/schemas.js";
 import log from "electron-log";
 
 // StoreService is used to interface with the various electron stores the app uses.
@@ -112,6 +111,14 @@ export class StoreService {
 
         const allBuilds = this.buildsStore.get("builds") as BuildStore["builds"];
         allBuilds[buildName] = build; // Upsert the build to the dict
+        this.buildsStore.set("builds", allBuilds);
+    }
+
+    deleteBuild(buildName: string): void {
+        if (!this.buildsStore) throw new Error("Profile not initialized");
+
+        const allBuilds = this.buildsStore.get("builds") as BuildStore["builds"];
+        delete allBuilds[buildName]; // Delete the build from the dict
         this.buildsStore.set("builds", allBuilds);
     }
 

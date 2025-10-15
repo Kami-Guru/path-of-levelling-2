@@ -1,6 +1,3 @@
-import log from 'electron-log';
-import path from 'path';
-import { getBuildPath } from '../pathResolver.js';
 import { objectFactory } from '../objectFactory.js';
 
 // Class to basically track state that shows in the front end, eg the current zone,

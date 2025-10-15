@@ -156,3 +156,23 @@ export type BuildStore = z.infer<typeof BuildStoreZodSchema>
 export type Build = z.infer<typeof BuildZodSchema>
 export type GemBuild = z.infer<typeof GemBuildZodSchema>
 export type GemSetup = z.infer<typeof GemSetupZodSchema>
+
+// --- Zone Reference Data --- //
+
+export const zoneReferenceZodSchema = z.object({
+    name: z.string(),
+    code: z.string()
+});
+
+export const actReferenceZodSchema = z.object({
+    name: z.string(),
+    zones: z.array(zoneReferenceZodSchema)
+});
+
+export const ZoneReferenceDataZodSchema = z.object({
+    acts: z.array(actReferenceZodSchema)
+});
+
+export type ZoneReferenceData = z.infer<typeof ZoneReferenceDataZodSchema>;
+export type ActReference = z.infer<typeof actReferenceZodSchema>;
+export type ZoneReference = z.infer<typeof zoneReferenceZodSchema>;

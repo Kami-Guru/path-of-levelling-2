@@ -14,9 +14,9 @@ import electronUpdater, { type AppUpdater } from 'electron-updater';
 import path from 'path';
 import { LogWatcherService } from './services/LogWatcherService.js';
 import { getDesktopIconPath, getPreloadPath, getUIPath, isDev } from './pathResolver.js';
-import { GemSetup } from './trackers/GemTracker.js';
 import { objectFactory } from './objectFactory.js';
 import { getProfile } from './profiles/profiles.js';
+import { GemSetup } from './zodSchemas/schemas.js';
 
 // Only allow one instance of the app
 if (!app.requestSingleInstanceLock()) {
@@ -76,15 +76,13 @@ async function createWindow() {
 			{
 				label: 'Switch To PoE1',
 				click: () => {
-					//TODO this is insufficient
-					objectFactory.getStoreService().switchProfile("poe1");
+					objectFactory.switchProfile("poe1");
 				}
 			},
 			{
 				label: 'Switch To PoE2',
 				click: () => {
-					//TODO this is insufficient
-					objectFactory.getStoreService().switchProfile("poe2");
+					objectFactory.switchProfile("poe2");
 				}
 			},
 		])
@@ -106,6 +104,7 @@ async function createWindow() {
 		mainWindow.loadFile(path.join(getUIPath()));
 	}
 
+	log.info('Attaching to window:', getProfile().windowName);
 	OverlayController.attachByTitle(
 		mainWindow,
 		getProfile().windowName
@@ -428,26 +427,26 @@ function registerGlobalHotkeys(mainWindow: BrowserWindow) {
 function LogOverlayEventCalls(mainWindow: BrowserWindow) {
 	// Still getting used to the events so uhhhhh just log when all of them are used.
 	OverlayController.events.addListener('attach', (params) => {
-		console.log('attach event emitted', params);
+		log.info('attach event emitted', params);
 	});
 
 	OverlayController.events.addListener('detach', () => {
-		console.log('detach event emitted ');
+		log.info('detach event emitted ');
 	});
 
 	OverlayController.events.addListener('fullscreen', () => {
-		console.log('fullscreen event emitted');
+		log.info('fullscreen event emitted');
 	});
 
 	OverlayController.events.addListener('moveresize', (params) => {
-		console.log('moveresize event emitted ', params);
+		log.info('moveresize event emitted ', params);
 	});
 
 	OverlayController.events.addListener('blur', (params) => {
-		console.log('blur event emitted ', params);
+		log.info('blur event emitted ', params);
 	});
 
 	OverlayController.events.addListener('focus', (params) => {
-		console.log('focus event emitted ', params);
+		log.info('focus event emitted ', params);
 	});
 }

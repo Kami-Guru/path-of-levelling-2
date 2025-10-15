@@ -1,15 +1,15 @@
 import log from 'electron-log';
 import fs from 'fs';
 import path from 'path';
-import { getBuildPath, getZoneLayoutImagesAbsolutePath, getZoneNotesPath } from '../pathResolver.js';
-import zoneReferenceData from '../profiles/poe2/referenceData/zoneReferenceData.json' with { type: "json" };
+import { getBuildPath, getZoneLayoutImagesAbsolutePath, getZoneNotesPath, getZoneReferenceDataPath } from '../pathResolver.js';
 import { objectFactory } from '../objectFactory.js';
 import { StoreService } from '../services/StoreService.js';
 import { getProfile } from '../profiles/profiles.js';
+import { ZoneReferenceData } from '../zodSchemas/schemas.js';
 
 export class ZoneTracker {
 	act: string = "Act 1";
-	zone: string = "The Riverwood";
+	zoneName: string = "The Riverwood";
 	zoneCode: string = "G1_1";
 
 	// Used to populate the dropdowns in UI
@@ -18,6 +18,7 @@ export class ZoneTracker {
 
 	// Used to populate zone layout images
 	zoneImageFilePaths: string[] = [''];
+	zoneReferenceData: ZoneReferenceData = Object();
 
 	// Guide
 	actNotes: string = '';
@@ -27,23 +28,12 @@ export class ZoneTracker {
 	allZoneNotes: JSON = Object();
 
 	constructor(storeService: StoreService) {
-		//TODO This crap was just put here to get rid of ts warning, verify this is all initialised
-		//TODO and DELETE these, then //@ts-ignore the props
-		this.zone = 'The Riverwood';
-		this.zoneCode = 'G1_1';
+		this.zoneReferenceData = JSON.parse(fs.readFileSync(
+			getZoneReferenceDataPath(getProfile().Id), 'utf-8'));
 
-		this.allActs = ['']
-		this.allZonesInAct = ['']
+		this.allActs = this.zoneReferenceData.acts.map((act) => act.name);
 
-		this.actNotes = '';
-		this.zoneNotes = '';
-
-		this.allZoneNotesPath = '';
-		this.allZoneNotes = Object();
-
-		this.allActs = zoneReferenceData.acts.map((act) => act.name);
-
-		var zoneNotesPath = getZoneNotesPath();
+		var zoneNotesPath = getZoneNotesPath(getProfile().Id);
 
 		try {
 			log.info('Loading zone notes from path:', zoneNotesPath)
@@ -58,7 +48,7 @@ export class ZoneTracker {
 		}
 	}
 
-	init() {}
+	init() { }
 
 	loadAllZoneNotes(allZoneNotesPath: string) {
 		log.info('Trying to load zone notes at path', allZoneNotesPath);
@@ -79,7 +69,7 @@ export class ZoneTracker {
 	// We basically need to switch to that act, then set everything based on the first zone
 	// in that act as a default.
 	saveZoneFromActName(actName: string) {
-		var actReference = zoneReferenceData.acts.find((act) => {
+		var actReference = this.zoneReferenceData.acts.find((act) => {
 			return act.name == actName;
 		});
 
@@ -90,7 +80,7 @@ export class ZoneTracker {
 		var allZonesInAct = actReference.zones.map((zoneObj) => zoneObj.name)
 
 		this.act = actReference.name;
-		this.zone = actReference.zones[0].name;
+		this.zoneName = actReference.zones[0].name;
 		this.zoneCode = actReference.zones[0].code;
 		this.allZonesInAct = allZonesInAct;
 
@@ -104,7 +94,7 @@ export class ZoneTracker {
 	// This is called when someone selects a zone in the dropdown in the UI
 	// In this case the act + name is enough to get the exact zone they want.
 	saveZoneFromZoneNameAndActName(zoneName: string, actName: string) {
-		var actReference = zoneReferenceData.acts.find((act) => {
+		var actReference = this.zoneReferenceData.acts.find((act) => {
 			return act.name == actName;
 		});
 
@@ -123,7 +113,7 @@ export class ZoneTracker {
 		var allZonesInAct = actReference.zones.map((zoneObj) => zoneObj.name)
 
 		this.act = actReference.name;
-		this.zone = zoneReference.name;
+		this.zoneName = zoneReference.name;
 		this.zoneCode = zoneReference.code;
 		this.allZonesInAct = allZonesInAct;
 
@@ -161,14 +151,13 @@ export class ZoneTracker {
 		// TODO: Then it's just (actNumber, zoneName) = zoneReferenceData[zoneCode]
 		// TODO: and the reverse in the methods above is
 		// TODO: zoneReferenceData.find(value => value === (actNumber, zoneName))
-		
+
 		//This will turn eg 2_6_4_0 -> ["2", "6", "4", "0"]
 		var zoneCodeData = zoneCode.split('_');
 
-		//This will look like "G1", so turn it into 1
-		var actNumber = parseInt(zoneCodeData[0].substring(1));
+		var actNumber = parseInt(zoneCodeData[1]);
 
-		var actReference = zoneReferenceData.acts.find((act) => {
+		var actReference = this.zoneReferenceData.acts.find((act) => {
 			return act.name == 'Act '.concat(actNumber.toString());
 		});
 
@@ -188,7 +177,7 @@ export class ZoneTracker {
 
 		//If we made it this far we can safely overwrite our current state
 		this.act = actReference.name;
-		this.zone = zoneReference.name;
+		this.zoneName = zoneReference.name;
 		this.zoneCode = zoneReference.code;
 		this.allZonesInAct = allZonesInAct;
 
@@ -202,7 +191,7 @@ export class ZoneTracker {
 		//This will look like "G1", so turn it into 1
 		var actNumber = parseInt(zoneCodeData[0].substring(1));
 
-		var actReference = zoneReferenceData.acts.find((act) => {
+		var actReference = this.zoneReferenceData.acts.find((act) => {
 			return act.name == 'Act '.concat(actNumber.toString());
 		});
 
@@ -222,7 +211,7 @@ export class ZoneTracker {
 
 		//If we made it this far we can safely overwrite our current state
 		this.act = actReference.name;
-		this.zone = zoneReference.name;
+		this.zoneName = zoneReference.name;
 		this.zoneCode = zoneReference.code;
 		this.allZonesInAct = allZonesInAct;
 

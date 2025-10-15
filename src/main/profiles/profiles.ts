@@ -5,7 +5,7 @@ import { poe2Profile } from "./poe2/PoE2Profile.js";
 
 export interface GameProfile {
     Id: ProfileId;
-    windowName: "Path of Exile 1" | "Path of Exile 2"
+    windowName: "Path of Exile" | "Path of Exile 2"
     // Paths
     defaultClientTxtPath: string;
     logFilePathGuesses: string[];

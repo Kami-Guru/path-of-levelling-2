@@ -6,6 +6,7 @@ import { objectFactory } from '../objectFactory.js';
 export class LogWatcherService {
 	newZoneRegex: RegExp;
 	levelUpRegex: RegExp;
+	watchedFilePath: string = '';
 	previousFileSize: number;
 
 	constructor() {
@@ -24,8 +25,10 @@ export class LogWatcherService {
 	// The fs.watchFile is the watcher that gets changes from client.txt
 	watchClientTxt(mainWindow: BrowserWindow) {
 		log.info('Trying to subscribe to Client.txt');
+		const filePathGuess = objectFactory.getSettingsService().getClientTxtPath();
+
 		try {
-			this.previousFileSize = fs.statSync(objectFactory.getSettingsService().getClientTxtPath()).size;
+			this.previousFileSize = fs.statSync(filePathGuess).size;
 		} catch (e: any) { // TODO shouldn't I just catch whatever error ENONET is separately?
 			// This flag basically displays a warning on the UI telling the user to
 			// update their client txt path.
@@ -33,23 +36,24 @@ export class LogWatcherService {
 
 			if ((e.code = 'ENOENT')) {
 				//@ts-ignore
-				log.info(
-					'ERROR: Could not subscribe to client txt changes, wrong client path!'
+				log.error(
+					`Could not subscribe to client txt changes, wrong client path! ${filePathGuess}`,
 				);
 				return;
 			}
 
-			log.info(
-				'ERROR: Could not subscribe to client txt changes, unknown error',
+			log.error(
+				`Could not subscribe to client txt changes, unknown error for path: ${filePathGuess}`,
 				e
 			);
 			return;
 		}
 
 		objectFactory.getStateTracker().logWatcherActive = true;
+		this.watchedFilePath = filePathGuess;
 		log.info('Successfully subscribed to Client.txt');
 
-		fs.watchFile(objectFactory.getSettingsService().getClientTxtPath(), (current, previous) => {
+		fs.watchFile(this.watchedFilePath, (current, previous) => {
 			var data = this.readNewLines(current, previous);
 
 			if (data == null) {
@@ -110,8 +114,8 @@ export class LogWatcherService {
 
 	// TODO fix this! Should be storing the path that is actually being watched not hoping that
 	// TODO this is up to date when we want to stop watching
-	stopTracking() {
-		fs.unwatchFile(objectFactory.getSettingsService().getClientTxtPath());
+	stopWatching() {
+		fs.unwatchFile(this.watchedFilePath);
 	}
 
 	readNewLines(current: fs.Stats, previous: fs.Stats) {

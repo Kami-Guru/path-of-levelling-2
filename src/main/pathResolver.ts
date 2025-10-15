@@ -28,37 +28,29 @@ export function getDesktopIconPath() {
 	);
 }
 
-export function getZoneNotesPath(): string {
+export function getZoneNotesPath(profileId: ProfileId): string {
 	// One day there will be per-build zone notes, but for now it's all in Default/zoneNotes.json
-	return path.join(getBuildPath('Default'), 'zoneNotes.json')
+	return path.join(getBuildPath(profileId, 'Default'), 'zoneNotes.json')
 }
 
-//TODO BROKEN FIX THIS
-export function getBuildPath(buildName: string) {
-	return path.join(
-		app.getAppPath(),
-		isDev() ? '.' : '..',
-		'src/main/builds',
-		buildName
-	);
+export function getZoneReferenceDataPath(profileId: ProfileId): string {
+	return path.join(getProfilePath(profileId), 'referenceData', 'zoneReferenceData.json')
+}
+
+export function getBuildPath(profileId: ProfileId, buildName: string) {
+	return path.join(getProfilePath(profileId), '/builds/',	buildName);
 }
 
 export function getBuildsRootPath(profileId: ProfileId) {
+	return path.join(getProfilePath(profileId), '/builds');
+}
+
+export function getProfilePath(profileId: ProfileId) {
 	return path.join(
 		app.getAppPath(),
 		isDev() ? '.' : '..',
 		'src/main/profiles/',
 		profileId,
-		'/builds',
-	);
-}
-
-export function getDefaultSettingsPath() {
-	return path.join(
-		app.getAppPath(),
-		isDev() ? '.' : '..',
-		'src/main/Settings',
-		'defaultSettings.json'
 	);
 }
 
