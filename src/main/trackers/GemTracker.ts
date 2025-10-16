@@ -1,12 +1,9 @@
-import fs from 'fs';
 import log from 'electron-log';
-import Store from 'electron-store';
-import path from 'path';
-import { getBuildsRootPath } from '../pathResolver.js';
 import { objectFactory } from '../objectFactory.js';
 import { SettingsService } from '../services/Settings.js';
 import { LevelTracker } from './LevelTracker.js';
 import { Build, GemBuild, GemSetup } from '../zodSchemas/schemas.js';
+import { GemDataDto } from '../ipc/apiInterface.js';
 
 // TODO: GemTracker owns builds cuz I haven't added any build stuff to anything else.
 export class GemTracker {
@@ -25,7 +22,15 @@ export class GemTracker {
 		this.setGemSetupFromPlayerLevel(levelTracker.playerLevel);
 	}
 
-	init() {}
+	init() { }
+
+	getGemDataDto(): GemDataDto {
+		return {
+			allGemSetupLevels: this.allGemSetupLevels,
+			gemSetupLevel: this.gemSetup.level,
+			gemLinks: this.gemSetup.gemLinks
+		}
+	}
 
 	//TODO Seriously I need to get all this build stuff out of gem tracker
 	saveNewBuild(newBuildName: string) {

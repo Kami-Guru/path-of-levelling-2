@@ -5,7 +5,8 @@ import { getBuildPath, getZoneLayoutImagesAbsolutePath, getZoneNotesPath, getZon
 import { objectFactory } from '../objectFactory.js';
 import { StoreService } from '../services/StoreService.js';
 import { getProfile } from '../profiles/profiles.js';
-import { ZoneReferenceData } from '../zodSchemas/schemas.js';
+import { ZoneReference, ZoneCodeToZoneReference } from '../zodSchemas/schemas.js';
+import { ZoneDataDto } from '../ipc/apiInterface.js';
 
 export class ZoneTracker {
 	act: string = "Act 1";
@@ -52,6 +53,18 @@ export class ZoneTracker {
 	}
 
 	init() { }
+
+	getZoneDataDto(): ZoneDataDto {
+		return {
+			act: this.act,
+			zone: this.zoneName,
+			zoneCode: this.zoneCode,
+			allActs: this.allActs,
+			allZonesInAct: this.allZonesInAct,
+			actNotes: this.actNotes,
+			zoneNotes: this.zoneNotes				
+		}
+	}
 
 	loadAllZoneNotes(allZoneNotesPath: string) {
 		log.info('Trying to load zone notes at path', allZoneNotesPath);

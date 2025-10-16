@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import type { Build, GemSetup } from '../../../main/trackers/GemTracker'
+import { GemSetup } from '../../../main/zodSchemas/schemas';
 
 export function GemSettingsComponent() {
     const [selectedBuild, setSelectedBuild] = useState('');
@@ -11,7 +11,6 @@ export function GemSettingsComponent() {
 
     // Get initial state for gem dropdown
     useEffect(() => {
-        //@ts-ignore
         window.electron.getGemSettingsState().then((response) => {
             if (!response.allBuildNames.includes(response.buildName)) {
                 response.buildName = 'Default';
@@ -35,7 +34,6 @@ export function GemSettingsComponent() {
         } else {
             setAddingBuild(false);
             // Post the change to main process and get back the new build selected
-            //@ts-ignore
             window.electron.postBuildSelected(event.target.value).then((response) => {
                 setSelectedBuild(response.buildName);
                 setAllBuildNames(response.allBuildNames);
@@ -50,7 +48,6 @@ export function GemSettingsComponent() {
 
     const handleAddBuild = () => {
         if (!newBuildName.trim() || allBuildNames.includes(newBuildName.trim())) return;
-        //@ts-ignore
         window.electron.postAddNewBuild(newBuildName.trim()).then((response) => {
             setSelectedBuild(response.buildName);
             setAllBuildNames(response.allBuildNames);
@@ -72,7 +69,6 @@ export function GemSettingsComponent() {
         };
 
         // Send updated gem setups and reload
-        //@ts-ignore
         window.electron.saveGemSetupsForBuild(response).then((response) => {
             setSelectedBuild(response.buildName);
             setAllBuildNames(response.allBuildNames);
@@ -89,7 +85,6 @@ export function GemSettingsComponent() {
             selectedBuild &&
             window.confirm(`Are you sure you want to delete build "${selectedBuild}"?`)
         ) {
-            //@ts-ignore
             window.electron.postDeleteBuild(selectedBuild).then((response) => {
                 setSelectedBuild(response.buildName);
                 setAllBuildNames(response.allBuildNames);

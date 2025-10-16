@@ -20,9 +20,7 @@ export function SettingsComponent() {
 
 	// Get initial state for settings window position
 	useEffect(() => {
-		//@ts-ignore
-		window.electron
-			.getSettingsOverlayPositionSettings()
+		window.electron.getSettingsOverlayPositionSettings()
 			.then((settingsOverlayPositionSettings: any) => {
 				setRndState({
 					x: settingsOverlayPositionSettings.x,
@@ -35,7 +33,6 @@ export function SettingsComponent() {
 
 	const handleDrag = (e: any, d: any) => {
 		// Send new settings to client to be saved
-		//@ts-ignore
 		window.electron.saveSettingsOverlayPositionSettings({
 			...rndState,
 			x: d.x,
@@ -52,7 +49,6 @@ export function SettingsComponent() {
 	// @ts-ignore
 	const handleResize = (e, direction, ref, delta, position) => {
 		// Send new settings to client to be saved
-		//@ts-ignore
 		window.electron.saveSettingsOverlayPositionSettings({
 			...position,
 			height: ref.style.height,

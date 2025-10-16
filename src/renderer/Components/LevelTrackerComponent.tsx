@@ -20,7 +20,6 @@ export function LevelTrackerComponent() {
 
 	//Subscribe to the level updates pushed from log tracker
 	useEffect(() => {
-		//@ts-ignore
 		window.electron.subscribeToLevelUpdates((levelTracker) => {
 			setLevelDropdownFromTracker(levelTracker);
 		});
@@ -28,7 +27,6 @@ export function LevelTrackerComponent() {
 
 	// Get initial state for level dropdown
 	useEffect(() => {
-		//@ts-ignore
 		window.electron.getLevelState().then((levelTracker) => {
 			setLevelDropdownFromTracker(levelTracker);
 		});
@@ -53,9 +51,7 @@ export function LevelTrackerComponent() {
 
 	// Get initial state for level tracker position
 	useEffect(() => {
-		//@ts-ignore
-		window.electron
-			.getLevelOverlayPositionSettings()
+		window.electron.getLevelOverlayPositionSettings()
 			.then((levelOverlayPositionSettings: any) => {
 				setRndState({
 					x: levelOverlayPositionSettings.x,
@@ -68,7 +64,6 @@ export function LevelTrackerComponent() {
 
 	const handleDrag = (e: any, d: any) => {
 		// Send new settings to client to be saved
-		//@ts-ignore
 		window.electron.saveLevelOverlayPositionSettings({
 			...rndState,
 			x: d.x,
@@ -85,7 +80,6 @@ export function LevelTrackerComponent() {
 	// @ts-ignore
 	const handleResize = (e, direction, ref, delta, position) => {
 		// Send new settings to client to be saved
-		//@ts-ignore
 		window.electron.saveLevelOverlayPositionSettings({
 			...position,
 			height: ref.style.height,

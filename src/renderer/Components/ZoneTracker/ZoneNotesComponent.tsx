@@ -28,7 +28,6 @@ export function ZoneNotesComponent(props: {
 
 	//Subscribe to the zone updates pushed from log tracker
 	useEffect(() => {
-		//@ts-ignore
 		window.electron.subscribeToZoneNotesUpdates((zoneTracker) => {
 			props.setSharedZoneCode(zoneTracker.zoneCode);
 
@@ -38,7 +37,6 @@ export function ZoneNotesComponent(props: {
 
 	// Get initial state for zone dropdown
 	useEffect(() => {
-		//@ts-ignore
 		window.electron.getZoneState().then((zoneTracker) => {
 			props.setSharedZoneCode(zoneTracker.zoneCode);
 
@@ -50,15 +48,12 @@ export function ZoneNotesComponent(props: {
 	const handleZoneDropdownSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		// Post the change to main process and await
 		if (event.target.name == 'actNameSelected') {
-			//@ts-ignore
 			window.electron.postActSelected(event.target.value).then((zoneTracker) => {
 				props.setSharedZoneCode(zoneTracker.zoneCode);
 				setZoneDropdownFromTracker(zoneTracker);
 			});
 		} else if (event.target.name == 'zoneNameSelected') {
-			//@ts-ignore
-			window.electron
-				.postZoneSelected(event.target.value, zoneDropdown.actNameSelected)
+			window.electron.postZoneSelected(event.target.value, zoneDropdown.actNameSelected)
 				.then((zoneTracker: any) => {
 					props.setSharedZoneCode(zoneTracker.zoneCode);
 					setZoneDropdownFromTracker(zoneTracker);
@@ -84,9 +79,7 @@ export function ZoneNotesComponent(props: {
 
 	// Get initial state for zone tracker position
 	useEffect(() => {
-		//@ts-ignore
-		window.electron
-			.getZoneOverlayPositionSettings()
+		window.electron.getZoneOverlayPositionSettings()
 			.then((zoneOverlayPositionSettings: any) => {
 				setRndState({
 					x: zoneOverlayPositionSettings.x,
@@ -99,7 +92,6 @@ export function ZoneNotesComponent(props: {
 
 	const handleDrag = (e: any, d: any) => {
 		// Send new settings to client to be saved
-		//@ts-ignore
 		window.electron.saveZoneOverlayPositionSettings({
 			...rndState,
 			x: d.x,
@@ -116,7 +108,6 @@ export function ZoneNotesComponent(props: {
 	// @ts-ignore
 	const handleResize = (e, direction, ref, delta, position) => {
 		// Send new settings to client to be saved
-		//@ts-ignore
 		window.electron.saveZoneOverlayPositionSettings({
 			...position,
 			height: ref.style.height,

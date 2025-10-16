@@ -1,7 +1,8 @@
-import { BrowserWindow } from 'electron';
+import { BrowserWindow, webContents } from 'electron';
 import log from 'electron-log';
 import fs from 'fs';
 import { objectFactory } from '../objectFactory.js';
+import { ipcWebContentsSend } from '../ipc/ipcWrappers.js';
 
 export class LogWatcherService {
 	newZoneRegex: RegExp;
@@ -85,21 +86,27 @@ export class LogWatcherService {
 
 			//send data to the renderer
 			if (shouldUpdateZoneTracker) {
-				mainWindow.webContents.send('zoneUpdatesFromLog', objectFactory.getZoneTracker());
-				mainWindow.webContents.send(
-					'zoneLayoutImageUpdates',
-					objectFactory.getZoneTracker().zoneImageFilePaths
-				);
+				ipcWebContentsSend('zoneUpdatesFromLog',
+					mainWindow.webContents,
+					objectFactory.getZoneTracker().getZoneDataDto());
+
+				ipcWebContentsSend('zoneLayoutImageUpdates',
+					mainWindow.webContents,
+					objectFactory.getZoneTracker().zoneImageFilePaths);
 			}
 
 			if (shouldUpdateLevelTracker) {
-				mainWindow.webContents.send(
-					'subscribeToLevelUpdates',
-					objectFactory.getLevelTracker()
+				ipcWebContentsSend('subscribeToLevelUpdates',
+					mainWindow.webContents,
+					objectFactory.getLevelTracker().getLevelDataDto()
 				);
 			}
 
 			if (shouldUpdateGemTracker) {
+				ipcWebContentsSend('subscribeToGemUpdates',
+					mainWindow.webContents,
+					objectFactory.getGemTracker().getGemDataDto()
+				);
 				mainWindow.webContents.send(
 					'subscribeToGemUpdates',
 					{

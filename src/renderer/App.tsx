@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import './App.css';
-import { GemTrackerComponent } from './Components/GemTrackerComponent';
-import { LevelTrackerComponent } from './Components/LevelTrackerComponent';
-import { SettingsComponent } from './Components/Settings/SettingsComponent';
-import { ZoneNotesComponent } from './Components/ZoneTracker/ZoneNotesComponent';
-import { ZoneTrackerComponent } from './Components/ZoneTracker/ZoneTrackerComponent';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import { GemTrackerComponent } from "./Components/GemTrackerComponent";
+import { LevelTrackerComponent } from "./Components/LevelTrackerComponent";
+import { SettingsComponent } from "./Components/Settings/SettingsComponent";
+import { ZoneNotesComponent } from "./Components/ZoneTracker/ZoneNotesComponent";
+import { ZoneTrackerComponent } from "./Components/ZoneTracker/ZoneTrackerComponent";
 
 function App() {
 	const [settingsActive, setSettingsActive] = useState(false);
@@ -16,22 +16,25 @@ function App() {
 	const [fontSize, setFontSize] = useState(11);
 
 	useEffect(() => {
-		//@ts-ignore
-		window.electron.subscribeToHotkeys((hotkeyEvent: any) => {
-			if (hotkeyEvent.Hotkey == 'ToggleSettings') {
-				setSettingsActive(hotkeyEvent.value);
-			}
-			if (hotkeyEvent.Hotkey == 'ToggleZoneNotes') {
-				setZoneNotesActive(hotkeyEvent.value);
-			}
-			if (hotkeyEvent.Hotkey == 'ToggleLayoutImages') {
-				setLayoutImagesActive(hotkeyEvent.value);
-			}
-			if (hotkeyEvent.Hotkey == 'ToggleLevelTracker') {
-				setLevelTrackerActive(hotkeyEvent.value);
-			}
-			if (hotkeyEvent.Hotkey == 'ToggleGemTracker') {
-				setGemTrackerActive(hotkeyEvent.value);
+		window.electron.subscribeToHotkeys((hotkeyEvent) => {
+			switch (hotkeyEvent.hotkey) {
+				case "ToggleSettings":
+					setSettingsActive(hotkeyEvent.value);
+					break;
+				case "ToggleZoneNotes":
+					setZoneNotesActive(hotkeyEvent.value);
+					break;
+				case "ToggleLayoutImages":
+					setLayoutImagesActive(hotkeyEvent.value);
+					break;
+				case "ToggleLevelTracker":
+					setLevelTrackerActive(hotkeyEvent.value);
+					break;
+				case "ToggleGemTracker":
+					setGemTrackerActive(hotkeyEvent.value);
+					break;
+				default:
+					console.log("Unrecognised hotkey!", hotkeyEvent.hotkey);
 			}
 		});
 	}, []);
@@ -53,8 +56,7 @@ function App() {
 	};
 
 	useEffect(() => {
-		//@ts-ignore
-		window.electron.getFontScalingFactor().then((fontScale: any) => {
+		window.electron.getFontScalingFactor().then((fontScale) => {
 			setFontSize(Math.ceil(11 * fontScale));
 		});
 	}, []);
@@ -62,9 +64,7 @@ function App() {
 	return (
 		<div
 			style={{ fontSize: fontSize }}
-			className={
-				settingsActive ? 'overlay-container-shown' : 'overlay-container-hidden'
-			}
+			className={settingsActive ? "overlay-container-shown" : "overlay-container-hidden"}
 		>
 			{conditionalRenderSettings()}
 			{/* Zone tracker component set up a little different becuase zone & layout are coupled */}

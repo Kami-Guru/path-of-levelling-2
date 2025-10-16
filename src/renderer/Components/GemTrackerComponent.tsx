@@ -1,24 +1,24 @@
 import { useEffect, useState } from 'react';
 import { DraggableData, Rnd } from 'react-rnd';
+import { GemDataDto } from '../../main/ipc/apiInterface';
 
 export function GemTrackerComponent() {
 	const [gemDropdown, setGemDropdown] = useState({
 		selectedLevel: 0,
 		gemLinks: [''],
-		allGemSetupLevels: [''],
+		allGemSetupLevels: [0],
 	});
 
-	const setGemDropdownFromClientResponse = (response: any) => {
+	const setGemDropdownFromClientResponse = (response: GemDataDto) => {
 		setGemDropdown({
 			allGemSetupLevels: response.allGemSetupLevels,
-			selectedLevel: response.selectedLevel,
+			selectedLevel: response.gemSetupLevel,
 			gemLinks: response.gemLinks,
 		});
 	};
 
 	// Subscribe to the gem updates pushed from main
 	useEffect(() => {
-		//@ts-ignore
 		window.electron.subscribeToGemUpdates((reponse) => {
 			setGemDropdownFromClientResponse(reponse);
 		});
@@ -26,7 +26,6 @@ export function GemTrackerComponent() {
 
 	// Get initial state for gem dropdown
 	useEffect(() => {
-		//@ts-ignore
 		window.electron.getGemState().then((reponse) => {
 			setGemDropdownFromClientResponse(reponse);
 		});
@@ -34,9 +33,15 @@ export function GemTrackerComponent() {
 
 	// Handle user updates to gem dropdown
 	const handleGemDropdownSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
+		const level = Number(event.target.value);
+
+		if (isNaN(level)) {
+			console.log("Selected level is not  anumber! Was:", event.target.value);
+			return;
+		}
+
 		// Post the change to main process and await
-		//@ts-ignore
-		window.electron.postGemLevelSelected(event.target.value).then((reponse) => {
+		window.electron.postGemLevelSelected(level).then((reponse) => {
 			setGemDropdownFromClientResponse(reponse);
 		});
 	};
@@ -67,9 +72,7 @@ export function GemTrackerComponent() {
 
 	// Get initial state for gem tracker position
 	useEffect(() => {
-		//@ts-ignore
-		window.electron
-			.getGemOverlayPositionSettings()
+		window.electron.getGemOverlayPositionSettings()
 			.then((gemOverlayPositionSettings: any) => {
 				setRndState({
 					x: gemOverlayPositionSettings.x,
@@ -82,7 +85,6 @@ export function GemTrackerComponent() {
 
 	const handleDrag = (e: any, d: any) => {
 		// Send new settings to client to be saved
-		//@ts-ignore
 		window.electron.saveGemOverlayPositionSettings({
 			...rndState,
 			x: d.x,
@@ -99,7 +101,6 @@ export function GemTrackerComponent() {
 	// @ts-ignore
 	const handleResize = (e, direction, ref, delta, position) => {
 		// Send new settings to client to be saved
-		//@ts-ignore
 		window.electron.saveGemOverlayPositionSettings({
 			...position,
 			height: ref.style.height,
@@ -171,7 +172,7 @@ export function GemTrackerComponent() {
 								{getGemLevelDisplayString(gemSetupLevel, index)}
 							</option>
 						);
-					})}				
+					})}
 				</select>
 				<div className="GemLinksDiv">
 					{gemDropdown.gemLinks?.map(function (gemLink: string) {

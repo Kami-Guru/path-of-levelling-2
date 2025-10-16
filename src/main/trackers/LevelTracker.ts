@@ -1,7 +1,7 @@
 import log from 'electron-log';
 import { objectFactory } from '../objectFactory.js';
 import { StoreService } from '../services/StoreService.js';
-import { GemTracker } from './GemTracker.js';
+import { LevelDataDto } from '../ipc/apiInterface.js';
 
 export class LevelTracker {
 	playerLevel: number;
@@ -22,7 +22,15 @@ export class LevelTracker {
 		);
 	}
 
-	init() {}
+	init() { }
+	
+	getLevelDataDto(): LevelDataDto {
+		return {
+			playerLevel: this.playerLevel,
+			monsterLevel: this.monsterLevel,
+			expMulti: this.expMulti
+		}
+	}
 
 	// It's a huge pain to have a bunch of ifs all over the place to update monster and
 	// player level separately, so I just made this method work whenever you need it to.

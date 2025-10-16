@@ -2,43 +2,43 @@
     "actNotes": [
         {
             "act": "Act 1",
-            "notes": ""
+            "notes": "test Act 1"
         },
         {
             "act": "Act 2",
-            "notes": ""
+            "notes": "test Act 2"
         },
         {
             "act": "Act 3",
-            "notes": ""
+            "notes": "test Act 3"
         },
         {
             "act": "Act 4",
-            "notes": ""
+            "notes": "test Act 4"
         },
         {
             "act": "Act 5",
-            "notes": ""
+            "notes": "test Act 5"
         },
         {
             "act": "Act 6",
-            "notes": ""
+            "notes": "test Act 6"
         },
         {
             "act": "Act 7",
-            "notes": ""
+            "notes": "test Act 7"
         },
         {
             "act": "Act 8",
-            "notes": ""
+            "notes": "test Act 8"
         },
         {
             "act": "Act 9",
-            "notes": ""
+            "notes": "test Act 9"
         },
         {
             "act": "Act 10",
-            "notes": ""
+            "notes": "test Act 10"
         }
     ],
     "zoneNotes": [
@@ -53,9 +53,69 @@
             "notes": "test The Coast"
         },
         {
+            "code": "1_1_2a",
+            "name": "Tidal Island",
+            "notes": "test Tidal Island"
+        },
+        {
             "code": "1_1_3",
             "name": "Mud Flats",
             "notes": "test Mud Flats"
+        },
+        {
+            "code": "1_1_3a",
+            "name": "The Fetid Pool",
+            "notes": "test The Fetid Pool"
+        },
+        {
+            "code": "1_1_4_1",
+            "name": "The Submerged Passage",
+            "notes": "test The Submerged Passage"
+        },
+        {
+            "code": "1_1_4_0",
+            "name": "The Flooded Depths",
+            "notes": "test The Flooded Depths"
+        },
+        {
+            "code": "1_1_5",
+            "name": "The Ledge",
+            "notes": "test The Ledge"
+        },
+        {
+            "code": "1_1_6",
+            "name": "The Climb",
+            "notes": "test The Climb"
+        },
+        {
+            "code": "1_1_7_1",
+            "name": "The Lower Prison",
+            "notes": "test The Lower Prison"
+        },
+        {
+            "code": "1_1_7_2",
+            "name": "The Upper Prison",
+            "notes": "test The Upper Prison"
+        },
+        {
+            "code": "1_1_8",
+            "name": "Prisoner's Gate",
+            "notes": "test Prisoner's Gate"
+        },
+        {
+            "code": "1_1_9",
+            "name": "The Ship Graveyard",
+            "notes": "test The Ship Graveyard"
+        },
+        {
+            "code": "1_1_9a",
+            "name": "The Ship Graveyard Cave",
+            "notes": "test The Ship Graveyard Cave"
+        },
+        {
+            "code": "1_1_11_2",
+            "name": "The Cavern of Anger",
+            "notes": "test The Cavern of Anger"
         }
     ]
 }
