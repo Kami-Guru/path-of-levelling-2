@@ -1,211 +1,194 @@
 {
-	"acts": [
-		{
-			"name": "Act 1",
-			"zones": [
-				{
-					"code": "G1_1",
-					"name": "The Riverbank"
-				},
-				{
-					"code": "G1_2",
-					"name": "Clearfell"
-				},
-				{
-					"code": "G1_3",
-					"name": "Mud Burrow"
-				},
-				{
-					"code": "G1_4",
-					"name": "The Grelwood"
-				},
-				{
-					"code": "G1_5",
-					"name": "The Red Vale"
-				},
-				{
-					"code": "G1_6",
-					"name": "The Grim Tangle"
-				},
-				{
-					"code": "G1_7",
-					"name": "Cemetary Of The Eternals"
-				},
-				{
-					"code": "G1_8",
-					"name": "Mausoleum Of The Praetor"
-				},
-				{
-					"code": "G1_9",
-					"name": "Tomb Of The Consort"
-				},
-				{
-					"code": "G1_11",
-					"name": "Hunting Grounds"
-				},
-				{
-					"code": "G1_12",
-					"name": "Freythorn"
-				},
-				{
-					"code": "G1_13_1",
-					"name": "Ogham Farmlands"
-				},
-				{
-					"code": "G1_13_2",
-					"name": "Ogham Village"
-				},
-				{
-					"code": "G1_14",
-					"name": "The Manor Ramparts"
-				},
-				{
-					"code": "G1_15",
-					"name": "Ogham Manor"
-				}
-			]
-		},
-		{
-			"name": "Act 2",
-			"zones": [
-				{
-					"code": "G2_1",
-					"name": "Vastiri Outskirts"
-				},
-				{
-					"code": "G2_2",
-					"name": "Traitor's Passage"
-				},
-				{
-					"code": "G2_3",
-					"name": "The Halani Gates"
-				},
-				{
-					"code": "G2_4_1",
-					"name": "Keth"
-				},
-				{
-					"code": "G2_4_2",
-					"name": "The Lost City"
-				},
-				{
-					"code": "G2_4_3",
-					"name": "Buried Shrines"
-				},
-				{
-					"code": "G2_5_1",
-					"name": "Mastodon Badlands"
-				},
-				{
-					"code": "G2_5_2",
-					"name": "The Bone Pits"
-				},
-				{
-					"code": "G2_6",
-					"name": "Valley Of The Titans"
-				},
-				{
-					"code": "G2_7",
-					"name": "The Titan Grotto"
-				},
-				{
-					"code": "G2_8",
-					"name": "Deshar"
-				},
-				{
-					"code": "G2_9_1",
-					"name": "Path Of Mourning"
-				},
-				{
-					"code": "G2_9_2",
-					"name": "The Spires Of Deshar"
-				},
-				{
-					"code": "G2_10_1",
-					"name": "Mawdun Quarry"
-				},
-				{
-					"code": "G2_10_2",
-					"name": "Mawdun Mine"
-				},
-				{
-					"code": "G2_12_1",
-					"name": "The Dreadnought"
-				},
-				{
-					"code": "G2_12_2",
-					"name": "Drednought Vanguard"
-				}
-			]
-		},
-		{
-			"name": "Act 3",
-			"zones": [
-				{
-					"code": "G3_1",
-					"name": "Sandswept Marsh"
-				},
-				{
-					"code": "G3_2_1",
-					"name": "Infested Barrens"
-				},
-				{
-					"code": "G3_2_2",
-					"name": "The Matlan Waterways"
-				},
-				{
-					"code": "G3_3",
-					"name": "Jungle Ruins"
-				},
-				{
-					"code": "G3_4",
-					"name": "The Venom Crypts"
-				},
-				{
-					"code": "G3_5",
-					"name": "Chimeral Wetlands"
-				},
-				{
-					"code": "G3_6_1",
-					"name": "Jiquani's Machinarium"
-				},
-				{
-					"code": "G3_6_2",
-					"name": "Jiquani's Sanctum"
-				},
-				{
-					"code": "G3_7",
-					"name": "The Azak Bog"
-				},
-				{
-					"code": "G3_8",
-					"name": "The Drowned City"
-				},
-				{
-					"code": "G3_9",
-					"name": "The Molten Vault"
-				},
-				{
-					"code": "G3_11",
-					"name": "Apex Of Filth"
-				},
-				{
-					"code": "G3_12",
-					"name": "Temple of Kopec"
-				},
-				{
-					"code": "G3_14",
-					"name": "Utzaal"
-				},
-				{
-					"code": "G3_16_",
-					"name": "Aggorat"
-				},
-				{
-					"code": "G3_17",
-					"name": "The Black Chambers"
-				}
-			]
-		}
-	]
+	"G1_1": {
+		"act": "Act 1",
+		"zoneName": "The Riverbank"
+	},
+	"G1_2": {
+		"act": "Act 1",
+		"zoneName": "Clearfell"
+	},
+	"G1_3": {
+		"act": "Act 1",
+		"zoneName": "Mud Burrow"
+	},
+	"G1_4": {
+		"act": "Act 1",
+		"zoneName": "The Grelwood"
+	},
+	"G1_5": {
+		"act": "Act 1",
+		"zoneName": "The Red Vale"
+	},
+	"G1_6": {
+		"act": "Act 1",
+		"zoneName": "The Grim Tangle"
+	},
+	"G1_7": {
+		"act": "Act 1",
+		"zoneName": "Cemetary Of The Eternals"
+	},
+	"G1_8": {
+		"act": "Act 1",
+		"zoneName": "Mausoleum Of The Praetor"
+	},
+	"G1_9": {
+		"act": "Act 1",
+		"zoneName": "Tomb Of The Consort"
+	},
+	"G1_11": {
+		"act": "Act 1",
+		"zoneName": "Hunting Grounds"
+	},
+	"G1_12": {
+		"act": "Act 1",
+		"zoneName": "Freythorn"
+	},
+	"G1_13_1": {
+		"act": "Act 1",
+		"zoneName": "Ogham Farmlands"
+	},
+	"G1_13_2": {
+		"act": "Act 1",
+		"zoneName": "Ogham Village"
+	},
+	"G1_14": {
+		"act": "Act 1",
+		"zoneName": "The Manor Ramparts"
+	},
+	"G1_15": {
+		"act": "Act 1",
+		"zoneName": "Ogham Manor"
+	},
+	"G2_1": {
+		"act": "Act 2",
+		"zoneName": "Vastiri Outskirts"
+	},
+	"G2_2": {
+		"act": "Act 2",
+		"zoneName": "Traitor's Passage"
+	},
+	"G2_3": {
+		"act": "Act 2",
+		"zoneName": "The Halani Gates"
+	},
+	"G2_4_1": {
+		"act": "Act 2",
+		"zoneName": "Keth"
+	},
+	"G2_4_2": {
+		"act": "Act 2",
+		"zoneName": "The Lost City"
+	},
+	"G2_4_3": {
+		"act": "Act 2",
+		"zoneName": "Buried Shrines"
+	},
+	"G2_5_1": {
+		"act": "Act 2",
+		"zoneName": "Mastodon Badlands"
+	},
+	"G2_5_2": {
+		"act": "Act 2",
+		"zoneName": "The Bone Pits"
+	},
+	"G2_6": {
+		"act": "Act 2",
+		"zoneName": "Valley Of The Titans"
+	},
+	"G2_7": {
+		"act": "Act 2",
+		"zoneName": "The Titan Grotto"
+	},
+	"G2_8": {
+		"act": "Act 2",
+		"zoneName": "Deshar"
+	},
+	"G2_9_1": {
+		"act": "Act 2",
+		"zoneName": "Path Of Mourning"
+	},
+	"G2_9_2": {
+		"act": "Act 2",
+		"zoneName": "The Spires Of Deshar"
+	},
+	"G2_10_1": {
+		"act": "Act 2",
+		"zoneName": "Mawdun Quarry"
+	},
+	"G2_10_2": {
+		"act": "Act 2",
+		"zoneName": "Mawdun Mine"
+	},
+	"G2_12_1": {
+		"act": "Act 2",
+		"zoneName": "The Dreadnought"
+	},
+	"G2_12_2": {
+		"act": "Act 2",
+		"zoneName": "Drednought Vanguard"
+	},
+	"G3_1": {
+		"act": "Act 3",
+		"zoneName": "Sandswept Marsh"
+	},
+	"G3_2_1": {
+		"act": "Act 3",
+		"zoneName": "Infested Barrens"
+	},
+	"G3_2_2": {
+		"act": "Act 3",
+		"zoneName": "The Matlan Waterways"
+	},
+	"G3_3": {
+		"act": "Act 3",
+		"zoneName": "Jungle Ruins"
+	},
+	"G3_4": {
+		"act": "Act 3",
+		"zoneName": "The Venom Crypts"
+	},
+	"G3_5": {
+		"act": "Act 3",
+		"zoneName": "Chimeral Wetlands"
+	},
+	"G3_6_1": {
+		"act": "Act 3",
+		"zoneName": "Jiquani's Machinarium"
+	},
+	"G3_6_2": {
+		"act": "Act 3",
+		"zoneName": "Jiquani's Sanctum"
+	},
+	"G3_7": {
+		"act": "Act 3",
+		"zoneName": "The Azak Bog"
+	},
+	"G3_8": {
+		"act": "Act 3",
+		"zoneName": "The Drowned City"
+	},
+	"G3_9": {
+		"act": "Act 3",
+		"zoneName": "The Molten Vault"
+	},
+	"G3_11": {
+		"act": "Act 3",
+		"zoneName": "Apex Of Filth"
+	},
+	"G3_12": {
+		"act": "Act 3",
+		"zoneName": "Temple of Kopec"
+	},
+	"G3_14": {
+		"act": "Act 3",
+		"zoneName": "Utzaal"
+	},
+	"G3_16_": {
+		"act": "Act 3",
+		"zoneName": "Aggorat"
+	},
+	"G3_17": {
+		"act": "Act 3",
+		"zoneName": "The Black Chambers"
+	}
 }

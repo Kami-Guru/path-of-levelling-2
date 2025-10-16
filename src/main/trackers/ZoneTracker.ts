@@ -18,7 +18,7 @@ export class ZoneTracker {
 
 	// Used to populate zone layout images
 	zoneImageFilePaths: string[] = [''];
-	zoneReferenceData: ZoneReferenceData = Object();
+	zoneReferenceData: ZoneCodeToZoneReference = Object();
 
 	// Guide
 	actNotes: string = '';
@@ -31,7 +31,10 @@ export class ZoneTracker {
 		this.zoneReferenceData = JSON.parse(fs.readFileSync(
 			getZoneReferenceDataPath(getProfile().Id), 'utf-8'));
 
-		this.allActs = this.zoneReferenceData.acts.map((act) => act.name);
+		// ...new Set() removes duplicates
+		this.allActs = [
+			...new Set(Object.values(this.zoneReferenceData).map((zoneReference) => zoneReference.act))
+		];
 
 		var zoneNotesPath = getZoneNotesPath(getProfile().Id);
 
@@ -69,20 +72,19 @@ export class ZoneTracker {
 	// We basically need to switch to that act, then set everything based on the first zone
 	// in that act as a default.
 	saveZoneFromActName(actName: string) {
-		var actReference = this.zoneReferenceData.acts.find((act) => {
-			return act.name == actName;
-		});
-
-		if (actReference == null) {
+		// returns the first [key, value] pair for the act, which should give the first zone.
+		const zoneCodeToZoneReference = Object.entries(this.zoneReferenceData).find(([key, value]) => value.act === actName);
+		if (zoneCodeToZoneReference == null) {
 			return false;
 		}
 
-		var allZonesInAct = actReference.zones.map((zoneObj) => zoneObj.name)
+		this.act = actName;
+		this.zoneName = zoneCodeToZoneReference[1].zoneName;
+		this.zoneCode = zoneCodeToZoneReference[0];
 
-		this.act = actReference.name;
-		this.zoneName = actReference.zones[0].name;
-		this.zoneCode = actReference.zones[0].code;
-		this.allZonesInAct = allZonesInAct;
+		this.allZonesInAct = Object.entries(this.zoneReferenceData)
+			.filter(([key, value]) => value.act === this.act)
+			.map(([key, value]) => value.zoneName);
 
 		this.setZoneNotes();
 
@@ -94,28 +96,20 @@ export class ZoneTracker {
 	// This is called when someone selects a zone in the dropdown in the UI
 	// In this case the act + name is enough to get the exact zone they want.
 	saveZoneFromZoneNameAndActName(zoneName: string, actName: string) {
-		var actReference = this.zoneReferenceData.acts.find((act) => {
-			return act.name == actName;
-		});
-
-		if (actReference == null) {
+		// returns the first [key, value] pair for the act, which should give the first zone.
+		const zoneCodeToZoneReference = Object.entries(this.zoneReferenceData)
+			.find(([key, value]) => value.act === actName && value.zoneName === zoneName);
+		if (zoneCodeToZoneReference == null) {
 			return false;
 		}
 
-		var zoneReference = actReference.zones.find((zone) => {
-			return zone.name == zoneName;
-		});
+		this.act = actName;
+		this.zoneName = zoneCodeToZoneReference[1].zoneName;
+		this.zoneCode = zoneCodeToZoneReference[0];
 
-		if (zoneReference == null) {
-			return false;
-		}
-
-		var allZonesInAct = actReference.zones.map((zoneObj) => zoneObj.name)
-
-		this.act = actReference.name;
-		this.zoneName = zoneReference.name;
-		this.zoneCode = zoneReference.code;
-		this.allZonesInAct = allZonesInAct;
+		this.allZonesInAct = Object.entries(this.zoneReferenceData)
+			.filter(([key, value]) => value.act === this.act)
+			.map(([key, value]) => value.zoneName);
 
 		this.setZoneNotes();
 
@@ -128,9 +122,7 @@ export class ZoneTracker {
 	// Returns a boolean representing whether or not there was actually a change in zone
 	// !If a zone is not found with that code we just do nothing!
 	saveZoneFromCode(zoneCode: string, updateOnly: boolean = false): boolean {
-		var zoneChanged: boolean = getProfile().Id === "poe1"
-			? this.setZoneFromCode_PoE1(zoneCode)
-			: this.setZoneFromCode_PoE2(zoneCode);
+		var zoneChanged: boolean = this.setZoneFromCode(zoneCode);
 
 		if (!zoneChanged) return false;
 
@@ -146,74 +138,20 @@ export class ZoneTracker {
 		return true;
 	}
 
-	setZoneFromCode_PoE1(zoneCode: string): boolean {
-		// TODO: Zone reference data should probably just be {zoneCode: (Act Number, Zone Name)}
-		// TODO: Then it's just (actNumber, zoneName) = zoneReferenceData[zoneCode]
-		// TODO: and the reverse in the methods above is
-		// TODO: zoneReferenceData.find(value => value === (actNumber, zoneName))
+	setZoneFromCode(zoneCode: string): boolean {
+		const zoneReference: ZoneReference = this.zoneReferenceData[zoneCode];
 
-		//This will turn eg 2_6_4_0 -> ["2", "6", "4", "0"]
-		var zoneCodeData = zoneCode.split('_');
-
-		var actNumber = parseInt(zoneCodeData[1]);
-
-		var actReference = this.zoneReferenceData.acts.find((act) => {
-			return act.name == 'Act '.concat(actNumber.toString());
-		});
-
-		if (actReference == null) {
+		if (zoneReference == undefined) {
 			return false;
 		}
 
-		var allZonesInAct = actReference.zones.map((zoneObj) => zoneObj.name)
+		this.act = zoneReference.act;
+		this.zoneName = zoneReference.zoneName;
+		this.zoneCode = zoneCode;
 
-		var zoneReference = actReference.zones.find((zone) => {
-			return zone.code == zoneCode;
-		});
-
-		if (zoneReference == null) {
-			return false;
-		}
-
-		//If we made it this far we can safely overwrite our current state
-		this.act = actReference.name;
-		this.zoneName = zoneReference.name;
-		this.zoneCode = zoneReference.code;
-		this.allZonesInAct = allZonesInAct;
-
-		return true;
-	}
-
-	setZoneFromCode_PoE2(zoneCode: string): boolean {
-		//This will turn eg C_G1_1_1 -> ["C", "G1", "1", "1"]
-		var zoneCodeData = zoneCode.split('_');
-
-		//This will look like "G1", so turn it into 1
-		var actNumber = parseInt(zoneCodeData[0].substring(1));
-
-		var actReference = this.zoneReferenceData.acts.find((act) => {
-			return act.name == 'Act '.concat(actNumber.toString());
-		});
-
-		if (actReference == null) {
-			return false;
-		}
-
-		var allZonesInAct = actReference.zones.map((zoneObj) => zoneObj.name)
-
-		var zoneReference = actReference.zones.find((zone) => {
-			return zone.code == zoneCode;
-		});
-
-		if (zoneReference == null) {
-			return false;
-		}
-
-		//If we made it this far we can safely overwrite our current state
-		this.act = actReference.name;
-		this.zoneName = zoneReference.name;
-		this.zoneCode = zoneReference.code;
-		this.allZonesInAct = allZonesInAct;
+		this.allZonesInAct = Object.entries(this.zoneReferenceData)
+			.filter(([key, value]) => value.act === this.act)
+			.map(([key, value]) => value.zoneName);
 
 		return true;
 	}

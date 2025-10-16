@@ -3,7 +3,6 @@
 		"types": [
 			"./apiTypes"
 		],
-		// "types": ["./types"],
 		"target": "ESNext",
 		// "useDefineForClassFields": true,
 		"lib": [

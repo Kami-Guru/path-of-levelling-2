@@ -1,21 +1,62 @@
 {
-    "acts": [
-        {
-            "name": "Act 1",
-            "zones": [
-                {
-                    "code": "1_1_1",
-                    "name": "The Strand"
-                },
-                {
-                    "code": "1_1_2",
-                    "name": "The Coast"
-                },
-                {
-                    "code": "1_1_3",
-                    "name": "Mud Flats"
-                }
-            ]
-        }
-    ]
+    "1_1_1": {
+        "act": "Act 1",
+        "zoneName": "The Strand"
+    },
+    "1_1_2": {
+        "act": "Act 1",
+        "zoneName": "The Coast"
+    },
+    "1_1_2a": {
+        "act": "Act 1",
+        "zoneName": "Tidal Island"
+    },
+    "1_1_3": {
+        "act": "Act 1",
+        "zoneName": "Mud Flats"
+    },
+    "1_1_3a": {
+        "act": "Act 1",
+        "zoneName": "The Fetid Pool"
+    },
+    "1_1_4_1": {
+        "act": "Act 1",
+        "zoneName": "The Submerged Passage"
+    },
+    "1_1_4_0": {
+        "act": "Act 1",
+        "zoneName": "The Flooded Depths"
+    },
+    "1_1_5": {
+        "act": "Act 1",
+        "zoneName": "The Ledge"
+    },
+    "1_1_6": {
+        "act": "Act 1",
+        "zoneName": "The Climb"
+    },
+    "1_1_7_1": {
+        "act": "Act 1",
+        "zoneName": "The Lower Prison"
+    },
+    "1_1_7_2": {
+        "act": "Act 1",
+        "zoneName": "The Upper Prison"
+    },
+    "1_1_8": {
+        "act": "Act 1",
+        "zoneName": "Prisoner's Gate"
+    },
+    "1_1_9": {
+        "act": "Act 1",
+        "zoneName": "The Ship Graveyard"
+    },
+    "1_1_9a": {
+        "act": "Act 1",
+        "zoneName": "The Ship Graveyard Cave"
+    },
+    "1_1_11_2": {
+        "act": "Act 1",
+        "zoneName": "The Cavern of Anger"
+    }
 }
