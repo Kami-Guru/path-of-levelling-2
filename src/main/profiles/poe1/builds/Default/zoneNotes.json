@@ -1,121 +1,126 @@
 {
-    "actNotes": [
-        {
-            "act": "Act 1",
-            "notes": "test Act 1"
-        },
-        {
-            "act": "Act 2",
-            "notes": "test Act 2"
-        },
-        {
-            "act": "Act 3",
-            "notes": "test Act 3"
-        },
-        {
-            "act": "Act 4",
-            "notes": "test Act 4"
-        },
-        {
-            "act": "Act 5",
-            "notes": "test Act 5"
-        },
-        {
-            "act": "Act 6",
-            "notes": "test Act 6"
-        },
-        {
-            "act": "Act 7",
-            "notes": "test Act 7"
-        },
-        {
-            "act": "Act 8",
-            "notes": "test Act 8"
-        },
-        {
-            "act": "Act 9",
-            "notes": "test Act 9"
-        },
-        {
-            "act": "Act 10",
-            "notes": "test Act 10"
-        }
-    ],
-    "zoneNotes": [
-        {
-            "code": "1_1_1",
-            "name": "The Strand",
-            "notes": "test The Strand"
-        },
-        {
-            "code": "1_1_2",
-            "name": "The Coast",
-            "notes": "test The Coast"
-        },
-        {
-            "code": "1_1_2a",
-            "name": "Tidal Island",
-            "notes": "test Tidal Island"
-        },
-        {
-            "code": "1_1_3",
-            "name": "Mud Flats",
-            "notes": "test Mud Flats"
-        },
-        {
-            "code": "1_1_3a",
-            "name": "The Fetid Pool",
-            "notes": "test The Fetid Pool"
-        },
-        {
-            "code": "1_1_4_1",
-            "name": "The Submerged Passage",
-            "notes": "test The Submerged Passage"
-        },
-        {
-            "code": "1_1_4_0",
-            "name": "The Flooded Depths",
-            "notes": "test The Flooded Depths"
-        },
-        {
-            "code": "1_1_5",
-            "name": "The Ledge",
-            "notes": "test The Ledge"
-        },
-        {
-            "code": "1_1_6",
-            "name": "The Climb",
-            "notes": "test The Climb"
-        },
-        {
-            "code": "1_1_7_1",
-            "name": "The Lower Prison",
-            "notes": "test The Lower Prison"
-        },
-        {
-            "code": "1_1_7_2",
-            "name": "The Upper Prison",
-            "notes": "test The Upper Prison"
-        },
-        {
-            "code": "1_1_8",
-            "name": "Prisoner's Gate",
-            "notes": "test Prisoner's Gate"
-        },
-        {
-            "code": "1_1_9",
-            "name": "The Ship Graveyard",
-            "notes": "test The Ship Graveyard"
-        },
-        {
-            "code": "1_1_9a",
-            "name": "The Ship Graveyard Cave",
-            "notes": "test The Ship Graveyard Cave"
-        },
-        {
-            "code": "1_1_11_2",
-            "name": "The Cavern of Anger",
-            "notes": "test The Cavern of Anger"
-        }
-    ]
+	"actNotes": [
+		{
+			"act": "Act 1",
+			"notes": "Enemy at the Gate:  Level 1 Gems\nBreaking Some Eggs: Level 4 Gems\nMercy mission:      Quicksilver, Level 4 Gems\nCaged Brute:        Level 8 Gems\nSiren's Cadence:    Level 12 Gems\nTrials: The Lower Prison\n\nIron Ring + Blue Gem = Sapphire Ring\nBoots + Aug + Quicksilver = MS boots\nLvl 12 for 15% MS\n\nLvl 4 Hailrake, 8-10 Brutus, 12-13 Merveil"
+		},
+		{
+			"act": "Act 2",
+			"notes": "test Act 2"
+		},
+		{
+			"act": "Act 3",
+			"notes": "test Act 3"
+		},
+		{
+			"act": "Act 4",
+			"notes": "test Act 4"
+		},
+		{
+			"act": "Act 5",
+			"notes": "test Act 5"
+		},
+		{
+			"act": "Act 6",
+			"notes": "test Act 6"
+		},
+		{
+			"act": "Act 7",
+			"notes": "test Act 7"
+		},
+		{
+			"act": "Act 8",
+			"notes": "test Act 8"
+		},
+		{
+			"act": "Act 9",
+			"notes": "test Act 9"
+		},
+		{
+			"act": "Act 10",
+			"notes": "test Act 10"
+		}
+	],
+	"zoneNotes": [
+		{
+			"code": "1_1_1",
+			"name": "The Strand",
+			"notes": "Follow the coast up and right\nONLY kill Hillock"
+		},
+		{
+			"code": "1_1_2",
+			"name": "The Coast",
+			"notes": "Stick to the right side following the wall\nDon't kill anything\nGrab the Waypoint then Exit > Mud Flats"
+		},
+		{
+			"code": "1_1_2a",
+			"name": "Tidal Island",
+			"notes": "The side without a ramp/cliff is the shortest\nKill Hailrake to get Medicine Chest\nTP/Logout and turn in quest to Nessa\nIn town Waypoint > The Submerged Passage"
+		},
+		{
+			"code": "1_1_3",
+			"name": "Mud Flats",
+			"notes": "Get level 4 here\nGrab the three glyphs then Exit > Submerged Passage"
+		},
+		{
+			"code": "1_1_3a",
+			"name": "The Fetid Pool",
+			"notes": "This quest is optional and should be skipped to save time\nGo in a circle and kill everything"
+		},
+		{
+			"code": "1_1_4_1",
+			"name": "The Submerged Passage",
+			"notes": "First time here grab Waypoint then use Waypoint > The Coast\nIn town Exit > Tidal Island\n\nSecond time here find the bridge and place a portal\nThen continue across the bridge to Exit > The Ledge\n\nThird time here go right of staircase to \nExit > The Flooded Depths"
+		},
+		{
+			"code": "1_1_4_0",
+			"name": "The Flooded Depths",
+			"notes": "There should be two rivers to cross with movement skill\nKill Deep Dweller - looks like essence mob\nTP/Logout and turn in quest to Tarkleigh\nIn town Waypoint > The Ledge"
+		},
+		{
+			"code": "1_1_5",
+			"name": "The Ledge",
+			"notes": "First time here get the Waypoint, then Waypoint > Town\nIn town take portal to The Submerged Passage\n\nSecond time here little totems at the Waypoint point to the\nExit > The Climb"
+		},
+		{
+			"code": "1_1_6",
+			"name": "The Climb",
+			"notes": "Always be going up, skip Faun to save time\nExit > The Lower Prison"
+		},
+		{
+			"code": "1_1_7_1",
+			"name": "The Lower Prison",
+			"notes": "Take the Waypoint\nDo the Trial - Spike Traps\nTry right first for the Exit > The Upper Prison"
+		},
+		{
+			"code": "1_1_7_2",
+			"name": "The Upper Prison",
+			"notes": "Try left first. Find hidden strongbox for quicksilvers\nKill Brutus then TP/Logout\nIn town Waypoint > Prisoner's Gate"
+		},
+		{
+			"code": "1_1_8",
+			"name": "Prisoner's Gate",
+			"notes": "Find the ramp/cliff down, Exit is after this ramp\nExit > The Ship Graveyard"
+		},
+		{
+			"code": "1_1_9",
+			"name": "The Ship Graveyard",
+			"notes": "Following the wall usually works\nLook for The Ship Graveyard Cave and leave a portal\nFind the Waypoint then Exit > The Cavern Of Wrath\n\nSecond time here, Exit > The Ship Graveyard Cave\nIn town Waypoint > Cavern Of Wrath"
+		},
+		{
+			"code": "1_1_9a",
+			"name": "The Ship Graveyard Cave",
+			"notes": "Get the Allflame from corpse, don't need to kill the rare\nExit > The Ship Graveyard to kill Fairgraves then logout"
+		},
+		{
+			"code": "1_1_11_1",
+			"name": "The Cavern of Wrath",
+			"notes": "First time here take Waypoint > Town\nIn town take portal > Ship Graveyard\n\nSecond time here Exit > Cavern of Anger"
+		},
+		{
+			"code": "1_1_11_2",
+			"name": "The Cavern of Anger",
+			"notes": "Entering this zone completes Lvl 12 Gem Quest, can turn in\nOften bottom right. You can follow the spirits. \nIf you see piles of gold you're close to Merveil\nRECOMMEND high cold resist"
+		}
+	]
 }

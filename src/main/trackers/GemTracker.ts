@@ -3,7 +3,7 @@ import { objectFactory } from '../objectFactory.js';
 import { SettingsService } from '../services/Settings.js';
 import { LevelTracker } from './LevelTracker.js';
 import { Build, GemBuild, GemSetup } from '../zodSchemas/schemas.js';
-import { GemDataDto } from '../ipc/apiInterface.js';
+import { GemDataDto, GemSettingsDto } from '../ipc/apiInterface.js';
 
 // TODO: GemTracker owns builds cuz I haven't added any build stuff to anything else.
 export class GemTracker {
@@ -30,6 +30,15 @@ export class GemTracker {
 			gemSetupLevel: this.gemSetup.level,
 			gemLinks: this.gemSetup.gemLinks
 		}
+	}
+
+	getGemSettingsDto(): GemSettingsDto {
+		return {
+			buildName: this.buildName,
+			allBuildNames: this.allBuildNames,
+			allGemSetupLevels: this.allGemSetupLevels,
+			allGemSetups: this.allGemSetups,
+		};
 	}
 
 	//TODO Seriously I need to get all this build stuff out of gem tracker

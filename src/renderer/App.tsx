@@ -17,6 +17,7 @@ function App() {
 
 	useEffect(() => {
 		window.electron.subscribeToHotkeys((hotkeyEvent) => {
+			console.log("Received hotkey event in renderer: ", hotkeyEvent);
 			switch (hotkeyEvent.hotkey) {
 				case "ToggleSettings":
 					setSettingsActive(hotkeyEvent.value);

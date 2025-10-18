@@ -25,7 +25,7 @@ export class StateTracker {
 		)
 	}
 
-	getIsClientWatcherActive(): Boolean {
+	getIsClientWatcherActive(): boolean {
 		return this.logWatcherActive;
 	}
 }

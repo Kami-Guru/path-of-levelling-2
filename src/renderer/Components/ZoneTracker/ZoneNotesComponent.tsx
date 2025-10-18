@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Rnd } from 'react-rnd';
+import { ZoneDataDto } from '../../../main/ipc/apiInterface';
 
 export function ZoneNotesComponent(props: {
 	sharedZoneCode: string;
@@ -15,7 +16,7 @@ export function ZoneNotesComponent(props: {
 		currentZoneNotes: '',
 	});
 
-	const setZoneDropdownFromTracker = (zoneTracker: any) => {
+	const setZoneDropdownFromTracker = (zoneTracker: ZoneDataDto) => {
 		setZoneDropdown({
 			actNameSelected: zoneTracker.act,
 			zoneNameSelected: zoneTracker.zone,

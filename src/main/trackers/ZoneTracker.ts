@@ -62,8 +62,8 @@ export class ZoneTracker {
 			allActs: this.allActs,
 			allZonesInAct: this.allZonesInAct,
 			actNotes: this.actNotes,
-			zoneNotes: this.zoneNotes				
-		}
+			zoneNotes: this.zoneNotes,
+		};
 	}
 
 	loadAllZoneNotes(allZoneNotesPath: string) {

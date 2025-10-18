@@ -107,13 +107,11 @@ export class LogWatcherService {
 					mainWindow.webContents,
 					objectFactory.getGemTracker().getGemDataDto()
 				);
-				mainWindow.webContents.send(
-					'subscribeToGemUpdates',
-					{
-						allGemSetupLevels: objectFactory.getGemTracker().allGemSetupLevels,
-						selectedLevel: objectFactory.getGemTracker().gemSetup.level,
-						gemLinks: objectFactory.getGemTracker().gemSetup.gemLinks
-					}
+
+				ipcWebContentsSend(
+					"subscribeToGemUpdates",
+					mainWindow.webContents,
+					objectFactory.getGemTracker().getGemDataDto()
 				);
 			}
 		});

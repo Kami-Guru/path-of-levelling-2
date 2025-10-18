@@ -62,7 +62,7 @@ electron.contextBridge.exposeInMainWorld("electron", {
 		});
 	},
 	getLayoutImagePaths: async () => electron.ipcRenderer.invoke("getLayoutImagePaths"),
-	
+
 	// Methods for the level tracker
 	subscribeToLevelUpdates: (callback: any) => {
 		return electron.ipcRenderer.on("subscribeToLevelUpdates", (event: any, args: any) => {
@@ -92,6 +92,3 @@ electron.contextBridge.exposeInMainWorld("electron", {
 	saveGemSetupsForBuild: async (response: any) =>
 		electron.ipcRenderer.invoke("saveGemSetupsForBuild", response),
 } satisfies Window["electron"]);
-
-// All these types have to be defined here cuz for whatever reason I can't import types into this
-// file. I probably just f'd up the compiler settings but whatever.

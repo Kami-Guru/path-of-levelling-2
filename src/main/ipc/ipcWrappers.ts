@@ -1,31 +1,37 @@
-import { WebContents, WebFrameMain } from 'electron';
-import url from 'url';
-import { getUIPath, isDev } from '../pathResolver.js';
-import { channelReturnTypeMapping } from './apiInterface.js';
+import { ipcMain, WebContents, WebFrameMain } from "electron";
+import url from "url";
+import { getUIPath, isDev } from "../pathResolver.js";
+import { channelRequestTypeMapping, channelReturnTypeMapping } from "./apiInterface.js";
 
-// if we're in the dev env check that we're receiving event from port we chose in vite
-// config if the frame did not come from our index.html then error. This is not foolproof,
-// if we need more than one file or whatever yeah
-export function validateEventFrame(frame: WebFrameMain) {
-	if (isDev() && new URL(frame.url).host === 'localhost:5123') {
-		return;
-	}
-	if (frame.url !== url.pathToFileURL(getUIPath()).toString()) {
-		throw new Error('Malicious event');
-	}
-}
-
-// export function ipcMainHandle<Key extends keyof channelReturnType>(
-// 	key: Key,
-// 	handler: () => channelReturnType[Key]
-// ) {
-// 	ipcMain.handle(key, (event) => {
-// 		validateEventFrame(event.senderFrame ?? new webFrameMain());
-// 		return handler();
-// 	});
+//Truthfully I have no idea what this is
+// // if we're in the dev env check that we're receiving event from port we chose in vite
+// // config if the frame did not come from our index.html then error. This is not foolproof,
+// // if we need more than one file or whatever yeah
+// export function validateEventFrame(frame: WebFrameMain) {
+// 	if (isDev() && new URL(frame.url).host === "localhost:5123") {
+// 		return;
+// 	}
+// 	if (frame.url !== url.pathToFileURL(getUIPath()).toString()) {
+// 		throw new Error("Malicious event");
+// 	}
 // }
 
-// //POST main -> renderer
+/** Type safe wrapper for post requests from Renderer->Main->Renderer that expect a response */
+export function ipcMainHandle<K extends keyof channelReturnTypeMapping>(
+	channel: K,
+	handler: (
+		event: any, // I never use this event, can add some type safety later if needed
+		request: K extends keyof channelRequestTypeMapping
+			? channelRequestTypeMapping[K]
+			: undefined
+	) => channelReturnTypeMapping[K] | Promise<channelReturnTypeMapping[K]>
+) {
+	ipcMain.handle(channel as string, (event, request) => {
+		return handler(event, request as any);
+	});
+}
+
+/** Type safe wrapper for Renderer->Main subscriptions */
 export function ipcWebContentsSend<K extends keyof channelReturnTypeMapping>(
 	channel: K,
 	webContents: WebContents,
@@ -33,7 +39,3 @@ export function ipcWebContentsSend<K extends keyof channelReturnTypeMapping>(
 ) {
 	webContents.send(channel, payload);
 }
-
-// if someone calls ipcOn then ipcOn will return the ubsubscribe function, if we return
-// this inside the UseEffect in app.tsx where we're subscribing then that will
-// unsubscribe check https://react.dev/reference/react/useEffect
