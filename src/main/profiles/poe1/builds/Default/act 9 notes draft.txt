@@ -1,0 +1,79 @@
+Act 9 Notes------------------------------------------------
+
+
+
+
+
+
+The Blood Acqueduct----------------------------------------
+Go to the top left, cross the bridges on dead ends
+This zone is great for EXP
+Exit > Town
+
+
+The Descent------------------------------------------------
+Go up and right to hoist, 
+then down and left to next hoist,
+then up and right to Exit > The Vastiri Desert
+
+
+The Vastiri Desert-----------------------------------------
+Go right to find Waypoint, then go right to find The Oasis,
+then TP to town for quest item, then come back here to 
+Exit > The Oasis 
+
+Second time here go up and left to Exit > The Foothills
+
+
+The Oasis--------------------------------------------------
+If the dead end is above, right hand wall follow
+If the dead end is below, left hand wall follow
+Fight boss then logout
+
+
+The Foothills----------------------------------------------
+Don't forget the Waypoint!
+Go up and left to find Waypoint, then right to
+Exit > The Boiling Lake
+
+Second time here go up and left to Exit > The Tunnel
+
+
+The Boiling Lake-------------------------------------------
+Go top right, petrified men means you're close to boss
+Kill boss, get quest item then logout
+In Town Waypoint > The Foothills
+
+
+The Tunnel-------------------------------------------------
+Go up and left, near the entrance there is a fork to the
+left or right, follow it for Trial
+After Trial go up and left to Exit > The Quarry
+TRIAL - Blade sentries
+CRAFT - All attributes
+
+
+The Quarry-------------------------------------------------
+Go up and left for Waypoint, then left for boss, logout
+In Town Waypoint > The Quarry
+
+Second time here go up and right to Exit > The Refinery
+
+Third time here Exit > The Belly of The Beast
+CRAFT - Physical damage
+RECOMMEND physical mitigation
+
+
+The Refinery-----------------------------------------------
+Follow the cart tracks top and right for Boss, then logout
+In Town Waypoint > The Quarry
+RECOMMEND lightning resist
+
+
+The Belly of the Beast-------------------------------------
+Go top and left to Exit > The Rotting Core
+
+
+The Rotting Core-------------------------------------------
+Go top and left to find The Black Core and kill the trio
+

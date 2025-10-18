@@ -135,6 +135,10 @@
 		"act": "Act 2",
 		"zoneName": "The Caverns"
 	},
+	"1_2_14_3": {
+		"act": "Act 2",
+		"zoneName": "The Ancient Pyramid"
+	},
 	"1_3_1": {
 		"act": "Act 3",
 		"zoneName": "The City of Sarn"
@@ -194,6 +198,10 @@
 	"1_3_17_1": {
 		"act": "Act 3",
 		"zoneName": "The Library"
+	},
+	"1_3_17_2": {
+		"act": "Act 3",
+		"zoneName": "The Archives"
 	},
 	"1_3_18_1": {
 		"act": "Act 3",
@@ -263,7 +271,14 @@
 		"act": "Act 5",
 		"zoneName": "The Control Blocks"
 	},
-
+	"1_5_3": {
+		"act": "Act 5",
+		"zoneName": "Oriath Square"
+	},
+	"1_5_4": {
+		"act": "Act 5",
+		"zoneName": "The Templar Courts"
+	},
 	"1_5_6": {
 		"act": "Act 5",
 		"zoneName": "The Ossuary"
@@ -307,6 +322,10 @@
 	"2_6_5": {
 		"act": "Act 6",
 		"zoneName": "The Karui Fortress"
+	},
+	"2_6_6": {
+		"act": "Act 6",
+		"zoneName": "The Ridge"
 	},
 	"2_6_7_1": {
 		"act": "Act 6",
@@ -368,6 +387,10 @@
 		"act": "Act 7",
 		"zoneName": "The Chamber of Sins Level 2"
 	},
+	"2_7_5_map": {
+		"act": "Act 7",
+		"zoneName": "Maligaro's Sanctum"
+	},
 	"2_7_6": {
 		"act": "Act 7",
 		"zoneName": "The Den"
@@ -403,6 +426,10 @@
 	"2_8_1": {
 		"act": "Act 8",
 		"zoneName": "The Sarn Ramparts"
+	},
+	"2_8_2_1": {
+		"act": "Act 8",
+		"zoneName": "The Toxic Conduits"
 	},
 	"2_8_2_2": {
 		"act": "Act 8",
