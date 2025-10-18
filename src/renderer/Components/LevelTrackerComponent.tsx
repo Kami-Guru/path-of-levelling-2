@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { Rnd } from 'react-rnd';
-import { LevelDataDto } from '../../main/ipc/apiInterface';
+import { useEffect, useState } from "react";
+import { Rnd } from "react-rnd";
 
 export function LevelTrackerComponent() {
 	//TODO need to do a lot of renaming here since this was copied from zone tracker
@@ -37,7 +36,7 @@ export function LevelTrackerComponent() {
 		// @ts-ignore
 		var diff = levelDropdown.playerLevel - levelDropdown.monsterLevel;
 
-		return 'Level Diff: ' + (diff < 0 ? '' : '+') + diff.toString();
+		return "Level Diff: " + (diff < 0 ? "" : "+") + diff.toString();
 	}
 
 	// Setting up the deggable/resizable state
@@ -46,21 +45,20 @@ export function LevelTrackerComponent() {
 	const [rndState, setRndState] = useState({
 		x: 0,
 		y: 0,
-		height: '200',
-		width: '400',
+		height: "200",
+		width: "400",
 	});
 
 	// Get initial state for level tracker position
 	useEffect(() => {
-		window.electron.getLevelOverlayPositionSettings()
-			.then((levelOverlayPositionSettings) => {
-				setRndState({
-					x: levelOverlayPositionSettings.x,
-					y: levelOverlayPositionSettings.y,
-					height: levelOverlayPositionSettings.height,
-					width: levelOverlayPositionSettings.width,
-				});
+		window.electron.getLevelOverlayPositionSettings().then((levelOverlayPositionSettings) => {
+			setRndState({
+				x: levelOverlayPositionSettings.x,
+				y: levelOverlayPositionSettings.y,
+				height: levelOverlayPositionSettings.height,
+				width: levelOverlayPositionSettings.width,
 			});
+		});
 	}, []);
 
 	const handleDrag = (e: any, d: any) => {
@@ -102,7 +100,6 @@ export function LevelTrackerComponent() {
 			onResizeStop={(e, direction, ref, delta, position) =>
 				handleResize(e, direction, ref, delta, position)
 			}
-
 			bounds="parent"
 			disableDragging={!moveMode}
 			enableResizing={{
@@ -120,10 +117,8 @@ export function LevelTrackerComponent() {
 			resizeHandleComponent={
 				moveMode
 					? {
-						bottomRight: (
-							<div className="RndResizeCircleHandle"></div>
-						),
-					}
+							bottomRight: <div className="RndResizeCircleHandle"></div>,
+						}
 					: {}
 			}
 		>

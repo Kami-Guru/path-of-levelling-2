@@ -1,97 +1,119 @@
+/// <reference path="./apiTypes.d.ts" />
 const electron = require("electron");
-//this is cts so that it compiles into the only cjs file and electron can find it
-//idk man i got it from the internet
+
+// Need to write some ipc wrappers here cuz can't import them
+// The Window interface gives type safety in Renderer; channelReturnTypeMapping and
+// channelRequestTypeMapping gives type safety in Main, these ipcWrappers throw errors when the
+// type mappings and the Window interface don't line up. This ensures the type hints on either side
+// actually match each other
+
+/** Type safe wrapper for get requests from Renderer->Main */
+function ipcRendererInvokeGet<K extends keyof channelReturnTypeMapping>(
+	channel: K
+): Promise<channelReturnTypeMapping[K]> {
+	return electron.ipcRenderer.invoke(channel as string);
+}
+
+/** Type safe wrapper for get requests from Renderer->Main which expect a response */
+function ipcRendererInvokePost<K extends keyof channelReturnTypeMapping>(
+	channel: K,
+	request: K extends keyof channelRequestTypeMapping ? channelRequestTypeMapping[K] : undefined
+): Promise<channelReturnTypeMapping[K]> {
+	return electron.ipcRenderer.invoke(channel as string, request as any);
+}
+
+/** Type safe wrapper for Renderer->Main subscriptions */
+function ipcRendererOn<K extends keyof channelReturnTypeMapping>(
+	channel: K,
+	callback: (event: any, payload: channelReturnTypeMapping[K]) => void
+) {
+	return electron.ipcRenderer.on(channel as string, (event: any, args: any) => {
+		callback(event, args);
+	});
+}
 
 electron.contextBridge.exposeInMainWorld("electron", {
 	// Settings
 	subscribeToHotkeys: (callback) => {
-		return electron.ipcRenderer.on("Hotkeys", (event: any, args: any) => {
+		return ipcRendererOn("Hotkeys", (_, args: HotkeyEvent) => {
 			callback(args);
 		});
 	},
-	getIsClientWatcherActive: async () => electron.ipcRenderer.invoke("getIsClientWatcherActive"),
-	getClientPath: async () => electron.ipcRenderer.invoke("getClientPath"),
+	getIsClientWatcherActive: async () => ipcRendererInvokeGet("getIsClientWatcherActive"),
+	getClientPath: async () => ipcRendererInvokeGet("getClientPath"),
 	saveClientPath: async (clientTxtPath: string) =>
-		electron.ipcRenderer.invoke("saveClientPath", clientTxtPath),
+		ipcRendererInvokePost("saveClientPath", clientTxtPath),
 
 	// Position Settings
-	getFontScalingFactor: async () => electron.ipcRenderer.invoke("getFontScalingFactor"),
+	getFontScalingFactor: async () => ipcRendererInvokeGet("getFontScalingFactor"),
 	getSettingsOverlayPositionSettings: async () =>
-		electron.ipcRenderer.invoke("getSettingsOverlayPositionSettings"),
+		ipcRendererInvokeGet("getSettingsOverlayPositionSettings"),
 	saveSettingsOverlayPositionSettings: async (settingsOverlaySettings) =>
-		electron.ipcRenderer.invoke("saveSettingsOverlayPositionSettings", settingsOverlaySettings),
+		ipcRendererInvokePost("saveSettingsOverlayPositionSettings", settingsOverlaySettings),
 
 	getZoneOverlayPositionSettings: async () =>
-		electron.ipcRenderer.invoke("getZoneOverlayPositionSettings"),
+		ipcRendererInvokeGet("getZoneOverlayPositionSettings"),
 	saveZoneOverlayPositionSettings: async (zoneSettings) =>
-		electron.ipcRenderer.invoke("saveZoneOverlayPositionSettings", zoneSettings),
+		ipcRendererInvokePost("saveZoneOverlayPositionSettings", zoneSettings),
 
 	getLayoutImagesOverlayPositionSettings: async () =>
-		electron.ipcRenderer.invoke("getLayoutImagesOverlayPositionSettings"),
+		ipcRendererInvokeGet("getLayoutImagesOverlayPositionSettings"),
 	saveLayoutImagesOverlayPositionSettings: async (layoutImagesSettings) =>
-		electron.ipcRenderer.invoke(
-			"saveLayoutImagesOverlayPositionSettings",
-			layoutImagesSettings
-		),
+		ipcRendererInvokePost("saveLayoutImagesOverlayPositionSettings", layoutImagesSettings),
 
 	getLevelOverlayPositionSettings: async () =>
-		electron.ipcRenderer.invoke("getLevelOverlayPositionSettings"),
+		ipcRendererInvokeGet("getLevelOverlayPositionSettings"),
 	saveLevelOverlayPositionSettings: async (levelSettings) =>
-		electron.ipcRenderer.invoke("saveLevelOverlayPositionSettings", levelSettings),
+		ipcRendererInvokePost("saveLevelOverlayPositionSettings", levelSettings),
 
 	getGemOverlayPositionSettings: async () =>
-		electron.ipcRenderer.invoke("getGemOverlayPositionSettings"),
+		ipcRendererInvokeGet("getGemOverlayPositionSettings"),
 	saveGemOverlayPositionSettings: async (gemSettings) =>
-		electron.ipcRenderer.invoke("saveGemOverlayPositionSettings", gemSettings),
+		ipcRendererInvokePost("saveGemOverlayPositionSettings", gemSettings),
 
 	// Methods for the zone tracker
 	subscribeToZoneNotesUpdates: (callback) => {
-		return electron.ipcRenderer.on("zoneUpdatesFromLog", (event: any, args: any) => {
+		return ipcRendererOn("zoneUpdatesFromLog", (_, args) => {
 			callback(args);
 		});
 	},
-	getZoneState: async () => electron.ipcRenderer.invoke("getZoneState"),
+	getZoneState: async () => ipcRendererInvokeGet("getZoneState"),
 	postActSelected: async (actSelected: string) =>
-		electron.ipcRenderer.invoke("postActSelected", actSelected),
+		ipcRendererInvokePost("postActSelected", actSelected),
 	postZoneSelected: async (zoneSelectedRequest) =>
-		electron.ipcRenderer.invoke(
-			"postZoneSelected",
-			zoneSelectedRequest
-		),
+		ipcRendererInvokePost("postZoneSelected", zoneSelectedRequest),
 
-	subscribeToZoneLayoutImageUpdates: (callback: any) => {
-		return electron.ipcRenderer.on("zoneLayoutImageUpdates", (event: any, args: any) => {
+	subscribeToZoneLayoutImageUpdates: (callback) => {
+		return ipcRendererOn("zoneLayoutImageUpdates", (_, args) => {
 			callback(args);
 		});
 	},
-	getLayoutImagePaths: async () => electron.ipcRenderer.invoke("getLayoutImagePaths"),
+	getLayoutImagePaths: async () => ipcRendererInvokeGet("getLayoutImagePaths"),
 
 	// Methods for the level tracker
-	subscribeToLevelUpdates: (callback: any) => {
-		return electron.ipcRenderer.on("subscribeToLevelUpdates", (event: any, args: any) => {
+	subscribeToLevelUpdates: (callback) => {
+		return ipcRendererOn("subscribeToLevelUpdates", (_, args) => {
 			callback(args);
 		});
 	},
-	getLevelState: async () => electron.ipcRenderer.invoke("getLevelState"),
+	getLevelState: async () => ipcRendererInvokeGet("getLevelState"),
 
 	// Methods for the gem TRACKER
-	subscribeToGemUpdates: (callback: any) => {
-		return electron.ipcRenderer.on("subscribeToGemUpdates", (event: any, args: any) => {
+	subscribeToGemUpdates: (callback) => {
+		return ipcRendererOn("subscribeToGemUpdates", (_, args) => {
 			callback(args);
 		});
 	},
-	getGemState: async () => electron.ipcRenderer.invoke("getGemState"),
-	postGemLevelSelected: async (gemLevelSelected: number) =>
-		electron.ipcRenderer.invoke("postGemLevelSelected", gemLevelSelected),
+	getGemState: async () => ipcRendererInvokeGet("getGemState"),
+	postGemLevelSelected: async (gemLevelSelected) =>
+		ipcRendererInvokePost("postGemLevelSelected", gemLevelSelected),
 
 	// Methods for the gem SETTINGS
-	getGemSettingsState: async () => electron.ipcRenderer.invoke("getGemSettingsState"),
-	postBuildSelected: async (buildName: string) =>
-		electron.ipcRenderer.invoke("postBuildSelected", buildName),
-	postAddNewBuild: async (buildName: string) =>
-		electron.ipcRenderer.invoke("postAddNewBuild", buildName),
-	postDeleteBuild: async (buildName: string) =>
-		electron.ipcRenderer.invoke("postDeleteBuild", buildName),
-	saveGemSetupsForBuild: async (response: any) =>
-		electron.ipcRenderer.invoke("saveGemSetupsForBuild", response),
+	getGemSettingsState: async () => ipcRendererInvokeGet("getGemSettingsState"),
+	postBuildSelected: async (buildName) =>
+		ipcRendererInvokePost("postBuildSelected", buildName),
+	postAddNewBuild: async (buildName) => ipcRendererInvokePost("postAddNewBuild", buildName),
+	postDeleteBuild: async (buildName) => ipcRendererInvokePost("postDeleteBuild", buildName),
+	saveGemSetupsForBuild: async (response) =>
+		ipcRendererInvokePost("saveGemSetupsForBuild", response),
 } satisfies Window["electron"]);

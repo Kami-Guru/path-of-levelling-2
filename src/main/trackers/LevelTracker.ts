@@ -1,7 +1,6 @@
 import log from 'electron-log';
 import { objectFactory } from '../objectFactory.js';
 import { StoreService } from '../services/StoreService.js';
-import { LevelDataDto } from '../ipc/apiInterface.js';
 
 export class LevelTracker {
 	playerLevel: number;

@@ -1,12 +1,11 @@
 import log from 'electron-log';
 import fs from 'fs';
 import path from 'path';
-import { getBuildPath, getZoneLayoutImagesAbsolutePath, getZoneNotesPath, getZoneReferenceDataPath } from '../pathResolver.js';
+import { getZoneLayoutImagesAbsolutePath, getZoneNotesPath, getZoneReferenceDataPath } from '../pathResolver.js';
 import { objectFactory } from '../objectFactory.js';
 import { StoreService } from '../services/StoreService.js';
 import { getProfile } from '../profiles/profiles.js';
 import { ZoneReference, ZoneCodeToZoneReference } from '../zodSchemas/schemas.js';
-import { ZoneDataDto } from '../ipc/apiInterface.js';
 
 export class ZoneTracker {
 	act: string = "Act 1";

@@ -3,7 +3,6 @@ import { objectFactory } from '../objectFactory.js';
 import { SettingsService } from '../services/Settings.js';
 import { LevelTracker } from './LevelTracker.js';
 import { Build, GemBuild, GemSetup } from '../zodSchemas/schemas.js';
-import { GemDataDto, GemSettingsDto } from '../ipc/apiInterface.js';
 
 // TODO: GemTracker owns builds cuz I haven't added any build stuff to anything else.
 export class GemTracker {

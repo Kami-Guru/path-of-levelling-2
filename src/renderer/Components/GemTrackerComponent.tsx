@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DraggableData, Rnd } from 'react-rnd';
-import { GemDataDto } from '../../main/ipc/apiInterface';
+import { Rnd } from 'react-rnd';
 
 export function GemTrackerComponent() {
 	const [gemDropdown, setGemDropdown] = useState({

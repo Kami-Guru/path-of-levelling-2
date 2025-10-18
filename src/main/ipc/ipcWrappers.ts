@@ -1,7 +1,4 @@
-import { ipcMain, WebContents, WebFrameMain } from "electron";
-import url from "url";
-import { getUIPath, isDev } from "../pathResolver.js";
-import { channelRequestTypeMapping, channelReturnTypeMapping } from "./apiInterface.js";
+import { ipcMain, WebContents } from "electron";
 
 //Truthfully I have no idea what this is
 // // if we're in the dev env check that we're receiving event from port we chose in vite

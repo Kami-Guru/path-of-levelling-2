@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Rnd } from "react-rnd";
-import { ZoneDataDto, ZoneSelectedRequest } from "../../../main/ipc/apiInterface";
+
 
 export function ZoneNotesComponent(props: { sharedZoneCode: string; setSharedZoneCode: any }) {
 	// Create state for zone dropdown

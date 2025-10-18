@@ -16,9 +16,7 @@ import { LogWatcherService } from "./services/LogWatcherService.js";
 import { getDesktopIconPath, getPreloadPath, getUIPath, isDev } from "./pathResolver.js";
 import { objectFactory } from "./objectFactory.js";
 import { getProfile } from "./profiles/profiles.js";
-import { GemSetup } from "./zodSchemas/schemas.js";
 import { ipcMainHandle, ipcWebContentsSend } from "./ipc/ipcWrappers.js";
-import { GemDataDto } from "./ipc/apiInterface.js";
 
 // Only allow one instance of the app
 if (!app.requestSingleInstanceLock()) {
