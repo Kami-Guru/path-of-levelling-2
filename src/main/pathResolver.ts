@@ -1,95 +1,80 @@
-import { app } from 'electron';
-import path from 'path';
-import { isDev } from './util.js';
-import fs from 'fs/promises';
+import { app } from "electron";
+import path from "path";
+import fs from "fs";
+import { ProfileId } from "./zodSchemas/schemas.js";
+import { getProfile } from "./profiles/profiles.js";
+
+export function isDev(): boolean {
+	return process.env.NODE_ENV === "development";
+}
 
 export function getPreloadPath() {
 	return path.join(
 		app.getAppPath(),
-		isDev() ? '.' : '..', // Need to escape app.asar in production for any files listed in electron-builder.json
-		'/dist-electron/ipc/preload.cjs' // Needs to be cjs so that it is compiled separately and can be accessed after compilation.
+		isDev() ? "." : "..", // Need to escape app.asar in production for any files listed in electron-builder.json
+		"/dist-electron/ipc/preload.cjs" // Needs to be cjs so that it is compiled separately and can be accessed after compilation.
 	);
 }
 
 export function getUIPath() {
-	return path.join(app.getAppPath(), '/dist-react/index.html');
+	return path.join(app.getAppPath(), "/dist-react/index.html");
 }
 
 export function getDesktopIconPath() {
 	return path.join(
 		app.getAppPath(),
-		isDev() ? 'assets' : 'dist-react',
+		isDev() ? "assets" : "dist-react",
 		process.platform === "win32" ? "icon.ico" : "icon.png"
 	);
 }
 
-export function getBuildsRootPath() {
-	return path.join(
-		app.getAppPath(),
-		isDev() ? '.' : '..',
-		'src/main/Builds'
-	);
+export function getZoneNotesPath(profileId: ProfileId): string {
+	// One day there will be per-build zone notes, but for now it's all in Default/zoneNotes.json
+	return path.join(getBuildPath(profileId, "Default"), "zoneNotes.json");
 }
 
-export function getBuildPath(buildName: string) {
-	return path.join(
-		app.getAppPath(),
-		isDev() ? '.' : '..',
-		'src/main/Builds',
-		buildName
-	);
-}
-
-export function getDefaultSettingsPath() {
-	return path.join(
-		app.getAppPath(),
-		isDev() ? '.' : '..',
-		'src/main/Settings',
-		'defaultSettings.json'
-	);
-}
-
-export async function guessClientTxtPath(): Promise<string> {
-	var pathGuesses: Array<string> = process.platform === "win32"
-		? [
-			path.join('C:/Program Files (x86)/Steam/steamapps/common/Path of Exile 2/logs/Client.txt'),
-			path.join('D:/SteamLibrary/steamapps/common/Path of Exile 2/logs/Client.txt')
-		]
-		: [
-			path.join(app.getPath('home'), '/.steam/root/steamapps/common/Path of Exile 2/logs/Client.txt'),
-		]
-	
-	var foundPath: string | undefined = undefined
-	for (var pathGuess in pathGuesses) {
-		try {
-			await fs.access(pathGuess, fs.constants.R_OK)
-
-			// If we made it here, .access didn't error so we have a valid path.
-			foundPath = pathGuess;
-		}
-		catch { }
-
-		if (foundPath) break;
-	}
-
-	return foundPath ?? getDefaultClientTxtPath();
-}
-
-export function getDefaultClientTxtPath(): string {
-	return process.platform === "win32" ? getDefaultClientTxtPathWindows() : getDefaultClientTxtPathLinux();
-}
-
-export function getDefaultClientTxtPathWindows() {
-	return path.join('C:/Program Files (x86)/Steam/steamapps/common/Path of Exile 2/logs/Client.txt');
-}
-
-export function getDefaultClientTxtPathLinux() {
-	return path.join('/home/punchingbag/.steam/root/steamapps/common/Path of Exile 2/logs/Client.txt');
+export function getZoneReferenceDataPath(profileId: ProfileId): string {
+	return path.join(getProfilePath(profileId), "referenceData", "zoneReferenceData.json");
 }
 
 export function getZoneLayoutImagesAbsolutePath() {
 	return path.join(
 		app.getAppPath(),
-		isDev() ? 'assets/Layout Images' : 'dist-react/Layout Images'
+		isDev() ? "assets/Layout Images" : "dist-react/Layout Images",
+		getProfile().Id
 	);
+}
+
+export function getBuildPath(profileId: ProfileId, buildName: string) {
+	return path.join(getProfilePath(profileId), "/builds/", buildName);
+}
+
+export function getBuildsRootPath(profileId: ProfileId) {
+	return path.join(getProfilePath(profileId), "/builds");
+}
+
+export function getProfilePath(profileId: ProfileId) {
+	return path.join(app.getAppPath(), isDev() ? "." : "..", "src/main/profiles/", profileId);
+}
+
+/** Guesses a few file paths, if none are valid then return default */
+export function guessClientTxtPathForProfileId(profileId: ProfileId): string {
+	const pathGuesses = getProfile(profileId).logFilePathGuesses;
+
+	var foundPath: string | undefined = undefined;
+	for (var pathGuess in pathGuesses) {
+		try {
+			fs.accessSync(pathGuess, fs.constants.R_OK);
+
+			// If we made it here, .access didn't error so we have a valid path.
+			foundPath = pathGuess;
+		} catch {
+			// fs.access threw so that path is invalid, continue guessing
+			continue;
+		}
+
+		if (foundPath) break;
+	}
+
+	return foundPath ?? getProfile(profileId).defaultClientTxtPath;
 }

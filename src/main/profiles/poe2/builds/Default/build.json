@@ -1,0 +1,17 @@
+{
+    "buildName": "Default",
+    "gemBuild": {
+        "changedByUser": false,
+        "gemSetups": [
+            {
+                "level": 1,
+                "gemLinks": [
+                    "No build selected!"
+                ],
+                "sources": [
+                    "No build selected!"
+                ]
+            }
+        ]
+    }
+}

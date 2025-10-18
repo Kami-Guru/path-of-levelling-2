@@ -1,0 +1,101 @@
+Act 8 Notes------------------------------------------------
+
+
+
+
+
+The Sarn Ramparts------------------------------------------
+Left hand wall-follow, go up stairs, follow the wall
+Exit > Town > The Toxic Conduits
+
+
+The Toxic Conduits-----------------------------------------
+Follow black paint on the floor, Exit > Deodre's Cesspool
+
+
+Deodre's Cesspool------------------------------------------
+The path without a dead end leads all the way to the exit. 
+After beating Doedre go left to Exit > The Grand Promenade 
+
+Second time here go right to Exit > The Quay
+CRAFT - Resistance
+
+
+The Grand Promenade----------------------------------------
+Wall-follow the right side to Exit > The Bath House
+
+
+The High Gardens-------------------------------------------
+Follow the upper levels, eventually one will lead to a big
+staircase that leads to boss, kill boss then logout
+In Town Waypoint > The Bath House
+
+
+The Bath House---------------------------------------------
+Do the Trial either on top of the zone or the left
+Then top or left of the zone to Exit > The High Gardens
+
+Second time here go right from Waypoint to 
+Exit > The Lunaris Concourse
+
+
+The Lunaris Concourse--------------------------------------
+Go up and right for Waypoint then up and left to
+Exit > Lunaris Temple
+
+Second time here, after beating both temples, go down and 
+right to Exit > Harbour Bridge
+
+
+The Lunaris Temple Level 1---------------------------------
+Follow the carpets, get the Waypoint, Exit > Level 2
+
+
+The Lunaris Temple Level 2---------------------------------
+Always go up stairs if you find them, should be two sets
+After stairs there will be vases on the opposite wall, 
+    pick the side where there is only one
+Logout after boss then in Town Waypoint > Deodre's Cesspool
+CRAFT - Minions
+RECOMMEND capped cold resistance
+
+
+The Quay---------------------------------------------------
+Follow bottom edge of the map the whole zone
+Go down from the entrance to get the quest item, then
+go right to fight Tolman, then go up and right to
+Exit > The Grain Gate
+
+
+The Grain Gate---------------------------------------------
+Only enter and leave buildings that have guard corpses
+Kill the Gemlings then Exit > The Imperial Fields
+
+
+The Imperial Fields----------------------------------------
+Follow the road until the end, then keep going that way
+Exit > The Solaris Temple
+
+
+The Solaris Concourse--------------------------------------
+Skip this zone, faster to get to Harbour Bridge by
+Logout, Waypoint > Lunaris Concourse > The Harbour Bridge
+
+
+The Solaris Temple Level 1---------------------------------
+Go down and left, then up and left for the Waypoint, which
+is always on the path. Then go up and left to 
+Exit > Level 2
+
+
+The Solaris Temple Level 2---------------------------------
+Follow the carpets, kill the boss then logout
+In Town Waypoint > The Lunaris Concourse
+RECOMMEND capped fire resistance
+
+
+The Harbour Bridge-----------------------------------------
+Farm here before Boss if you are under leveled
+Follow the path top and right to find the boss
+RECOMMEND capped fire and cold resist
+

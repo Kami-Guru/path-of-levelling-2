@@ -1,0 +1,129 @@
+Act 3 Notes------------------------------------------------
+
+
+
+
+
+
+
+The City of Sarn-------------------------------------------
+Don't forget to talk to Clarissa
+Exit > Town > The Slums
+CRAFT - Movement Speed
+
+
+The Slums--------------------------------------------------
+Find the grates to the sewers
+Then Exit > The Crematorium
+
+
+The Crematorium--------------------------------------------
+Try left first, get Waypoint
+Do the trial, get the craft, kill Piety, 
+pick up the bracelet then tp/logout
+In Town talk to Clarissa then exit > The Sewers
+CRAFT - Fire damage
+
+
+The Sewers-------------------------------------------------
+First bust before Waypoint
+Second is just after it 
+Last is up and right, then exit > The Marketplace
+ 
+Use the Sulphite, Get the craft, Exit > The Ebony Barracks
+CRAFT - Physical damage
+
+
+The Marketplace--------------------------------------------
+Skip the quest item
+Usually up and right, then go through the statue hall
+Get the Waypoint then exit > The Catacombs
+ 
+Second time here right hand wall follow to find the exit
+Exit > The Battlefront
+
+
+The Catacombs----------------------------------------------
+Do the trial, get the craft, then logout
+In Town Waypoint > The Marketplace
+CRAFT - Ele Damage w/ Attacks
+
+
+The Battlefront--------------------------------------------
+Go up and left for the Waypoint 
+Spool is usually down/left from Waypoint
+Then go right from Waypoint to Exit > The Docks
+
+Second time here go up to Exit > The Solaris Temple
+
+
+The Solaris Temple Level 1---------------------------------
+Get the waypoint, follow the carpets
+Exit > Solaris Temple Level 2
+
+
+The Solaris Temple Level 2---------------------------------
+Follow the carpets, turn in Ribbon Spool, logout
+In Town Waypoint > The Sewers
+CRAFT - Cold damage
+
+
+The Docks--------------------------------------------------
+Get Level 24 here
+Usually left side, get the Sulphite then logout
+In Town turn in quests, Waypoint > The Battlefront
+
+
+The Ebony Barracks-----------------------------------------
+Go up/left, kill General Gravicus then exit is usually up
+Don't forget the Waypoint!
+Exit > The Lunaris Temple
+ 
+Second time here go right to Exit > The Imperial Gardens
+
+
+The Lunaris Temple Level 1---------------------------------
+Don't kill Kole, follow the carpets, get the Waypoint
+Exit > The Lunaris Temple Level 2
+
+
+The Lunaris Temple Level 2---------------------------------
+Always go up stairs if you find them, should be two sets
+After stairs there will be carts on both sides, 
+    pick the side where there is only one
+Kill Piety, get the craft and TP/Logout
+In town turn in quests then Waypoint > The Ebony Barracks
+CRAFT - Lightning damage
+
+
+The Imperial Gardens---------------------------------------
+Follow the road until the end, get the waypoint
+[OPTIONAL] The Library is up/left from Waypoint
+To the Trial, usually up from Waypoint
+Then go right from Waypoint to Exit > The Sceptre Of God
+CRAFT - All attributes
+
+
+The Library------------------------------------------------
+Find Waypoint in the middle of the zone and talk to Siosa
+Exit > The Archives to do his quest
+ 
+Second time here turn in quest and buy gems
+Logout then Waypoint > The Imperial Gardens
+
+
+The Archives-----------------------------------------------
+Get the 4 pages then logout and Waypoint > The Library
+Bring currency when buying gems from Siosa
+
+
+The Sceptre of God-----------------------------------------
+Exits spawn in a random corner, often diagonally across
+Exit > The Upper Sceptre Of God
+
+
+The Upper Sceptre of God-----------------------------------
+Get some cold and lightning resist before fighting Dominus
+Exits spawn in a random corner, often diagonally across
+Kill Dominus then exit > The Aqueduct
+

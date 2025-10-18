@@ -4,8 +4,10 @@
 	"files": ["dist-electron", "dist-react"],
 	"extraResources": [
 		"dist-electron/ipc/preload.cjs",
-		"src/main/Builds/**",
-		"src/main/Settings/defaultSettings.json",
+		"src/main/profiles/poe1/builds/**",
+		"src/main/profiles/poe2/builds/**",
+		"src/main/profiles/poe1/defaultSettings.json",
+		"src/main/profiles/poe2/defaultSettings.json",
 		"src/renderer/assets/**"
 	],
 	"asarUnpack": ["**/*.node"],

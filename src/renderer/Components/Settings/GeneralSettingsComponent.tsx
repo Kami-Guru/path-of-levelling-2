@@ -5,7 +5,7 @@ export function GeneralSettingsComponent() {
     const [clientPath, setClientPath] = useState('');
     const [isClientPathSaveClicked, setIsClientPathSaveClicked] = useState(false);
     const [isClientWatcherActive, setIsClientWatcherActive] = useState(Boolean);
-    
+
     // This basically just records keystrokes in the input component so that the text
     // is actually stored.
     const handleClientPathChange = (event: any) => {
@@ -14,8 +14,7 @@ export function GeneralSettingsComponent() {
 
     // Get initial state - this is required for the input to show the current client path.
     useEffect(() => {
-        //@ts-ignore
-        window.electron.getClientPath().then((clientPath: string) => {
+        window.electron.getClientPath().then((clientPath) => {
             setClientPath(clientPath);
         });
     }, []);
@@ -23,8 +22,7 @@ export function GeneralSettingsComponent() {
     // Post the clientPath provided by the user and get a bool saying whether or not the
     // log watcher was activated.
     const handleSaveClientPathClicked = (event: any) => {
-        //@ts-ignore
-        window.electron.saveClientPath(clientPath).then((isWatcherActive: boolean) => {
+        window.electron.saveClientPath(clientPath).then((isWatcherActive) => {
             setIsClientWatcherActive(isWatcherActive);
             setIsClientPathSaveClicked(true);
         });
@@ -32,9 +30,7 @@ export function GeneralSettingsComponent() {
 
     // Get initial state for whether or not the client log reader was attached.
     useEffect(() => {
-        //@ts-ignore
-        window.electron
-            .getIsClientWatcherActive()
+        window.electron.getIsClientWatcherActive()
             .then((isClientWatcherActive: boolean) => {
                 setIsClientWatcherActive(isClientWatcherActive);
             });

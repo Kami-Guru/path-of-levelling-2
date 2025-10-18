@@ -1,63 +1,50 @@
-import fs from 'fs';
 import log from 'electron-log';
-import Store from 'electron-store';
-import path from 'path';
-import { getBuildsRootPath } from '../pathResolver.js';
+import { objectFactory } from '../objectFactory.js';
+import { SettingsService } from '../services/Settings.js';
+import { LevelTracker } from './LevelTracker.js';
+import { Build, GemBuild, GemSetup } from '../zodSchemas/schemas.js';
 
 // TODO: GemTracker owns builds cuz I haven't added any build stuff to anything else.
 export class GemTracker {
-	store: Store;
-
 	//TODO: move this when I have a Build class or something better than this
-	buildName: string;
-	allBuildNames: string[]
-	gemBuild: GemBuild;
+	buildName: string = "Default";
+	allBuildNames: string[] = ["Default"];
+	gemBuild: GemBuild = Object();
 
 	// Current setup - shown in the UI
-	gemSetup: GemSetup;
-	allGemSetups: GemSetup[];
-	allGemSetupLevels: number[];
+	gemSetup: GemSetup = Object();
+	allGemSetups: GemSetup[] = Object();
+	allGemSetupLevels: number[] = [0];
 
-	constructor() {
-		this.store = new Store({ name: "builds", accessPropertiesByDotNotation: false });
-
-		this.buildName = '';
-		this.allBuildNames = [];
-		this.gemBuild = Object();
-
-		this.allGemSetupLevels = [0];
-		this.allGemSetups = Object();
-
-		// Current setup
-		this.gemSetup = Object();
+	constructor(settingsService: SettingsService, levelTracker: LevelTracker) {
+		this.loadGemSetup(settingsService.getBuildName())
+		this.setGemSetupFromPlayerLevel(levelTracker.playerLevel);
 	}
 
-	// Crawls the src/main/Builds folder for default builds, and if the user does not have it in their
-	// builds.json Store, add it there.
-	async fillMissingBuildsWithDefaults() {
-		const buildsDir = getBuildsRootPath();
-		const buildFolders = fs.readdirSync(buildsDir, { withFileTypes: true })
-			.filter(dirent => dirent.isDirectory()
-				&& dirent.name !== "template")
-			.map(dirent => dirent.name);
+	init() { }
 
-		for (const folder of buildFolders) {
-			const buildPath = path.join(buildsDir, folder, 'build.json');
-			if (!fs.existsSync(buildPath)) continue;
-
-			const buildData = JSON.parse(fs.readFileSync(buildPath, 'utf-8'));
-			const buildName = buildData.buildName;
-			if (!this.store.get(buildName)) {
-				this.store.set(buildName, buildData);
-			}
+	getGemDataDto(): GemDataDto {
+		return {
+			allGemSetupLevels: this.allGemSetupLevels,
+			gemSetupLevel: this.gemSetup.level,
+			gemLinks: this.gemSetup.gemLinks
 		}
+	}
+
+	getGemSettingsDto(): GemSettingsDto {
+		return {
+			buildName: this.buildName,
+			allBuildNames: this.allBuildNames,
+			allGemSetupLevels: this.allGemSetupLevels,
+			allGemSetups: this.allGemSetups,
+		};
 	}
 
 	//TODO Seriously I need to get all this build stuff out of gem tracker
 	saveNewBuild(newBuildName: string) {
 		log.info('Saving new build:', newBuildName);
 
-		if (this.store.get(newBuildName)) {
+		if (objectFactory.getStoreService().getBuild(newBuildName)) {
 			log.warn('Build already exists, not saving:', newBuildName);
 			return;
 		}
@@ -76,18 +63,18 @@ export class GemTracker {
 			}
 		};
 
-		this.store.set(newBuildName, newBuild);
+		objectFactory.getStoreService().setBuild(newBuildName, newBuild);
 	}
 
 	deleteBuild(buildName: string) {
 		log.info('Deleting build:', buildName);
 
-		if (!this.store.get(buildName)) {
+		if (!objectFactory.getStoreService().getBuild(buildName)) {
 			log.warn('Build does not exist, not deleting:', buildName);
 			return;
 		}
 
-		this.store.delete(buildName);
+		objectFactory.getStoreService().deleteBuild(buildName);
 	}
 
 	loadGemSetup(buildName: string) {
@@ -95,14 +82,14 @@ export class GemTracker {
 
 		//TODO this should go in a real Build class or whatever
 		this.buildName = buildName;
-		this.allBuildNames = Object.keys(this.store.store);
+		this.allBuildNames = objectFactory.getStoreService().getAllBuildNames();
 
-		var build = this.store.get(buildName) as Build;
+		var build = objectFactory.getStoreService().getBuild(buildName);
 
 		if (!build) {
 			log.warn('Could not load gem setup, build does not exist: ' + buildName)
 			log.warn('Loading default gem setup')
-			var build = this.store.get('Default') as Build;
+			build = objectFactory.getStoreService().getBuild('Default')!;
 		}
 
 		this.gemBuild = build.gemBuild
@@ -145,25 +132,9 @@ export class GemTracker {
 			gemSetups: gemSetups
 		};
 
-		this.store.set(buildName, {
-			...this.store.get(buildName) as Build,
+		objectFactory.getStoreService().setBuild(buildName, {
+			...objectFactory.getStoreService().getBuild(buildName) ?? { buildName: buildName },
 			gemBuild: newGemBuild
 		});
 	}
 }
-
-export type Build = {
-	buildName: string;
-	gemBuild: GemBuild;
-}
-
-export type GemBuild = {
-	changedByUser: boolean;
-	gemSetups: GemSetup[];
-}
-
-export type GemSetup = {
-	level: number;
-	gemLinks: string[];
-	gemSources: string[];
-};
