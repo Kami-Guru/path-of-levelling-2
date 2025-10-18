@@ -1,22 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
-import { Rnd } from 'react-rnd';
-import { ZoneDataDto } from '../../../main/ipc/apiInterface';
+import { useEffect, useRef, useState } from "react";
+import { Rnd } from "react-rnd";
+import { ZoneDataDto, ZoneSelectedRequest } from "../../../main/ipc/apiInterface";
 
-export function ZoneNotesComponent(props: {
-	sharedZoneCode: string;
-	setSharedZoneCode: any;
-}) {
+export function ZoneNotesComponent(props: { sharedZoneCode: string; setSharedZoneCode: any }) {
 	// Create state for zone dropdown
 	const [zoneDropdown, setZoneDropdown] = useState({
-		actNameSelected: '',
-		zoneNameSelected: '',
-		allActNames: [''],
-		allZoneNames: [''],
-		currentActNotes: '',
-		currentZoneNotes: '',
+		actNameSelected: "",
+		zoneNameSelected: "",
+		allActNames: [""],
+		allZoneNames: [""],
+		currentActNotes: "",
+		currentZoneNotes: "",
 	});
 
-	const setZoneDropdownFromTracker = (zoneTracker: ZoneDataDto) => {
+	const setZoneDropdownFromDto = (zoneTracker: ZoneDataDto) => {
 		setZoneDropdown({
 			actNameSelected: zoneTracker.act,
 			zoneNameSelected: zoneTracker.zone,
@@ -27,12 +24,12 @@ export function ZoneNotesComponent(props: {
 		});
 	};
 
-	//Subscribe to the zone updates pushed from log tracker
+	// Subscribe to the zone updates pushed from log tracker
 	useEffect(() => {
 		window.electron.subscribeToZoneNotesUpdates((zoneTracker) => {
 			props.setSharedZoneCode(zoneTracker.zoneCode);
 
-			setZoneDropdownFromTracker(zoneTracker);
+			setZoneDropdownFromDto(zoneTracker);
 		});
 	}, []);
 
@@ -41,24 +38,36 @@ export function ZoneNotesComponent(props: {
 		window.electron.getZoneState().then((zoneTracker) => {
 			props.setSharedZoneCode(zoneTracker.zoneCode);
 
-			setZoneDropdownFromTracker(zoneTracker);
+			setZoneDropdownFromDto(zoneTracker);
 		});
 	}, []);
 
 	// Handle user updates to zone dropdown
 	const handleZoneDropdownSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		// Post the change to main process and await
-		if (event.target.name == 'actNameSelected') {
-			window.electron.postActSelected(event.target.value).then((zoneTracker) => {
-				props.setSharedZoneCode(zoneTracker.zoneCode);
-				setZoneDropdownFromTracker(zoneTracker);
+		if (event.target.name == "actNameSelected") {
+			console.log("Posting act selected:", event.target.value);
+
+			window.electron.postActSelected(event.target.value).then((zoneDataDto) => {
+				console.log("Received zone data dto:", zoneDataDto);
+
+				props.setSharedZoneCode(zoneDataDto.zoneCode);
+				setZoneDropdownFromDto(zoneDataDto);
 			});
-		} else if (event.target.name == 'zoneNameSelected') {
-			window.electron.postZoneSelected(event.target.value, zoneDropdown.actNameSelected)
-				.then((zoneTracker: any) => {
-					props.setSharedZoneCode(zoneTracker.zoneCode);
-					setZoneDropdownFromTracker(zoneTracker);
-				});
+		} else if (event.target.name == "zoneNameSelected") {
+			const zoneSelectedRequest: ZoneSelectedRequest = {
+				zoneSelected: event.target.value,
+				actSelected: zoneDropdown.actNameSelected,
+			};
+
+			console.log("Posting zoneSelectedRequest:", zoneSelectedRequest);
+
+			window.electron.postZoneSelected(zoneSelectedRequest).then((zoneDataDto) => {
+				console.log("Received zone data dto:", zoneDataDto);
+
+				props.setSharedZoneCode(zoneDataDto.zoneCode);
+				setZoneDropdownFromDto(zoneDataDto);
+			});
 		}
 
 		// Update the dropdown selection
@@ -74,13 +83,14 @@ export function ZoneNotesComponent(props: {
 	const [rndState, setRndState] = useState({
 		x: 0,
 		y: 0,
-		height: '200',
-		width: '400',
+		height: "200",
+		width: "400",
 	});
 
 	// Get initial state for zone tracker position
 	useEffect(() => {
-		window.electron.getZoneOverlayPositionSettings()
+		window.electron
+			.getZoneOverlayPositionSettings()
 			.then((zoneOverlayPositionSettings: any) => {
 				setRndState({
 					x: zoneOverlayPositionSettings.x,
@@ -138,10 +148,8 @@ export function ZoneNotesComponent(props: {
 			resizeHandleComponent={
 				moveMode
 					? {
-						bottomRight: (
-							<div className="RndResizeCircleHandle"></div>
-						),
-					}
+							bottomRight: <div className="RndResizeCircleHandle"></div>,
+						}
 					: {}
 			}
 		>
@@ -168,10 +176,7 @@ export function ZoneNotesComponent(props: {
 				>
 					{zoneDropdown.allActNames.map(function (act: any) {
 						return (
-							<option
-								value={act}
-								selected={act == zoneDropdown.actNameSelected}
-							>
+							<option value={act} selected={act == zoneDropdown.actNameSelected}>
 								{act}
 							</option>
 						);

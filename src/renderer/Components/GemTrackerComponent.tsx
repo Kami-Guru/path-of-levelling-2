@@ -73,7 +73,7 @@ export function GemTrackerComponent() {
 	// Get initial state for gem tracker position
 	useEffect(() => {
 		window.electron.getGemOverlayPositionSettings()
-			.then((gemOverlayPositionSettings: any) => {
+			.then((gemOverlayPositionSettings) => {
 				setRndState({
 					x: gemOverlayPositionSettings.x,
 					y: gemOverlayPositionSettings.y,

@@ -1,18 +1,18 @@
-import { BrowserWindow, webContents } from 'electron';
-import log from 'electron-log';
-import fs from 'fs';
-import { objectFactory } from '../objectFactory.js';
-import { ipcWebContentsSend } from '../ipc/ipcWrappers.js';
+import { BrowserWindow, webContents } from "electron";
+import log from "electron-log";
+import fs from "fs";
+import { objectFactory } from "../objectFactory.js";
+import { ipcWebContentsSend } from "../ipc/ipcWrappers.js";
 
 export class LogWatcherService {
 	newZoneRegex: RegExp;
 	levelUpRegex: RegExp;
-	watchedFilePath: string = '';
+	watchedFilePath: string = "";
 	previousFileSize: number;
 
 	constructor() {
 		this.newZoneRegex = RegExp('Generating level (.*) area "(.*)" with seed');
-		this.levelUpRegex = RegExp('is now level (.*)');
+		this.levelUpRegex = RegExp("is now level (.*)");
 
 		this.previousFileSize = 0;
 
@@ -25,20 +25,21 @@ export class LogWatcherService {
 
 	// The fs.watchFile is the watcher that gets changes from client.txt
 	watchClientTxt(mainWindow: BrowserWindow) {
-		log.info('Trying to subscribe to Client.txt');
+		log.info("Trying to subscribe to Client.txt");
 		const filePathGuess = objectFactory.getSettingsService().getClientTxtPath();
 
 		try {
 			this.previousFileSize = fs.statSync(filePathGuess).size;
-		} catch (e: any) { // TODO shouldn't I just catch whatever error ENONET is separately?
+		} catch (e: any) {
+			// TODO shouldn't I just catch whatever error ENONET is separately?
 			// This flag basically displays a warning on the UI telling the user to
 			// update their client txt path.
 			objectFactory.getStateTracker().logWatcherActive = false;
 
-			if ((e.code = 'ENOENT')) {
+			if ((e.code = "ENOENT")) {
 				//@ts-ignore
 				log.error(
-					`Could not subscribe to client txt changes, wrong client path! ${filePathGuess}`,
+					`Could not subscribe to client txt changes, wrong client path! ${filePathGuess}`
 				);
 				return;
 			}
@@ -52,7 +53,7 @@ export class LogWatcherService {
 
 		objectFactory.getStateTracker().logWatcherActive = true;
 		this.watchedFilePath = filePathGuess;
-		log.info('Successfully subscribed to Client.txt');
+		log.info("Successfully subscribed to Client.txt");
 
 		fs.watchFile(this.watchedFilePath, (current, previous) => {
 			var data = this.readNewLines(current, previous);
@@ -63,19 +64,18 @@ export class LogWatcherService {
 
 			var shouldUpdateZoneTracker = false;
 			// handle new zone code
-			if (data.zoneCode != '') {
-				shouldUpdateZoneTracker = objectFactory.getZoneTracker().saveZoneFromCode(
-					data.zoneCode
-				);
+			if (data.zoneCode != "") {
+				shouldUpdateZoneTracker = objectFactory
+					.getZoneTracker()
+					.saveZoneFromCode(data.zoneCode);
 			}
 
 			var shouldUpdateLevelTracker;
 			if (data.monsterLevel > 0 || data.playerLevel > 0) {
 				shouldUpdateLevelTracker = true;
-				objectFactory.getLevelTracker().savePlayerOrMonsterLevel(
-					data.playerLevel,
-					data.monsterLevel
-				);
+				objectFactory
+					.getLevelTracker()
+					.savePlayerOrMonsterLevel(data.playerLevel, data.monsterLevel);
 			}
 
 			var shouldUpdateGemTracker;
@@ -86,24 +86,30 @@ export class LogWatcherService {
 
 			//send data to the renderer
 			if (shouldUpdateZoneTracker) {
-				ipcWebContentsSend('zoneUpdatesFromLog',
+				ipcWebContentsSend(
+					"zoneUpdatesFromLog",
 					mainWindow.webContents,
-					objectFactory.getZoneTracker().getZoneDataDto());
+					objectFactory.getZoneTracker().getZoneDataDto()
+				);
 
-				ipcWebContentsSend('zoneLayoutImageUpdates',
+				ipcWebContentsSend(
+					"zoneLayoutImageUpdates",
 					mainWindow.webContents,
-					objectFactory.getZoneTracker().zoneImageFilePaths);
+					objectFactory.getZoneTracker().zoneImageFilePaths
+				);
 			}
 
 			if (shouldUpdateLevelTracker) {
-				ipcWebContentsSend('subscribeToLevelUpdates',
+				ipcWebContentsSend(
+					"subscribeToLevelUpdates",
 					mainWindow.webContents,
 					objectFactory.getLevelTracker().getLevelDataDto()
 				);
 			}
 
 			if (shouldUpdateGemTracker) {
-				ipcWebContentsSend('subscribeToGemUpdates',
+				ipcWebContentsSend(
+					"subscribeToGemUpdates",
 					mainWindow.webContents,
 					objectFactory.getGemTracker().getGemDataDto()
 				);
@@ -130,7 +136,9 @@ export class LogWatcherService {
 		}
 
 		// Figure out size of the buffer
-		var newFileSize: number = fs.statSync(objectFactory.getSettingsService().getClientTxtPath()).size;
+		var newFileSize: number = fs.statSync(
+			objectFactory.getSettingsService().getClientTxtPath()
+		).size;
 		var sizeDiff: number = newFileSize - this.previousFileSize;
 
 		//If we get a negative difference, the file was reset, so we read the whole
@@ -143,7 +151,10 @@ export class LogWatcherService {
 		var buffer = Buffer.alloc(sizeDiff);
 
 		//read the file and save our place
-		var fileDescriptor = fs.openSync(objectFactory.getSettingsService().getClientTxtPath(), 'r');
+		var fileDescriptor = fs.openSync(
+			objectFactory.getSettingsService().getClientTxtPath(),
+			"r"
+		);
 		fs.readSync(fileDescriptor, buffer, 0, sizeDiff, this.previousFileSize);
 		fs.closeSync(fileDescriptor);
 
@@ -153,7 +164,8 @@ export class LogWatcherService {
 		//read the buffer here
 		var data = this.parseBuffer(buffer);
 
-		log.info('New lines had data', data);
+		log.info("New lines had data", data);
+		log.debug(`"${data.zoneCode}": {\n"act": "Act 10",\n"zoneName": ""\n},`);
 		return data;
 	}
 
@@ -161,7 +173,7 @@ export class LogWatcherService {
 		// Set invalid values that we can check against later.
 		var playerLevel = 0;
 		var monsterLevel = 0;
-		var zoneCode = '';
+		var zoneCode = "";
 
 		var newLines = buffer.toString();
 

@@ -85,6 +85,8 @@ export class ZoneTracker {
 	// We basically need to switch to that act, then set everything based on the first zone
 	// in that act as a default.
 	saveZoneFromActName(actName: string) {
+		log.info('Saving zone from act name:', actName);
+
 		// returns the first [key, value] pair for the act, which should give the first zone.
 		const zoneCodeToZoneReference = Object.entries(this.zoneReferenceData).find(([key, value]) => value.act === actName);
 		if (zoneCodeToZoneReference == null) {
@@ -109,10 +111,14 @@ export class ZoneTracker {
 	// This is called when someone selects a zone in the dropdown in the UI
 	// In this case the act + name is enough to get the exact zone they want.
 	saveZoneFromZoneNameAndActName(zoneName: string, actName: string) {
+		log.info("Saving zone from act name:", actName, "and zone name:", zoneName);
+
 		// returns the first [key, value] pair for the act, which should give the first zone.
 		const zoneCodeToZoneReference = Object.entries(this.zoneReferenceData)
 			.find(([key, value]) => value.act === actName && value.zoneName === zoneName);
+		
 		if (zoneCodeToZoneReference == null) {
+			log.info("Could not find zone for act name:", actName, "and zone name:", zoneName);
 			return false;
 		}
 

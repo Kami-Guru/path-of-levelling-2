@@ -186,6 +186,7 @@ function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatch
 	});
 
 	ipcMainHandle("postZoneSelected", async (event, zoneSelectedRequest) => {
+		console.log("Updating zone from zoneSelectedRequest:", zoneSelectedRequest);
 		// Update zone based on zone and act selected
 		objectFactory
 			.getZoneTracker()

@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { Rnd } from 'react-rnd';
+import { LevelDataDto } from '../../main/ipc/apiInterface';
 
 export function LevelTrackerComponent() {
 	//TODO need to do a lot of renaming here since this was copied from zone tracker
 	//TODO eg there is no dropdown, you can't even input on the level tracker currently
 	const [levelDropdown, setLevelDropdown] = useState({
-		playerLevel: Number,
-		monsterLevel: Number,
-		expMulti: Number,
+		playerLevel: 0,
+		monsterLevel: 0,
+		expMulti: 1,
 	});
 
-	const setLevelDropdownFromTracker = (levelTracker: any) => {
+	const setLevelDropdownFromTracker = (levelTracker: LevelDataDto) => {
 		setLevelDropdown({
 			playerLevel: levelTracker.playerLevel,
 			monsterLevel: levelTracker.monsterLevel,
@@ -52,7 +53,7 @@ export function LevelTrackerComponent() {
 	// Get initial state for level tracker position
 	useEffect(() => {
 		window.electron.getLevelOverlayPositionSettings()
-			.then((levelOverlayPositionSettings: any) => {
+			.then((levelOverlayPositionSettings) => {
 				setRndState({
 					x: levelOverlayPositionSettings.x,
 					y: levelOverlayPositionSettings.y,

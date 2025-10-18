@@ -41,7 +41,7 @@ declare global {
 			subscribeToZoneNotesUpdates: (callback: (zoneDataDto: ZoneDataDto) => void) => void;
 			getZoneState: () => Promise<ZoneDataDto>;
 			postActSelected: (actSelected: string) => Promise<ZoneDataDto>;
-			postZoneSelected: (zoneSelected: string, actSelected: string) => Promise<ZoneDataDto>;
+			postZoneSelected: (zoneSelectedRequest: ZoneSelectedRequest) => Promise<ZoneDataDto>;
 
 			subscribeToZoneLayoutImageUpdates: (callback: (paths: string[]) => void) => void;
 			getLayoutImagePaths: () => Promise<string[]>;
