@@ -165,7 +165,6 @@ export class LogWatcherService {
 		var data = this.parseBuffer(buffer);
 
 		log.info("New lines had data", data);
-		log.debug(`"${data.zoneCode}": {\n"act": "Act 10",\n"zoneName": ""\n},`);
 		return data;
 	}
 

@@ -103,9 +103,9 @@ export function LevelTrackerComponent() {
 			bounds="parent"
 			disableDragging={!moveMode}
 			enableResizing={{
-				top: false,
+				top: moveMode,
 				right: moveMode,
-				bottom: false,
+				bottom: moveMode,
 				left: moveMode,
 				topRight: false,
 				bottomRight: false,

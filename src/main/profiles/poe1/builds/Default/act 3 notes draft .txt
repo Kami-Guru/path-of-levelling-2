@@ -1,9 +1,15 @@
 Act 3 Notes------------------------------------------------
+Lost in Love:         Lvl 24 Gems (Curses, Warcries, Anger)
+Sever the Right Hand: Lvl 28 Gems
+Fixture of Fate:      Siosa (Vendor w All Gems)
+Trials: Crematorium, Catacombs, Imperial Gardens
 
+Boots + Aug + Quicksilver = MS boots
+Lvl 24 for 20% Movespeed
+Lvl 32 for 25% Movespeed
+iLvl 25 for 4-socket (vendors sell at player level 24)
 
-
-
-
+Lvl 24 Enter Docks, 27 Piety, 28 Dominus
 
 
 The City of Sarn-------------------------------------------
@@ -27,8 +33,10 @@ CRAFT - Fire damage
 
 The Sewers-------------------------------------------------
 First bust before Waypoint
-Second is just after it 
-Last is up and right, then exit > The Marketplace
+Second is just after it
+If second bust is in big room last bust is up, otherwise
+    last bust is right
+Exit is up and left, exit > The Marketplace
  
 Use the Sulphite, Get the craft, Exit > The Ebony Barracks
 CRAFT - Physical damage
@@ -69,9 +77,9 @@ CRAFT - Cold damage
 
 
 The Docks--------------------------------------------------
-Get Level 24 here
+Get a lot of XP here
 Usually left side, get the Sulphite then logout
-In Town turn in quests, Waypoint > The Battlefront
+In Town Waypoint > The Battlefront
 
 
 The Ebony Barracks-----------------------------------------

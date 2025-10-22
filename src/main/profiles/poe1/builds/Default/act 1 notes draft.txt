@@ -8,7 +8,7 @@ Trials: The Lower Prison
 
 Iron Ring + Blue Gem = Sapphire Ring
 Boots + Aug + Quicksilver = MS boots
-Lvl 12 for 15% MS
+Lvl 12 for 15% Movespeed
 
 Lvl 4 Hailrake, 8-10 Brutus, 12-13 Merveil
 
