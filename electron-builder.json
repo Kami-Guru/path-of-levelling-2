@@ -6,8 +6,10 @@
 		"dist-electron/ipc/preload.cjs",
 		"src/main/profiles/poe1/builds/**",
 		"src/main/profiles/poe2/builds/**",
-		"src/main/profiles/poe1/defaultSettings.json",
-		"src/main/profiles/poe2/defaultSettings.json",
+		"src/main/profiles/poe1/referenceData/**",
+		"src/main/profiles/poe2/referenceData/**",
+		"src/main/profiles/poe1/defaultUnversionedSettings.json",
+		"src/main/profiles/poe2/defaultUnversionedSettings.json",
 		"src/renderer/assets/**"
 	],
 	"asarUnpack": ["**/*.node"],

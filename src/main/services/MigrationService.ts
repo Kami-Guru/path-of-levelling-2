@@ -230,7 +230,6 @@ export class MigrationService {
         poe2newBuildStore.set('version', 1);
 
         const migratedBuilds: Record<string, object> = {};
-        // TODO need to test that this works, type hints say it does (buildName is a string)
         for (const buildName in oldBuildStore.store) {
             migratedBuilds[buildName] = oldBuildStore.get(buildName) as object;
         }

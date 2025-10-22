@@ -123,8 +123,6 @@ export class LogWatcherService {
 		});
 	}
 
-	// TODO fix this! Should be storing the path that is actually being watched not hoping that
-	// TODO this is up to date when we want to stop watching
 	stopWatching() {
 		fs.unwatchFile(this.watchedFilePath);
 	}

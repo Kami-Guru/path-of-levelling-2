@@ -92,7 +92,7 @@ export const DefaultPoE1GameSettings = GameSettingsZodSchema.extend({
     clientTxtPath: z.string().default("C:/SteamLibrary/steamapps/common/Path of Exile 1/logs/Client.txt"),
     buildName: z.string().default("Default"),
     lastSessionState: LastSessionStateZodSchema.default({
-        zoneCode: "", //TODO what the hell is the first zone in poe1
+        zoneCode: "1_1_1",
         monsterLevel: 1,
         playerLevel: 1
     }),

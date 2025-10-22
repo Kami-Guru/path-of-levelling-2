@@ -3,17 +3,11 @@ import { objectFactory } from '../objectFactory.js';
 import { StoreService } from '../services/StoreService.js';
 
 export class LevelTracker {
-	playerLevel: number;
-	monsterLevel: number;
-	expMulti: number;
+	playerLevel: number = 0;
+	monsterLevel: number = 0;
+	expMulti: number = 0;
 
 	constructor(storeService: StoreService) {
-		//TODO This crap was just put here to get rid of ts warning, verify this is all initialised
-		//TODO and DELETE these, then //@ts-ignore the props
-		this.playerLevel = 0;
-		this.monsterLevel = 0;
-		this.expMulti = 0;
-
 		this.savePlayerOrMonsterLevel(
 			storeService.getGameSetting('lastSessionState.playerLevel'),
 			storeService.getGameSetting('lastSessionState.monsterLevel'),
