@@ -1,0 +1,85 @@
+Act 4 Notes------------------------------------------------
+Breaking The Seal:  Lvl 34 Gems
+Eternal Nightmare:  Lvl 38 Gems
+
+Boots + Aug + Quicksilver = MS boots
+Lvl 32 for 25% Movespeed
+
+Lvl 30-31 Dried Lake, 31 Normal Lab, 34-35 Malachai
+
+
+The Acqueduct----------------------------------------------
+Follow the river, exit > Town
+In Town > Dried Lake
+
+
+The Dried Lake---------------------------------------------
+Level to 31 here, Voll is either directly down, right, or
+down/right from Waypoint
+Kill Voll, get the craft, logout
+In Town exit > The Mines
+CRAFT - Attack/Cast speed
+
+
+The Mines Level 1------------------------------------------
+Exit is usually top left corner, Exit > Level 2
+
+
+The Mines Level 2------------------------------------------
+Find the spirit then exit > The Crystal Veins
+
+
+The Crystal Veins------------------------------------------
+Loop around bottom right to go to the top left exit
+Get the waypoint and crafting, then tp/logout for quest turnin
+In Town Waypoint > Act 3 for Labyrinth
+After Lab Waypoint > Crystal Veins
+
+Exit > Daresso's Dream
+ 
+Exit > Kaom's Dream
+
+Talk to Dialla, exit > The Belly Of The Beast
+G,CRAFT - Resistance
+
+
+Kaom's Dream-----------------------------------------------
+Follow passages and bridges, zig-zag up and left
+Exit > Kaom's Stronghold
+
+
+Kaom's Stronghold------------------------------------------
+Follow passages and bridges, zig-zag up and left
+Kill Kaom, logout, in Town Waypoint > The Crystal Veins
+RECOMMEND fire resist
+
+
+Daresso's Dream--------------------------------------------
+Move towards the top right, Exit > The Grand Arena
+
+
+The Grand Arena--------------------------------------------
+Move down and left from Waypoint, then follow the path
+Kill Daresso, logout, in Town Waypoint > The Crystal Veins
+RECOMMEND cold resist
+
+
+The Belly of the Beast Level 1-----------------------------
+Aim for top left, exit > Level 2
+
+
+The Belly of the Beast Level 2-----------------------------
+Get Level 34-35 before Malachai
+Aim for top left, get the craft, kill Piety > The Harvest
+CRAFT - Chaos damage
+
+
+The Harvest------------------------------------------------
+Get Level 34-35 before Malachai
+Always one boss on right side, two on the left
+
+
+The Ascent-------------------------------------------------
+Go up and right, cross the bridge and follow the road to 
+a small passage to the exit
+CRAFT - Ailment, Stun and Curse Mitigation

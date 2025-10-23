@@ -1,0 +1,133 @@
+Act 2 Notes------------------------------------------------
+Great White Beast:  Quicksilver
+Intruders in Black: Level 16 Gems (Heralds/Skitterbots)
+Sharp and Cruel:    Level 18 Gems (Supports)
+Bandits:            Alira 15% Res, Kraityn 8% Movespeed
+Trials: Crypt, Chamber of Sins 2
+
+CRAFT BENCH resistances + phys dmg
+
+Boots + Aug + Quicksilver = MS boots
+Lvl 24 for 20% Movespeed 
+iLvl 25 for 4-socket
+
+Lvl 14-15 Fidelitas, 16 Weaver, 20-22 Vaal Oversoul
+
+
+
+The Southern Forest----------------------------------------
+Follow the right wall, exit > Town 
+In Town top right exit > The Old Fields
+
+
+The Old Fields---------------------------------------------
+Follow the road, leave a portal at The Den 
+Then exit > The Crossroads
+
+
+The Den----------------------------------------------------
+Kill Great White Beast and Logout
+In Town Waypoint > The Crossroads
+
+
+The Crossroads---------------------------------------------
+Follow the road to the waypoint, then Waypoint > Town
+In Town take portal > The Den
+
+Second time here go up/left to exit > Chamber of Sins
+ 
+Third time here go down/right to exit > Fellshrine Ruins
+ 
+Fourth time here go up/right to exit > The Broken Bridge
+
+The Broken Bridge------------------------------------------
+Follow the road to the right to kill Kraityn, TP/Logout
+In Town Waypoint > The Riverways to do Einhar's Quest
+
+
+The Fellshrine Ruins---------------------------------------
+Follow the road to exit > The Crypt
+
+
+The Crypt Level 1------------------------------------------
+Do the Trial then Exit > The Crypt Level 2
+
+
+The Crypt Level 2------------------------------------------
+Shake the Golden Hand then logout, don't need to kill rare
+In Town Waypoint > The Crossroads
+
+
+The Chamber of Sins Level 1--------------------------------
+Circle to the center of the zone. 
+The hallway next to the Waypoint leads to the next zone
+Exit > The Chamber Of Sins Level 2
+
+
+The Chamber of Sins Level 2--------------------------------
+Do the Trial in top left
+Kill Fidelitas in bottom right then logout
+In Town Waypoint > The Crossroads
+
+
+The Riverways----------------------------------------------
+If Einhar quest has Farric Ursa kill it and 3 other beasts
+(chance to craft tabula)
+Follow the road, get Waypoint then exit > Western Forest
+ 
+Second time here Exit > Wetlands
+Always on the opposite side of the road from Waypoint
+
+
+The Western Forest-----------------------------------------
+Get Waypoint, go to the end of the path, kill boss and get
+Thaumatic Emblem, use it and TP/logout
+In Town Waypoint > Act 1 Bestel quest turn in
+Then Waypoint > Western Forest
+
+Second time here Exit > Weaver's Chambers 
+Always on opposite side as the broken section of road.
+
+Third time here help Alira 
+Always on same side as the broken section of road, logout
+In Town Waypoint > The Wetlands
+
+
+The Weaver's Chambers--------------------------------------
+Go left if you can, otherwise loop around right side
+Kill Weaver then TP/Logout, Waypoint > The Riverways
+
+
+The Wetlands-----------------------------------------------
+Kill Oak in top left
+Then go around top left side of camp for Waypoint
+Waypoint > The Western Forest for Alira
+
+Second time here Exit > The Vaal Ruins
+
+
+The Vaal Ruins---------------------------------------------
+Exit > The Northern Forest
+
+
+The Northern Forest----------------------------------------
+Go to the top right by following the shoreline
+Do not go in the Dread Thicket
+Exit > The Caverns
+
+
+The Dread Thicket------------------------------------------
+This zone should be skipped to save time
+
+
+The Caverns------------------------------------------------
+[OPTIONAL] Good time to go to town for more lightning res
+Try going up from waypoint 
+Exit > The Ancient Pyramid
+There's also a useless craft, skip it
+
+
+The Ancient Pyramid----------------------------------------
+Exits are usually diagonal from entrance
+Kill Vaal Oversoul, Logout, then Waypoint > Act 3
+CRAFT - Spell damage

@@ -1,0 +1,570 @@
+{
+	"1_1_1": {
+		"act": "Act 1",
+		"zoneName": "The Strand"
+	},
+	"1_1_2": {
+		"act": "Act 1",
+		"zoneName": "The Coast"
+	},
+	"1_1_2a": {
+		"act": "Act 1",
+		"zoneName": "Tidal Island"
+	},
+	"1_1_3": {
+		"act": "Act 1",
+		"zoneName": "Mud Flats"
+	},
+	"1_1_3a": {
+		"act": "Act 1",
+		"zoneName": "The Fetid Pool"
+	},
+	"1_1_4_1": {
+		"act": "Act 1",
+		"zoneName": "The Submerged Passage"
+	},
+	"1_1_4_0": {
+		"act": "Act 1",
+		"zoneName": "The Flooded Depths"
+	},
+	"1_1_5": {
+		"act": "Act 1",
+		"zoneName": "The Ledge"
+	},
+	"1_1_6": {
+		"act": "Act 1",
+		"zoneName": "The Climb"
+	},
+	"1_1_7_1": {
+		"act": "Act 1",
+		"zoneName": "The Lower Prison"
+	},
+	"1_1_7_2": {
+		"act": "Act 1",
+		"zoneName": "The Upper Prison"
+	},
+	"1_1_8": {
+		"act": "Act 1",
+		"zoneName": "Prisoner's Gate"
+	},
+	"1_1_9": {
+		"act": "Act 1",
+		"zoneName": "The Ship Graveyard"
+	},
+	"1_1_9a": {
+		"act": "Act 1",
+		"zoneName": "The Ship Graveyard Cave"
+	},
+	"1_1_11_1": {
+		"act": "Act 1",
+		"zoneName": "The Cavern of Anger"
+	},
+	"1_1_11_2": {
+		"act": "Act 1",
+		"zoneName": "The Cavern of Anger"
+	},
+	"1_2_1": {
+		"act": "Act 2",
+		"zoneName": "The Southern Forest"
+	},
+	"1_2_2": {
+		"act": "Act 2",
+		"zoneName": "The Old Fields"
+	},
+	"1_2_2a": {
+		"act": "Act 2",
+		"zoneName": "The Den"
+	},
+	"1_2_3": {
+		"act": "Act 2",
+		"zoneName": "The Crossroads"
+	},
+	"1_2_4": {
+		"act": "Act 2",
+		"zoneName": "The Broken Bridge"
+	},
+	"1_2_15": {
+		"act": "Act 2",
+		"zoneName": "The Fellshrine Ruins"
+	},
+	"1_2_5_1": {
+		"act": "Act 2",
+		"zoneName": "The Crypt Level 1"
+	},
+	"1_2_5_2": {
+		"act": "Act 2",
+		"zoneName": "The Crypt Level 2"
+	},
+	"1_2_6_1": {
+		"act": "Act 2",
+		"zoneName": "The Chamber of Sins Level 1"
+	},
+	"1_2_6_2": {
+		"act": "Act 2",
+		"zoneName": "The Chamber of Sins Level 2"
+	},
+	"1_2_7": {
+		"act": "Act 2",
+		"zoneName": "The Riverways"
+	},
+	"1_2_9": {
+		"act": "Act 2",
+		"zoneName": "The Western Forest"
+	},
+	"1_2_10": {
+		"act": "Act 2",
+		"zoneName": "The Weaver's Chambers"
+	},
+	"1_2_12": {
+		"act": "Act 2",
+		"zoneName": "The Wetlands"
+	},
+	"1_2_11": {
+		"act": "Act 2",
+		"zoneName": "The Vaal Ruins"
+	},
+	"1_2_8": {
+		"act": "Act 2",
+		"zoneName": "The Northern Forest"
+	},
+	"1_2_13": {
+		"act": "Act 2",
+		"zoneName": "The Dread Thicket"
+	},
+	"1_2_14_2": {
+		"act": "Act 2",
+		"zoneName": "The Caverns"
+	},
+	"1_2_14_3": {
+		"act": "Act 2",
+		"zoneName": "The Ancient Pyramid"
+	},
+	"1_3_1": {
+		"act": "Act 3",
+		"zoneName": "The City of Sarn"
+	},
+	"1_3_2": {
+		"act": "Act 3",
+		"zoneName": "The Slums"
+	},
+	"1_3_3_1": {
+		"act": "Act 3",
+		"zoneName": "The Crematorium"
+	},
+	"1_3_10_1": {
+		"act": "Act 3",
+		"zoneName": "The Sewers"
+	},
+	"1_3_5": {
+		"act": "Act 3",
+		"zoneName": "The Marketplace"
+	},
+	"1_3_6": {
+		"act": "Act 3",
+		"zoneName": "The Catacombs"
+	},
+	"1_3_7": {
+		"act": "Act 3",
+		"zoneName": "The Battlefront"
+	},
+	"1_3_8_1": {
+		"act": "Act 3",
+		"zoneName": "The Solaris Temple Level 1"
+	},
+	"1_3_8_2": {
+		"act": "Act 3",
+		"zoneName": "The Solaris Temple Level 2"
+	},
+	"1_3_9": {
+		"act": "Act 3",
+		"zoneName": "The Docks"
+	},
+	"1_3_13": {
+		"act": "Act 3",
+		"zoneName": "The Ebony Barracks"
+	},
+	"1_3_14_1": {
+		"act": "Act 3",
+		"zoneName": "The Lunaris Temple Level 1"
+	},
+	"1_3_14_2": {
+		"act": "Act 3",
+		"zoneName": "The Lunaris Temple Level 2"
+	},
+	"1_3_15": {
+		"act": "Act 3",
+		"zoneName": "The Imperial Gardens"
+	},
+	"1_3_17_1": {
+		"act": "Act 3",
+		"zoneName": "The Library"
+	},
+	"1_3_17_2": {
+		"act": "Act 3",
+		"zoneName": "The Archives"
+	},
+	"1_3_18_1": {
+		"act": "Act 3",
+		"zoneName": "The Sceptre of God"
+	},
+	"1_3_18_2": {
+		"act": "Act 3",
+		"zoneName": "The Upper Sceptre of God"
+	},
+	"1_4_1": {
+		"act": "Act 4",
+		"zoneName": "The Acqueduct"
+	},
+	"1_4_2": {
+		"act": "Act 4",
+		"zoneName": "The Dried Lake"
+	},
+	"1_4_3_1": {
+		"act": "Act 4",
+		"zoneName": "The Mines Level 1"
+	},
+	"1_4_3_2": {
+		"act": "Act 4",
+		"zoneName": "The Mines Level 2"
+	},
+	"1_4_3_3": {
+		"act": "Act 4",
+		"zoneName": "The Crystal Veins"
+	},
+	"1_4_4_1": {
+		"act": "Act 4",
+		"zoneName": "Kaom's Dream"
+	},
+	"1_4_4_3": {
+		"act": "Act 4",
+		"zoneName": "Kaom's Stronghold"
+	},
+	"1_4_5_1": {
+		"act": "Act 4",
+		"zoneName": "Daresso's Dream"
+	},
+	"1_4_5_2": {
+		"act": "Act 4",
+		"zoneName": "The Grand Arena"
+	},
+	"1_4_6_1": {
+		"act": "Act 4",
+		"zoneName": "The Belly of the Beast Level 1"
+	},
+	"1_4_6_2": {
+		"act": "Act 4",
+		"zoneName": "The Belly of the Beast Level 2"
+	},
+	"1_4_6_3": {
+		"act": "Act 4",
+		"zoneName": "The Harvest"
+	},
+	"1_4_7": {
+		"act": "Act 4",
+		"zoneName": "The Ascent"
+	},
+	"1_5_1": {
+		"act": "Act 5",
+		"zoneName": "The Slave Pens"
+	},
+	"1_5_2": {
+		"act": "Act 5",
+		"zoneName": "The Control Blocks"
+	},
+	"1_5_3": {
+		"act": "Act 5",
+		"zoneName": "Oriath Square"
+	},
+	"1_5_4": {
+		"act": "Act 5",
+		"zoneName": "The Templar Courts"
+	},
+	"1_5_6": {
+		"act": "Act 5",
+		"zoneName": "The Ossuary"
+	},
+	"1_5_7": {
+		"act": "Act 5",
+		"zoneName": "The Reliquary"
+	},
+	"1_5_8": {
+		"act": "Act 5",
+		"zoneName": "The Cathedral Rooftop"
+	},
+	"1_5_5": {
+		"act": "Act 5",
+		"zoneName": "The Chamber of Innocence"
+	},
+	"1_5_3b": {
+		"act": "Act 5",
+		"zoneName": "The Ruined Square"
+	},
+	"1_5_4b": {
+		"act": "Act 5",
+		"zoneName": "The Torched Courts"
+	},
+	"2_6_1": {
+		"act": "Act 6",
+		"zoneName": "The Twilight Strand"
+	},
+	"2_6_2": {
+		"act": "Act 6",
+		"zoneName": "The Coast"
+	},
+	"2_6_3": {
+		"act": "Act 6",
+		"zoneName": "The Tidal Island"
+	},
+	"2_6_4": {
+		"act": "Act 6",
+		"zoneName": "The Mud Flats"
+	},
+	"2_6_5": {
+		"act": "Act 6",
+		"zoneName": "The Karui Fortress"
+	},
+	"2_6_6": {
+		"act": "Act 6",
+		"zoneName": "The Ridge"
+	},
+	"2_6_7_1": {
+		"act": "Act 6",
+		"zoneName": "The Lower Prison"
+	},
+	"2_6_7_2": {
+		"act": "Act 6",
+		"zoneName": "Shavronne's Tower"
+	},
+	"2_6_8": {
+		"act": "Act 6",
+		"zoneName": "Prisoner's Gate"
+	},
+	"2_6_9": {
+		"act": "Act 6",
+		"zoneName": "The Western Forest"
+	},
+	"2_6_10": {
+		"act": "Act 6",
+		"zoneName": "The Riverways"
+	},
+	"2_6_12": {
+		"act": "Act 6",
+		"zoneName": "The Southern Forest"
+	},
+	"2_6_13": {
+		"act": "Act 6",
+		"zoneName": "The Cavern of Anger"
+	},
+	"2_6_14": {
+		"act": "Act 6",
+		"zoneName": "The Beacon"
+	},
+	"2_6_15": {
+		"act": "Act 6",
+		"zoneName": "The Brine King's Reef"
+	},
+	"2_7_1": {
+		"act": "Act 7",
+		"zoneName": "The Broken Bridge"
+	},
+	"2_7_2": {
+		"act": "Act 7",
+		"zoneName": "The Crossroads"
+	},
+	"2_7_3": {
+		"act": "Act 7",
+		"zoneName": "The Fellshrine Ruins"
+	},
+	"2_7_4": {
+		"act": "Act 7",
+		"zoneName": "The Crypt"
+	},
+	"2_7_5_1": {
+		"act": "Act 7",
+		"zoneName": "The Chamber of Sins Level 1"
+	},
+	"2_7_5_2": {
+		"act": "Act 7",
+		"zoneName": "The Chamber of Sins Level 2"
+	},
+	"2_7_5_map": {
+		"act": "Act 7",
+		"zoneName": "Maligaro's Sanctum"
+	},
+	"2_7_6": {
+		"act": "Act 7",
+		"zoneName": "The Den"
+	},
+	"2_7_7": {
+		"act": "Act 7",
+		"zoneName": "The Ashen Fields"
+	},
+	"2_7_8": {
+		"act": "Act 7",
+		"zoneName": "The Northern Forest"
+	},
+	"2_7_9": {
+		"act": "Act 7",
+		"zoneName": "The Dread Thicket"
+	},
+	"2_7_10": {
+		"act": "Act 7",
+		"zoneName": "The Causeway"
+	},
+	"2_7_11": {
+		"act": "Act 7",
+		"zoneName": "The Vaal City"
+	},
+	"2_7_12_1": {
+		"act": "Act 7",
+		"zoneName": "The Temple of Decay Level 1"
+	},
+	"2_7_12_2": {
+		"act": "Act 7",
+		"zoneName": "The Temple of Decay Level 2"
+	},
+	"2_8_1": {
+		"act": "Act 8",
+		"zoneName": "The Sarn Ramparts"
+	},
+	"2_8_2_1": {
+		"act": "Act 8",
+		"zoneName": "The Toxic Conduits"
+	},
+	"2_8_2_2": {
+		"act": "Act 8",
+		"zoneName": "Deodre's Cesspool"
+	},
+	"2_8_3": {
+		"act": "Act 8",
+		"zoneName": "The Grand Promenade"
+	},
+	"2_8_4": {
+		"act": "Act 8",
+		"zoneName": "The High Gardens"
+	},
+	"2_8_5": {
+		"act": "Act 8",
+		"zoneName": "The Bath House"
+	},
+	"2_8_6": {
+		"act": "Act 8",
+		"zoneName": "The Lunaris Concourse"
+	},
+	"2_8_7_1_": {
+		"act": "Act 8",
+		"zoneName": "The Lunaris Temple Level 1"
+	},
+	"2_8_7_2": {
+		"act": "Act 8",
+		"zoneName": "The Lunaris Temple Level 2"
+	},
+	"2_8_8": {
+		"act": "Act 8",
+		"zoneName": "The Quay"
+	},
+	"2_8_9": {
+		"act": "Act 8",
+		"zoneName": "The Grain Gate"
+	},
+	"2_8_10": {
+		"act": "Act 8",
+		"zoneName": "The Imperial Fields"
+	},
+	"2_8_11": {
+		"act": "Act 8",
+		"zoneName": "The Solaris Concourse"
+	},
+	"2_8_12_1": {
+		"act": "Act 8",
+		"zoneName": "The Solaris Temple Level 1"
+	},
+	"2_8_12_2": {
+		"act": "Act 8",
+		"zoneName": "The Solaris Temple Level 2"
+	},
+	"2_8_13": {
+		"act": "Act 8",
+		"zoneName": "The Harbour Bridge"
+	},
+	"2_9_1": {
+		"act": "Act 9",
+		"zoneName": "The Blood Acqueduct"
+	},
+	"2_9_2": {
+		"act": "Act 9",
+		"zoneName": "The Descent"
+	},
+	"2_9_3": {
+		"act": "Act 9",
+		"zoneName": "The Vastiri Desert"
+	},
+	"2_9_4": {
+		"act": "Act 9",
+		"zoneName": "The Oasis"
+	},
+	"2_9_5": {
+		"act": "Act 9",
+		"zoneName": "The Foothills"
+	},
+	"2_9_6": {
+		"act": "Act 9",
+		"zoneName": "The Boiling Lake"
+	},
+	"2_9_7": {
+		"act": "Act 9",
+		"zoneName": "The Tunnel"
+	},
+	"2_9_8": {
+		"act": "Act 9",
+		"zoneName": "The Quarry"
+	},
+	"2_9_9": {
+		"act": "Act 9",
+		"zoneName": "The Refinery"
+	},
+	"2_9_10_1": {
+		"act": "Act 9",
+		"zoneName": "The Belly of the Beast"
+	},
+	"2_9_10_2": {
+		"act": "Act 9",
+		"zoneName": "The Rotting Core"
+	},
+	"2_10_1": {
+		"act": "Act 10",
+		"zoneName": "The Cathedral Rooftop"
+	},
+	"2_10_2": {
+		"act": "Act 10",
+		"zoneName": "The Ravaged Square"
+	},
+	"2_10_3": {
+		"act": "Act 10",
+		"zoneName": "The Torched Courts"
+	},
+	"2_10_4": {
+		"act": "Act 10",
+		"zoneName": "The Desecrated Chambers"
+	},
+	"2_10_7": {
+		"act": "Act 10",
+		"zoneName": "The Control Blocks"
+	},
+	"2_10_8": {
+		"act": "Act 10",
+		"zoneName": "The Reliquary"
+	},
+	"2_10_9": {
+		"act": "Act 10",
+		"zoneName": "The Ossuary"
+	},
+	"2_10_5": {
+		"act": "Act 10",
+		"zoneName": "The Canals"
+	},
+	"2_10_6": {
+		"act": "Act 10",
+		"zoneName": "The Feeding Trough"
+	}
+}

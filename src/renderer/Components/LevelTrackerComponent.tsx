@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
-import { Rnd } from 'react-rnd';
+import { useEffect, useState } from "react";
+import { Rnd } from "react-rnd";
 
 export function LevelTrackerComponent() {
 	//TODO need to do a lot of renaming here since this was copied from zone tracker
 	//TODO eg there is no dropdown, you can't even input on the level tracker currently
 	const [levelDropdown, setLevelDropdown] = useState({
-		playerLevel: Number,
-		monsterLevel: Number,
-		expMulti: Number,
+		playerLevel: 0,
+		monsterLevel: 0,
+		expMulti: 1,
 	});
 
-	const setLevelDropdownFromTracker = (levelTracker: any) => {
+	const setLevelDropdownFromTracker = (levelTracker: LevelDataDto) => {
 		setLevelDropdown({
 			playerLevel: levelTracker.playerLevel,
 			monsterLevel: levelTracker.monsterLevel,
@@ -20,7 +20,6 @@ export function LevelTrackerComponent() {
 
 	//Subscribe to the level updates pushed from log tracker
 	useEffect(() => {
-		//@ts-ignore
 		window.electron.subscribeToLevelUpdates((levelTracker) => {
 			setLevelDropdownFromTracker(levelTracker);
 		});
@@ -28,7 +27,6 @@ export function LevelTrackerComponent() {
 
 	// Get initial state for level dropdown
 	useEffect(() => {
-		//@ts-ignore
 		window.electron.getLevelState().then((levelTracker) => {
 			setLevelDropdownFromTracker(levelTracker);
 		});
@@ -38,7 +36,7 @@ export function LevelTrackerComponent() {
 		// @ts-ignore
 		var diff = levelDropdown.playerLevel - levelDropdown.monsterLevel;
 
-		return 'Level Diff: ' + (diff < 0 ? '' : '+') + diff.toString();
+		return "Level Diff: " + (diff < 0 ? "" : "+") + diff.toString();
 	}
 
 	// Setting up the deggable/resizable state
@@ -47,28 +45,24 @@ export function LevelTrackerComponent() {
 	const [rndState, setRndState] = useState({
 		x: 0,
 		y: 0,
-		height: '200',
-		width: '400',
+		height: "200",
+		width: "400",
 	});
 
 	// Get initial state for level tracker position
 	useEffect(() => {
-		//@ts-ignore
-		window.electron
-			.getLevelOverlayPositionSettings()
-			.then((levelOverlayPositionSettings: any) => {
-				setRndState({
-					x: levelOverlayPositionSettings.x,
-					y: levelOverlayPositionSettings.y,
-					height: levelOverlayPositionSettings.height,
-					width: levelOverlayPositionSettings.width,
-				});
+		window.electron.getLevelOverlayPositionSettings().then((levelOverlayPositionSettings) => {
+			setRndState({
+				x: levelOverlayPositionSettings.x,
+				y: levelOverlayPositionSettings.y,
+				height: levelOverlayPositionSettings.height,
+				width: levelOverlayPositionSettings.width,
 			});
+		});
 	}, []);
 
 	const handleDrag = (e: any, d: any) => {
 		// Send new settings to client to be saved
-		//@ts-ignore
 		window.electron.saveLevelOverlayPositionSettings({
 			...rndState,
 			x: d.x,
@@ -85,7 +79,6 @@ export function LevelTrackerComponent() {
 	// @ts-ignore
 	const handleResize = (e, direction, ref, delta, position) => {
 		// Send new settings to client to be saved
-		//@ts-ignore
 		window.electron.saveLevelOverlayPositionSettings({
 			...position,
 			height: ref.style.height,
@@ -107,13 +100,12 @@ export function LevelTrackerComponent() {
 			onResizeStop={(e, direction, ref, delta, position) =>
 				handleResize(e, direction, ref, delta, position)
 			}
-
 			bounds="parent"
 			disableDragging={!moveMode}
 			enableResizing={{
-				top: false,
+				top: moveMode,
 				right: moveMode,
-				bottom: false,
+				bottom: moveMode,
 				left: moveMode,
 				topRight: false,
 				bottomRight: false,
@@ -125,10 +117,8 @@ export function LevelTrackerComponent() {
 			resizeHandleComponent={
 				moveMode
 					? {
-						bottomRight: (
-							<div className="RndResizeCircleHandle"></div>
-						),
-					}
+							bottomRight: <div className="RndResizeCircleHandle"></div>,
+						}
 					: {}
 			}
 		>

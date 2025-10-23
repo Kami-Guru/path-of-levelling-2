@@ -1,10 +1,14 @@
 {
 	"compilerOptions": {
-		"types": ["./apiTypes"],
-		// "types": ["./types"],
+		"types": [
+			"./apiTypes"
+		],
 		"target": "ESNext",
 		// "useDefineForClassFields": true,
-		"lib": ["DOM", "ESNext"]
+		"lib": [
+			"DOM",
+			"ESNext"
+		]
 		// "allowJs": false,
 		// "skipLibCheck": true,
 		// "esModuleInterop": false,
@@ -19,6 +23,15 @@
 		// "jsx": "react-jsx"
 	},
 	"files": [],
-	"exclude": ["src/main"],
-	"references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
+	"exclude": [
+		"src/main"
+	],
+	"references": [
+		{
+			"path": "./tsconfig.app.json"
+		},
+		{
+			"path": "./tsconfig.node.json"
+		}
+	]
 }

@@ -1,43 +1,68 @@
 import log from 'electron-log';
 import fs from 'fs';
 import path from 'path';
-import { getBuildPath, getZoneLayoutImagesAbsolutePath } from '../pathResolver.js';
-import zoneReferenceData from '../referenceData/zoneReferenceData.json' with { type: "json" };
+import { getZoneLayoutImagesAbsolutePath, getZoneNotesPath, getZoneReferenceDataPath } from '../pathResolver.js';
+import { objectFactory } from '../objectFactory.js';
+import { StoreService } from '../services/StoreService.js';
+import { getProfile } from '../profiles/profiles.js';
+import { ZoneReference, ZoneCodeToZoneReference } from '../zodSchemas/schemas.js';
 
 export class ZoneTracker {
-	act: string;
-	zone: string;
-	zoneCode: string;
+	act: string = "Act 1";
+	zoneName: string = "The Riverwood";
+	zoneCode: string = "G1_1";
 
 	// Used to populate the dropdowns in UI
-	allActs: string[];
-	allZonesInAct: string[]
+	allActs: string[] = [''];
+	allZonesInAct: string[] = [''];
 
 	// Used to populate zone layout images
 	zoneImageFilePaths: string[] = [''];
+	zoneReferenceData: ZoneCodeToZoneReference = Object();
 
 	// Guide
-	actNotes: string;
-	zoneNotes: string;
+	actNotes: string = '';
+	zoneNotes: string = '';
 
-	allZoneNotesPath: string
-	allZoneNotes: JSON
+	allZoneNotesPath: string = '';
+	allZoneNotes: JSON = Object();
 
-	constructor() {
-		this.act = 'Act 1';
-		this.zone = 'The Riverwood';
-		this.zoneCode = 'G1_1';
+	constructor(storeService: StoreService) {
+		this.zoneReferenceData = JSON.parse(fs.readFileSync(
+			getZoneReferenceDataPath(getProfile().Id), 'utf-8'));
 
-		this.allActs = ['']
-		this.allZonesInAct = ['']
+		// ...new Set() removes duplicates
+		this.allActs = [
+			...new Set(Object.values(this.zoneReferenceData).map((zoneReference) => zoneReference.act))
+		];
 
-		this.actNotes = '';
-		this.zoneNotes = '';
+		var zoneNotesPath = getZoneNotesPath(getProfile().Id);
 
-		this.allZoneNotesPath = '';
-		this.allZoneNotes = Object();
+		try {
+			log.info('Loading zone notes from path:', zoneNotesPath)
+			this.loadAllZoneNotes(zoneNotesPath);
+			this.saveZoneFromCode(
+				storeService.getGameSetting('lastSessionState.zoneCode'),
+				true
+			);
+		} catch (error) {
+			log.error('Could not construct ZoneTracker, with error:')
+			log.error(error)
+		}
+	}
 
-		this.allActs = zoneReferenceData.acts.map((act) =>  act.name );
+	init() { }
+
+	getZoneDataDto(): ZoneDataDto {
+		return {
+			act: this.act,
+			zone: this.zoneName,
+			zoneCode: this.zoneCode,
+			allActs: this.allActs,
+			allZonesInAct: this.allZonesInAct,
+			actNotes: this.actNotes,
+			zoneNotes: this.zoneNotes,
+		};
 	}
 
 	loadAllZoneNotes(allZoneNotesPath: string) {
@@ -59,59 +84,56 @@ export class ZoneTracker {
 	// We basically need to switch to that act, then set everything based on the first zone
 	// in that act as a default.
 	saveZoneFromActName(actName: string) {
-		var actReference = zoneReferenceData.acts.find((act) => {
-			return act.name == actName;
-		});
+		log.info('Saving zone from act name:', actName);
 
-		if (actReference == null) {
+		// returns the first [key, value] pair for the act, which should give the first zone.
+		const zoneCodeToZoneReference = Object.entries(this.zoneReferenceData).find(([key, value]) => value.act === actName);
+		if (zoneCodeToZoneReference == null) {
 			return false;
 		}
 
-		var allZonesInAct = actReference.zones.map((zoneObj) => zoneObj.name)
-		
-		this.act = actReference.name;
-		this.zone = actReference.zones[0].name;
-		this.zoneCode = actReference.zones[0].code;
-		this.allZonesInAct = allZonesInAct;
+		this.act = actName;
+		this.zoneName = zoneCodeToZoneReference[1].zoneName;
+		this.zoneCode = zoneCodeToZoneReference[0];
+
+		this.allZonesInAct = Object.entries(this.zoneReferenceData)
+			.filter(([key, value]) => value.act === this.act)
+			.map(([key, value]) => value.zoneName);
 
 		this.setZoneNotes();
 
 		this.setZoneLayoutImagePaths(this.zoneCode);
 
-		mainState.writeStateToFile();
+		objectFactory.getStateTracker().saveSessionState();
 	}
 
 	// This is called when someone selects a zone in the dropdown in the UI
 	// In this case the act + name is enough to get the exact zone they want.
 	saveZoneFromZoneNameAndActName(zoneName: string, actName: string) {
-		var actReference = zoneReferenceData.acts.find((act) => {
-			return act.name == actName;
-		});
+		log.info("Saving zone from act name:", actName, "and zone name:", zoneName);
 
-		if (actReference == null) {
-			return false;
-		}
-
-		var zoneReference = actReference.zones.find((zone) => {
-			return zone.name == zoneName;
-		});
-
-		if (zoneReference == null) {
-			return false;
-		}
-
-		var allZonesInAct = actReference.zones.map((zoneObj) => zoneObj.name)
+		// returns the first [key, value] pair for the act, which should give the first zone.
+		const zoneCodeToZoneReference = Object.entries(this.zoneReferenceData)
+			.find(([key, value]) => value.act === actName && value.zoneName === zoneName);
 		
-		this.act = actReference.name;
-		this.zone = zoneReference.name;
-		this.zoneCode = zoneReference.code;
-		this.allZonesInAct = allZonesInAct;
+		if (zoneCodeToZoneReference == null) {
+			log.info("Could not find zone for act name:", actName, "and zone name:", zoneName);
+			return false;
+		}
+
+		this.act = actName;
+		this.zoneName = zoneCodeToZoneReference[1].zoneName;
+		this.zoneCode = zoneCodeToZoneReference[0];
+
+		this.allZonesInAct = Object.entries(this.zoneReferenceData)
+			.filter(([key, value]) => value.act === this.act)
+			.map(([key, value]) => value.zoneName);
 
 		this.setZoneNotes();
 
 		this.setZoneLayoutImagePaths(this.zoneCode);
 
-		mainState.writeStateToFile();
+		objectFactory.getStateTracker().saveSessionState();
 	}
 
 	// This method takes a zoneCode and uses it to update the current state
@@ -129,43 +151,25 @@ export class ZoneTracker {
 		// There are a few reasons we want to update locally, but not save.
 		// Biggest example is when the app is first starting up and loading from file,
 		// don't need to immediately write to that file.
-		if (!updateOnly) mainState.writeStateToFile();
+		if (!updateOnly) objectFactory.getStateTracker().saveSessionState();
 
 		return true;
 	}
 
 	setZoneFromCode(zoneCode: string): boolean {
-		//TODO: Would [{Act 1, zoneCode, zoneName}] be better for the zone reference?
+		const zoneReference: ZoneReference = this.zoneReferenceData[zoneCode];
 
-		//This will turn eg C_G1_1_1 -> ["C", "G1", "1", "1"]
-		var zoneCodeData = zoneCode.split('_');
-
-		//This will look like "G1", so turn it into 1
-		var actNumber = parseInt(zoneCodeData[0].substring(1));
-
-		var actReference = zoneReferenceData.acts.find((act) => {
-			return act.name == 'Act '.concat(actNumber.toString());
-		});
-
-		if (actReference == null) {
+		if (zoneReference == undefined) {
 			return false;
 		}
 
-		var allZonesInAct = actReference.zones.map((zoneObj) => zoneObj.name)
+		this.act = zoneReference.act;
+		this.zoneName = zoneReference.zoneName;
+		this.zoneCode = zoneCode;
 
-		var zoneReference = actReference.zones.find((zone) => {
-			return zone.code == zoneCode;
-		});
-
-		if (zoneReference == null) {
-			return false;
-		}
-
-		//If we made it this far we can safely overwrite our current state
-		this.act = actReference.name;
-		this.zone = zoneReference.name;
-		this.zoneCode = zoneReference.code;
-		this.allZonesInAct = allZonesInAct;
+		this.allZonesInAct = Object.entries(this.zoneReferenceData)
+			.filter(([key, value]) => value.act === this.act)
+			.map(([key, value]) => value.zoneName);
 
 		return true;
 	}
@@ -208,19 +212,24 @@ export class ZoneTracker {
 			return directory.includes(zoneCode);
 		})
 
-		// If we couldn't find layout images, do nothing.
-		// TODO This is kinda awkward since there will be notes from the previous zone
-		// TODO displayed.
-		if (requiredDirectory == null) return false;
+		// If we couldn't find layout images, clear the file paths (i.e. clear the layout images).
+		// This is useful for towns, or for areas that don't have layout images.
+		if (requiredDirectory == null) {
+			this.zoneImageFilePaths = [];
+			return false;
+		};
 
 		const fileNames = fs.readdirSync(path.join(getZoneLayoutImagesAbsolutePath(), requiredDirectory));
 
-		if (fileNames == null || fileNames.length == 0) return false;
+		if (fileNames == null || fileNames.length == 0) {
+			this.zoneImageFilePaths = [];
+			return false;
+		}
 
 		var filePaths = fileNames.map((fileName: string) => {
 			//TODO: I have to find a better way to store this ../ stuff, this needs to 
 			//TODO: send RELATIVE filepaths, and that is FROM LayoutImageComponent.tsx :(
-			return path.join( 'Layout Images', requiredDirectory, fileName)
+			return path.join('Layout Images', requiredDirectory, fileName)
 		})
 
 		this.zoneImageFilePaths = filePaths;

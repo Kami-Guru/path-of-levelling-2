@@ -1,0 +1,109 @@
+Act 7 Notes------------------------------------------------
+Trials: The Crypt, The Chamber of Sins
+
+Check vendors every 3-4 levels
+Gambling with gold for gear gives a LOT of 4-links
+Gamble gear with stats matching colours you need
+    Armour for red, Evasion for green, ES for blue
+
+Boots + Aug + Quicksilver = MS boots
+
+Stay at lowest level without penalty
+5 levels under zone at player level 32-48
+6 levels under zone at player level 48-62
+
+
+The Broken Bridge------------------------------------------
+Find the locket for an extra Utility flask
+Follow the road to the left to Exit > Town
+
+
+The Crossroads---------------------------------------------
+Don’t forget the Waypoint!
+Follow the road for the Waypoint, then go down and right 
+Exit > The Fellshrine Ruins 
+
+Second time here go up and right from Waypoint
+Exit > The Chamber of Sins
+
+
+The Fellshrine Ruins---------------------------------------
+Follow the road, go down right to the end then go up right
+
+
+The Crypt--------------------------------------------------
+Do the trial, then open the sarcophagus for the second area
+In second area find Maligaro's map then logout
+In Town Waypoint > The Crossroads
+TRIAL - Spinning blades
+CRAFT - Damage over time
+
+
+The Chamber of Sins Level 1--------------------------------
+Loop around to the center, then activate the Waypoint
+Use the map from the Crypt in the map device
+
+Second time here after Maligaro, follow the hall by the 
+Waypoint to Exit > The Chamber of Sins Level 2
+CRAFT - Lightning damage
+
+
+The Chamber of Sins Level 2--------------------------------
+There should be a fork near the entrance, go left for Trial
+then later go right, and exit is in top right of zone, past
+where you fought Fidelitas in Act 2
+Click the cracked wall to show the exit
+Exit > The Den
+
+
+Maligaro's Sanctum-----------------------------------------
+Follow the edges of the zone, cross all the bridges, before
+the fight leave a portal in case you die
+After killing Maligaro take the portal to go back to Silk
+RECOMMEND lightning resist
+
+
+The Den----------------------------------------------------
+Either top right or top left to Exit > The Ashen Fields
+
+
+The Ashen Fields-------------------------------------------
+Follow the road to the left
+RECOMMEND phys mitigation, bleed removal
+
+
+The Northern Forest----------------------------------------
+Wall-follow the left side to Exit > The Dread Thicket
+
+Then Wall-follow the right side to Exit > The Causeway
+
+
+The Dread Thicket------------------------------------------
+Explore the zone and find the fireflies, kill Gruthkul
+CRAFT - Fire damage
+RECOMMEND physical mitigation
+
+
+The Causeway-----------------------------------------------
+Go top right to the exit. Loot Kishara's star near the exit
+Exit > The Vaal City
+CRAFT - Cold damage
+
+
+The Vaal City----------------------------------------------
+Find and follow the thick walls to guide you to the exit
+Exit > The Temple of Decay
+
+
+The Temple of Decay Level 1--------------------------------
+Just like Act 2, exits are usually diagonal from entrances
+CRAFT - Accuracy
+RECOMMEND capped lightning resist
+
+
+The Temple of Decay Level 2--------------------------------
+Same as Level 1
+Just like Act 2, exits are usually diagonal from entrances
+CRAFT - Accuracy
+RECOMMEND capped lightning resist
+

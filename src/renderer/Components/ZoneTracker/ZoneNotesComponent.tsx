@@ -1,21 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
-import { Rnd } from 'react-rnd';
+import { useEffect, useRef, useState } from "react";
+import { Rnd } from "react-rnd";
 
-export function ZoneNotesComponent(props: {
-	sharedZoneCode: string;
-	setSharedZoneCode: any;
-}) {
+
+export function ZoneNotesComponent(props: { sharedZoneCode: string; setSharedZoneCode: any }) {
 	// Create state for zone dropdown
 	const [zoneDropdown, setZoneDropdown] = useState({
-		actNameSelected: '',
-		zoneNameSelected: '',
-		allActNames: [''],
-		allZoneNames: [''],
-		currentActNotes: '',
-		currentZoneNotes: '',
+		actNameSelected: "",
+		zoneNameSelected: "",
+		allActNames: [""],
+		allZoneNames: [""],
+		currentActNotes: "",
+		currentZoneNotes: "",
 	});
 
-	const setZoneDropdownFromTracker = (zoneTracker: any) => {
+	const setZoneDropdownFromDto = (zoneTracker: ZoneDataDto) => {
 		setZoneDropdown({
 			actNameSelected: zoneTracker.act,
 			zoneNameSelected: zoneTracker.zone,
@@ -26,43 +24,50 @@ export function ZoneNotesComponent(props: {
 		});
 	};
 
-	//Subscribe to the zone updates pushed from log tracker
+	// Subscribe to the zone updates pushed from log tracker
 	useEffect(() => {
-		//@ts-ignore
 		window.electron.subscribeToZoneNotesUpdates((zoneTracker) => {
 			props.setSharedZoneCode(zoneTracker.zoneCode);
 
-			setZoneDropdownFromTracker(zoneTracker);
+			setZoneDropdownFromDto(zoneTracker);
 		});
 	}, []);
 
 	// Get initial state for zone dropdown
 	useEffect(() => {
-		//@ts-ignore
 		window.electron.getZoneState().then((zoneTracker) => {
 			props.setSharedZoneCode(zoneTracker.zoneCode);
 
-			setZoneDropdownFromTracker(zoneTracker);
+			setZoneDropdownFromDto(zoneTracker);
 		});
 	}, []);
 
 	// Handle user updates to zone dropdown
 	const handleZoneDropdownSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
 		// Post the change to main process and await
-		if (event.target.name == 'actNameSelected') {
-			//@ts-ignore
-			window.electron.postActSelected(event.target.value).then((zoneTracker) => {
-				props.setSharedZoneCode(zoneTracker.zoneCode);
-				setZoneDropdownFromTracker(zoneTracker);
+		if (event.target.name == "actNameSelected") {
+			console.log("Posting act selected:", event.target.value);
+
+			window.electron.postActSelected(event.target.value).then((zoneDataDto) => {
+				console.log("Received zone data dto:", zoneDataDto);
+
+				props.setSharedZoneCode(zoneDataDto.zoneCode);
+				setZoneDropdownFromDto(zoneDataDto);
 			});
-		} else if (event.target.name == 'zoneNameSelected') {
-			//@ts-ignore
-			window.electron
-				.postZoneSelected(event.target.value, zoneDropdown.actNameSelected)
-				.then((zoneTracker: any) => {
-					props.setSharedZoneCode(zoneTracker.zoneCode);
-					setZoneDropdownFromTracker(zoneTracker);
-				});
+		} else if (event.target.name == "zoneNameSelected") {
+			const zoneSelectedRequest: ZoneSelectedRequest = {
+				zoneSelected: event.target.value,
+				actSelected: zoneDropdown.actNameSelected,
+			};
+
+			console.log("Posting zoneSelectedRequest:", zoneSelectedRequest);
+
+			window.electron.postZoneSelected(zoneSelectedRequest).then((zoneDataDto) => {
+				console.log("Received zone data dto:", zoneDataDto);
+
+				props.setSharedZoneCode(zoneDataDto.zoneCode);
+				setZoneDropdownFromDto(zoneDataDto);
+			});
 		}
 
 		// Update the dropdown selection
@@ -78,13 +83,12 @@ export function ZoneNotesComponent(props: {
 	const [rndState, setRndState] = useState({
 		x: 0,
 		y: 0,
-		height: '200',
-		width: '400',
+		height: "200",
+		width: "400",
 	});
 
 	// Get initial state for zone tracker position
 	useEffect(() => {
-		//@ts-ignore
 		window.electron
 			.getZoneOverlayPositionSettings()
 			.then((zoneOverlayPositionSettings: any) => {
@@ -99,7 +103,6 @@ export function ZoneNotesComponent(props: {
 
 	const handleDrag = (e: any, d: any) => {
 		// Send new settings to client to be saved
-		//@ts-ignore
 		window.electron.saveZoneOverlayPositionSettings({
 			...rndState,
 			x: d.x,
@@ -116,7 +119,6 @@ export function ZoneNotesComponent(props: {
 	// @ts-ignore
 	const handleResize = (e, direction, ref, delta, position) => {
 		// Send new settings to client to be saved
-		//@ts-ignore
 		window.electron.saveZoneOverlayPositionSettings({
 			...position,
 			height: ref.style.height,
@@ -146,10 +148,8 @@ export function ZoneNotesComponent(props: {
 			resizeHandleComponent={
 				moveMode
 					? {
-						bottomRight: (
-							<div className="RndResizeCircleHandle"></div>
-						),
-					}
+							bottomRight: <div className="RndResizeCircleHandle"></div>,
+						}
 					: {}
 			}
 		>
@@ -176,10 +176,7 @@ export function ZoneNotesComponent(props: {
 				>
 					{zoneDropdown.allActNames.map(function (act: any) {
 						return (
-							<option
-								value={act}
-								selected={act == zoneDropdown.actNameSelected}
-							>
+							<option value={act} selected={act == zoneDropdown.actNameSelected}>
 								{act}
 							</option>
 						);

@@ -1,14 +1,28 @@
 import log from 'electron-log';
+import { objectFactory } from '../objectFactory.js';
+import { StoreService } from '../services/StoreService.js';
 
 export class LevelTracker {
-	playerLevel: number;
-	monsterLevel: number;
-	expMulti: number;
+	playerLevel: number = 0;
+	monsterLevel: number = 0;
+	expMulti: number = 0;
 
-	constructor() {
-		this.playerLevel = 0;
-		this.monsterLevel = 0;
-		this.expMulti = 0;
+	constructor(storeService: StoreService) {
+		this.savePlayerOrMonsterLevel(
+			storeService.getGameSetting('lastSessionState.playerLevel'),
+			storeService.getGameSetting('lastSessionState.monsterLevel'),
+			true
+		);
+	}
+
+	init() { }
+	
+	getLevelDataDto(): LevelDataDto {
+		return {
+			playerLevel: this.playerLevel,
+			monsterLevel: this.monsterLevel,
+			expMulti: this.expMulti
+		}
 	}
 
 	// It's a huge pain to have a bunch of ifs all over the place to update monster and
@@ -29,7 +43,7 @@ export class LevelTracker {
 		// There are a few reasons we want to update locally, but not save.
 		// Biggest example is when the app is first starting up and loading from file,
 		// don't need to immediately write to that file.
-		if (!updateOnly) mainState.writeStateToFile();
+		if (!updateOnly) objectFactory.getStateTracker().saveSessionState();
 	}
 
 	recalculateEXPModifier() {
@@ -82,8 +96,7 @@ export class LevelTracker {
 
 		var expMulti = Math.sqrt(
 			((this.playerLevel + 5) /
-				(this.playerLevel + 5 + Math.sqrt(effectiveDifference ** 5))) **
-				3
+				(this.playerLevel + 5 + Math.sqrt(effectiveDifference ** 5))) ** 3
 		);
 
 		if (this.playerLevel >= 95) {
