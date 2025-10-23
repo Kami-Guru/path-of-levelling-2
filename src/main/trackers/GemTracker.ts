@@ -1,8 +1,8 @@
-import log from 'electron-log';
-import { objectFactory } from '../objectFactory.js';
-import { SettingsService } from '../services/Settings.js';
-import { LevelTracker } from './LevelTracker.js';
-import { Build, GemBuild, GemSetup } from '../zodSchemas/schemas.js';
+import log from "electron-log";
+import { objectFactory } from "../objectFactory.js";
+import { SettingsService } from "../services/Settings.js";
+import { LevelTracker } from "./LevelTracker.js";
+import { Build, GemBuild, GemSetup } from "../zodSchemas/schemas.js";
 
 // TODO: GemTracker owns builds cuz I haven't added any build stuff to anything else.
 export class GemTracker {
@@ -17,18 +17,18 @@ export class GemTracker {
 	allGemSetupLevels: number[] = [0];
 
 	constructor(settingsService: SettingsService, levelTracker: LevelTracker) {
-		this.loadGemSetup(settingsService.getBuildName())
+		this.loadGemSetup(settingsService.getBuildName());
 		this.setGemSetupFromPlayerLevel(levelTracker.playerLevel);
 	}
 
-	init() { }
+	init() {}
 
 	getGemDataDto(): GemDataDto {
 		return {
 			allGemSetupLevels: this.allGemSetupLevels,
 			gemSetupLevel: this.gemSetup.level,
-			gemLinks: this.gemSetup.gemLinks
-		}
+			gemLinks: this.gemSetup.gemLinks,
+		};
 	}
 
 	getGemSettingsDto(): GemSettingsDto {
@@ -42,10 +42,10 @@ export class GemTracker {
 
 	//TODO Seriously I need to get all this build stuff out of gem tracker
 	saveNewBuild(newBuildName: string) {
-		log.info('Saving new build:', newBuildName);
+		log.info("Saving new build:", newBuildName);
 
 		if (objectFactory.getStoreService().getBuild(newBuildName)) {
-			log.warn('Build already exists, not saving:', newBuildName);
+			log.warn("Build already exists, not saving:", newBuildName);
 			return;
 		}
 
@@ -57,20 +57,21 @@ export class GemTracker {
 					{
 						level: 1,
 						gemLinks: [],
-						gemSources: []
-					}
-				]
-			}
+						gemSources: [],
+					},
+				],
+			},
+			actNotes: [],
 		};
 
 		objectFactory.getStoreService().setBuild(newBuildName, newBuild);
 	}
 
 	deleteBuild(buildName: string) {
-		log.info('Deleting build:', buildName);
+		log.info("Deleting build:", buildName);
 
 		if (!objectFactory.getStoreService().getBuild(buildName)) {
-			log.warn('Build does not exist, not deleting:', buildName);
+			log.warn("Build does not exist, not deleting:", buildName);
 			return;
 		}
 
@@ -78,7 +79,7 @@ export class GemTracker {
 	}
 
 	loadGemSetup(buildName: string) {
-		log.info('Trying to load gem setups');
+		log.info("Trying to load gem setups");
 
 		//TODO this should go in a real Build class or whatever
 		this.buildName = buildName;
@@ -87,12 +88,12 @@ export class GemTracker {
 		var build = objectFactory.getStoreService().getBuild(buildName);
 
 		if (!build) {
-			log.warn('Could not load gem setup, build does not exist: ' + buildName)
-			log.warn('Loading default gem setup')
-			build = objectFactory.getStoreService().getBuild('Default')!;
+			log.warn("Could not load gem setup, build does not exist: " + buildName);
+			log.warn("Loading default gem setup");
+			build = objectFactory.getStoreService().getBuild("Default")!;
 		}
 
-		this.gemBuild = build.gemBuild
+		this.gemBuild = build.gemBuild;
 		this.allGemSetups = build.gemBuild.gemSetups;
 
 		// This is used to populate the dropdown in the UI
@@ -100,7 +101,7 @@ export class GemTracker {
 			return setup.level;
 		});
 
-		log.info('Successfully loaded gem setups');
+		log.info("Successfully loaded gem setups");
 	}
 
 	// Returns bool representing if gem setup was actually changed
@@ -111,11 +112,11 @@ export class GemTracker {
 		});
 
 		if (foundGemSetup == null) {
-			log.info('Could not find gem setup matching level', playerLevel);
+			log.info("Could not find gem setup matching level", playerLevel);
 			return false;
 		}
 		if (foundGemSetup == this.gemSetup) {
-			log.info('Gem setup found, but same as existing. No changes made.');
+			log.info("Gem setup found, but same as existing. No changes made.");
 			return false;
 		}
 
@@ -124,17 +125,20 @@ export class GemTracker {
 	}
 
 	saveGemBuild(buildName: string, gemSetups: GemSetup[]) {
-		log.info('Saving gem setups for build:', buildName);
+		log.info("Saving gem setups for build:", buildName);
 		log.info(gemSetups);
 
 		const newGemBuild = {
 			changedByUser: true,
-			gemSetups: gemSetups
+			gemSetups: gemSetups,
 		};
 
 		objectFactory.getStoreService().setBuild(buildName, {
-			...objectFactory.getStoreService().getBuild(buildName) ?? { buildName: buildName },
-			gemBuild: newGemBuild
+			...(objectFactory.getStoreService().getBuild(buildName) ?? {
+				buildName: buildName,
+				actNotes: [],
+			}),
+			gemBuild: newGemBuild,
 		});
 	}
 }

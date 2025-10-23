@@ -231,7 +231,9 @@ export class MigrationService {
 
         const migratedBuilds: Record<string, object> = {};
         for (const buildName in oldBuildStore.store) {
-            migratedBuilds[buildName] = oldBuildStore.get(buildName) as object;
+            const oldBuild = oldBuildStore.get(buildName) as object;
+            Object.assign(oldBuild, { "actNotes": [] });
+            migratedBuilds[buildName] = oldBuild;
         }
 
         poe2newBuildStore.set('builds', migratedBuilds)
