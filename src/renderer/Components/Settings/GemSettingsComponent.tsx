@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { GemSetup } from "../../../main/zodSchemas/schemas";
-import { GemDataDto } from "../../../main/ipc/apiInterface";
 
 export function GemSettingsComponent() {
 	const [selectedBuild, setSelectedBuild] = useState("");
