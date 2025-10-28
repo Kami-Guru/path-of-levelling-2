@@ -30,6 +30,15 @@ type channelReturnTypeMapping = {
 	postDeleteBuild: GemSettingsDto;
 	saveGemSetupsForBuild: GemSettingsDto;
 
+	// Act Notes Settings
+	getActNotesSettingsState: ActNotesSettingsDto;
+	saveActNotesForBuild: ActNotesSettingsDto;
+	postResetActNoteForAct: ActNote; // Send back the default Act Note, DON'T reset the whole screen
+	postBuildSelectedFromActNotes: ActNotesSettingsDto;
+	postAddNewBuildFromActNotes: ActNotesSettingsDto;
+	postDeleteBuildFromActNotes: ActNotesSettingsDto;
+
+
 	// --- TRACKERS --- //
 	// Zone Tracker
 	zoneUpdatesFromLog: ZoneDataDto;
@@ -67,6 +76,13 @@ type channelRequestTypeMapping = {
 	postDeleteBuild: string;
 	saveGemSetupsForBuild: SaveGemSetupsRequest;
 
+	postBuildSelectedFromActNotes: string;
+	saveActNotesForBuild: SaveActNotesRequest;
+	postResetActNoteForAct: string;
+	postAddNewBuildFromActNotes: string;
+	postDeleteBuildFromActNotes: string;
+
+
 	// --- TRACKERS --- //
 	// Zone Tracker
 	postZoneSelected: ZoneSelectedRequest;
@@ -79,11 +95,11 @@ type channelRequestTypeMapping = {
 // --- Settings --- //
 type HotkeyEvent = {
 	hotkey:
-		| "ToggleSettings"
-		| "ToggleZoneNotes"
-		| "ToggleLayoutImages"
-		| "ToggleLevelTracker"
-		| "ToggleGemTracker";
+	| "ToggleSettings"
+	| "ToggleZoneNotes"
+	| "ToggleLayoutImages"
+	| "ToggleLevelTracker"
+	| "ToggleGemTracker";
 	value: boolean;
 };
 
@@ -97,6 +113,17 @@ type GemSettingsDto = {
 	allBuildNames: string[];
 	allGemSetupLevels: number[];
 	allGemSetups: GemSetup[];
+};
+
+type SaveActNotesRequest = {
+	buildName: string;
+	allActNotes: ActNote[];
+};
+
+type ActNotesSettingsDto = {
+	buildName: string;
+	allBuildNames: string[],
+	allActNotes: ActNote[];
 };
 
 // --- Trackers --- //

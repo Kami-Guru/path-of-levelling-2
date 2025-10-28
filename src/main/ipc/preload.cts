@@ -116,4 +116,15 @@ electron.contextBridge.exposeInMainWorld("electron", {
 	postDeleteBuild: async (buildName) => ipcRendererInvokePost("postDeleteBuild", buildName),
 	saveGemSetupsForBuild: async (response) =>
 		ipcRendererInvokePost("saveGemSetupsForBuild", response),
+
+	// Methods for the act notes SETTINGS
+	getActNotesSettingsState: async () => ipcRendererInvokeGet("getActNotesSettingsState"),
+	saveActNotesForBuild: async (response) =>
+		ipcRendererInvokePost("saveActNotesForBuild", response),
+	postResetActNoteForAct: async (actName) => ipcRendererInvokePost("postResetActNoteForAct", actName),
+	postBuildSelectedFromActNotes: async (buildName) =>
+		ipcRendererInvokePost("postBuildSelectedFromActNotes", buildName),
+	postAddNewBuildFromActNotes: async (buildName) => ipcRendererInvokePost("postAddNewBuildFromActNotes", buildName),
+	postDeleteBuildFromActNotes: async (buildName) => ipcRendererInvokePost("postDeleteBuildFromActNotes", buildName),
+
 } satisfies Window["electron"]);

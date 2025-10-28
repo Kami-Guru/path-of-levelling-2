@@ -1,6 +1,6 @@
 // Extend the 'Window' interface to include all the methods that we put in preload.cts,
 
-import { OverlayPosition } from "../zodSchemas/schemas.js";
+import { ActNote, OverlayPosition } from "../zodSchemas/schemas.js";
 
 // so that in react land we can write 'window.electron.someMethod' with type safety.
 declare global {
@@ -17,12 +17,22 @@ declare global {
 
 			// Gem Settings
 			getGemSettingsState: () => Promise<GemSettingsDto>;
-			postBuildSelected: (buildName: string) => Promise<GemSettingsDto>;
-			postAddNewBuild: (buildName: string) => Promise<GemSettingsDto>;
-			postDeleteBuild: (buildName: string) => Promise<GemSettingsDto>;
 			saveGemSetupsForBuild: (
 				saveGemSetupsDto: SaveGemSetupsRequest
 			) => Promise<GemSettingsDto>;
+			postBuildSelected: (buildName: string) => Promise<GemSettingsDto>;
+			postAddNewBuild: (buildName: string) => Promise<GemSettingsDto>;
+			postDeleteBuild: (buildName: string) => Promise<GemSettingsDto>;
+
+			// Act Notes Settings
+			getActNotesSettingsState: () => Promise<ActNotesSettingsDto>;
+			saveActNotesForBuild: (
+				saveGemSetupsDto: SaveActNotesRequest
+			) => Promise<ActNotesSettingsDto>;
+			postResetActNoteForAct: (actName: string) => Promise<ActNote>;
+			postBuildSelectedFromActNotes: (buildName: string) => Promise<ActNotesSettingsDto>;
+			postAddNewBuildFromActNotes: (buildName: string) => Promise<ActNotesSettingsDto>;
+			postDeleteBuildFromActNotes: (buildName: string) => Promise<ActNotesSettingsDto>;
 
 			// Position Settings
 			getSettingsOverlayPositionSettings: () => Promise<OverlayPosition>;

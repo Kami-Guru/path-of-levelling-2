@@ -2,7 +2,7 @@ import log from "electron-log";
 import { objectFactory } from "../objectFactory.js";
 import { SettingsService } from "../services/Settings.js";
 import { LevelTracker } from "./LevelTracker.js";
-import { Build, GemBuild, GemSetup } from "../zodSchemas/schemas.js";
+import { Build, DefaultGemBuild, GemBuild, GemSetup } from "../zodSchemas/schemas.js";
 
 // TODO: GemTracker owns builds cuz I haven't added any build stuff to anything else.
 export class GemTracker {
@@ -51,20 +51,13 @@ export class GemTracker {
 
 		const newBuild: Build = {
 			buildName: newBuildName,
-			gemBuild: {
-				changedByUser: true,
-				gemSetups: [
-					{
-						level: 1,
-						gemLinks: [],
-						gemSources: [],
-					},
-				],
-			},
+			gemBuild: DefaultGemBuild.parse({}),
 			actNotes: [],
 		};
 
 		objectFactory.getStoreService().setBuild(newBuildName, newBuild);
+
+		this.allBuildNames = objectFactory.getStoreService().getAllBuildNames();
 	}
 
 	deleteBuild(buildName: string) {

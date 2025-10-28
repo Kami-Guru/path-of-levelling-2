@@ -14,8 +14,12 @@ import {
 	ZoneCodeToZoneReference,
 	ActNote,
 	DefaultZoneNotes,
+	DefaultGemBuild,
 } from "../zodSchemas/schemas.js";
 import { SettingsService } from "../services/Settings.js";
+import { cpuUsage } from "process";
+import { error } from "console";
+import { StateTracker } from "./StateTracker.js";
 
 export class ZoneTracker {
 	actName: string = "Act 1";
@@ -39,7 +43,9 @@ export class ZoneTracker {
 	defaultZoneNotesPath: string = "";
 	defaultZoneNotes: DefaultZoneNotes = Object();
 
-	constructor(storeService: StoreService, settingsService: SettingsService) {
+	// SettingsService needs to be loaded to call this.loadActNotes
+	// StateTracker required for this.saveZoneFromCode
+	constructor(storeService: StoreService, stateTracker: StateTracker, settingsService: SettingsService) {
 		this.zoneReferenceData = JSON.parse(
 			fs.readFileSync(getZoneReferenceDataPath(getProfile().Id), "utf-8")
 		);
@@ -51,32 +57,14 @@ export class ZoneTracker {
 			),
 		];
 
-		var zoneNotesPath = getZoneNotesPath(getProfile().Id);
+		this.loadDefaultZoneNotes();
 
-		try {
-			log.info("Loading zone notes from path:", zoneNotesPath);
-			this.loadDefaultZoneNotes();
-		} catch (error) {
-			log.error("Could not construct ZoneTracker, with error:");
-			log.error(error);
-		}
-
-		const userActNotes = this.getActNotes(storeService, settingsService);
-
-		// Zip together the default act notes and user's act notes
-		this.allActNotes = this.defaultZoneNotes.actNotes.map((actNotes) => {
-			return {
-				actName: actNotes.actName,
-				notes:
-					userActNotes.find((userActNotes) => userActNotes.actName === actNotes.actName)
-						?.notes ?? actNotes.notes,
-			};
-		});
+		this.loadActNotes();
 
 		this.saveZoneFromCode(storeService.getGameSetting("lastSessionState.zoneCode"), true);
 	}
 
-	init() {}
+	init() { }
 
 	getZoneDataDto(): ZoneDataDto {
 		return {
@@ -88,6 +76,16 @@ export class ZoneTracker {
 			actNotes: this.actNotes,
 			zoneNotes: this.zoneNotes,
 		};
+	}
+
+	getActNotesSettingsDto(): ActNotesSettingsDto {
+		const dto = {
+			buildName: objectFactory.getGemTracker().buildName,
+			allBuildNames: objectFactory.getGemTracker().allBuildNames,
+			allActNotes: this.allActNotes
+		};
+		console.log('Sending Act Notes Dto:', dto)
+		return dto
 	}
 
 	loadDefaultZoneNotes() {
@@ -103,9 +101,68 @@ export class ZoneTracker {
 		}
 	}
 
-	getActNotes(storeService: StoreService, settingsService: SettingsService): Array<ActNote> {
-		const currentBuild = storeService.getBuild(settingsService.getBuildName());
-		return currentBuild === undefined ? [] : currentBuild.actNotes;
+	/** Reads act notes from the current build and zips them with default notes to give a full set
+	 * of act notes in memory.
+	 */
+	loadActNotes() {
+		const currentBuild = objectFactory.getStoreService().getBuild(objectFactory.getSettingsService().getBuildName());
+		const userActNotes = currentBuild === undefined ? [] : currentBuild.actNotes;
+
+		// Zip together the default act notes and user's act notes
+		this.allActNotes = this.defaultZoneNotes.actNotes.map((actNotes) => {
+			return {
+				actName: actNotes.actName,
+				notes:
+					userActNotes.find((userActNotes) => userActNotes.actName === actNotes.actName)
+						?.notes ?? actNotes.notes,
+			};
+		});
+
+		// Re-select the current Act and Zone to re-load those notes - updateOnly = true
+		this.saveZoneFromCode(this.zoneCode, true);
+	}
+
+	saveActNotes(buildName: string, newActNotes: Array<ActNote>) {
+		// First, figure out which act notes are NOT the default
+		const actNotesToSave = newActNotes.filter(newActNote =>
+			newActNote.notes !== this.defaultZoneNotes.actNotes
+				.find(defaultActNote => defaultActNote.actName == newActNote.actName)?.notes
+		);
+
+		if (actNotesToSave.length === 0)
+			return;
+
+		// Save the new notes to build - create a new build if required
+		objectFactory.getStoreService().setBuild(buildName, {
+			...(objectFactory.getStoreService().getBuild(buildName)
+				?? {
+				buildName: buildName,
+				gemBuild: DefaultGemBuild.parse({})
+			}),
+			actNotes: actNotesToSave,
+		});
+
+		// Re-load the notes from the build store into memory
+		this.loadActNotes();
+	}
+
+	resetActNoteForAct(actName: string): ActNote {
+		// Remove the user's act note from the saved custom Act Notes
+		const currentBuildName = objectFactory.getSettingsService().getBuildName();
+		const currentBuild = objectFactory.getStoreService().getBuild(currentBuildName);
+
+		if (!currentBuild)
+			return this.defaultZoneNotes.actNotes
+				.find(defaultActNote => defaultActNote.actName == actName)!;
+
+
+		objectFactory.getStoreService().setBuild(currentBuildName, {
+			...currentBuild,
+			actNotes: currentBuild.actNotes.filter(existingActNote => existingActNote.actName !== actName),
+		});
+
+		return this.defaultZoneNotes.actNotes
+			.find(defaultActNote => defaultActNote.actName == actName)!;
 	}
 
 	// This is called when someone selects an act in the dropdown in the UI
@@ -264,7 +321,7 @@ export class ZoneTracker {
 		var filePaths = fileNames.map((fileName: string) => {
 			//TODO: I have to find a better way to store this ../ stuff, this needs to
 			//TODO: send RELATIVE filepaths, and that is FROM LayoutImageComponent.tsx :(
-			return path.join("Layout Images", requiredDirectory, fileName);
+			return path.join("Layout Images", getProfile().Id, requiredDirectory, fileName);
 		});
 
 		this.zoneImageFilePaths = filePaths;

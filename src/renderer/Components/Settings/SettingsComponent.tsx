@@ -4,9 +4,10 @@ import { Rnd } from 'react-rnd';
 import { GeneralSettingsComponent } from './GeneralSettingsComponent';
 import { GemSettingsComponent } from './GemSettingsComponent';
 import { AboutSettingsComponent } from './AboutSettingsComponent';
+import { ActNotesSettingsComponent } from './ActNotesSettingsComponent';
 
 export function SettingsComponent() {
-	const [activePage, setActivePage] = useState<'General' | 'Gems' | 'About'>('General');
+	const [activePage, setActivePage] = useState < 'General' | 'Gems' | 'Act Notes' | 'About'>('General');
 	const [isHovered, setIsHovered] = useState(false);
 	const [moveMode, setMoveMode] = useState(false);
 
@@ -128,6 +129,12 @@ export function SettingsComponent() {
 						<h3>Gems</h3>
 					</button>
 					<button
+						className={`SidebarTab${activePage === 'Act Notes' ? ' Active' : ''}`}
+						onClick={() => setActivePage('Act Notes')}
+					>
+						<h3>Act Notes</h3>
+					</button>
+					<button
 						className={`SidebarTab${activePage === 'About' ? ' Active' : ''}`}
 						onClick={() => setActivePage('About')}
 					>
@@ -138,6 +145,7 @@ export function SettingsComponent() {
 				<div className="SettingsPageContent">
 					{activePage === 'General' && <GeneralSettingsComponent />}
 					{activePage === 'Gems' && <GemSettingsComponent />}
+					{activePage === 'Act Notes' && <ActNotesSettingsComponent />}
 					{activePage === 'About' && <AboutSettingsComponent />}
 				</div>
 			</div>
