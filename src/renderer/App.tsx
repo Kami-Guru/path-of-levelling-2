@@ -42,7 +42,7 @@ function App() {
 
 	const conditionalRenderSettings = () => {
 		if (settingsActive) {
-			return <SettingsComponent />;
+			return <SettingsComponent fontSize={fontSize} setFontSizeFunction = {setFontSize} />;
 		}
 	};
 	const conditionalRenderLevelTracker = () => {
@@ -57,8 +57,8 @@ function App() {
 	};
 
 	useEffect(() => {
-		window.electron.getFontScalingFactor().then((fontScale) => {
-			setFontSize(Math.ceil(11 * fontScale));
+		window.electron.getFontSize().then((fontSize) => {
+			setFontSize(fontSize);
 		});
 	}, []);
 

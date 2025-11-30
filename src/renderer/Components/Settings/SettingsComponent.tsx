@@ -6,8 +6,14 @@ import { GemSettingsComponent } from './GemSettingsComponent';
 import { AboutSettingsComponent } from './AboutSettingsComponent';
 import { ActNotesSettingsComponent } from './ActNotesSettingsComponent';
 
-export function SettingsComponent() {
-	const [activePage, setActivePage] = useState < 'General' | 'Gems' | 'Act Notes' | 'About'>('General');
+export function SettingsComponent({
+	setFontSizeFunction,
+	fontSize,
+}: {
+	setFontSizeFunction: (n: number) => void;
+	fontSize: number;
+}) {
+	const [activePage, setActivePage] = useState<'General' | 'Gems' | 'Act Notes' | 'About'>('General');
 	const [isHovered, setIsHovered] = useState(false);
 	const [moveMode, setMoveMode] = useState(false);
 
@@ -61,6 +67,21 @@ export function SettingsComponent() {
 			height: ref.style.height,
 			width: ref.style.width,
 		});
+	};
+
+	// local editable font size input state
+	const [fontSizeInput, setFontSizeInput] = useState(String(fontSize));
+
+	useEffect(() => {
+		setFontSizeInput(String(fontSize));
+	}, [fontSize]);
+
+	// save button handler to call parent setter
+	const handleSaveFontSize = () => {
+		const parsed = parseInt(fontSizeInput, 10);
+		if (!isNaN(parsed)) {
+			setFontSizeFunction(parsed);
+		}
 	};
 
 	return (
@@ -143,7 +164,9 @@ export function SettingsComponent() {
 				</div>
 				{/* Main Content */}
 				<div className="SettingsPageContent">
-					{activePage === 'General' && <GeneralSettingsComponent />}
+					{activePage === 'General' && <GeneralSettingsComponent
+						fontSize={fontSize}
+						setFontSizeFunction={setFontSizeFunction} />}
 					{activePage === 'Gems' && <GemSettingsComponent />}
 					{activePage === 'Act Notes' && <ActNotesSettingsComponent />}
 					{activePage === 'About' && <AboutSettingsComponent />}

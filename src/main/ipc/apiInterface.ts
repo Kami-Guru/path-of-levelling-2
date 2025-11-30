@@ -9,6 +9,8 @@ declare global {
 			// --- SETTINGS --- //
 			subscribeToHotkeys: (callback: (hotkeyEvent: HotkeyEvent) => void) => void;
 			getFontScalingFactor: () => Promise<number>;
+			getFontSize: () => Promise<number>;
+			saveFontSize: (fontSize: number) => void;
 
 			// Client.txt tracking
 			getIsClientWatcherActive: () => Promise<boolean>;

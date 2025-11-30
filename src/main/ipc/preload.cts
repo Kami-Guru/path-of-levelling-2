@@ -39,6 +39,9 @@ electron.contextBridge.exposeInMainWorld("electron", {
 			callback(args);
 		});
 	},
+	getFontSize: async () => ipcRendererInvokeGet("getFontSize"),
+	saveFontSize: async (fontSize: number) => ipcRendererInvokePost("saveFontSize", fontSize),
+
 	getIsClientWatcherActive: async () => ipcRendererInvokeGet("getIsClientWatcherActive"),
 	getClientPath: async () => ipcRendererInvokeGet("getClientPath"),
 	saveClientPath: async (clientTxtPath: string) =>

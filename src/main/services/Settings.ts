@@ -7,10 +7,18 @@ export class SettingsService {
 
 	constructor() { }
 
-	init() {}
+	init() { }
+	
+	getFontSize(): number {
+		return objectFactory.getStoreService().getGlobalSetting('fontSize') 
+	}
+
+	saveFontSize(fontSize: number) {
+		objectFactory.getStoreService().setGlobalSetting('fontSize', fontSize);
+	}
 
 	getClientTxtPath(): string {
-		return objectFactory.getStoreService().getGameSetting('clientTxtPath') as string;
+		return objectFactory.getStoreService().getGameSetting('clientTxtPath');
 	}
 
 	saveClientTxtPath(
@@ -32,7 +40,7 @@ export class SettingsService {
 	}
 
 	getBuildName(): string {
-		return objectFactory.getStoreService().getGameSetting('buildName') as string;
+		return objectFactory.getStoreService().getGameSetting('buildName');
 	}
 
 	saveBuildName(buildName: string) {

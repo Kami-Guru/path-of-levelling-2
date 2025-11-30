@@ -17,6 +17,9 @@ type channelReturnTypeMapping = {
 	saveGemOverlayPositionSettings: void;
 
 	getFontScalingFactor: number;
+	getFontSize: number;
+	saveFontSize: number;
+	
 	getClientPath: string;
 	saveClientPath: boolean;
 	getIsClientWatcherActive: boolean;
@@ -68,6 +71,8 @@ type channelRequestTypeMapping = {
 	saveLayoutImagesOverlayPositionSettings: OverlayPosition;
 	saveLevelOverlayPositionSettings: OverlayPosition;
 	saveGemOverlayPositionSettings: OverlayPosition;
+
+	saveFontSize: number;
 
 	saveClientPath: string;
 

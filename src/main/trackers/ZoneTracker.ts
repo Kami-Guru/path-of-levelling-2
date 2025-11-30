@@ -84,7 +84,6 @@ export class ZoneTracker {
 			allBuildNames: objectFactory.getGemTracker().allBuildNames,
 			allActNotes: this.allActNotes
 		};
-		console.log('Sending Act Notes Dto:', dto)
 		return dto
 	}
 

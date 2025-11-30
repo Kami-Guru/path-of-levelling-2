@@ -1,7 +1,14 @@
+import { electron } from 'process';
 import { useEffect, useState } from 'react';
 
-export function GeneralSettingsComponent() {
-    // Setting up the input forms
+export function GeneralSettingsComponent({
+    fontSize,
+    setFontSizeFunction,
+}: {
+    fontSize: number;
+    setFontSizeFunction: (n: number) => void;
+}) {
+    // Setting up the Client Path inputs
     const [clientPath, setClientPath] = useState('');
     const [isClientPathSaveClicked, setIsClientPathSaveClicked] = useState(false);
     const [isClientWatcherActive, setIsClientWatcherActive] = useState(Boolean);
@@ -10,6 +17,22 @@ export function GeneralSettingsComponent() {
     // is actually stored.
     const handleClientPathChange = (event: any) => {
         setClientPath(event.target.value);
+        setIsClientPathSaveClicked(true);
+    };
+
+    // Setting up the Font Size inputs
+    const [fontSizeInput, setFontSizeInput] = useState(String(fontSize));
+
+    useEffect(() => {
+        setFontSizeInput(String(fontSize));
+    }, [fontSize]);
+
+    const handleSaveFontSize = () => {
+        const parsed = parseInt(fontSizeInput, 10);
+        if (!isNaN(parsed)) {
+            window.electron.saveFontSize(parsed);
+            setFontSizeFunction(parsed);
+        }
     };
 
     // Get initial state - this is required for the input to show the current client path.
@@ -57,6 +80,21 @@ export function GeneralSettingsComponent() {
 
     return (
         <div className="GeneralSettingsComponent">
+            <h3>General Settings</h3>
+            <div className="FontSizeUpdaterWrapper">
+                <label className="SettingsLabel">Font Size:</label>
+                <input
+                    autoComplete={fontSize.toString()}
+                    className="FontSizeInput"
+                    name="fontSize"
+                    value={fontSizeInput}
+                    onChange={(e) => setFontSizeInput(e.target.value)}
+                    type="number"
+                />
+                <button onClick={handleSaveFontSize} style={{ marginLeft: 8 }}>
+                    Save
+                </button>
+            </div>
             <div className="HotkeysWrapper">
                 <h3>Hotkeys</h3>
                 <div className="HotkeysRow">

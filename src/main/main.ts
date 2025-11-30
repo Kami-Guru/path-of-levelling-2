@@ -68,12 +68,6 @@ async function createWindow() {
 	tray.setContextMenu(
 		Menu.buildFromTemplate([
 			{
-				label: "Quit",
-				click: () => {
-					app.quit();
-				},
-			},
-			{
 				label: "Switch To PoE1",
 				click: () => {
 					objectFactory.switchProfile("poe1");
@@ -83,6 +77,12 @@ async function createWindow() {
 				label: "Switch To PoE2",
 				click: () => {
 					objectFactory.switchProfile("poe2");
+				},
+			},
+			{
+				label: "Quit",
+				click: () => {
+					app.quit();
 				},
 			},
 		])
@@ -144,6 +144,15 @@ function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatch
 	ipcMainHandle("getFontScalingFactor", async (_) => {
 		const { width, height } = screen.getPrimaryDisplay().workAreaSize;
 		return height / 1080; // return a scaling factor to scale up text with resolution
+	});
+
+	ipcMainHandle("getFontSize", async (_) => {
+		return objectFactory.getSettingsService().getFontSize()
+	});
+
+	ipcMainHandle("saveFontSize", async (_, fontSize) => {
+		objectFactory.getSettingsService().saveFontSize(fontSize);
+		return objectFactory.getSettingsService().getFontSize();
 	});
 
 	// Handle events from the General Settings overlay

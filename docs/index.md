@@ -23,7 +23,7 @@ You can download Path of Levelling 2 on the following platforms:
       <tr>
         <td>
           <a :href="`${data.github.releasesUrl}/download/v${VITE_APP_VERSION}/Path-Of-Levelling-2-Setup-${VITE_APP_VERSION}.exe`">
-            Windows 10 (Installer)
+            Windows (Installer)
           </a>
         </td>
         <td>✅</td>

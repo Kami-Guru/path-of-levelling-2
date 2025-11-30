@@ -48,6 +48,7 @@ export const ProfileId = z.enum(["poe1", "poe2"]);
 export const GlobalSettingsZodSchema = z.object({
 	version: z.number().default(1),
 	selectedProfile: z.enum(["poe1", "poe2"]).default("poe2"),
+	fontSize: z.number().default(11)
 });
 
 export type GlobalSettings = z.infer<typeof GlobalSettingsZodSchema>;
