@@ -17,6 +17,9 @@ type channelReturnTypeMapping = {
 	saveGemOverlayPositionSettings: void;
 
 	getFontScalingFactor: number;
+	getFontSize: number;
+	saveFontSize: number;
+	
 	getClientPath: string;
 	saveClientPath: boolean;
 	getIsClientWatcherActive: boolean;
@@ -29,6 +32,15 @@ type channelReturnTypeMapping = {
 	postAddNewBuild: GemSettingsDto;
 	postDeleteBuild: GemSettingsDto;
 	saveGemSetupsForBuild: GemSettingsDto;
+
+	// Act Notes Settings
+	getActNotesSettingsState: ActNotesSettingsDto;
+	saveActNotesForBuild: ActNotesSettingsDto;
+	postResetActNoteForAct: ActNote; // Send back the default Act Note, DON'T reset the whole screen
+	postBuildSelectedFromActNotes: ActNotesSettingsDto;
+	postAddNewBuildFromActNotes: ActNotesSettingsDto;
+	postDeleteBuildFromActNotes: ActNotesSettingsDto;
+
 
 	// --- TRACKERS --- //
 	// Zone Tracker
@@ -60,12 +72,21 @@ type channelRequestTypeMapping = {
 	saveLevelOverlayPositionSettings: OverlayPosition;
 	saveGemOverlayPositionSettings: OverlayPosition;
 
+	saveFontSize: number;
+
 	saveClientPath: string;
 
 	postBuildSelected: string;
 	postAddNewBuild: string;
 	postDeleteBuild: string;
 	saveGemSetupsForBuild: SaveGemSetupsRequest;
+
+	postBuildSelectedFromActNotes: string;
+	saveActNotesForBuild: SaveActNotesRequest;
+	postResetActNoteForAct: string;
+	postAddNewBuildFromActNotes: string;
+	postDeleteBuildFromActNotes: string;
+
 
 	// --- TRACKERS --- //
 	// Zone Tracker
@@ -79,11 +100,11 @@ type channelRequestTypeMapping = {
 // --- Settings --- //
 type HotkeyEvent = {
 	hotkey:
-		| "ToggleSettings"
-		| "ToggleZoneNotes"
-		| "ToggleLayoutImages"
-		| "ToggleLevelTracker"
-		| "ToggleGemTracker";
+	| "ToggleSettings"
+	| "ToggleZoneNotes"
+	| "ToggleLayoutImages"
+	| "ToggleLevelTracker"
+	| "ToggleGemTracker";
 	value: boolean;
 };
 
@@ -97,6 +118,17 @@ type GemSettingsDto = {
 	allBuildNames: string[];
 	allGemSetupLevels: number[];
 	allGemSetups: GemSetup[];
+};
+
+type SaveActNotesRequest = {
+	buildName: string;
+	allActNotes: ActNote[];
+};
+
+type ActNotesSettingsDto = {
+	buildName: string;
+	allBuildNames: string[],
+	allActNotes: ActNote[];
 };
 
 // --- Trackers --- //

@@ -109,7 +109,7 @@ react-draggable {
 .SettingsSidebar {
 	position: absolute;
 	top: 40px;
-	width: 120px;
+	width: 130px;
 	height: calc(100% - 40px);
 	background: transparent;
 
@@ -444,6 +444,200 @@ react-draggable {
 }
 
 .GemSettingsSaveButton {
+	background: #353e54;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	padding: 8px 20px;
+	/* font-size: 16px; */
+	cursor: pointer;
+	font-weight: bold;
+	margin-left: 16px;
+}
+
+/* Act Notes Settings Page Content */
+.ActNotesSettingsComponent {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	color: white;
+	box-sizing: border-box;
+	display: block;
+
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.ActNotesSettingsComponent * {
+	text-align: left;
+}
+
+.ActNotesSettingsComponent label {
+	font-weight: bold;
+	margin-right: 8px;
+	color: #fff;
+}
+
+.ActNotesSettingsComponent select {
+	background: #23293a;
+	color: #fff;
+	border: 1px solid #353e54;
+	border-radius: 4px;
+	padding: 6px 12px;
+	font-size: inherit;
+	/*font-size: 16px;*/
+	outline: none;
+	transition: border-color 0.2s;
+	margin-left: 0px;
+	margin-bottom: 0px;
+}
+
+.ActNotesSettingsComponent select:focus {
+	border-color: #f9caca;
+}
+
+.ActNotesSettingsBuildRow {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 8px;
+	white-space: nowrap;
+}
+
+.ActNotesSettingsBuildRow label {
+	white-space: nowrap;
+	/* Prevent label from wrapping */
+}
+
+.ActNotesSettingsDeleteBuildButton {
+	background: #d9534f;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	padding: 6px 10px;
+	/* font-size: 18px; */
+	cursor: pointer;
+	font-weight: bold;
+	margin-left: 8px;
+	transition: background 0.2s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 110px;
+	white-space: nowrap;
+}
+
+.ActNotesSettingsDeleteBuildButton:hover {
+	background: #b52a1a;
+}
+
+.ActNotesSettingsBlocksContainer {
+	margin-top: 24px;
+	/* need padding so that banner doesn't cover bottom of the component */
+	padding-bottom: 48px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* Center blocks horizontally */
+}
+
+.ActNotesSettingsBlock {
+	position: relative;
+	width: calc(100% - 40px);
+	/* Add horizontal padding */
+	margin-left: 0;
+	margin-right: 0;
+	border: 1px solid #444;
+	border-radius: 8px;
+	padding: 16px;
+	margin-bottom: 16px;
+	background: #23293a;
+	box-sizing: border-box;
+}
+
+.ActNotesSettingsResetActButton {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	background: #353e54;
+	color: #fff;
+	border: none;
+	width: 56px;
+	height: 28px;
+	/* font-size: 18px; */
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.2s;
+	margin: 0;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	line-height: 1;
+}
+
+.ActNotesSettingsResetActButton:hover {
+	background: #d9534f;
+	color: #fff;
+}
+
+.ActNotesSettingsTextarea {
+	width: calc(100% - 16px);
+	/* Inset right edge */
+	margin-top: 8px;
+	margin-right: 8px;
+	/* Add right margin for gap */
+	resize: vertical;
+	padding: 8px;
+	border-radius: 4px;
+	border: 1px solid #444;
+	background: #23293a;
+	color: #fff;
+	font-family: inherit;
+	font-size: inherit;
+	box-sizing: border-box;
+}
+
+.ActNotesSettingsBuildSelect {
+	background: #23293a;
+	color: #fff;
+	border: 1px solid #353e54;
+	border-radius: 4px;
+	padding: 6px 12px;
+	/* font-size: 16px; */
+	outline: none;
+	transition: border-color 0.2s;
+	margin-left: 0px;
+	margin-bottom: 0px;
+	width: auto;
+	min-width: 80px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ActNotesSettingsBuildSelect:focus {
+	border-color: #f9caca;
+}
+
+.ActNotesSettingsBanner {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 48px;
+	background: #23293a;
+	border-top: 2px solid #222;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding-right: 32px;
+	z-index: 100;
+	box-sizing: border-box;
+}
+
+.ActNotesSettingsSaveButton {
 	background: #353e54;
 	color: #fff;
 	border: none;

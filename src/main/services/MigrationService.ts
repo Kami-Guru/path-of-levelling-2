@@ -1,5 +1,6 @@
 import Store from "electron-store";
-import log from "electron-log"
+import log from "electron-log";
+import screen from "electron";
 import fs from 'fs';
 import path from 'path';
 import { z } from 'zod';
@@ -31,7 +32,7 @@ export class MigrationService {
 
     private MigrateGlobalSettings() {
         // First need to migrate unversioned files - should just have just added a version day 1 :(
-        this.MigrateGlobalSettingsUnversionedToV1()
+        this.MigrateGlobalSettingsUnversionedToV1();
 
         // In future I can do this:
         /*  const migrations = {
@@ -51,11 +52,14 @@ export class MigrationService {
         // --- Fill missing settings with defaults from zod schema --- //
         const globalSettings = objectFactory.getStoreService().getAllGlobalSettings();
 
+        const primaryDisplayHeight = screen.screen.getPrimaryDisplay().workAreaSize.height;
+        const defaultFontSize = Math.ceil(11 * primaryDisplayHeight / 1080);
+
         const dataValidationResult = this.FillWithDefaultsAndStrip(
             GlobalSettingsZodSchema,
-            GlobalSettingsZodSchema.parse({}),
+            { ...GlobalSettingsZodSchema.parse({}), fontSize: defaultFontSize },
             globalSettings
-        )
+        );
 
         if (!dataValidationResult) return; // No changes required
 
@@ -79,7 +83,7 @@ export class MigrationService {
             GameSettingsZodSchema,
             DefaultPoE1GameSettings.parse({}),
             poe1GameSettings
-        )
+        );
 
         if (!dataValidationResult) return; // No changes required
 
@@ -104,7 +108,7 @@ export class MigrationService {
             GameSettingsZodSchema,
             DefaultPoE2GameSettings.parse({}),
             poe2GameSettings
-        )
+        );
 
         if (!dataValidationResult) return; // No changes required
 
@@ -118,7 +122,7 @@ export class MigrationService {
     }
 
     private MigrateBuilds() {
-        this.MigrateBuildStoresUnversionedToV1()
+        this.MigrateBuildStoresUnversionedToV1();
 
         // Fill missing default builds - PoE1
         const poe1BuildsDir = getBuildsRootPath("poe1");
@@ -176,7 +180,7 @@ export class MigrationService {
         // settings file and a settings file for poe1 and poe2.
         const globalSettingsStore = new Store({
             name: "globalSettings"
-        })
+        });
         globalSettingsStore.set('version', 1);
         globalSettingsStore.set('selectedProfile', "poe2");
 
@@ -190,14 +194,14 @@ export class MigrationService {
         poe2SettingsStore.set('uiSettings', oldSettingsStore.get('uiSettings') ?? poe2DefaultSettings.uiSettings);
 
         // poe1 settings we just fill with defaults
-        const poe1SettingsStore = new Store({ name: "poe1-gameSettings" })
+        const poe1SettingsStore = new Store({ name: "poe1-gameSettings" });
 
         poe1SettingsStore.set('version', 1);
         // For clientTxtPath we try to make a few guesses before falling back to the default
         poe1SettingsStore.set('clientTxtPath', guessClientTxtPathForProfileId("poe1"));
-        poe1SettingsStore.set('buildName', poe1DefaultSettings.buildName)
-        poe1SettingsStore.set('lastSessionState', poe1DefaultSettings.lastSessionState)
-        poe1SettingsStore.set('uiSettings', poe1DefaultSettings.uiSettings)
+        poe1SettingsStore.set('buildName', poe1DefaultSettings.buildName);
+        poe1SettingsStore.set('lastSessionState', poe1DefaultSettings.lastSessionState);
+        poe1SettingsStore.set('uiSettings', poe1DefaultSettings.uiSettings);
 
         // Now delete the old settings store
         oldSettingsStore.clear();
@@ -208,7 +212,7 @@ export class MigrationService {
         const oldBuildStore = new Store({
             name: "builds",
             accessPropertiesByDotNotation: false // So ppl can use . in build names (eg 3.27 LA)
-        })
+        });
         const oldData = oldBuildStore.store;
 
         // If there are no old settings, no migration required.
@@ -225,27 +229,29 @@ export class MigrationService {
         const poe2newBuildStore = new Store({
             name: "poe2-builds",
             accessPropertiesByDotNotation: false
-        })
+        });
 
         poe2newBuildStore.set('version', 1);
 
         const migratedBuilds: Record<string, object> = {};
         for (const buildName in oldBuildStore.store) {
-            migratedBuilds[buildName] = oldBuildStore.get(buildName) as object;
+            const oldBuild = oldBuildStore.get(buildName) as object;
+            Object.assign(oldBuild, { "actNotes": [] });
+            migratedBuilds[buildName] = oldBuild;
         }
 
-        poe2newBuildStore.set('builds', migratedBuilds)
+        poe2newBuildStore.set('builds', migratedBuilds);
 
         // There was never a poe1 builds store, so we just create an empty one
         const poe1newBuildStore = new Store({
             name: "poe1-builds",
             accessPropertiesByDotNotation: false
-        })
+        });
         poe1newBuildStore.set('version', 1);
         poe1newBuildStore.set('builds', {});
 
         // Clear the old builds store
-        oldBuildStore.clear()
+        oldBuildStore.clear();
     }
 
     /** Checks existing settings, trims extra keys and fills defaults.
@@ -269,7 +275,7 @@ export class MigrationService {
         return schema.safeParse({
             ...defaults,
             ...current
-        })
+        });
     }
 }
 

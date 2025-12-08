@@ -4,10 +4,11 @@ import { GemSetup } from "../../../main/zodSchemas/schemas";
 export function GemSettingsComponent() {
 	const [selectedBuild, setSelectedBuild] = useState("");
 	const [allBuildNames, setAllBuildNames] = useState<string[]>([]);
-	const [allGemSetups, setallGemSetups] = useState<GemSetup[]>([]);
-	const [editableGemSetups, setEditableGemSetups] = useState<GemSetup[]>([]);
 	const [addingBuild, setAddingBuild] = useState(false);
 	const [newBuildName, setNewBuildName] = useState("");
+
+	const [allGemSetups, setallGemSetups] = useState<GemSetup[]>([]);
+	const [editableGemSetups, setEditableGemSetups] = useState<GemSetup[]>([]);
 
 	// Get initial state for gem dropdown
 	useEffect(() => {
@@ -28,7 +29,7 @@ export function GemSettingsComponent() {
 		});
 	}, []);
 
-	const handleGemDropdownSelection = (event: React.ChangeEvent<HTMLSelectElement>) => {
+	const handleBuildDropdownSelection = (event: React.ChangeEvent<HTMLSelectElement>) => { 
 		const value = event.target.value;
 		if (value === "__add__") {
 			setAddingBuild(true);
@@ -132,7 +133,7 @@ export function GemSettingsComponent() {
 				<select
 					id="build-select"
 					value={addingBuild ? "__add__" : selectedBuild}
-					onChange={handleGemDropdownSelection}
+					onChange={handleBuildDropdownSelection}
 					className="GemSettingsBuildSelect"
 				>
 					{allBuildNames.map((buildName) => (

@@ -1,43 +1,43 @@
 {
 	"actNotes": [
 		{
-			"act": "Act 1",
+			"actName": "Act 1",
 			"notes": "Enemy at the Gate:  Level 1 Gems\nBreaking Some Eggs: Level 4 Gems\nMercy mission:      Quicksilver, Level 4 Gems\nCaged Brute:        Level 8 Gems\nSiren's Cadence:    Level 12 Gems\nTrials: The Lower Prison\n\nIron Ring + Blue Gem = Sapphire Ring\nBoots + Aug + Quicksilver = MS boots\nLvl 12 for 15% MS\n\nLvl 4 Hailrake, 8-10 Brutus, 12-13 Merveil"
 		},
 		{
-			"act": "Act 2",
+			"actName": "Act 2",
 			"notes": "Great White Beast:  Quicksilver\nIntruders in Black: Level 16 Gems (Heralds/Skitterbots)\nSharp and Cruel:    Level 18 Gems (Supports)\nBandits:            Alira 15% Res, Kraityn 8% Movespeed\nTrials: Crypt, Chamber of Sins 2\nCRAFT BENCH resistances + phys dmg\n\nBoots + Aug + Quicksilver = MS boots\nLvl 24 for 20% Movespeed\niLvl 25 for 4-socket\n\nLvl 14-15 Fidelitas, 16 Weaver, 20-22 Vaal Oversoul"
 		},
 		{
-			"act": "Act 3",
+			"actName": "Act 3",
 			"notes": "Lost in Love:         Lvl 24 Gems (Curses, Warcries, Anger)\nSever the Right Hand: Lvl 28 Gems\nFixture of Fate:      Siosa (Vendor w All Gems)\nTrials: Crematorium, Catacombs, Imperial Gardens\n\nBoots + Aug + Quicksilver = MS boots\nLvl 24 for 20% Movespeed \nLvl 32 for 25% Movespeed \niLvl 25 for 4-socket (vendors sell at player level 24)\n\nLvl 24 Enter Docks, 27 Piety, 28 Dominus"
 		},
 		{
-			"act": "Act 4",
+			"actName": "Act 4",
 			"notes": "Breaking The Seal:  Lvl 34 Gems\nEternal Nightmare:  Lvl 38 Gems\n\nBoots + Aug + Quicksilver = MS boots\nLvl 32 for 25% Movespeed\n\nLvl 30-31 Dried Lake, 31 Normal Lab, 34-35 Malachai"
 		},
 		{
-			"act": "Act 5",
+			"actName": "Act 5",
 			"notes": "Check vendors every 3-4 levels\nGambling with gold for gear gives a LOT of 4-links\nGamble gear with stats matching colours you need\n    Armour for red, Evasion for green, ES for blue\n\nBoots + Aug + Quicksilver = MS boots\nLvl 32 for 25% Movespeed\nLvl 44 for 30% Movespeed\niLvl 35 for 5-links (rare!)\n\nLvl 40-42 Leave Chambers"
 		},
 		{
-			"act": "Act 6",
+			"actName": "Act 6",
 			"notes": "Trials: The Prison\n\nCheck vendors every 3-4 levels\nGambling with gold for gear gives a LOT of 4-links\nGamble gear with stats matching colours you need\n    Armour for red, Evasion for green, ES for blue\n\nBoots + Aug + Quicksilver = MS boots\n\nStay at lowest level without penalty\n5 levels under zone at player level 32-48"
 		},
 		{
-			"act": "Act 7",
+			"actName": "Act 7",
 			"notes": "Trials: The Crypt, The Chamber of Sins\n\nCheck vendors every 3-4 levels\nGambling with gold for gear gives a LOT of 4-links\nGamble gear with stats matching colours you need\n    Armour for red, Evasion for green, ES for blue\n\nBoots + Aug + Quicksilver = MS boots\n\nStay at lowest level without penalty\n5 levels under zone at player level 32-48\n6 levels under zone at player level 48-62"
 		},
 		{
-			"act": "Act 8",
+			"actName": "Act 8",
 			"notes": "Trials: Bath House\n\nCheck vendors every 3-4 levels\nGambling with gold for gear gives a LOT of 4-links\nGamble gear with stats matching colours you need\n    Armour for red, Evasion for green, ES for blue\n\nBoots + Aug + Quicksilver = MS boots\n\nLvl 54 Finish Act 8 (Harbour Bridge is last zone)"
 		},
 		{
-			"act": "Act 9",
+			"actName": "Act 9",
 			"notes": "Trials: The Tunnel\n\nCheck vendors every 3-4 levels\nGambling with gold for gear gives a LOT of 4-links\nGamble gear with stats matching colours you need\n    Armour for red, Evasion for green, ES for blue\n\nBoots + Aug + Quicksilver = MS boots\n\nLvl 54 Enter BA\nLeave at: 58 if strong, 60 if average, 62 if weak"
 		},
 		{
-			"act": "Act 10",
+			"actName": "Act 10",
 			"notes": "Trials: The Ossuary\n\nCheck vendors every 3-4 levels\nGambling with gold for gear gives a LOT of 4-links\nGamble gear with stats matching colours you need\n    Armour for red, Evasion for green, ES for blue\n\nBoots + Aug + Quicksilver = MS boots\n\nStay at lowest level without penalty (6-7 under zone)"
 		}
 	],
