@@ -1,0 +1,67 @@
+{
+	"buildName": "0.4.0 Fubgun's Poison Pathfinder",
+	"gemBuild": {
+		"changedByUser": false,
+		"gemSetups": [
+			{
+				"level": 1,
+				"gemLinks": [
+					"Lightning Arrow",
+					"Poisonburst Arrow - Escalating Poison - Conc Area",
+					"Contagion - Unleash",
+					"Vine Arrow - Swift Affliction",
+					"Withering Prescence - Prolonged Duration"
+				],
+				"sources": []
+			},
+			{
+				"level": 14,
+				"gemLinks": [
+					"Poisonburst Arrow - Mag Area - Pierce",
+					"Contagion - Unleash",
+					"Vine Arrow - Swift Affliction",
+					"Toxic Growth - Escalating Poison - Conc Area",
+					"Withering Prescence - Prolonged Duration"
+				],
+				"gemSources": []
+			},
+			{
+				"level": 22,
+				"gemLinks": [
+					"Poisonburst Arrow - Mag Area - Pierce",
+					"Vine Arrow - Swift Affliction - Prolonged Duration",
+					"Toxic Growth - Escalating Poison - Conc Area",
+					"Gas Arrow - Encroaching Ground - Persistent Ground",
+					"Withering Prescence - Prolonged Duration",
+					"Contagion - Unleash"
+				],
+				"gemSources": []
+			},
+			{
+				"level": 29,
+				"gemLinks": [
+					"Poisonburst Arrow - Mag Area - Pierce",
+					"Vine Arrow - Swift Affliction - Prolonged Duration",
+					"Toxic Growth - Esc Poison - Conc Area - Long Fuse",
+					"Gas Arrow - Encr Ground - Pers Ground - Deadly Poison",
+					"Withering Prescence - Prolonged Duration",
+					"Herald of the Plague"
+				],
+				"gemSources": []
+			},
+			{
+				"level": 39,
+				"gemLinks": [
+					"Poisonburst Arrow - Mag Area - Pierce - Deadly Poison",
+					"Vine Arrow - Swift Affl - Pro Duration - Deliberation",
+					"Toxic Growth - Long Fuse - Conc Area - Deadly - Heft",
+					"Gas Arrow - Encr Ground - Pers Ground - Deadly Poison",
+					"Withering Prescence - Prolonged Duration",
+					"Herald of the Plague"
+				],
+				"gemSources": []
+			}
+		]
+	},
+	"actNotes": []
+}

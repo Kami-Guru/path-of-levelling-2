@@ -11,6 +11,7 @@ Check Vendor at level up for
 Movespeed boots
 New Weapon
 Potions: Lvl 4, 10, 16, 23
+Act and Zone Notes are this wide---------------------------
 
 
 
