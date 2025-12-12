@@ -190,5 +190,85 @@
 	"G3_17": {
 		"act": "Act 3",
 		"zoneName": "The Black Chambers"
+	},
+	"G4_1_1": {
+		"act": "Act 4",
+		"zoneName": "Isle of Kin"
+	},
+	"G4_1_2": {
+		"act": "Act 4",
+		"zoneName": "Volcanic Warrens"
+	},
+	"G4_2_1": {
+		"act": "Act 4",
+		"zoneName": "Kedge Bay"
+	},
+	"G4_2_2": {
+		"act": "Act 4",
+		"zoneName": "Journey's End"
+	},
+	"G4_3_1": {
+		"act": "Act 4",
+		"zoneName": "Whakapanu Island"
+	},
+	"G4_3_2": {
+		"act": "Act 4",
+		"zoneName": "Singing Caverns"
+	},
+	"G4_4_1": {
+		"act": "Act 4",
+		"zoneName": "Eye of Hinekora"
+	},
+	"G4_4_2": {
+		"act": "Act 4",
+		"zoneName": "Halls of the Dead"
+	},
+	"G4_4_3": {
+		"act": "Act 4",
+		"zoneName": "Trial of the Ancestors"
+	},
+	"G4_5_1": {
+		"act": "Act 4",
+		"zoneName": "Abandoned Prison"
+	},
+	"G4_5_2": {
+		"act": "Act 4",
+		"zoneName": "Solitary Confinement"
+	},
+	"G4_7": {
+		"act": "Act 4",
+		"zoneName": "Shrike Island"
+	},
+	"G4_8b": {
+		"act": "Act 4",
+		"zoneName": "Arastas"
+	},
+	"G4_10": {
+		"act": "Act 4",
+		"zoneName": "The Excavation"
+	},
+	"G4_11_1a": {
+		"act": "Act 4",
+		"zoneName": "Ngakanu"
+	},
+	"G4_11_2": {
+		"act": "Act 4",
+		"zoneName": "Heart of the Tribe"
+	},
+	"G4_13": {
+		"act": "Act 4",
+		"zoneName": "Plunder's Point"
+	},
+	"P1_Town": {
+		"act": "Interludes",
+		"zoneName": "Curse of Holten"
+	},
+	"P2_Town": {
+		"act": "Interludes",
+		"zoneName": "The Stolen Barya"
+	},
+	"P3_Town": {
+		"act": "Interludes",
+		"zoneName": "Doriyani's Contingency"
 	}
 }

@@ -2,7 +2,7 @@
 	"actNotes": [
 		{
 			"actName": "Act 1",
-			"notes": "Clearfell       - Beira         - 10% Cold Res\nHunting Ground  - Crowbell Boss - 2 Passive Points\nFreythorn - King In The Mists - 30 Spirit + Lvl4 Spirit Gem\nOgham Farmlands - Una's Lute    - 2 Passive Points\nOgham Manor     - Candlemass    - +20 Life\n\nCtrl+Alt+S to open settings and drag/scale windows\n\nCheck Vendor at level up for\nMovespeed boots, New Weapon\nPotions: Lvl 4, 10, 16, 23"
+			"notes": "Clearfell       - Beira         - 10% Cold Res\nHunting Ground  - Crowbell Boss - 2 Passive Points\nFreythorn - King In The Mists - 30 Spirit + Lvl4 Spirit Gem\nOgham Farmlands - Una's Lute    - 2 Passive Points\nOgham Manor     - Candlemass    - +20 Life\n\nCtrl+Alt+S to open settings and drag/scale windows\n\nCheck Vendor at level up for\nMovespeed boots, New Weapon\nPotions: Lvl 4, 10, 16, 23\nAct and Zone Notes are this wide--------------------"
 		},
 		{
 			"actName": "Act 2",
@@ -11,6 +11,14 @@
 		{
 			"actName": "Act 3",
 			"notes": "Sandswept Marsh - Orok Campfire     - Lesser Jeweller's\nJungle Ruins    - Mighty Silverfist - 2 Passive Points\nVenom Crypts    - Venom Draught     - Choice\nAzak Bog        - Ignagduk - 30 Spirit / Lvl10 spirit gem\nJiquani's Machinarium - Blackjaw    - +10% Fire res\nAggorat         - Blood Sacrifice   - 2 Passive Points\n\nCheck Vendor at level up for\nMovespeed boots, New Weapon\nPotions: Lvl 30, 40, 50"
+		},
+		{
+			"actName": "Act 4",
+			"notes": "Journey's End           - +2 Passives\nHalls of the Dead       - +5 for each Res or Stat \nHalls of the Dead       - 5% Increased Max Mana\nTrials of the Ancestors - +2 Passives\nAbandoned Prison        - Life/Mana Flask Recovery\nArastas - Evening Bell  - 3 Exalted Orbs\n\nEye of Hinekora when you free Matiki\nKedge Bay > Whakapanu > Prison > Arastas > Ngakanu\nShrike Island/Isle of Kin (maybe optional)\n\nWeapon Pieces/Matiki could be on any boss so will\nhave to do optional areas to complete act\n\nPotions: Lvl 40, 50, 60"
+		},
+		{
+			"actName": "Interludes",
+			"notes": "No zone notes for Interludes :( change the zone to\nsee the bonuses each Interlude gives to choose your\nown order to do the Interludes\n\nCompleting all Interludes gives +2 Passives\n\nPotions cap out at required level 60"
 		}
 	],
 	"zoneNotes": [
@@ -253,6 +261,106 @@
 			"code": "G3_17",
 			"name": "The Black Chambers",
 			"notes": "Go left or right until you cross first bridge\n\nContinue in the same direction after the bridge to find checkpoint with second bridge\n\nFollow the bridges that float out of the water\n\nKill Doriyani!"
+		},
+		{
+			"code": "G4_1_1",
+			"name": "Isle of Kin",
+			"notes": "Head in the opposite direction as the dock\nWhen you hit a wall, follow it\nExit > Volcanic Warrens"
+		},
+		{
+			"code": "G4_1_2",
+			"name": "Volcanic Warrens",
+			"notes": "Long and winding area, boss is at the very end of it\nKill the boss then TP > Town \nBy now you have ToTA and weapon so sail > Arastas"
+		},
+		{
+			"code": "G4_2_1",
+			"name": "Kedge Bay",
+			"notes": "Just keep following the zone to the end\nExit > Journey's End"
+		},
+		{
+			"code": "G4_2_2",
+			"name": "Journey's End",
+			"notes": "Winding area, keep following the zone to the end\nCheckpoint to start to fight Omniphobia\nTP > Town then Sail > Whakapanu"
+		},
+		{
+			"code": "G4_3_1",
+			"name": "Whakapanu Island",
+			"notes": "Great XP here\nCan kill the Great White One for the shark fin, turn\nin at Ngakanu for a Skill, Spirit, OR Support gem\nExit > The Singing Caverns"
+		},
+		{
+			"code": "G4_3_2",
+			"name": "Singing Caverns",
+			"notes": "The Beckoning Clam gives quest item for a Perlescent\nAmulet at Rog, generally worth finding\nSolved layout just follow the images\nKill the boss, TP > Town and Sail > Abandoned Prison"
+		},
+		{
+			"code": "G4_4_1",
+			"name": "Eye of Hinekora",
+			"notes": "Don't miss Navali's 5% Max Mana\nExit > Halls of the Dead"
+		},
+		{
+			"code": "G4_4_2",
+			"name": "Halls of the Dead",
+			"notes": "Don't miss all 3 Res/Stat tattoos\nFairly linear layout, kill the boss \nExit > Trial of the Ancestors"
+		},
+		{
+			"code": "G4_4_3",
+			"name": "Trial of the Ancestors",
+			"notes": "Get the +2 Passives then TP > Town\nSail to the next island, follow the Act Notes"
+		},
+		{
+			"code": "G4_5_1",
+			"name": "Abandoned Prison",
+			"notes": "Find the Goddess of Justice then\nExit > Solitary Confinement"
+		},
+		{
+			"code": "G4_5_2",
+			"name": "Solitary Confinement",
+			"notes": "Follow the wall the waves are hitting\nKill the boss then TP > Town\nIn Town start doing optional areas for Matiki/Weapon"
+		},
+		{
+			"code": "G4_7",
+			"name": "Shrike Island",
+			"notes": "Incredibly linear layout just keep moving forward\nKill the boss then TP > Town\nIn Town start doing optional areas for Matiki/Weapon"
+		},
+		{
+			"code": "G4_8b",
+			"name": "Arastas",
+			"notes": "1. Get out of town square, there is nothing here\n2. Hug top wall to get to Evening Bell\n3. [Optional] Morning Bell is opposite side of\n  Coastal Ridge as Evening Bell\n4. Follow the coastal ridge then through town to\n  kill boss and Exit > The Excavation"
+		},
+		{
+			"code": "G4_10",
+			"name": "The Excavation",
+			"notes": "Pick a wall and follow it all the way to the boss\nKill the boss and TP > Town to Sail > Ngakanu"
+		},
+		{
+			"code": "G4_11_1a",
+			"name": "Ngakanu",
+			"notes": "After leaving the main building follow the wall to\nExit > Heart of the Tribe"
+		},
+		{
+			"code": "G4_11_2",
+			"name": "Heart of the Tribe",
+			"notes": "Keep trying to head north, every time you see a \nCheckpoint go back and find the fork, you went the\nwrong way\nKill Tavakai and you're done with Act 4!"
+		},
+		{
+			"code": "G4_13",
+			"name": "Plunder's Point",
+			"notes": "Optional Area!\ndo the expedition then continue with the act"
+		},
+		{
+			"code": "P1_Town",
+			"name": "Curse of Holten",
+			"notes": "Holten - Sould of the Ferryman - Cheap Greater Runes\nWolvenhold - +2 Passives"
+		},
+		{
+			"code": "P2_Town",
+			"name": "The Stolen Barya",
+			"notes": "The Khari Crossing - Skullmaw Stairway - 5% Max Life\nThe Khari Crossing - Worm and Scorpion - +2 Passives\nQimah - Choice of 7 buffs (can change later)"
+		},
+		{
+			"code": "P3_Town",
+			"name": "Doriyani's Contingency",
+			"notes": "Kriar Village - +40 Max Spirit\nHowling Caves - +2 Passives\nKriar Peaks - Elder Maddox - Unique Item"
 		}
 	]
 }
