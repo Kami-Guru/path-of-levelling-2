@@ -1,0 +1,52 @@
+{
+	"buildName": "0.4.0 Jungroan's Limitless Stormweaver",
+	"gemBuild": {
+		"changedByUser": false,
+		"gemSetups": [
+			{
+				"level": 1,
+				"gemLinks": [
+					"Spark - Unleash",
+					"Frost Bomb",
+					"Contagion"
+				],
+				"sources": []
+			},
+			{
+				"level": 6,
+				"gemLinks": [
+					"Essence Drain - Chain - Zenith",
+					"Contagion - Unleash",
+					"Orb of Storms - Overabundance"
+				],
+				"gemSources": []
+			},
+			{
+				"level": 14,
+				"gemLinks": [
+					"Orb of Storms - Overabundance - Living Lightning - Unleash",
+					"Ember Fusillade - Considered Casting - Contr Destruction",
+					"Frost Bomb - Potent Exposure - Long Fuse",
+					"Mana Tempest",
+					"Elemental Weakness - Heightened Curse - Prolonged Duration"
+				],
+				"gemSources": []
+			},
+			{
+				"level": 41,
+				"gemLinks": [
+					"Orb of Storms - Overabundance - Rapid Cast - Pinpoint Crit",
+					"Elemental Storm - Contr Dest - Cooldown Recov - Pro Duration",
+					"Firestorm - Conc Area - Unleash - Rising Tempest",
+					"Frost Bomb - Potent Exposure - Long Fuse - Pro Duration",
+					"Elemental Weakness - Heightened Curse - Pro Duration",
+					"Mana Tempest",
+					"Elemental Invoc - Liv Bomb - Boundless Energy - Energy Ret",
+					"Cast on Critical - Arc - Energy Retention - Boundless Energy"
+				],
+				"gemSources": []
+			}
+		]
+	},
+	"actNotes": []
+}
