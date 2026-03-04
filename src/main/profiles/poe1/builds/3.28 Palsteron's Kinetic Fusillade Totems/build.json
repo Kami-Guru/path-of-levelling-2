@@ -1,0 +1,151 @@
+
+{
+    "buildName": "3.28 Palsteron's Kinetic Fusillade Totems",
+    "gemBuild": {
+        "changedByUser": true,
+        "gemSetups": [
+            {
+                "level": 1,
+                "gemLinks": [
+                    "Adjust your gem setups tab to fit this line!-------",
+                    "BB Rolling Magma - Ele Prolif",
+                    "Momentum (equip for gem xp)"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 4,
+                "gemLinks": [
+                    "BBB Rolling Mag - Ele Prolif - Arcane Surge",
+                    "RB  Holy Flame Totem - Summon Phantasm",
+                    "RG  Shield Charge - Momentum",
+                    "Frostblink, Flame Wall"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 8,
+                "gemLinks": [
+                    "BBB Rolling Mag - Ele Prolif - Combust",
+                    "RBR HFT - Infused Channeling - Added Fire Damage",
+                    "BB  Flame Wall - Arcane Surge",
+                    "RG  Shield Charge - Momentum",
+                    "Frostblink"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 10,
+                "gemLinks": [
+                    "BBB Rolling Mag - Ele Prolif - Combust",
+                    "RBR HFT - Infused Channeling - Added Fire Damage",
+                    "BB  Flame Wall - Arcane Surge",
+                    "RG  Shield Charge - Momentum",
+                    "Clarity (Low Level)",
+                    "Frostblink"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 16,
+                "gemLinks": [
+                    "BBB Rolling Mag - Ele Prolif - Combust",
+                    "RBR HFT - Infused Channeling - Added Fire Damage",
+                    "BB  Flame Wall - Arcane Surge",
+                    "RG  Shield Charge - Momentum",
+                    "Herald of Ash, Herald of Thunder",
+                    "Frostblink"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 18,
+                "gemLinks": [
+                    "BBB  Rolling Mag - Ele Prolif - Combust",
+                    "RBRB HFT - Infused Channel - Added Fire - Fast Cast",
+                    "BB   Flame Wall - Arcane Surge",
+                    "RG   Shield Charge - Momentum",
+                    "Herald of Ash, Herald of Thunder",
+                    "Frostblink"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 24,
+                "gemLinks": [
+                    "BBB  Rolling Mag - Ele Prolif - Combust",
+                    "RBRB HFT - Infused Channel - Added Fire - Fast Cast",
+                    "BB   Flame Wall - Arcane Surge",
+                    "RG   Shield Charge - Momentum",
+                    "Herald of Ash, Herald of Thunder",
+                    "Frostblink, Elemental Weakness"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 28,
+                "gemLinks": [
+                    "BBBB Firestorm - Ele Focus - Fast Cast - Arcane Sur",
+                    "RRBB HFT - Added Fire - Faster Casting - Combustion",
+                    "RGG  Shield Charge - Momentum - Faster Attacks",
+                    "Herald of Ash, Haste",
+                    "Flame Wall, Frostblink, Elemental Weakness"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 40,
+                "gemLinks": [
+                    "BRRG KF - Ballista Totem - Less Dur - Greater Voll",
+                    "BBG  Arcanist Brand - Faster Casting - Tornado",
+                    "RGG  Shield Charge - Momentum - Faster Attacks",
+                    "Herald of Ice, Wrath, Precision",
+                    "Frostblink, Elemental Weakness, Frenzy"
+                ],
+                "gemSources": []
+            }
+        ]
+    },
+    "actNotes": [
+        {
+            "actName": "Act 1",
+            "notes": "Make the notes as wide as this line------------------------\nEnemy at the Gate:  Rolling Magma, BUY Ele Prolif\nBreaking Some Eggs: Shield Charge, BUY Flame Wall, \n                        Frostblink, Holy Flame Totem\nMercy mission:      Quicksilver, Arcane Surge, BUY Summon\n                        Phantasm, Infused Channeling\nCaged Brute:        Combustion, BUY Added Fire, Clarity\nSiren's Cadence:    -\nTrials: The Lower Prison\n\nIron Ring + Blue Gem = Sapphire Ring\nBoots + Aug + Quicksilver = MS boots\nLvl 12 for 15% MS\n\nLvl 4 Hailrake, 8-10 Brutus, 12-13 Merveil"
+        },
+        {
+            "actName": "Act 2",
+            "notes": "Great White Beast:  Quicksilver\nIntruders in Black: Herald of Ash, BUY Herald of Thunder\nSharp and Cruel:    Faster Casting, BUY Elemental Focus\n                       Level Elemental Focus in Weapon Swap\nBandits:            Alira 15% Res\nTrials: Crypt, Chamber of Sins 2\n\nCRAFT BENCH dex/str stats + flat fire damage\n\nBoots + Aug + Quicksilver = MS boots\nLvl 24 for 20% Movespeed\niLvl 25 for 4-socket\n\nLvl 14-15 Fidelitas, 16 Weaver, 20-22 Vaal Oversoul"
+        },
+        {
+            "actName": "Act 3",
+            "notes": "Lost in Love:         Elemental Weakness\nSever the Right Hand: Firestorm\nFixture of Fate:      Siosa (Vendor with ALL Gems)\nTrials: Crematorium, Catacombs, Imperial Gardens\n\nSiosa gems cost 1 Chance 2 Alteration 3 Transmute, buy:\nKinetic Fusillade, Ballista Totem, Less Duration, Wrath,\nFaster Attacks, Frenzy\nLevel up any gems you don't immediately use in offhand for\nLevel 40 KF Swap\n\nDo Labyrinth around level 32, Pursuit of Faith\n\nBoots + Aug + Quicksilver = MS boots\nLvl 24 for 20% Movespeed \nLvl 32 for 25% Movespeed \niLvl 25 for 4-socket (vendors sell at player level 24)\n\nLvl 24 Enter Docks, 27 Piety, 28 Dominus"
+        },
+        {
+            "actName": "Act 4",
+            "notes": "Breaking The Seal:  Tornado\nEternal Nightmare:  Greater Volley, BUY Arcanist Brand\n\nFor Level 40 KF swap buy Precision from Nessa in Act 1\n\nBoots + Aug + Quicksilver = MS boots\nLvl 32 for 25% Movespeed\n\nLvl 30-31 Dried Lake, 31 Normal Lab, 34-35 Malachai"
+        },
+        {
+            "actName": "Act 5",
+            "notes": "There may be 5-link in a Breach in Slave Pens\n\nCheck vendors every 3-4 levels\nGambling for gear can give 4-links, ideally gamble gloves\nGamble gear with stats matching colours you need\n    Armour for red, Evasion for green, ES for blue\n\nBoots + Aug + Quicksilver = MS boots\nLvl 32 for 25% Movespeed\nLvl 44 for 30% Movespeed\niLvl 35 for 5-links (rare!)\n\nLvl 40-42 Leave Chambers"
+        },
+        {
+            "actName": "Act 6",
+            "notes": "Trials: The Prison\n\nThere may be 5-link in a Breach in The Strand\n\nCheck vendors every 3-4 levels\nGambling for gear can give 4-links, ideally gamble gloves\nGamble gear with stats matching colours you need\n    Armour for red, Evasion for green, ES for blue\n\nBoots + Aug + Quicksilver = MS boots\n\nStay at lowest level without penalty\n5 levels under zone at player level 32-48"
+        },
+        {
+            "actName": "Act 7",
+            "notes": "Trials: The Crypt, The Chamber of Sins\n\nSecond Lab is Ritual of Awakening\n\nCheck vendors every 3-4 levels\nGambling for gear can give 4-links, ideally gamble gloves\nGamble gear with stats matching colours you need\n    Armour for red, Evasion for green, ES for blue\n\nBoots + Aug + Quicksilver = MS boots\n\nStay at lowest level without penalty\n5 levels under zone at player level 32-48\n6 levels under zone at player level 48-62"
+        },
+        {
+            "actName": "Act 8",
+            "notes": "Trials: Bath House\n\nCheck vendors every 3-4 levels\nGambling for gear can give 4-links, ideally gamble gloves\nGamble gear with stats matching colours you need\n    Armour for red, Evasion for green, ES for blue\n\nBoots + Aug + Quicksilver = MS boots\n\nLvl 54 Finish Act 8 (Harbour Bridge is last zone)"
+        },
+        {
+            "actName": "Act 9",
+            "notes": "Trials: The Tunnel\n\nCheck vendors every 3-4 levels\nGambling for gear can give 4-links, ideally gamble gloves\nGamble gear with stats matching colours you need\n    Armour for red, Evasion for green, ES for blue\n\nBoots + Aug + Quicksilver = MS boots\n\nLvl 54 Enter BA\nLeave at: 58 if strong, 60 if average, 62 if weak"
+        },
+        {
+            "actName": "Act 10",
+            "notes": "Trials: The Ossuary\n\nThird Lab is Conviction of Power\n\nCheck vendors every 3-4 levels\nGambling for gear can give 4-links, ideally gamble gloves\nGamble gear with stats matching colours you need\n    Armour for red, Evasion for green, ES for blue\n\nBoots + Aug + Quicksilver = MS boots\n\nStay at lowest level without penalty (6-7 under zone)"
+        }
+    ]
+}
