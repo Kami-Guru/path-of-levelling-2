@@ -1,0 +1,1 @@
+if this isn't here, the build tool 'optimises' away the poe1 folder and I get endless list of errors
