@@ -60,7 +60,7 @@ CRAFT - Ele Damage w/ Attacks
 The Battlefront--------------------------------------------
 Go up and left for the Waypoint 
 Spool is usually down/left from Waypoint
-Then go right from Waypoint to Exit > The Docks
+Then go left from Waypoint to Exit > The Docks
 
 Second time here go up to Exit > The Solaris Temple
 
