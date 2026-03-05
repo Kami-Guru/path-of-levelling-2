@@ -1,6 +1,6 @@
 # Path of Levelling 2
 
-A levelling overlay for Path Of Exile 2. 
+A levelling overlay for Path Of Exile 2
 
 ## Features 
 Completed:
@@ -13,15 +13,8 @@ In Progress:
      - An overlay for displaying gem setups at different level breakpoints
      - An overlay which shows a screenshot of a passive skill tree (presumably from POB), with many potential screenshots that will be displayed based on your current level.
 
-## Demo:
-https://youtu.be/iSzbu-6Ncwk
-
-![image](https://github.com/user-attachments/assets/54e9e939-04ac-4f27-93c1-b3164e434b67)
-
-Use Ctrl+Alt+S to open settings:
-![image](https://github.com/user-attachments/assets/c0b51b7a-5013-4d56-94d5-d47767fb4ad6)
-
-
+## Documentation
+To see the full documentation, including the quick start guide, go here: https://kami-guru.github.io/path-of-levelling-2/
 
 # Support: 
 If you would like to support my work, you can buy me a coffee at https://ko-fi.com/kamiguru
