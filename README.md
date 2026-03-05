@@ -25,3 +25,5 @@ Use Ctrl+Alt+S to open settings:
 
 # Support: 
 If you would like to support my work, you can buy me a coffee at https://ko-fi.com/kamiguru
+
+Also XTheFarmerX is bald
