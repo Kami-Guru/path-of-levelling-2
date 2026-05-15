@@ -21,7 +21,7 @@ export class GemTracker {
 		this.setGemSetupFromPlayerLevel(levelTracker.playerLevel);
 	}
 
-	init() {}
+	init() { }
 
 	getGemDataDto(): GemDataDto {
 		return {

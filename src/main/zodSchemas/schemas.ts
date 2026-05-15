@@ -138,6 +138,12 @@ export const GemSetupZodSchema = z.object({
 	gemSources: z.array(z.string()),
 });
 
+export const ZoneNoteZodSchema = z.object({
+	zoneCode: z.string(),
+	zoneName: z.string(),
+	notes: z.string(),
+});
+
 export const ActNoteZodSchema = z.object({
 	actName: z.string(),
 	notes: z.string(),
@@ -152,6 +158,7 @@ export const BuildZodSchema = z.object({
 	buildName: z.string(),
 	gemBuild: GemBuildZodSchema,
 	actNotes: z.array(ActNoteZodSchema),
+	zoneNotes: z.array(ZoneNoteZodSchema),
 });
 
 // Builds are stored in a dict like BuildStore.builds["buildName"] = Build
@@ -165,7 +172,7 @@ export type Build = z.infer<typeof BuildZodSchema>;
 export type GemBuild = z.infer<typeof GemBuildZodSchema>;
 export type GemSetup = z.infer<typeof GemSetupZodSchema>;
 export type ActNote = z.infer<typeof ActNoteZodSchema>;
-
+export type ZoneNote = z.infer<typeof ZoneNoteZodSchema>;
 
 
 export const DefaultGemBuild = GemBuildZodSchema.extend({
@@ -195,16 +202,9 @@ export type ZoneReference = z.infer<typeof zoneReferenceZodSchema>;
 
 // --- Default Zone Notes --- //
 
-export const ZoneNotesZodSchema = z.object({
-	code: z.string(),
-	name: z.string(),
-	notes: z.string(),
-});
-
 export const DefaultZoneNotesZodSchema = z.object({
 	actNotes: z.array(ActNoteZodSchema),
-	zoneNotes: z.array(ZoneNotesZodSchema),
+	zoneNotes: z.array(ZoneNoteZodSchema),
 });
 
-export type DefaultZoneNotes = z.infer<typeof DefaultZoneNotesZodSchema>;
-export type ZoneNotes = z.infer<typeof ZoneNotesZodSchema>;
+export type DefaultActAndZoneNotes = z.infer<typeof DefaultZoneNotesZodSchema>;

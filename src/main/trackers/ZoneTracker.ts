@@ -13,7 +13,8 @@ import {
 	ZoneReference,
 	ZoneCodeToZoneReference,
 	ActNote,
-	DefaultZoneNotes,
+	ZoneNote,
+	DefaultActAndZoneNotes,
 	DefaultGemBuild,
 } from "../zodSchemas/schemas.js";
 import { SettingsService } from "../services/Settings.js";
@@ -39,9 +40,10 @@ export class ZoneTracker {
 	zoneNotes: string = "";
 
 	allActNotes: Array<ActNote> = [];
+	allZoneNotes: Array<ZoneNote> = [];
 
 	defaultZoneNotesPath: string = "";
-	defaultZoneNotes: DefaultZoneNotes = Object();
+	defaultActAndZoneNotes: DefaultActAndZoneNotes = Object();
 
 	// SettingsService needs to be loaded to call this.loadActNotes
 	// StateTracker required for this.saveZoneFromCode
@@ -60,6 +62,7 @@ export class ZoneTracker {
 		this.loadDefaultZoneNotes();
 
 		this.loadActNotes();
+		this.loadZoneNotes();
 
 		this.saveZoneFromCode(storeService.getGameSetting("lastSessionState.zoneCode"), true);
 	}
@@ -84,7 +87,7 @@ export class ZoneTracker {
 			allBuildNames: objectFactory.getGemTracker().allBuildNames,
 			allActNotes: this.allActNotes
 		};
-		return dto
+		return dto;
 	}
 
 	loadDefaultZoneNotes() {
@@ -93,7 +96,7 @@ export class ZoneTracker {
 
 		try {
 			var buffer = fs.readFileSync(this.defaultZoneNotesPath);
-			this.defaultZoneNotes = JSON.parse(buffer.toString());
+			this.defaultActAndZoneNotes = JSON.parse(buffer.toString());
 			log.info("Successfully loaded zone notes");
 		} catch (error) {
 			log.info("Could not load zone notes");
@@ -108,12 +111,12 @@ export class ZoneTracker {
 		const userActNotes = currentBuild === undefined ? [] : currentBuild.actNotes;
 
 		// Zip together the default act notes and user's act notes
-		this.allActNotes = this.defaultZoneNotes.actNotes.map((actNotes) => {
+		this.allActNotes = this.defaultActAndZoneNotes.actNotes.map((actNotes) => {
 			return {
 				actName: actNotes.actName,
-				notes:
-					userActNotes.find((userActNotes) => userActNotes.actName === actNotes.actName)
-						?.notes ?? actNotes.notes,
+				notes: userActNotes
+					.find((userActNotes) => userActNotes.actName === actNotes.actName)?.notes
+					?? actNotes.notes,
 			};
 		});
 
@@ -121,10 +124,29 @@ export class ZoneTracker {
 		this.saveZoneFromCode(this.zoneCode, true);
 	}
 
+	/** Reads zone notes from the current build and zips them with default notes to give a full set
+	 * of zone notes in memory.
+	 */
+	loadZoneNotes() {
+		const currentBuild = objectFactory.getStoreService().getBuild(objectFactory.getSettingsService().getBuildName());
+		const userZoneNotes = currentBuild === undefined ? [] : currentBuild.zoneNotes;
+
+		// Zip together the default zone notes and user's zone notes
+		this.allZoneNotes = this.defaultActAndZoneNotes.zoneNotes.map((zoneNotes) => {
+			return {
+				zoneCode: zoneNotes.zoneCode,
+				zoneName: zoneNotes.zoneName,
+				notes: userZoneNotes
+					.find((userZoneNotes) => userZoneNotes.zoneName === zoneNotes.zoneName)?.notes
+					?? zoneNotes.notes,
+			};
+		});
+	}
+
 	saveActNotes(buildName: string, newActNotes: Array<ActNote>) {
 		// First, figure out which act notes are NOT the default
 		const actNotesToSave = newActNotes.filter(newActNote =>
-			newActNote.notes !== this.defaultZoneNotes.actNotes
+			newActNote.notes !== this.defaultActAndZoneNotes.actNotes
 				.find(defaultActNote => defaultActNote.actName == newActNote.actName)?.notes
 		);
 
@@ -136,7 +158,8 @@ export class ZoneTracker {
 			...(objectFactory.getStoreService().getBuild(buildName)
 				?? {
 				buildName: buildName,
-				gemBuild: DefaultGemBuild.parse({})
+				gemBuild: DefaultGemBuild.parse({}),
+				zoneNotes: [],
 			}),
 			actNotes: actNotesToSave,
 		});
@@ -145,23 +168,67 @@ export class ZoneTracker {
 		this.loadActNotes();
 	}
 
+	saveZoneNotes(buildName: string, newZoneNotes: Array<ZoneNote>) {
+		// First, figure out which zone notes are NOT the default
+		const zoneNotesToSave = newZoneNotes.filter(newZoneNote =>
+			newZoneNote.notes !== this.defaultActAndZoneNotes.zoneNotes
+				.find(defaultZoneNote => defaultZoneNote.zoneCode == newZoneNote.zoneCode)?.notes
+		);
+
+		if (zoneNotesToSave.length === 0)
+			return;
+
+		// Save the new notes to build - create a new build if required
+		objectFactory.getStoreService().setBuild(buildName, {
+			...(objectFactory.getStoreService().getBuild(buildName)
+				?? {
+				buildName: buildName,
+				gemBuild: DefaultGemBuild.parse({}),
+				actNotes: [],
+			}),
+			zoneNotes: zoneNotesToSave,
+		});
+
+		// Re-load the notes from the build store into memory
+		this.loadZoneNotes();
+	}
+
+	// Remove the user's act note from the saved custom Act Notes
 	resetActNoteForAct(actName: string): ActNote {
-		// Remove the user's act note from the saved custom Act Notes
 		const currentBuildName = objectFactory.getSettingsService().getBuildName();
 		const currentBuild = objectFactory.getStoreService().getBuild(currentBuildName);
 
+		// If there is no build selected, idk, we have other problems just send the default note
 		if (!currentBuild)
-			return this.defaultZoneNotes.actNotes
+			return this.defaultActAndZoneNotes.actNotes
 				.find(defaultActNote => defaultActNote.actName == actName)!;
-
 
 		objectFactory.getStoreService().setBuild(currentBuildName, {
 			...currentBuild,
 			actNotes: currentBuild.actNotes.filter(existingActNote => existingActNote.actName !== actName),
 		});
 
-		return this.defaultZoneNotes.actNotes
+		return this.defaultActAndZoneNotes.actNotes
 			.find(defaultActNote => defaultActNote.actName == actName)!;
+	}
+
+	// Remove the user's zone note from the saved array of custom Zone Notes
+	resetZoneNoteForZoneCode(zoneCode: string): ZoneNote {
+		const currentBuildName = objectFactory.getSettingsService().getBuildName();
+		const currentBuild = objectFactory.getStoreService().getBuild(currentBuildName);
+
+		// If there is no build selected, idk, we have other problems just send the default note
+		if (!currentBuild)
+			return this.defaultActAndZoneNotes.zoneNotes
+				.find(defaultZoneNote => defaultZoneNote.zoneCode == zoneCode)!;
+
+		objectFactory.getStoreService().setBuild(currentBuildName, {
+			...currentBuild,
+			zoneNotes: currentBuild.zoneNotes.filter(existingActNote => existingActNote.zoneCode !== zoneCode),
+		});
+
+		return this.defaultActAndZoneNotes.zoneNotes
+			.find(defaultZoneNote => defaultZoneNote.zoneCode == zoneCode)!;
 	}
 
 	// This is called when someone selects an act in the dropdown in the UI
@@ -272,8 +339,8 @@ export class ZoneTracker {
 
 		this.actNotes = actNotes.notes;
 
-		var zoneNotes = this.defaultZoneNotes.zoneNotes.find((zoneNotes) => {
-			return zoneNotes.code == this.zoneCode;
+		var zoneNotes = this.defaultActAndZoneNotes.zoneNotes.find((zoneNotes) => {
+			return zoneNotes.zoneCode == this.zoneCode;
 		});
 
 		// This basically gives users the option to not set notes for a zone

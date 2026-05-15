@@ -123,6 +123,7 @@ export class MigrationService {
 
     private MigrateBuilds() {
         this.MigrateBuildStoresUnversionedToV1();
+        this.MigrateBuildStoresV1ToV2();
 
         // Fill missing default builds - PoE1
         const poe1BuildsDir = getBuildsRootPath("poe1");
@@ -254,6 +255,57 @@ export class MigrationService {
         oldBuildStore.clear();
     }
 
+    private MigrateBuildStoresV1ToV2() {
+        // V2 added Zone Notes to builds (like how V1 added Act Notes) so here we just:
+        // 1. Change "version": 1 -> "version": 2
+        // 2. Add zoneNotes: [] to each build
+        const poe2NewBuildStore = new Store({
+            name: "poe2-builds",
+            accessPropertiesByDotNotation: false
+        });
+
+        // Only migrate if we're on version 1
+        if (poe2NewBuildStore.get('version') == 1) {
+            poe2NewBuildStore.set('version', 2);
+
+            // Add zoneNotes to each build
+            const poe2MigratedBuilds: Record<string, object> = {};
+
+            const builds = poe2NewBuildStore.get('builds') as Record<string, object>;
+            for (const buildName in builds) {
+                poe2MigratedBuilds[buildName] = {
+                    ...builds[buildName],
+                    zoneNotes: []
+                };
+            }
+
+            poe2NewBuildStore.set('builds', poe2MigratedBuilds);
+        };
+
+        const poe1NewBuildStore = new Store({
+            name: "poe1-builds",
+            accessPropertiesByDotNotation: false
+        });
+
+        if (poe1NewBuildStore.get('version') == 1) {
+            poe1NewBuildStore.set('version', 2);
+
+            // Add zoneNotes to each build
+            const poe1MigratedBuilds: Record<string, object> = {};
+
+            const builds = poe1NewBuildStore.get('builds') as Record<string, object>;
+            for (const buildName in builds) {
+                poe1MigratedBuilds[buildName] = {
+                    ...builds[buildName],
+                    zoneNotes: []
+                };
+            }
+
+            poe1NewBuildStore.set('builds', poe1MigratedBuilds);
+        };
+
+    }
+
     /** Checks existing settings, trims extra keys and fills defaults.
      * Returns undefined if no changes are required.
      */
@@ -278,4 +330,3 @@ export class MigrationService {
         });
     }
 }
-
