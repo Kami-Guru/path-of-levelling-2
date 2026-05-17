@@ -63,5 +63,6 @@
 			}
 		]
 	},
-	"actNotes": []
+	"actNotes": [],
+    "zoneNotes": []
 }
