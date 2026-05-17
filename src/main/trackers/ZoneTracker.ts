@@ -59,7 +59,7 @@ export class ZoneTracker {
 			),
 		];
 
-		this.loadDefaultZoneNotes();
+		this.loadDefaultActAndZoneNotes();
 
 		this.loadActNotes();
 		this.loadZoneNotes();
@@ -90,7 +90,16 @@ export class ZoneTracker {
 		return dto;
 	}
 
-	loadDefaultZoneNotes() {
+	getZoneNotesSettingsDto(): ZoneNotesSettingsDto {
+		const dto = {
+			buildName: objectFactory.getGemTracker().buildName,
+			allBuildNames: objectFactory.getGemTracker().allBuildNames,
+			allZoneNotes: this.allZoneNotes
+		};
+		return dto;
+	}
+
+	loadDefaultActAndZoneNotes() {
 		this.defaultZoneNotesPath = getZoneNotesPath(getProfile().Id);
 		log.info("Trying to load zone notes at path", this.defaultZoneNotesPath);
 
@@ -137,10 +146,13 @@ export class ZoneTracker {
 				zoneCode: zoneNotes.zoneCode,
 				zoneName: zoneNotes.zoneName,
 				notes: userZoneNotes
-					.find((userZoneNotes) => userZoneNotes.zoneName === zoneNotes.zoneName)?.notes
+					.find((userZoneNotes) => userZoneNotes.zoneCode === zoneNotes.zoneCode)?.notes
 					?? zoneNotes.notes,
 			};
 		});
+
+		// Re-select the current Act and Zone to re-load those notes - updateOnly = true
+		this.saveZoneFromCode(this.zoneCode, true);
 	}
 
 	saveActNotes(buildName: string, newActNotes: Array<ActNote>) {
@@ -213,7 +225,7 @@ export class ZoneTracker {
 	}
 
 	// Remove the user's zone note from the saved array of custom Zone Notes
-	resetZoneNoteForZoneCode(zoneCode: string): ZoneNote {
+	resetZoneNoteForZone(zoneCode: string): ZoneNote {
 		const currentBuildName = objectFactory.getSettingsService().getBuildName();
 		const currentBuild = objectFactory.getStoreService().getBuild(currentBuildName);
 
@@ -224,7 +236,7 @@ export class ZoneTracker {
 
 		objectFactory.getStoreService().setBuild(currentBuildName, {
 			...currentBuild,
-			zoneNotes: currentBuild.zoneNotes.filter(existingActNote => existingActNote.zoneCode !== zoneCode),
+			zoneNotes: currentBuild.zoneNotes.filter(existingZoneNote => existingZoneNote.zoneCode !== zoneCode),
 		});
 
 		return this.defaultActAndZoneNotes.zoneNotes
@@ -339,13 +351,12 @@ export class ZoneTracker {
 
 		this.actNotes = actNotes.notes;
 
-		var zoneNotes = this.defaultActAndZoneNotes.zoneNotes.find((zoneNotes) => {
-			return zoneNotes.zoneCode == this.zoneCode;
+		var zoneNotes = this.allZoneNotes.find((zoneNote) => {
+			return zoneNote.zoneCode == this.zoneCode;
 		});
 
 		// This basically gives users the option to not set notes for a zone
-		// Dont know why they would but as a side effect missing notes don't cause error
-		// popups.
+		// Dont know why they would but as a side effect missing notes don't cause error popups
 		if (zoneNotes == null) {
 			return;
 		}
@@ -356,7 +367,7 @@ export class ZoneTracker {
 	// Returns a boolean representing whether or not zone layout image paths were changed.
 	// Stops us from updating images every time this method is called.
 	//TODO actually I never use this bool, is it really necessary? there are already
-	//TODO safeguards to prevent zone ntoes from being changed when zone isn't really
+	//TODO safeguards to prevent zone notes from being changed when zone isn't really
 	//TODO changed, but am I ok with these being so coupled? I guess it isn't really coupling
 	//TODO if it's all the same state on the same class.
 	setZoneLayoutImagePaths(zoneCode: string): Boolean {

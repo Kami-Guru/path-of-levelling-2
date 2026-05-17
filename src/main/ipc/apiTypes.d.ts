@@ -41,6 +41,13 @@ type channelReturnTypeMapping = {
 	postAddNewBuildFromActNotes: ActNotesSettingsDto;
 	postDeleteBuildFromActNotes: ActNotesSettingsDto;
 
+	// Zone Notes Settings
+	getZoneNotesSettingsState: ZoneNotesSettingsDto;
+	saveZoneNotesForBuild: ZoneNotesSettingsDto;
+	postResetZoneNoteForZone: ZoneNote; // Send back the default Zone Note, DON'T reset the whole screen
+	postBuildSelectedFromZoneNotes: ZoneNotesSettingsDto;
+	postAddNewBuildFromZoneNotes: ZoneNotesSettingsDto;
+	postDeleteBuildFromZoneNotes: ZoneNotesSettingsDto;
 
 	// --- TRACKERS --- //
 	// Zone Tracker
@@ -87,6 +94,11 @@ type channelRequestTypeMapping = {
 	postAddNewBuildFromActNotes: string;
 	postDeleteBuildFromActNotes: string;
 
+	postBuildSelectedFromZoneNotes: string;
+	saveZoneNotesForBuild: SaveZoneNotesRequest;
+	postResetZoneNoteForZone: string;
+	postAddNewBuildFromZoneNotes: string;
+	postDeleteBuildFromZoneNotes: string;
 
 	// --- TRACKERS --- //
 	// Zone Tracker
@@ -129,6 +141,17 @@ type ActNotesSettingsDto = {
 	buildName: string;
 	allBuildNames: string[],
 	allActNotes: ActNote[];
+};
+
+type SaveZoneNotesRequest = {
+	buildName: string;
+	allZoneNotes: ZoneNote[];
+};
+
+type ZoneNotesSettingsDto = {
+	buildName: string;
+	allBuildNames: string[],
+	allZoneNotes: ZoneNote[];
 };
 
 // --- Trackers --- //
