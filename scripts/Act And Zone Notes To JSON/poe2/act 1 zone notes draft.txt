@@ -123,6 +123,7 @@ Second floor go in opposite direction as first floor
 Third floor go in opposite direction as second floor
 
 Kill Geonor. If you didn't kill Candlemass, before cutscene click Respawn At Checkpoint then Checkpoint > Candlemass then come back
+WARNING: Dying to Candlemass, respawns Geonor!
 
 Exit > Act 2!
 
