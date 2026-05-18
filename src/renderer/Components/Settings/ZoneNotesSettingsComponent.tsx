@@ -1,5 +1,36 @@
 import React, { useEffect, useState, useRef } from "react";
-import { ZoneNote } from "../../../main/zodSchemas/schemas";
+import { LockNoteOption, ZoneNote } from "../../../main/zodSchemas/schemas";
+
+function getLockButtonProps(lockNoteOption: LockNoteOption): {
+    label: string;
+    title: string;
+    className: string;
+    disabled: boolean;
+} {
+    switch (lockNoteOption) {
+        case "unlocked":
+            return {
+                label: "Automatically Update",
+                title: "Notes will update when the app is updated. Click to lock.",
+                className: "ZoneNotesSettingsLockButton--unlocked",
+                disabled: false,
+            };
+        case "locked":
+            return {
+                label: "Do Not Update",
+                title: "Notes will not update when the app is updated. Click to unlock.",
+                className: "ZoneNotesSettingsLockButton--locked",
+                disabled: false,
+            };
+        case "lockedCannotUnlock":
+            return {
+                label: "Cannot Update (Custom Notes)",
+                title: "Custom zone notes cannot be updated. Reset this note for updates.",
+                className: "ZoneNotesSettingsLockButton--lockedCannotUnlock",
+                disabled: true,
+            };
+    }
+}
 
 export function ZoneNotesSettingsComponent() {
     const [selectedBuild, setSelectedBuild] = useState("");
@@ -72,6 +103,7 @@ export function ZoneNotesSettingsComponent() {
             buildName: selectedBuild,
             allZoneNotes: editableZoneNotes,
         };
+
         // Save notes in main process and use returned state to refresh local state
         window.electron.saveZoneNotesForBuild(payload).then((response) => {
             setEditableZoneNotes(response.allZoneNotes);
@@ -88,18 +120,37 @@ export function ZoneNotesSettingsComponent() {
         });
     };
 
+    /** Handle changes to the lock option for a Zone */
+    const handleLockOptionChange = (zoneCode: string, value: LockNoteOption) => {
+        const newNotes = editableZoneNotes.map((zoneNote) => (zoneNote.zoneCode !== zoneCode
+            ? zoneNote
+            : {
+                lockNoteOption: value,
+                zoneName: zoneNote.zoneName,
+                zoneCode: zoneNote.zoneCode,
+                notes: zoneNote.notes
+            }));
+
+        setEditableZoneNotes(newNotes);
+    };
+
+    const handleLockToggle = (zoneCode: string, lockNoteOption: LockNoteOption) => {
+        if (lockNoteOption === "lockedCannotUnlock") return;
+        const nextValue: LockNoteOption = lockNoteOption === "unlocked" ? "locked" : "unlocked";
+        handleLockOptionChange(zoneCode, nextValue);
+    };
+
     /** Handle edits to Zone Notes */
     const handleNoteChange = (zoneCode: string, value: string) => {
         // Replace the newly edited note in the current set of Zone Notes
         const newNotes = editableZoneNotes.map((zoneNote) => (zoneNote.zoneCode !== zoneCode
             ? zoneNote
             : {
+                lockNoteOption: zoneNote.lockNoteOption,
                 zoneName: zoneNote.zoneName,
                 zoneCode: zoneNote.zoneCode,
                 notes: value
             }));
-
-        setEditableZoneNotes(newNotes);
 
         setEditableZoneNotes(newNotes);
         setTimeout(() => autoResize(zoneCode), 0); // Wait for DOM update
@@ -134,6 +185,41 @@ export function ZoneNotesSettingsComponent() {
     useEffect(() => {
         editableZoneNotes.forEach((zoneNote) => autoResize(zoneNote.zoneCode));
     }, [editableZoneNotes]);
+
+    const renderZoneNoteBlock = (zoneNote: ZoneNote) => {
+        const lockButton = getLockButtonProps(zoneNote.lockNoteOption);
+        return (
+            <div key={zoneNote.zoneCode} className="ZoneNotesSettingsBlock">
+                <label>{zoneNote.zoneName}</label>
+                <label>
+                    <textarea
+                        ref={el => { textareaRefs.current[zoneNote.zoneCode] = el; }}
+                        value={zoneNote.notes ?? ""}
+                        onChange={(e) => handleNoteChange(zoneNote.zoneCode, e.target.value)}
+                        className="ZoneNotesSettingsTextarea"
+                        style={{ overflow: "hidden", resize: "vertical" }}
+                    />
+                </label>
+                <button
+                    type="button"
+                    className={`ZoneNotesSettingsLockButton ${lockButton.className}`}
+                    onClick={() => handleLockToggle(zoneNote.zoneCode, zoneNote.lockNoteOption)}
+                    title={lockButton.title}
+                    disabled={lockButton.disabled}
+                    aria-label={lockButton.label}
+                >
+                    {lockButton.label}
+                </button>
+                <button
+                    className="ZoneNotesSettingsResetZoneButton"
+                    onClick={() => handleResetZone(zoneNote.zoneCode)}
+                    title={`Reset notes for ${zoneNote.zoneCode} to default`}
+                >
+                    Reset
+                </button>
+            </div>
+        );
+    };
 
     return (
         <div className="ZoneNotesSettingsComponent" ref={containerRef}>
@@ -186,27 +272,7 @@ export function ZoneNotesSettingsComponent() {
             )}
             {/* List of text boxes to add Zone Notes */}
             <div className="ZoneNotesSettingsBlocksContainer">
-                {editableZoneNotes.map((zoneNote) => (
-                    <div key={zoneNote.zoneCode} className="ZoneNotesSettingsBlock">
-                        <label>{zoneNote.zoneName}</label>
-                        <label>
-                            <textarea
-                                ref={el => { textareaRefs.current[zoneNote.zoneCode] = el; }}
-                                value={zoneNote.notes ?? ""}
-                                onChange={(e) => handleNoteChange(zoneNote.zoneCode, e.target.value)}
-                                className="ZoneNotesSettingsTextarea"
-                                style={{ overflow: "hidden", resize: "vertical" }}
-                            />
-                        </label>
-                        <button
-                            className="ZoneNotesSettingsResetZoneButton"
-                            onClick={() => handleResetZone(zoneNote.zoneCode)}
-                            title={`Reset notes for ${zoneNote.zoneCode} to default`}
-                        >
-                            Reset
-                        </button>
-                    </div>
-                ))}
+                {editableZoneNotes.map(renderZoneNoteBlock)}
             </div>
 
             <div className="ZoneNotesSettingsBanner">

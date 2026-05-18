@@ -138,13 +138,19 @@ export const GemSetupZodSchema = z.object({
 	gemSources: z.array(z.string()),
 });
 
+// User can choose whether to have notes updated on app update (lock or unlock)
+// There are some cases where a note cannot be unlocked, eg if a user creates a custom note
+export const LockNoteOptionZodSchema = z.enum(["unlocked", "locked", "lockedCannotUnlock"]);
+
 export const ZoneNoteZodSchema = z.object({
+	lockNoteOption: LockNoteOptionZodSchema,
 	zoneCode: z.string(),
 	zoneName: z.string(),
 	notes: z.string(),
 });
 
 export const ActNoteZodSchema = z.object({
+	lockNoteOption: LockNoteOptionZodSchema,
 	actName: z.string(),
 	notes: z.string(),
 });
@@ -173,6 +179,7 @@ export type GemBuild = z.infer<typeof GemBuildZodSchema>;
 export type GemSetup = z.infer<typeof GemSetupZodSchema>;
 export type ActNote = z.infer<typeof ActNoteZodSchema>;
 export type ZoneNote = z.infer<typeof ZoneNoteZodSchema>;
+export type LockNoteOption = z.infer<typeof LockNoteOptionZodSchema>;
 
 
 export const DefaultGemBuild = GemBuildZodSchema.extend({

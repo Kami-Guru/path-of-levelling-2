@@ -555,6 +555,49 @@ react-draggable {
 	box-sizing: border-box;
 }
 
+.ActNotesSettingsLockButton {
+	position: absolute;
+	top: 8px;
+	right: 72px;
+	color: #fff;
+	border: none;
+	height: 28px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.2s, opacity 0.2s;
+	margin: 0;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 10px;
+	line-height: 1;
+	border-radius: 4px;
+	white-space: nowrap;
+}
+
+.ActNotesSettingsLockButton--unlocked {
+	background: #3d7a4a;
+}
+
+.ActNotesSettingsLockButton--unlocked:hover:not(:disabled) {
+	background: #4f9a5f;
+}
+
+.ActNotesSettingsLockButton--locked {
+	background: #6b5b2e;
+}
+
+.ActNotesSettingsLockButton--locked:hover:not(:disabled) {
+	background: #8a7538;
+}
+
+.ActNotesSettingsLockButton--lockedCannotUnlock {
+	background: #5a3d6e;
+	cursor: not-allowed;
+	opacity: 0.85;
+}
+
 .ActNotesSettingsResetActButton {
 	position: absolute;
 	top: 8px;
@@ -747,6 +790,49 @@ react-draggable {
 	margin-bottom: 16px;
 	background: #23293a;
 	box-sizing: border-box;
+}
+
+.ZoneNotesSettingsLockButton {
+	position: absolute;
+	top: 8px;
+	right: 72px;
+	color: #fff;
+	border: none;
+	height: 28px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.2s, opacity 0.2s;
+	margin: 0;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 10px;
+	line-height: 1;
+	border-radius: 4px;
+	white-space: nowrap;
+}
+
+.ZoneNotesSettingsLockButton--unlocked {
+	background: #3d7a4a;
+}
+
+.ZoneNotesSettingsLockButton--unlocked:hover:not(:disabled) {
+	background: #4f9a5f;
+}
+
+.ZoneNotesSettingsLockButton--locked {
+	background: #6b5b2e;
+}
+
+.ZoneNotesSettingsLockButton--locked:hover:not(:disabled) {
+	background: #8a7538;
+}
+
+.ZoneNotesSettingsLockButton--lockedCannotUnlock {
+	background: #5a3d6e;
+	cursor: not-allowed;
+	opacity: 0.85;
 }
 
 .ZoneNotesSettingsResetZoneButton {

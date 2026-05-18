@@ -258,7 +258,8 @@ export class MigrationService {
     private MigrateBuildStoresV1ToV2() {
         // V2 added Zone Notes to builds (like how V1 added Act Notes) so here we just:
         // 1. Change "version": 1 -> "version": 2
-        // 2. Add zoneNotes: [] to each build
+        // 2. Add lockNoteOption: "lockedCannotUnlock" to each act note
+        // 3. Add zoneNotes: [] to each build
         const poe2NewBuildStore = new Store({
             name: "poe2-builds",
             accessPropertiesByDotNotation: false
@@ -266,6 +267,13 @@ export class MigrationService {
 
         // Only migrate if we're on version 1
         if (poe2NewBuildStore.get('version') == 1) {
+            // Backup
+            const poe2BackupBuildStore = new Store({
+                name: "poe2-builds-v1-backup",
+                defaults: poe2NewBuildStore.store,
+                accessPropertiesByDotNotation: false
+            });
+
             poe2NewBuildStore.set('version', 2);
 
             // Add zoneNotes to each build
@@ -275,6 +283,11 @@ export class MigrationService {
             for (const buildName in builds) {
                 poe2MigratedBuilds[buildName] = {
                     ...builds[buildName],
+                    // @ts-ignore
+                    actNotes: builds[buildName].actNotes.map((actNote) => ({
+                        lockNoteOption: "lockedCannotUnlock",
+                        ...actNote
+                    })),
                     zoneNotes: []
                 };
             }
@@ -288,6 +301,13 @@ export class MigrationService {
         });
 
         if (poe1NewBuildStore.get('version') == 1) {
+            // Backup
+            const poe1BackupBuildStore = new Store({
+                name: "poe1-builds-v1-backup",
+                defaults: poe1NewBuildStore.store,
+                accessPropertiesByDotNotation: false
+            });
+
             poe1NewBuildStore.set('version', 2);
 
             // Add zoneNotes to each build
@@ -297,6 +317,11 @@ export class MigrationService {
             for (const buildName in builds) {
                 poe1MigratedBuilds[buildName] = {
                     ...builds[buildName],
+                    // @ts-ignore
+                    actNotes: builds[buildName].actNotes.map((actNote) => ({
+                        lockNoteOption: "lockedCannotUnlock",
+                        ...actNote
+                    })),
                     zoneNotes: []
                 };
             }
