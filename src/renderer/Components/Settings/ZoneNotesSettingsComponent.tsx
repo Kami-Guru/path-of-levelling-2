@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { ZoneNote } from "../../../main/zodSchemas/schemas";
 
 export function ZoneNotesSettingsComponent() {
@@ -8,6 +8,8 @@ export function ZoneNotesSettingsComponent() {
     const [newBuildName, setNewBuildName] = useState("");
 
     const [editableZoneNotes, setEditableZoneNotes] = useState<ZoneNote[]>([]);
+    const textareaRefs = React.useRef<{ [zoneCode: string]: HTMLTextAreaElement | null; }>({});
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
     // Load initial zone names & notes from main
     useEffect(() => {
@@ -98,10 +100,43 @@ export function ZoneNotesSettingsComponent() {
             }));
 
         setEditableZoneNotes(newNotes);
+
+        setEditableZoneNotes(newNotes);
+        setTimeout(() => autoResize(zoneCode), 0); // Wait for DOM update
     };
 
+    const autoResize = (zoneCode: string) => {
+        const ref = textareaRefs.current[zoneCode];
+        const container = containerRef.current;
+        if (ref && container) {
+            // Save parent scroll position
+            const prevScrollTop = container.scrollTop;
+            const prevScrollHeight = container.scrollHeight;
+
+            // Save caret position
+            const { selectionStart, selectionEnd } = ref;
+
+            ref.style.height = 'auto';
+            ref.style.height = ref.scrollHeight + 'px';
+
+            // Restore caret position
+            ref.selectionStart = selectionStart;
+            ref.selectionEnd = selectionEnd;
+
+            // Adjust scroll so the caret stays in view, but don't jump to top
+            const scrollDiff = container.scrollHeight - prevScrollHeight;
+            if (scrollDiff > 0) {
+                container.scrollTop = prevScrollTop + scrollDiff;
+            }
+        }
+    };
+
+    useEffect(() => {
+        editableZoneNotes.forEach((zoneNote) => autoResize(zoneNote.zoneCode));
+    }, [editableZoneNotes]);
+
     return (
-        <div className="ZoneNotesSettingsComponent">
+        <div className="ZoneNotesSettingsComponent" ref={containerRef}>
             <h3>Zone Notes</h3>
             {/* Row at the top for selecting/adding/deleting build */}
             <div className="ZoneNotesSettingsBuildRow">
@@ -156,10 +191,11 @@ export function ZoneNotesSettingsComponent() {
                         <label>{zoneNote.zoneName}</label>
                         <label>
                             <textarea
+                                ref={el => { textareaRefs.current[zoneNote.zoneCode] = el; }}
                                 value={zoneNote.notes ?? ""}
                                 onChange={(e) => handleNoteChange(zoneNote.zoneCode, e.target.value)}
-                                rows={zoneNote.notes.split('\n').length || 4}
                                 className="ZoneNotesSettingsTextarea"
+                                style={{ overflow: "hidden", resize: "vertical" }}
                             />
                         </label>
                         <button
