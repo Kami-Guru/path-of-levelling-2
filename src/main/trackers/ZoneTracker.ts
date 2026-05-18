@@ -172,7 +172,8 @@ export class ZoneTracker {
 
 		// Get the rest of the locked notes - these can remain as just 'locked'
 		const lockedActNotesToSave = newActNotes
-			.filter(newActNote => newActNote.lockNoteOption === LockNoteOptionZodSchema.enum.locked
+			.filter(newActNote => (newActNote.lockNoteOption === LockNoteOptionZodSchema.enum.locked
+				|| newActNote.lockNoteOption === LockNoteOptionZodSchema.enum.lockedCannotUnlock)
 				&& !customActNotesToSave.some(customActNote => customActNote.actName === newActNote.actName));
 
 		// Zip the lists together for saving
