@@ -12,50 +12,50 @@ iLvl 35 for 5-links (rare!)
 Lvl 40-42 Leave Chambers
 
 
-The Slave Pens---------------------------------------------
+1_5_1 The Slave Pens----------------------------------------
 Go all the way down, then left, kill Overseer Crow then 
 Exit > Town, in Town Exit > The Control Blocks
 
 
-The Control Blocks-----------------------------------------
+1_5_2 The Control Blocks------------------------------------
 Go top left for the Miasmeter, then up and right to kill 
 Justicar Casticus, then Exit > Oriath Square
 
 
-Oriath Square----------------------------------------------
+1_5_3 Oriath Square-----------------------------------------
 Go top right until you cross the bridge, then down
 Exit > The Templar Courts
 
 
-The Templar Courts-----------------------------------------
-Loop around clockwise, Exit > The Chamber Of Innocence
+1_5_4 The Templar Courts------------------------------------
+Loop around clockwise, Exit > The Chamber of Innocence
 
 
-The Ossuary------------------------------------------------
+1_5_6 The Ossuary-------------------------------------------
 Loop around clockwise, get Sign Of Purity then logout
-In Town Waypoint > Ruined Square
+In Town Waypoint > The Ruined Square
 CRAFT - Physical damage
 
 
-The Reliquary----------------------------------------------
+1_5_7 The Reliquary-----------------------------------------
 Find 3 quest items in corners of the zone then logout
-In Town Waypoint > Ruined Square
+In Town Waypoint > The Ruined Square
 CRAFT - Accuracy
 
 
-The Cathedral Rooftop--------------------------------------
+1_5_8 The Cathedral Rooftop---------------------------------
 Run top left and kill Kitava!
 When you get to Act 6 exit > Twilight Strand
 
 
-The Chamber of Innocence-----------------------------------
+1_5_5 The Chamber of Innocence------------------------------
 Get Level 42 here
 Go up and left, then spiral counter clockwise, kill Avarius
 Exit > The Torched Courts
 CRAFT - Movement speed
 
 
-The Ruined Square------------------------------------------
+1_5_3b The Ruined Square------------------------------------
 One layout, multiple stops
 Zig-zag up and left to get Waypoint and Exit > The Ossuary
 
@@ -63,8 +63,8 @@ Second time here exit is at the bottom of the zone, leave a
 portal by the fountain then exit > The Reliquary
  
 Third time here from portal go up/left
-Exit > Cathedral Rooftop
+Exit > The Cathedral Rooftop
 
 
-The Torched Courts-----------------------------------------
+1_5_4b The Torched Courts-----------------------------------
 Loop around counter clockwise to exit > The Ruined Square

@@ -12,18 +12,18 @@ iLvl 25 for 4-socket (vendors sell at player level 24)
 Lvl 24 Enter Docks, 27 Piety, 28 Dominus
 
 
-The City of Sarn-------------------------------------------
+1_3_1 The City of Sarn--------------------------------------
 Don't forget to talk to Clarissa
 Exit > Town > The Slums
 CRAFT - Movement Speed
 
 
-The Slums--------------------------------------------------
+1_3_2 The Slums---------------------------------------------
 Find the grates to the sewers
 Then Exit > The Crematorium
 
 
-The Crematorium--------------------------------------------
+1_3_3_1 The Crematorium-------------------------------------
 Try left first, get Waypoint
 Do the trial, get the craft, kill Piety, 
 pick up the bracelet then tp/logout
@@ -31,7 +31,7 @@ In Town talk to Clarissa then exit > The Sewers
 CRAFT - Fire damage
 
 
-The Sewers-------------------------------------------------
+1_3_10_1 The Sewers-----------------------------------------
 First bust before Waypoint
 Second is just after it
 If second bust is in big room last bust is up, otherwise
@@ -42,7 +42,7 @@ Use the Sulphite, Get the craft, Exit > The Ebony Barracks
 CRAFT - Physical damage
 
 
-The Marketplace--------------------------------------------
+1_3_5 The Marketplace---------------------------------------
 Skip the quest item
 Usually up and right, then go through the statue hall
 Get the Waypoint then exit > The Catacombs
@@ -51,13 +51,13 @@ Second time here right hand wall follow to find the exit
 Exit > The Battlefront
 
 
-The Catacombs----------------------------------------------
+1_3_6 The Catacombs-----------------------------------------
 Do the trial, get the craft, then logout
 In Town Waypoint > The Marketplace
 CRAFT - Ele Damage w/ Attacks
 
 
-The Battlefront--------------------------------------------
+1_3_7 The Battlefront---------------------------------------
 Go up and left for the Waypoint 
 Spool is usually down/left from Waypoint
 Then go left from Waypoint to Exit > The Docks
@@ -65,24 +65,24 @@ Then go left from Waypoint to Exit > The Docks
 Second time here go up to Exit > The Solaris Temple
 
 
-The Solaris Temple Level 1---------------------------------
+1_3_8_1 The Solaris Temple Level 1--------------------------
 Get the waypoint, follow the carpets
-Exit > Solaris Temple Level 2
+Exit > The Solaris Temple Level 2
 
 
-The Solaris Temple Level 2---------------------------------
+1_3_8_2 The Solaris Temple Level 2--------------------------
 Follow the carpets, turn in Ribbon Spool, logout
 In Town Waypoint > The Sewers
 CRAFT - Cold damage
 
 
-The Docks--------------------------------------------------
+1_3_9 The Docks---------------------------------------------
 Get a lot of XP here
 Usually left side, get the Sulphite then logout
 In Town Waypoint > The Battlefront
 
 
-The Ebony Barracks-----------------------------------------
+1_3_13 The Ebony Barracks-----------------------------------
 Go up/left, kill General Gravicus then exit is usually up
 Don't forget the Waypoint!
 Exit > The Lunaris Temple
@@ -90,12 +90,12 @@ Exit > The Lunaris Temple
 Second time here go right to Exit > The Imperial Gardens
 
 
-The Lunaris Temple Level 1---------------------------------
+1_3_14_1 The Lunaris Temple Level 1-------------------------
 Don't kill Kole, follow the carpets, get the Waypoint
 Exit > The Lunaris Temple Level 2
 
 
-The Lunaris Temple Level 2---------------------------------
+1_3_14_2 The Lunaris Temple Level 2-------------------------
 Always go up stairs if you find them, should be two sets
 After stairs there will be carts on both sides, 
     pick the side where there is only one
@@ -104,15 +104,15 @@ In town turn in quests then Waypoint > The Ebony Barracks
 CRAFT - Lightning damage
 
 
-The Imperial Gardens---------------------------------------
+1_3_15 The Imperial Gardens---------------------------------
 Follow the road until the end, get the waypoint
 [OPTIONAL] The Library is up/left from Waypoint
 To the Trial, usually up from Waypoint
-Then go right from Waypoint to Exit > The Sceptre Of God
+Then go right from Waypoint to Exit > The Sceptre of God
 CRAFT - All attributes
 
 
-The Library------------------------------------------------
+1_3_17_1 The Library----------------------------------------
 Find Waypoint in the middle of the zone and talk to Siosa
 Exit > The Archives to do his quest
  
@@ -120,18 +120,17 @@ Second time here turn in quest and buy gems
 Logout then Waypoint > The Imperial Gardens
 
 
-The Archives-----------------------------------------------
+1_3_17_2 The Archives---------------------------------------
 Get the 4 pages then logout and Waypoint > The Library
 Bring currency when buying gems from Siosa
 
 
-The Sceptre of God-----------------------------------------
+1_3_18_1 The Sceptre of God---------------------------------
 Exits spawn in a random corner, often diagonally across
-Exit > The Upper Sceptre Of God
+Exit > The Upper The Sceptre of God
 
 
-The Upper Sceptre of God-----------------------------------
+1_3_18_2 The Upper Sceptre of God---------------------------
 Get some cold and lightning resist before fighting Dominus
 Exits spawn in a random corner, often diagonally across
 Kill Dominus then exit > The Aqueduct
-

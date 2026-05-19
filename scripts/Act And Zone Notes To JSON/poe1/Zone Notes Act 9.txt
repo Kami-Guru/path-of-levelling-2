@@ -12,22 +12,19 @@ Lvl 54 Enter BA
 Leave at: 58 if strong, 60 if average, 62 if weak
 
 
-
-
-
-The Blood Acqueduct----------------------------------------
+2_9_1 The Blood Acqueduct-----------------------------------
 Go to the top left, cross the bridges on dead ends
 This zone is great for EXP
 Exit > Town
 
 
-The Descent------------------------------------------------
+2_9_2 The Descent-------------------------------------------
 Go up and right to hoist, 
 then down and left to next hoist,
 then up and right to Exit > The Vastiri Desert
 
 
-The Vastiri Desert-----------------------------------------
+2_9_3 The Vastiri Desert------------------------------------
 Go right to find Waypoint, then go right to find The Oasis,
 then TP to town for quest item, then come back here to 
 Exit > The Oasis 
@@ -35,13 +32,13 @@ Exit > The Oasis
 Second time here go up and left to Exit > The Foothills
 
 
-The Oasis--------------------------------------------------
+2_9_4 The Oasis---------------------------------------------
 If the dead end is above, right hand wall follow
 If the dead end is below, left hand wall follow
 Fight boss then logout
 
 
-The Foothills----------------------------------------------
+2_9_5 The Foothills-----------------------------------------
 Don't forget the Waypoint!
 Go up and left to find Waypoint, then right to
 Exit > The Boiling Lake
@@ -49,13 +46,13 @@ Exit > The Boiling Lake
 Second time here go up and left to Exit > The Tunnel
 
 
-The Boiling Lake-------------------------------------------
+2_9_6 The Boiling Lake--------------------------------------
 Go top right, petrified men means you're close to boss
 Kill boss, get quest item then logout
 In Town Waypoint > The Foothills
 
 
-The Tunnel-------------------------------------------------
+2_9_7 The Tunnel--------------------------------------------
 Go up and left, near the entrance there is a fork to the
 left or right, follow it for Trial
 After Trial go up and left to Exit > The Quarry
@@ -63,7 +60,7 @@ TRIAL - Blade sentries
 CRAFT - All attributes
 
 
-The Quarry-------------------------------------------------
+2_9_8 The Quarry--------------------------------------------
 Go up and left for Waypoint, then left for boss, logout
 In Town Waypoint > The Quarry
 
@@ -74,16 +71,15 @@ CRAFT - Physical damage
 RECOMMEND physical mitigation
 
 
-The Refinery-----------------------------------------------
+2_9_9 The Refinery------------------------------------------
 Follow the cart tracks top and right for Boss, then logout
 In Town Waypoint > The Quarry
 RECOMMEND lightning resist
 
 
-The Belly of the Beast-------------------------------------
+2_9_10_1 The Belly of the Beast-----------------------------
 Go top and left to Exit > The Rotting Core
 
 
-The Rotting Core-------------------------------------------
+2_9_10_2 The Rotting Core-----------------------------------
 Go top and left to find The Black Core and kill the trio
-
