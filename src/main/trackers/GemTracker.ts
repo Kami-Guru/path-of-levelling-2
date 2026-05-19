@@ -21,7 +21,7 @@ export class GemTracker {
 		this.setGemSetupFromPlayerLevel(levelTracker.playerLevel);
 	}
 
-	init() {}
+	init() { }
 
 	getGemDataDto(): GemDataDto {
 		return {
@@ -53,6 +53,7 @@ export class GemTracker {
 			buildName: newBuildName,
 			gemBuild: DefaultGemBuild.parse({}),
 			actNotes: [],
+			zoneNotes: [],
 		};
 
 		objectFactory.getStoreService().setBuild(newBuildName, newBuild);
@@ -130,6 +131,7 @@ export class GemTracker {
 			...(objectFactory.getStoreService().getBuild(buildName) ?? {
 				buildName: buildName,
 				actNotes: [],
+				zoneNotes: [],
 			}),
 			gemBuild: newGemBuild,
 		});

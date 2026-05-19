@@ -1,0 +1,427 @@
+{
+	"actNotes": [
+		{
+			"lockNoteOption": "unlocked",
+			"actName": "Act 1",
+			"notes": "Clearfell       - Beira         - 10% Cold Res\nHunting Ground  - Crowbell Boss - 2 Passive Points\nFreythorn - King In The Mists - 30 Spirit + Lvl4 Spirit Gem\nOgham Farmlands - Una's Lute    - 2 Passive Points\nOgham Manor     - Candlemass    - +20 Life\n\nCtrl+Alt+S to open settings and drag/scale windows\n\nCheck Vendor at level up for\nMovespeed boots - Max 10% this Act\nNew Weapon\nPotions: Lvl 4, 10, 16, 23\nAct and Zone Notes are this wide----------------------------"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"actName": "Act 2",
+			"notes": "Traitor's Passage    - Balbala      - Ascendancy\nKeth                 - Kabala       - 2 Passive Points\nValley Of The Titans - Ancient Vows - Choice\nDeshar               - Final Letter - 2 Passive Points\nSpires Of Deshar - Sisters Of Garukhan - 10% Light res\n\nCheck Vendor at level up for\nMovespeed boots - Max 15% this Act\nNew Weapon\nPotions: Lvl 23, 30, 40"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"actName": "Act 3",
+			"notes": "Sandswept Marsh - Orok Campfire     - Lesser Jeweller's\nJungle Ruins    - Mighty Silverfist - 2 Passive Points\nVenom Crypts    - Venom Draught     - Choice\nAzak Bog        - Ignagduk - 30 Spirit / Lvl10 spirit gem\nJiquani's Machinarium - Blackjaw    - +10% Fire res\nAggorat         - Blood Sacrifice   - 2 Passive Points\n\nCheck Vendor at level up for\nMovespeed boots - Max 20% this Act\nNew Weapon\nPotions: Lvl 30, 40, 50"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"actName": "Act 4",
+			"notes": "Journey's End           - +2 Passives\nHalls of the Dead       - +5 for each Res or Stat \nHalls of the Dead       - 5% Increased Max Mana\nTrials of the Ancestors - +2 Passives\nAbandoned Prison        - Life/Mana Flask Recovery\nArastas - Evening Bell  - 3 Exalted Orbs\n\nEye of Hinekora when you free Matiki\nKedge Bay > Whakapanu > Prison > Arastas > Ngakanu\nShrike Island/Isle of Kin (maybe optional)\n\nCheck Vendor at level up for\nMovespeed boots - Max 25% this Act\nPotions: Lvl 40, 50, 60"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"actName": "Interludes",
+			"notes": "No zone notes for Interludes :( change the zone to \nsee the bonuses each Interlude gives to choose your\nown order to do the Interludes\n\nCompleting all Interludes gives +2 Passives\n\nCheck Vendor at level up for\nMovespeed boots - Max 25% in Interludes\nPotions cap out at required level 60"
+		}
+	],
+	"zoneNotes": [
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_1",
+			"zoneName": "The Riverbank",
+			"notes": "Kill Hillock and Exit > Town\n\nThank you for using Path Of Levelling 2!"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_2",
+			"zoneName": "Clearfell",
+			"notes": "[Optional] Mud Burrow boss has Lvl 2 Skill + Lvl 1 Support\n\nGet the waypoint\nBeira usually directly north from waypoint\n\nExit > The Grelwood"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_3",
+			"zoneName": "Mud Burrow",
+			"notes": "Skippable area, Devourer drops Lvl 2 Skill + quest reward\nLvl 1 Support"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_4",
+			"zoneName": "The Grelwood",
+			"notes": "Four locations, always shaped like a diamond\n\nIf you find The Grim Tangle or The Red Vale, go in and grab \nthe waypoint before coming back\n\n1) The Grim Tangle - enter and get the waypoint\n2) Tree Of Souls + Waypoint\n3) Brambleghast - Lvl 1 Skill\n4) Areagne's Hut - optional potions + Lvl 1 Skill\n\nExit > The Red Vale, usually same corner as Brambleghast"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_5",
+			"zoneName": "The Red Vale",
+			"notes": "Usually a spiral pattern, try following the zone clockwise\nor counterclockwise with the wall just offscreen\n\nListen for music when altar is nearby\n\nOne altar may randomly spawn in the middle of the zone\n\nKill the boss, TP > Town, then Waypoint > The Grim Tangle"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_6",
+			"zoneName": "The Grim Tangle",
+			"notes": "Go roughly up and left\n\nZone layout may be flipped vertically, so if you start north\ngo south\n\n[Optional] Rotten Druid drops a Lvl 1 Support\n\nExit > Cemetary Of The Eternals"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_7",
+			"zoneName": "Cemetary Of The Eternals",
+			"notes": "Zone layout may be rotated\nWall-follow around the zone, get both checkpoints first\nExits usually on opposite sides of the zone\n\nGrave on the edge of the zone could have an Iron Ring\n\nCheckpoint > Mausoleum Of The Praetor\n\nSecond time here Checkpoint > Tomb Of The Consort"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_8",
+			"zoneName": "Mausoleum Of The Praetor",
+			"notes": "Draw a line from the exit through the tile in the middle of\nthe zone, boss is in that direction\n\nKill the boss, Exit > Cemetary Of The Eternals\nThen Checkpoint > Tomb Of The Consort"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_9",
+			"zoneName": "Tomb Of The Consort",
+			"notes": "Boss is usually in north corner of the zone or in the middle\n\nFollow the corridors through the center of the zone\n\nTP > Town, Waypoint > Cemetary Of The Eternals for boss"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_11",
+			"zoneName": "Hunting Grounds",
+			"notes": "Follow the edge of the zone clockwise\n\nKill Crowbell for 2 Passive Points. If you find a giant pit\nthe boss is nearby\n\nIf you find Ogham Farmlands or Freythorn then go in, get the\nwaypoint and come back\n\nExit > Freythorn, or TP Town then Waypoint if you got it\n\nSecond time here Exit/TP > Ogham Farmlands"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_12",
+			"zoneName": "Freythorn",
+			"notes": "This layout is busted, good luck.\n\nIf you find the final ritual without the other 3, there are\nwisps that point to the direction of the remaining rituals\n\nKill King In The Mist then TP > Town\nThen Waypoint > Hunting Grounds to Exit > Ogham Farmlands"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_13_1",
+			"zoneName": "Ogham Farmlands",
+			"notes": "Usually go down and left, exit always on opposite wall from\nentrance\n\nLast layout image is the Una's Lute tile. Quest item is\nalways on the other side of the broken down caravans\n\nExit > Ogham Village"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_13_2",
+			"zoneName": "Ogham Village",
+			"notes": "Follow the edge of the zone north\n\nIf you find the boss before Renly's Tools take Checkpoint to\nthe entrance then wall-follow south\n\nKill The Executioner then Exit > The Manor Ramparts"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_14",
+			"zoneName": "The Manor Ramparts",
+			"notes": "Layout could be flipped vertically! Usually go clockwise\n\n[Optional] Gallows on north wall has Lvl 1 Support, or south\nwall if layout is flipped"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G1_15",
+			"zoneName": "Ogham Manor",
+			"notes": "Each floor has a bridge roughly in the middle, find that\nfirst\n\nFirst Floor usually up and right\n\nSecond and Third floors go in the opposite direction as \nprevious floor\n\nExit > Act 2!"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_1",
+			"zoneName": "Vastiri Outskirts",
+			"notes": "Zone layout may be flipped, Boss is either down/left or \ndown/right, rougly Z shape\n\nStay on the tip of Rathbreaker's cliff to avoid spears\n\nKill Rathbreaker then TP to start and Exit > Town\nIn Town Caravan > The Halani Gates, don't need to talk to \nSekhema just get the ! over her head then Exit > Town\n\nIn Town Caravan > Mawdun Quarry"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_10_1",
+			"zoneName": "Mawdun Quarry",
+			"notes": "Roughly Z Shape. If in doubt follow a wall\n\nExit > Mawdun Mine"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_10_2",
+			"zoneName": "Mawdun Mine",
+			"notes": "Boss is usually directly north from entrance\n\nRECOMMEND Fire Res, boss can deal a lot of damage. Watch out\nfor mines\n\nExit > Traitor's Passage"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_2",
+			"zoneName": "Traitor's Passage",
+			"notes": "If you find Decree of Imprisonment lore item, follow pages\non the wall for Balbala, then the other direction for exit\n\nSix Sisters indicate you're going the right way. Could get\nreally early Six Sisters, there's a layout image for that\n\nExit > The Halani Gates"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_3",
+			"zoneName": "The Halani Gates",
+			"notes": "Head to opposite corner from entrance\n\nRECOMMEND Lightning Resistance, Topaz Charm\n\nIn Town Caravan > Keth"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_4_1",
+			"zoneName": "Keth",
+			"notes": "Wall-follow clockwise.\nIf you find exit before boss, Checkpoint > entrance and\n    wall-follow counter-clockwise\nIf you find exit before boss AGAIN, Checkpoint > entrance\n    and try the other two points in zone layout image\nThere is a head-shaped tile near boss, looks like a round \nburied building\n\nXP is great here\n\nExit > The Lost City"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_4_2",
+			"zoneName": "The Lost City",
+			"notes": "Zone is shaped like a diamond with bridges as the corners\n\nFirst bridge is either far left or far right of the first\n\"rectangle\"\n\n[Optional] There is a sarcophagus with Lvl 6/7 Skill\n\nExit > Buried Shrines"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_4_3",
+			"zoneName": "Buried Shrines",
+			"notes": "Zone is two rectangles joined by bridges\n\nThe direction the bridge points tells you where the boss is:\nSouth - North: boss is directly up\nNorth - South: boss is directly left\n\nBoss tile has V-shaped bridge facing north-east\n\n[Optional] Elemental Offering event drops a magic \ncold/fire/lightning res ring\n\nKill the boss, TP > Town then Caravan > Mastodon Badlands"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_5_1",
+			"zoneName": "Mastodon Badlands",
+			"notes": "Best chance is wall-follow the wall opposite side of the\nWaypoint\n\nEffigy in this zone drops Lvl 1 Support\n\nExit > The Bone Pits"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_5_2",
+			"zoneName": "The Bone Pits",
+			"notes": "Bone Arch near entrance to zone points directly to the boss\n\nKill boss then TP > Town and Caravan > Valley Of The Titans"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_6",
+			"zoneName": "Valley Of The Titans",
+			"notes": "Wall-follow either direction for seals and permanent buff,\nthird seal might be in the middle of the zone\n\nExit > The Titan Grotto"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_7",
+			"zoneName": "The Titan Grotto",
+			"notes": "Zone is shaped like a rectangle, follow the direction the \nbridge from the entrance takes to get to the opposite side\nBoss is on long straight bridge similar to entrance\n\nUsually stay in 12 o'clock for first phase and 3 o'clock for\nsecond phase\n\nKill boss then TP > Town, use Horn on North tip of Caravan \nThen Caravan > Deshar"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_8",
+			"zoneName": "Deshar",
+			"notes": "Quest item is on the outside of one of the buildings\n\nExit is on the furthest edge of second area with buildings\n\nExit > Path Of Mourning"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_9_1",
+			"zoneName": "Path Of Mourning",
+			"notes": "Area is unpredictable, try going to opposite corner of zone\nfrom entrance\n\nCan also try 3-3-3 method of going right for three bridges,\nup/right for three bridges, down/right for three bridges,\nrepeat "
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_9_2",
+			"zoneName": "The Spires Of Deshar",
+			"notes": "Don't forget the Sisters Of Garukhan!!!\nSisters should be in a G-shaped tile, use process of \nelimination to find it\n\nKill Tor Gul, TP > Town then Caravan > The Dreadnought"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_12_1",
+			"zoneName": "The Dreadnought",
+			"notes": "Be patient, enemies jump behind you, easy to get swarmed\n\nGo roughtly up/left"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G2_12_2",
+			"zoneName": "Drednought Vanguard",
+			"notes": "Be patient, enemies jump behind you, easy to get swarmed\n\nRECOMMEND lightning resist\n\nGo roughtly up/left"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_1",
+			"zoneName": "Sandswept Marsh",
+			"notes": "In swamp area kill Rootredge for Lvl 9 Skill Gem, usually in\nthe middle\n\nIn grass area Azak Campfire is on north or south of exit,\ndrops Lesser Jeweller's Orb\n\nExit > Town then Exit > Jungle Ruins"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_3",
+			"zoneName": "Jungle Ruins",
+			"notes": "Three main locations:\n1) Infested Barrens - opposite wall from entrance\n2) The Venom Crypts - in one of 9 places arranged in a grid\n3) Silverfist - usually top third of zone, occasionally in\n    the middle\n\nIf you find The Venom Crypts go in, get waypoint, come back\n\nSteps:\n1. Start following the downward wall to find 2) or 3)\n2. From opposite side checkpoint to the start and wall \n    follow the other way to find 1)\n3. If you found all 3 locations then Exit > Infested Barrens\n4. Else scan back and forth through the zone starting from\n    top/left third of map\n\n[Optional] Jungle grave for a belt\n[Optional] Troubled Camp for a vendor\n\nExit > Infested Barrens"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_2_1",
+			"zoneName": "Infested Barrens",
+			"notes": "All locations are on edges of zone so wall-follow to get all\ncheckpoints and The Matlan Waterways Waypoint\n\nExit > The Azak Bog\n\nSecond time here Exit > Chimeral Wetlands\n\nThird time here Exit > The Matlan Waterways"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_7",
+			"zoneName": "The Azak Bog",
+			"notes": "Boss is generally in up-right quarter of the zone\n\nKill boss, TP > Town then Waypoint > Infested Barrens then\nCheckpoint > Chimeral Wetlands"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_5",
+			"zoneName": "Chimeral Wetlands",
+			"notes": "Get waypoint in Temple of Chaos and Jiquani's Machinarium\nTemple of Chaos is usually top of the zone facing directly \nup, go in get the waypoint then come back\nJiquani's Machinarium always faces the left, wall-follow to \nthe left\n\nExit > Jiquani's Machinarium"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_6_1",
+			"zoneName": "Jiquani's Machinarium",
+			"notes": "Listen to loot filer sounds if you have one, quest item will\nmake a sound before you can see it\n\nBlackjaw is in far left or far right of zone\n\nExit > Jiquani's Sanctum"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_6_2",
+			"zoneName": "Jiquani's Sanctum",
+			"notes": "For second generator, respawn at checkpoint then walk away a\nbit, rinse and repeat until soul core spawns nearby\n\nCheckpoint to start of zone for boss\n\nKill boss then TP > Town then Waypoint > Infested Barrens to\nExit > The Matlan Waterways"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_2_2",
+			"zoneName": "The Matlan Waterways",
+			"notes": "RECOMMEND fire resist and patience\n\nFind the lever then TP > Town then Exit > The Drowned City"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_8",
+			"zoneName": "The Drowned City",
+			"notes": "Don't forget the waypoint at the start!\n\nGo up/right until you hit a wall, then down/right until you\nfind a large area with a checkpoint. This is an ambush\nExit the ambush then turn down/right then up/right for exit\n\nExit > Apex Of Filth"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_11",
+			"zoneName": "Apex Of Filth",
+			"notes": "Run the zone in a spiral, following the causeways\nIf you hit the dead end wall in the Layout Images with the\narrow, boss is on the other side of that\n\nMy eyes :(\nKill the boss then TP > Town \nThen go down the big stairs again to Exit > Temple of Kopec"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_12",
+			"zoneName": "Temple of Kopec",
+			"notes": "Each floor is a triangle and the exit is in a corner\n\nDoor won't show on minimap until you're really close, don't\nturn away too early\n\nSecond floor has an unpassable hole, the boss room is on the\nother side of it. "
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_14",
+			"zoneName": "Utzaal",
+			"notes": "Utzaal has same layout as The Drowned City\n\nFollow the path with the big tiles, boss is in the same \nplace that you were ambushed in The Drowned City\n\nGo up/right until you hit a wall, then down/right until you\nfind boss room\nAfter boss turn down/right then up/right for exit\n\nExit > Aggorat"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_16",
+			"zoneName": "Aggorat",
+			"notes": "Find the gigantic area with altar with the enemies praying, \ngo through the arch to get to second half of zone\n\nIn the second half of zone do the sacrificial heart for \n2 Passive Points\n\nExit to the Black Chambers is diagonal from the altar area\nExit > The Black Chambers"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_17",
+			"zoneName": "The Black Chambers",
+			"notes": "Go left or right until you cross first bridge\n\nContinue in the same direction after the bridge to find \ncheckpoint with second bridge\n\nFollow the bridges that float out of the water\n\nKill Doriyani!"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_1_1",
+			"zoneName": "Isle of Kin",
+			"notes": "Head in the opposite direction as the dock\nWhen you hit a wall, follow it\nExit > Volcanic Warrens"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_1_2",
+			"zoneName": "Volcanic Warrens",
+			"notes": "Long and winding area, boss is at the very end of it\nKill the boss then TP > Town \nBy now you have ToTA and weapon so sail > Arastas"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_2_1",
+			"zoneName": "Kedge Bay",
+			"notes": "Just keep following the zone to the end\nExit > Journey's End"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_2_2",
+			"zoneName": "Journey's End",
+			"notes": "Winding area, keep following the zone to the end\nCheckpoint to start to fight Omniphobia\nTP > Town then Sail > Whakapanu"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_3_1",
+			"zoneName": "Whakapanu Island",
+			"notes": "Great XP here\nCan kill the Great White One for the shark fin, turn\nin at Ngakanu for a Skill, Spirit, OR Support gem\nExit > Singing Caverns"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_3_2",
+			"zoneName": "Singing Caverns",
+			"notes": "The Beckoning Clam gives quest item for a Perlescent\nAmulet at Rog, generally worth finding\nSolved layout just follow the images\nKill the boss, TP > Town and Sail > Abandoned Prison"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_4_1",
+			"zoneName": "Eye of Hinekora",
+			"notes": "Don't miss Navali's 5% Max Mana\nExit > Halls of the Dead"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_4_2",
+			"zoneName": "Halls of the Dead",
+			"notes": "Don't miss all 3 Res/Stat tattoos\nFairly linear layout, kill the boss \nExit > Trial of the Ancestors"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_4_3",
+			"zoneName": "Trial of the Ancestors",
+			"notes": "Get the +2 Passives then TP > Town\nSail to the next island, follow the Act Notes"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_5_1",
+			"zoneName": "Abandoned Prison",
+			"notes": "Find the Goddess of Justice then\nExit > Solitary Confinement"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_5_2",
+			"zoneName": "Solitary Confinement",
+			"notes": "Follow the wall the waves are hitting\nKill the boss then TP > Town\nIn Town start doing optional areas for Matiki/Weapon"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_7",
+			"zoneName": "Shrike Island",
+			"notes": "Incredibly linear layout just keep moving forward\nKill the boss then TP > Town\nIn Town start doing optional areas for Matiki/Weapon"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_8b",
+			"zoneName": "Arastas",
+			"notes": "1. Get out of town square, there is nothing here\n2. Hug top wall to get to Evening Bell\n3. [Optional] Morning Bell is opposite side of\n  Coastal Ridge as Evening Bell\n4. Follow the coastal ridge then through town to\n  kill boss and Exit > The Excavation"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_10",
+			"zoneName": "The Excavation",
+			"notes": "Pick a wall and follow it all the way to the boss\nKill the boss and TP > Town to Sail > Ngakanu"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_11_1a",
+			"zoneName": "Ngakanu",
+			"notes": "After leaving the main building follow the wall to\nExit > Heart of the Tribe"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_11_2",
+			"zoneName": "Heart of the Tribe",
+			"notes": "Keep trying to head north, every time you see a \nCheckpoint go back and find the fork, you went the\nwrong way\nKill Tavakai and you're done with Act 4!"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_13",
+			"zoneName": "Plunder's Point",
+			"notes": "Optional Area!\nDo the expedition then continue with the act"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "P1_Town",
+			"zoneName": "Curse of Holten",
+			"notes": "Holten - Sould of the Ferryman - Cheap Greater Runes\nWolvenhold - +2 Passives"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "P2_Town",
+			"zoneName": "The Stolen Barya",
+			"notes": "The Khari Crossing - Skullmaw Stairway - 5% Max Life\nThe Khari Crossing - Worm and Scorpion - +2 Passives\nQimah - Choice of 7 buffs (can change later)"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "P3_Town",
+			"zoneName": "Doriyani's Contingency",
+			"notes": "Kriar Village - +40 Max Spirit\nHowling Caves - +2 Passives\nKriar Peaks - Elder Maddox - Unique Item"
+		}
+	]
+}

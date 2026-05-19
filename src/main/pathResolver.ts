@@ -29,8 +29,8 @@ export function getDesktopIconPath() {
 }
 
 export function getZoneNotesPath(profileId: ProfileId): string {
-	// One day there will be per-build zone notes, but for now it's all in Default/zoneNotes.json
-	return path.join(getBuildPath(profileId, "Default"), "zoneNotes.json");
+	// Path to the default Act and Zone notes - <profileId>/referenceData/zoneNotes.json
+	return path.join(getProfilePath(profileId), "referenceData", "zoneNotes.json");
 }
 
 export function getZoneReferenceDataPath(profileId: ProfileId): string {

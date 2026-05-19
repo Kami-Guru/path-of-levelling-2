@@ -13,8 +13,10 @@ import {
 	ZoneReference,
 	ZoneCodeToZoneReference,
 	ActNote,
-	DefaultZoneNotes,
+	ZoneNote,
+	DefaultActAndZoneNotes,
 	DefaultGemBuild,
+	LockNoteOptionZodSchema,
 } from "../zodSchemas/schemas.js";
 import { SettingsService } from "../services/Settings.js";
 import { cpuUsage } from "process";
@@ -39,9 +41,10 @@ export class ZoneTracker {
 	zoneNotes: string = "";
 
 	allActNotes: Array<ActNote> = [];
+	allZoneNotes: Array<ZoneNote> = [];
 
 	defaultZoneNotesPath: string = "";
-	defaultZoneNotes: DefaultZoneNotes = Object();
+	defaultActAndZoneNotes: DefaultActAndZoneNotes = Object();
 
 	// SettingsService needs to be loaded to call this.loadActNotes
 	// StateTracker required for this.saveZoneFromCode
@@ -57,9 +60,10 @@ export class ZoneTracker {
 			),
 		];
 
-		this.loadDefaultZoneNotes();
+		this.loadDefaultActAndZoneNotes();
 
 		this.loadActNotes();
+		this.loadZoneNotes();
 
 		this.saveZoneFromCode(storeService.getGameSetting("lastSessionState.zoneCode"), true);
 	}
@@ -84,16 +88,25 @@ export class ZoneTracker {
 			allBuildNames: objectFactory.getGemTracker().allBuildNames,
 			allActNotes: this.allActNotes
 		};
-		return dto
+		return dto;
 	}
 
-	loadDefaultZoneNotes() {
+	getZoneNotesSettingsDto(): ZoneNotesSettingsDto {
+		const dto = {
+			buildName: objectFactory.getGemTracker().buildName,
+			allBuildNames: objectFactory.getGemTracker().allBuildNames,
+			allZoneNotes: this.allZoneNotes
+		};
+		return dto;
+	}
+
+	loadDefaultActAndZoneNotes() {
 		this.defaultZoneNotesPath = getZoneNotesPath(getProfile().Id);
 		log.info("Trying to load zone notes at path", this.defaultZoneNotesPath);
 
 		try {
 			var buffer = fs.readFileSync(this.defaultZoneNotesPath);
-			this.defaultZoneNotes = JSON.parse(buffer.toString());
+			this.defaultActAndZoneNotes = JSON.parse(buffer.toString());
 			log.info("Successfully loaded zone notes");
 		} catch (error) {
 			log.info("Could not load zone notes");
@@ -108,35 +121,71 @@ export class ZoneTracker {
 		const userActNotes = currentBuild === undefined ? [] : currentBuild.actNotes;
 
 		// Zip together the default act notes and user's act notes
-		this.allActNotes = this.defaultZoneNotes.actNotes.map((actNotes) => {
+		this.allActNotes = this.defaultActAndZoneNotes.actNotes.map((actNote) => {
+			const userActNote = userActNotes
+				.find((userActNotes) => userActNotes.actName === actNote.actName);
+
 			return {
-				actName: actNotes.actName,
-				notes:
-					userActNotes.find((userActNotes) => userActNotes.actName === actNotes.actName)
-						?.notes ?? actNotes.notes,
+				lockNoteOption: userActNote?.lockNoteOption ?? actNote.lockNoteOption,
+				actName: actNote.actName,
+				notes: userActNote?.notes ?? actNote.notes,
 			};
 		});
 
-		// Re-select the current Act and Zone to re-load those notes - updateOnly = true
+		// Re-select the current Act and Zone to reload those notes into this.actNote and this.zoneNote
+		this.saveZoneFromCode(this.zoneCode, true);
+	}
+
+	/** Reads zone notes from the current build and zips them with default notes to give a full set
+	 * of zone notes in memory.
+	 */
+	loadZoneNotes() {
+		const currentBuild = objectFactory.getStoreService().getBuild(objectFactory.getSettingsService().getBuildName());
+		const userZoneNotes = currentBuild === undefined ? [] : currentBuild.zoneNotes;
+
+		// Zip together the default zone notes and user's zone notes
+		this.allZoneNotes = this.defaultActAndZoneNotes.zoneNotes.map((zoneNote) => {
+			const userZoneNote = userZoneNotes
+				.find((userZoneNotes) => userZoneNotes.zoneCode === zoneNote.zoneCode);
+
+			return {
+				lockNoteOption: userZoneNote?.lockNoteOption ?? zoneNote.lockNoteOption,
+				zoneCode: zoneNote.zoneCode,
+				zoneName: zoneNote.zoneName,
+				notes: userZoneNote?.notes ?? zoneNote.notes,
+			};
+		});
+
+		// Re-select the current Act and Zone to re-load those notes into this.actNote and this.zoneNote
 		this.saveZoneFromCode(this.zoneCode, true);
 	}
 
 	saveActNotes(buildName: string, newActNotes: Array<ActNote>) {
-		// First, figure out which act notes are NOT the default
-		const actNotesToSave = newActNotes.filter(newActNote =>
-			newActNote.notes !== this.defaultZoneNotes.actNotes
-				.find(defaultActNote => defaultActNote.actName == newActNote.actName)?.notes
-		);
+		// Notes which are different to the default note must be saved with lockedCannotUnlock
+		const customActNotesToSave = newActNotes
+			.filter(newActNote => newActNote.notes !== this.defaultActAndZoneNotes.actNotes
+				.find(defaultActNote => defaultActNote.actName == newActNote.actName)?.notes)
+			.map((customActNote) => ({
+				...customActNote,
+				lockNoteOption: LockNoteOptionZodSchema.enum.lockedCannotUnlock,
+			}));
 
-		if (actNotesToSave.length === 0)
-			return;
+		// Get the rest of the locked notes - these can remain as just 'locked'
+		const lockedActNotesToSave = newActNotes
+			.filter(newActNote => (newActNote.lockNoteOption === LockNoteOptionZodSchema.enum.locked
+				|| newActNote.lockNoteOption === LockNoteOptionZodSchema.enum.lockedCannotUnlock)
+				&& !customActNotesToSave.some(customActNote => customActNote.actName === newActNote.actName));
+
+		// Zip the lists together for saving
+		const actNotesToSave = [...customActNotesToSave, ...lockedActNotesToSave];
 
 		// Save the new notes to build - create a new build if required
 		objectFactory.getStoreService().setBuild(buildName, {
 			...(objectFactory.getStoreService().getBuild(buildName)
 				?? {
 				buildName: buildName,
-				gemBuild: DefaultGemBuild.parse({})
+				gemBuild: DefaultGemBuild.parse({}),
+				zoneNotes: [],
 			}),
 			actNotes: actNotesToSave,
 		});
@@ -145,23 +194,92 @@ export class ZoneTracker {
 		this.loadActNotes();
 	}
 
+	CopyActNotesFromBuild(buildName: string, buildToCopyName: string) {
+		const buildToCopy = objectFactory.getStoreService().getBuild(buildToCopyName);
+
+		const actNotesToCopy = buildToCopy?.actNotes ?? [];
+
+		this.saveActNotes(buildName, actNotesToCopy);
+	}
+
+	saveZoneNotes(buildName: string, newZoneNotes: Array<ZoneNote>) {
+		// Notes which are different to the default note must be saved with lockedCannotUnlock
+		const customZoneNotesToSave = newZoneNotes
+			.filter(newZoneNote => newZoneNote.notes !== this.defaultActAndZoneNotes.zoneNotes
+				.find(defaultZoneNote => defaultZoneNote.zoneCode == newZoneNote.zoneCode)?.notes)
+			.map((customZoneNote) => ({
+				...customZoneNote,
+				lockNoteOption: LockNoteOptionZodSchema.enum.lockedCannotUnlock,
+			}));
+
+		// Get the rest of the locked or lockedCannotUnlock notes - these can keep their status
+		const lockedZoneNotesToSave = newZoneNotes
+			.filter(newZoneNote => (newZoneNote.lockNoteOption === LockNoteOptionZodSchema.enum.locked
+				|| newZoneNote.lockNoteOption === LockNoteOptionZodSchema.enum.lockedCannotUnlock)
+				&& !customZoneNotesToSave.some(customZoneNote => customZoneNote.zoneCode === newZoneNote.zoneCode));
+
+		// Zip the lists together for saving
+		const zoneNotesToSave = [...customZoneNotesToSave, ...lockedZoneNotesToSave];
+
+		// Save the new notes to build - create a new build if required
+		objectFactory.getStoreService().setBuild(buildName, {
+			...(objectFactory.getStoreService().getBuild(buildName)
+				?? {
+				buildName: buildName,
+				gemBuild: DefaultGemBuild.parse({}),
+				actNotes: [],
+			}),
+			zoneNotes: zoneNotesToSave,
+		});
+
+		// Re-load the notes from the build store into memory
+		this.loadZoneNotes();
+	}
+
+	CopyZoneNotesFromBuild(buildName: string, buildToCopyName: string) {
+		const buildToCopy = objectFactory.getStoreService().getBuild(buildToCopyName);
+
+		const zoneNotesToCopy = buildToCopy?.zoneNotes ?? [];
+
+		this.saveZoneNotes(buildName, zoneNotesToCopy);
+	}
+
+	// Remove the user's act note from the saved custom Act Notes
 	resetActNoteForAct(actName: string): ActNote {
-		// Remove the user's act note from the saved custom Act Notes
 		const currentBuildName = objectFactory.getSettingsService().getBuildName();
 		const currentBuild = objectFactory.getStoreService().getBuild(currentBuildName);
 
+		// If there is no build selected, idk, we have other problems just send the default note
 		if (!currentBuild)
-			return this.defaultZoneNotes.actNotes
+			return this.defaultActAndZoneNotes.actNotes
 				.find(defaultActNote => defaultActNote.actName == actName)!;
-
 
 		objectFactory.getStoreService().setBuild(currentBuildName, {
 			...currentBuild,
 			actNotes: currentBuild.actNotes.filter(existingActNote => existingActNote.actName !== actName),
 		});
 
-		return this.defaultZoneNotes.actNotes
+		return this.defaultActAndZoneNotes.actNotes
 			.find(defaultActNote => defaultActNote.actName == actName)!;
+	}
+
+	// Remove the user's zone note from the saved array of custom Zone Notes
+	resetZoneNoteForZone(zoneCode: string): ZoneNote {
+		const currentBuildName = objectFactory.getSettingsService().getBuildName();
+		const currentBuild = objectFactory.getStoreService().getBuild(currentBuildName);
+		const defaultZoneNote = this.defaultActAndZoneNotes.zoneNotes
+			.find(defaultZoneNote => defaultZoneNote.zoneCode == zoneCode)!;
+
+		// If there is no build selected, idk, we have other problems just send the default note
+		if (!currentBuild)
+			return defaultZoneNote;
+
+		objectFactory.getStoreService().setBuild(currentBuildName, {
+			...currentBuild,
+			zoneNotes: currentBuild.zoneNotes.filter(existingZoneNote => existingZoneNote.zoneCode !== zoneCode),
+		});
+
+		return defaultZoneNote;
 	}
 
 	// This is called when someone selects an act in the dropdown in the UI
@@ -272,13 +390,12 @@ export class ZoneTracker {
 
 		this.actNotes = actNotes.notes;
 
-		var zoneNotes = this.defaultZoneNotes.zoneNotes.find((zoneNotes) => {
-			return zoneNotes.code == this.zoneCode;
+		var zoneNotes = this.allZoneNotes.find((zoneNote) => {
+			return zoneNote.zoneCode == this.zoneCode;
 		});
 
 		// This basically gives users the option to not set notes for a zone
-		// Dont know why they would but as a side effect missing notes don't cause error
-		// popups.
+		// Dont know why they would but as a side effect missing notes don't cause error popups
 		if (zoneNotes == null) {
 			return;
 		}
@@ -289,7 +406,7 @@ export class ZoneTracker {
 	// Returns a boolean representing whether or not zone layout image paths were changed.
 	// Stops us from updating images every time this method is called.
 	//TODO actually I never use this bool, is it really necessary? there are already
-	//TODO safeguards to prevent zone ntoes from being changed when zone isn't really
+	//TODO safeguards to prevent zone notes from being changed when zone isn't really
 	//TODO changed, but am I ok with these being so coupled? I guess it isn't really coupling
 	//TODO if it's all the same state on the same class.
 	setZoneLayoutImagePaths(zoneCode: string): Boolean {

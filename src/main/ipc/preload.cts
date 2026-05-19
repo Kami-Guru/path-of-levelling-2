@@ -124,10 +124,24 @@ electron.contextBridge.exposeInMainWorld("electron", {
 	getActNotesSettingsState: async () => ipcRendererInvokeGet("getActNotesSettingsState"),
 	saveActNotesForBuild: async (response) =>
 		ipcRendererInvokePost("saveActNotesForBuild", response),
+	postCopyActNotesFromBuild: async (response) =>
+		ipcRendererInvokePost("postCopyActNotesFromBuild", response),
 	postResetActNoteForAct: async (actName) => ipcRendererInvokePost("postResetActNoteForAct", actName),
 	postBuildSelectedFromActNotes: async (buildName) =>
 		ipcRendererInvokePost("postBuildSelectedFromActNotes", buildName),
 	postAddNewBuildFromActNotes: async (buildName) => ipcRendererInvokePost("postAddNewBuildFromActNotes", buildName),
 	postDeleteBuildFromActNotes: async (buildName) => ipcRendererInvokePost("postDeleteBuildFromActNotes", buildName),
+
+	// Methods for the zone notes SETTINGS
+	getZoneNotesSettingsState: async () => ipcRendererInvokeGet("getZoneNotesSettingsState"),
+	saveZoneNotesForBuild: async (response) =>
+		ipcRendererInvokePost("saveZoneNotesForBuild", response),
+	postCopyZoneNotesFromBuild: async (response) =>
+		ipcRendererInvokePost("postCopyZoneNotesFromBuild", response),
+	postResetZoneNoteForZone: async (zoneCode) => ipcRendererInvokePost("postResetZoneNoteForZone", zoneCode),
+	postBuildSelectedFromZoneNotes: async (buildName) =>
+		ipcRendererInvokePost("postBuildSelectedFromZoneNotes", buildName),
+	postAddNewBuildFromZoneNotes: async (buildName) => ipcRendererInvokePost("postAddNewBuildFromZoneNotes", buildName),
+	postDeleteBuildFromZoneNotes: async (buildName) => ipcRendererInvokePost("postDeleteBuildFromZoneNotes", buildName),
 
 } satisfies Window["electron"]);

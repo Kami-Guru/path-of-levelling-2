@@ -11,17 +11,16 @@ Boots + Aug + Quicksilver = MS boots
 Lvl 54 Finish Act 8 (Harbour Bridge is last zone)
 
 
-
-The Sarn Ramparts------------------------------------------
+2_8_1 The Sarn Ramparts-------------------------------------
 Left hand wall-follow, go up stairs, follow the wall
 Exit > Town > The Toxic Conduits
 
 
-The Toxic Conduits-----------------------------------------
+2_8_2_1 The Toxic Conduits----------------------------------
 Follow black paint on the floor, Exit > Deodre's Cesspool
 
 
-Deodre's Cesspool------------------------------------------
+2_8_2_2 Deodre's Cesspool-----------------------------------
 The path without a dead end leads all the way to the exit. 
 After beating Doedre go left to Exit > The Grand Promenade 
 
@@ -29,17 +28,17 @@ Second time here go right to Exit > The Quay
 CRAFT - Resistance
 
 
-The Grand Promenade----------------------------------------
+2_8_3 The Grand Promenade-----------------------------------
 Wall-follow the right side to Exit > The Bath House
 
 
-The High Gardens-------------------------------------------
+2_8_4 The High Gardens--------------------------------------
 Follow the upper levels, eventually one will lead to a big
 staircase that leads to boss, kill boss then logout
 In Town Waypoint > The Bath House
 
 
-The Bath House---------------------------------------------
+2_8_5 The Bath House----------------------------------------
 Do the Trial either on top of the zone or the left
 Then top or left of the zone to Exit > The High Gardens
 
@@ -47,19 +46,19 @@ Second time here go right from Waypoint to
 Exit > The Lunaris Concourse
 
 
-The Lunaris Concourse--------------------------------------
+2_8_6 The Lunaris Concourse---------------------------------
 Go up and right for Waypoint then up and left to
-Exit > Lunaris Temple
+Exit > The Lunaris Temple Level 1
 
 Second time here, after beating both temples, go down and 
-right to Exit > Harbour Bridge
+right to Exit > The Harbour Bridge
 
 
-The Lunaris Temple Level 1---------------------------------
+2_8_7_1_ The Lunaris Temple Level 1-------------------------
 Follow the carpets, get the Waypoint, Exit > Level 2
 
 
-The Lunaris Temple Level 2---------------------------------
+2_8_7_2 The Lunaris Temple Level 2--------------------------
 Always go up stairs if you find them, should be two sets
 After stairs there will be vases on the opposite wall, 
     pick the side where there is only one
@@ -68,42 +67,41 @@ CRAFT - Minions
 RECOMMEND capped cold resistance
 
 
-The Quay---------------------------------------------------
+2_8_8 The Quay----------------------------------------------
 Follow bottom edge of the map the whole zone
 Go down from the entrance to get the quest item, then
 go right to fight Tolman, then go up and right to
 Exit > The Grain Gate
 
 
-The Grain Gate---------------------------------------------
+2_8_9 The Grain Gate----------------------------------------
 Only enter and leave buildings that have guard corpses
 Kill the Gemlings then Exit > The Imperial Fields
 
 
-The Imperial Fields----------------------------------------
+2_8_10 The Imperial Fields----------------------------------
 Follow the road until the end, then keep going that way
 Exit > The Solaris Temple
 
 
-The Solaris Concourse--------------------------------------
-Skip this zone, faster to get to Harbour Bridge by
-Logout, Waypoint > Lunaris Concourse > The Harbour Bridge
+2_8_11 The Solaris Concourse--------------------------------
+Skip this zone, faster to get to The Harbour Bridge by
+Logout, Waypoint > The Lunaris Concourse > The Harbour Bridge
 
 
-The Solaris Temple Level 1---------------------------------
+2_8_12_1 The Solaris Temple Level 1-------------------------
 Go down and left, then up and left for the Waypoint, which
 is always on the path. Then go up and left to 
 Exit > Level 2
 
 
-The Solaris Temple Level 2---------------------------------
+2_8_12_2 The Solaris Temple Level 2-------------------------
 Follow the carpets, kill the boss then logout
 In Town Waypoint > The Lunaris Concourse
 RECOMMEND capped fire resistance
 
 
-The Harbour Bridge-----------------------------------------
+2_8_13 The Harbour Bridge-----------------------------------
 Farm here before Boss if you are under leveled
 Follow the path top and right to find the boss
 RECOMMEND capped fire and cold resist
-

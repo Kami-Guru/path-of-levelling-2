@@ -12,44 +12,44 @@ Stay at lowest level without penalty
 5 levels under zone at player level 32-48
 
 
-The Twilight Strand----------------------------------------
+2_6_1 The Twilight Strand-----------------------------------
 Clear to open Lilly's Gem shop then logout
 In Town Exit > The Coast
 
 
-The Coast--------------------------------------------------
+2_6_2 The Coast---------------------------------------------
 Go to the right side of the zone and go to the top right 
 corner, grab the Waypoint then Exit > The Mud Flats
 
 
-The Tidal Island-------------------------------------------
+2_6_3 The Tidal Island--------------------------------------
 This zone should be skipped to save time
 
 
-The Mud Flats----------------------------------------------
+2_6_4 The Mud Flats-----------------------------------------
 Kill the boss on the right side then go left 
-Exit > Karui Fortifications
+Exit > The Karui Fortress
 
 
-The Karui Fortress-----------------------------------------
+2_6_5 The Karui Fortress------------------------------------
 Follow the right hand side, kill Tukohama
-Exit > Karui Fortifications
+Exit > The Karui Fortress
 CRAFT - Defences
 
 
-The Ridge--------------------------------------------------
+2_6_6 The Ridge---------------------------------------------
 Follow the path until you can go right, then follow that 
 until you have a path up left then Exit > The Lower Prison
 
 
-The Lower Prison-------------------------------------------
+2_6_7_1 The Lower Prison------------------------------------
 Try down or left for exit, Trial will be nearby to Waypoint
 Exit > Shavronne's Tower
 TRIAL - Spike traps
 CRAFT - Double resistance
 
 
-Shavronne's Tower------------------------------------------
+2_6_7_2 Shavronne's Tower-----------------------------------
 Four mini-zones, the steps are:
 1. Follow the halls, 2. go over thin bridge in center, 
 3. Go around and over thin bridge, 4. Go around to find 
@@ -58,17 +58,17 @@ Kill boss then Exit > Warden's Chamber > Prisoner's Gate
 CRAFT - Spell damage
 
 
-Prisoner's Gate--------------------------------------------
+2_6_8 Prisoner's Gate---------------------------------------
 Find the ramp/cliff downwards then wall follow for Abberath
 Follow the road to Exit > The Western Forest 
 
 
-The Western Forest-----------------------------------------
-Follow the road to Exit > Riverways
+2_6_9 The Western Forest------------------------------------
+Follow the road to Exit > The Riverways
 CRAFT - Attributes
 
 
-The Riverways----------------------------------------------
+2_6_10 The Riverways----------------------------------------
 Follow the road to the Waypoint, then go up for Rhyslatha
 Exit > The Wetlands
  
@@ -76,25 +76,24 @@ Second time here keep following road, when you find
 encampment go down and right to Exit > The Southern Forest
 
 
-The Southern Forest----------------------------------------
+2_6_12 The Southern Forest----------------------------------
 Get Waypoint, follow the right hand wall
-Exit > Cavern of Anger
+Exit > The Cavern of Anger
 
 
-The Cavern of Anger----------------------------------------
+2_6_13 The Cavern of Anger----------------------------------
 Don’t forget the black flag upon entering this zone
 Go down then up first, then go right, then exit can be up 
 or down, Exit > The Beacon
 
 
-The Beacon-------------------------------------------------
+2_6_14 The Beacon-------------------------------------------
 Follow the shoreline until you reach the beacons
-Don't forget the craft, then Sail > Brine King's Reef
+Don't forget the craft, then Sail > The Brine King's Reef
 CRAFT - Life/Mana
 
 
-The Brine King's Reef--------------------------------------
+2_6_15 The Brine King's Reef--------------------------------
 Follow the left hand shoreline to the Brine King's arena
 RECOMMEND capped lightning resist
 and capped cold resist
-

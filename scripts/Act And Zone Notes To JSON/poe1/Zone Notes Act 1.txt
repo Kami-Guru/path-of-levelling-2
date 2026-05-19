@@ -13,36 +13,36 @@ Lvl 12 for 15% Movespeed
 Lvl 4 Hailrake, 8-10 Brutus, 12-13 Merveil
 
 
-The Strand-------------------------------------------------
+1_1_1 The Strand--------------------------------------------
 Make the notes as wide as this line------------------------
 Follow the coast up and right
 ONLY kill Hillock
 
 
-The Coast--------------------------------------------------
+1_1_2 The Coast---------------------------------------------
 Stick to the right side following the wall
 Don't kill anything
 Grab the Waypoint then Exit > Mud Flats
 
 
-Tidal Island-----------------------------------------------
+1_1_2a Tidal Island-----------------------------------------
 The side without a ramp/cliff is the shortest
 Kill Hailrake to get Medicine Chest
 TP/Logout and turn in quest to Nessa
 In town Waypoint > The Submerged Passage
 
 
-Mud Flats--------------------------------------------------
+1_1_3 Mud Flats---------------------------------------------
 Get level 4 here
-Grab the three glyphs then Exit > Submerged Passage
+Grab the three glyphs then Exit > The Submerged Passage
 
 
-The Fetid Pool---------------------------------------------
+1_1_3a The Fetid Pool---------------------------------------
 This quest is optional and should be skipped to save time
 Go in a circle and kill everything
 
 
-The Submerged Passage--------------------------------------
+1_1_4_1 The Submerged Passage-------------------------------
 First time here grab Waypoint then use Waypoint > The Coast
 In town Exit > Tidal Island
 
@@ -53,14 +53,14 @@ Third time here go right of staircase to
 Exit > The Flooded Depths
 
 
-The Flooded Depths-----------------------------------------
+1_1_4_0 The Flooded Depths----------------------------------
 There should be two rivers to cross with movement skill
 Kill Deep Dweller - looks like essence mob
 TP/Logout and turn in quest to Tarkleigh
 In town Waypoint > The Ledge
 
 
-The Ledge--------------------------------------------------
+1_1_5 The Ledge---------------------------------------------
 First time here get the Waypoint, then Waypoint > Town
 In town take portal to The Submerged Passage
 
@@ -68,50 +68,50 @@ Second time here little totems at the Waypoint point to the
 Exit > The Climb
 
 
-The Climb--------------------------------------------------
+1_1_6 The Climb---------------------------------------------
 Always be going up, skip Faun to save time
 Exit > The Lower Prison
 
 
-The Lower Prison-------------------------------------------
+1_1_7_1 The Lower Prison------------------------------------
 Take the Waypoint
 Do the Trial - Spike Traps
 Try right first for the Exit > The Upper Prison
 
 
-The Upper Prison-------------------------------------------
+1_1_7_2 The Upper Prison------------------------------------
 Try left first. Find hidden strongbox for quicksilvers
 Kill Brutus then TP/Logout
 In town Waypoint > Prisoner's Gate
 
 
-Prisoner's Gate--------------------------------------------
+1_1_8 Prisoner's Gate---------------------------------------
 Find the ramp/cliff down, Exit is after this ramp
 Exit > The Ship Graveyard
 
 
-The Ship Graveyard-----------------------------------------
+1_1_9 The Ship Graveyard------------------------------------
 Following the wall usually works
 Look for The Ship Graveyard Cave and leave a portal
-Find the Waypoint then Exit > The Cavern Of Wrath
+Find the Waypoint then Exit > The Cavern of Wrath
 
 Second time here, Exit > The Ship Graveyard Cave
-In town Waypoint > Cavern Of Wrath
+In town Waypoint > The Cavern of Wrath
 
 
-The Ship Graveyard Cave------------------------------------
+1_1_9a The Ship Graveyard Cave------------------------------
 Get the Allflame from corpse, don't need to kill the rare
 Exit > The Ship Graveyard to kill Fairgraves then logout
 
 
-Cavern of Wrath--------------------------------------------
+1_1_11_1 The Cavern of Wrath--------------------------------
 First time here take Waypoint > Town
-In town take portal > Ship Graveyard
+In town take portal > The Ship Graveyard
 
-Second time here Exit > Cavern of Anger
+Second time here Exit > The Cavern of Anger
 
 
-The Cavern of Anger----------------------------------------
+1_1_11_2 The Cavern of Anger--------------------------------
 Entering this zone completes Lvl 12 Gem Quest, can turn in
 Often bottom right. You can follow the spirits. 
 If you see piles of gold you're close to Merveil

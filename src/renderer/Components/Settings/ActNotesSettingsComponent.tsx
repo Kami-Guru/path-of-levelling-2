@@ -1,11 +1,43 @@
 import React, { useEffect, useState } from "react";
-import { ActNote } from "../../../main/zodSchemas/schemas";
+import { ActNote, LockNoteOption } from "../../../main/zodSchemas/schemas";
+
+function getLockButtonProps(lockNoteOption: LockNoteOption): {
+    label: string;
+    title: string;
+    className: string;
+    disabled: boolean;
+} {
+    switch (lockNoteOption) {
+        case "unlocked":
+            return {
+                label: "Automatically Update",
+                title: "Notes will update when the app is updated. Click to lock.",
+                className: "ActNotesSettingsLockButton--unlocked",
+                disabled: false,
+            };
+        case "locked":
+            return {
+                label: "Do Not Update",
+                title: "Notes will not update when the app is updated. Click to unlock.",
+                className: "ActNotesSettingsLockButton--locked",
+                disabled: false,
+            };
+        case "lockedCannotUnlock":
+            return {
+                label: "Cannot Update (Custom Notes)",
+                title: "Custom act notes cannot be updated. Reset this note for updates.",
+                className: "ActNotesSettingsLockButton--lockedCannotUnlock",
+                disabled: true,
+            };
+    }
+}
 
 export function ActNotesSettingsComponent() {
     const [selectedBuild, setSelectedBuild] = useState("");
     const [allBuildNames, setAllBuildNames] = useState<string[]>([]);
     const [addingBuild, setAddingBuild] = useState(false);
     const [newBuildName, setNewBuildName] = useState("");
+    const [buildToCopyName, setBuildToCopyName] = useState<string>("");
 
     const [editableActNotes, setEditableActNotes] = useState<ActNote[]>([]);
 
@@ -76,6 +108,19 @@ export function ActNotesSettingsComponent() {
         });
     };
 
+    const handleCopyActNotesFromBuild = () => {
+        if (!buildToCopyName || buildToCopyName === selectedBuild) return;
+
+        const payload = {
+            buildName: selectedBuild,
+            buildToCopyName: buildToCopyName
+        };
+
+        window.electron.postCopyActNotesFromBuild(payload).then((response) => {
+            setEditableActNotes(response.allActNotes || []);
+        });
+    };
+
     /** Handle resetting the notes for an Act */
     const handleResetAct = (actName: string) => {
         // Ask main process to reset this act to default, then update ONLY that act in local state
@@ -86,12 +131,31 @@ export function ActNotesSettingsComponent() {
         });
     };
 
-    /** Handle edits to Act Notes */
-    const handleNoteChange = (actNumber: number, value: string) => {
-        // Replace the newly edited note in the current set of Act Notes
-        const newNotes = editableActNotes.map((actNote, index) => (index !== actNumber
+    /** Handle changes to the lock option for an Act */
+    const handleLockOptionChange = (actName: string, value: LockNoteOption) => {
+        const newNotes = editableActNotes.map((actNote) => (actNote.actName !== actName
             ? actNote
             : {
+                lockNoteOption: value,
+                actName: actNote.actName,
+                notes: actNote.notes
+            }));
+
+        setEditableActNotes(newNotes);
+    };
+
+    const handleLockToggle = (actName: string, lockNoteOption: LockNoteOption) => {
+        if (lockNoteOption === "lockedCannotUnlock") return;
+        const nextValue: LockNoteOption = lockNoteOption === "unlocked" ? "locked" : "unlocked";
+        handleLockOptionChange(actName, nextValue);
+    };
+
+    /** Handle edits to Act Notes */
+    const handleNoteChange = (actName: string, value: string) => {
+        const newNotes = editableActNotes.map((actNote) => (actNote.actName !== actName
+            ? actNote
+            : {
+                lockNoteOption: actNote.lockNoteOption,
                 actName: actNote.actName,
                 notes: value
             }));
@@ -99,9 +163,44 @@ export function ActNotesSettingsComponent() {
         setEditableActNotes(newNotes);
     };
 
+    const renderActNoteBlock = (actNote: ActNote) => {
+        const lockButton = getLockButtonProps(actNote.lockNoteOption);
+        return (
+            <div key={actNote.actName} className="ActNotesSettingsBlock">
+                <label>{actNote.actName}</label>
+                <label>
+                    <textarea
+                        value={actNote.notes ?? ""}
+                        onChange={(e) => handleNoteChange(actNote.actName, e.target.value)}
+                        rows={actNote.notes.split('\n').length || 4}
+                        className="ActNotesSettingsTextarea"
+                    />
+                </label>
+                <button
+                    type="button"
+                    className={`ActNotesSettingsLockButton ${lockButton.className}`}
+                    onClick={() => handleLockToggle(actNote.actName, actNote.lockNoteOption)}
+                    title={lockButton.title}
+                    disabled={lockButton.disabled}
+                    aria-label={lockButton.label}
+                >
+                    {lockButton.label}
+                </button>
+                <button
+                    className="ActNotesSettingsResetActButton"
+                    onClick={() => handleResetAct(actNote.actName)}
+                    title={`Reset notes for ${actNote.actName} to default`}
+                >
+                    Reset
+                </button>
+            </div>
+        );
+    };
+
     return (
         <div className="ActNotesSettingsComponent">
             <h3>Act Notes</h3>
+
             {/* Row at the top for selecting/adding/deleting build */}
             <div className="ActNotesSettingsBuildRow">
                 <label htmlFor="build-select">Select Build:</label>
@@ -128,6 +227,34 @@ export function ActNotesSettingsComponent() {
                     </button>
                 )}
             </div>
+
+            {/* Copy Act Notes From section */}
+            {!addingBuild && (
+                <div className="ActNotesSettingsCopyRow">
+                    <button
+                        className="ActNotesSettingsCopyButton"
+                        onClick={handleCopyActNotesFromBuild}
+                        disabled={!buildToCopyName || buildToCopyName === selectedBuild}
+                        title="Copy act notes from another build"
+                    >
+                        Copy Act Notes From:
+                    </button>
+                    <select
+                        className="ActNotesSettingsCopySelect"
+                        value={buildToCopyName}
+                        onChange={e => setBuildToCopyName(e.target.value)}
+                    >
+                        <option value="">Select build...</option>
+                        {allBuildNames
+                            .filter(name => name !== selectedBuild)
+                            .map(name => (
+                                <option key={name} value={name}>{name}</option>
+                            ))}
+                    </select>
+                </div>
+            )}
+
+            {/* Add Build section */}
             {addingBuild && (
                 <div className="ActNotesSettingsAddBuildContainer">
                     <input
@@ -150,26 +277,7 @@ export function ActNotesSettingsComponent() {
             )}
             {/* List of text boxes to add Act Notes */}
             <div className="ActNotesSettingsBlocksContainer">
-                {editableActNotes.map((actNote, idx) => (
-                    <div key={actNote.actName} className="ActNotesSettingsBlock">
-                        <label>{actNote.actName}</label>
-                        <label>
-                            <textarea
-                                value={actNote.notes ?? ""}
-                                onChange={(e) => handleNoteChange(idx, e.target.value)}
-                                rows={actNote.notes.split('\n').length || 4}
-                                className="ActNotesSettingsTextarea"
-                            />
-                        </label>
-                        <button
-                            className="ActNotesSettingsResetActButton"
-                            onClick={() => handleResetAct(actNote.actName)}
-                            title={`Reset notes for ${actNote.actName} to default`}
-                        >
-                            Reset
-                        </button>
-                    </div>
-                ))}
+                {editableActNotes.map(renderActNoteBlock)}
             </div>
 
             <div className="ActNotesSettingsBanner">

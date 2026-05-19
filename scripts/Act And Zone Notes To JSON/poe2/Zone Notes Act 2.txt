@@ -1,0 +1,141 @@
+G2_1 Vastiri Outskirts--------------------------------------
+Zone layout may be flipped, Boss is either down/left or 
+down/right, rougly Z shape
+
+Stay on the tip of Rathbreaker's cliff to avoid spears
+
+Kill Rathbreaker then TP to start and Exit > Town
+In Town Caravan > The Halani Gates, don't need to talk to 
+Sekhema just get the ! over her head then Exit > Town
+
+In Town Caravan > Mawdun Quarry
+
+G2_10_1 Mawdun Quarry---------------------------------------
+Roughly Z Shape. If in doubt follow a wall
+
+Exit > Mawdun Mine
+
+G2_10_2 Mawdun Mine-----------------------------------------
+Boss is usually directly north from entrance
+
+RECOMMEND Fire Res, boss can deal a lot of damage. Watch out
+for mines
+
+Exit > Traitor's Passage
+
+G2_2 Traitor's Passage--------------------------------------
+If you find Decree of Imprisonment lore item, follow pages
+on the wall for Balbala, then the other direction for exit
+
+Six Sisters indicate you're going the right way. Could get
+really early Six Sisters, there's a layout image for that
+
+Exit > The Halani Gates
+
+G2_3 The Halani Gates---------------------------------------
+Head to opposite corner from entrance
+
+RECOMMEND Lightning Resistance, Topaz Charm
+
+In Town Caravan > Keth
+
+G2_4_1 Keth-------------------------------------------------
+Wall-follow clockwise.
+If you find exit before boss, Checkpoint > entrance and
+    wall-follow counter-clockwise
+If you find exit before boss AGAIN, Checkpoint > entrance
+    and try the other two points in zone layout image
+There is a head-shaped tile near boss, looks like a round 
+buried building
+
+XP is great here
+
+Exit > The Lost City
+
+G2_4_2 The Lost City----------------------------------------
+Zone is shaped like a diamond with bridges as the corners
+
+First bridge is either far left or far right of the first
+"rectangle"
+
+[Optional] There is a sarcophagus with Lvl 6/7 Skill
+
+Exit > Buried Shrines
+
+G2_4_3 Buried Shrines---------------------------------------
+Zone is two rectangles joined by bridges
+
+The direction the bridge points tells you where the boss is:
+South - North: boss is directly up
+North - South: boss is directly left
+
+Boss tile has V-shaped bridge facing north-east
+
+[Optional] Elemental Offering event drops a magic 
+cold/fire/lightning res ring
+
+Kill the boss, TP > Town then Caravan > Mastodon Badlands
+
+G2_5_1 Mastodon Badlands------------------------------------
+Best chance is wall-follow the wall opposite side of the
+Waypoint
+
+Effigy in this zone drops Lvl 1 Support
+
+Exit > The Bone Pits
+
+G2_5_2 The Bone Pits----------------------------------------
+Bone Arch near entrance to zone points directly to the boss
+
+Kill boss then TP > Town and Caravan > Valley Of The Titans
+
+G2_6 Valley Of The Titans-----------------------------------
+Wall-follow either direction for seals and permanent buff,
+third seal might be in the middle of the zone
+
+Exit > The Titan Grotto
+
+G2_7 The Titan Grotto---------------------------------------
+Zone is shaped like a rectangle, follow the direction the 
+bridge from the entrance takes to get to the opposite side
+Boss is on long straight bridge similar to entrance
+
+Usually stay in 12 o'clock for first phase and 3 o'clock for
+second phase
+
+Kill boss then TP > Town, use Horn on North tip of Caravan 
+Then Caravan > Deshar
+
+G2_8 Deshar-------------------------------------------------
+Quest item is on the outside of one of the buildings
+
+Exit is on the furthest edge of second area with buildings
+
+Exit > Path Of Mourning
+
+G2_9_1 Path Of Mourning-------------------------------------
+Area is unpredictable, try going to opposite corner of zone
+from entrance
+
+Can also try 3-3-3 method of going right for three bridges,
+up/right for three bridges, down/right for three bridges,
+repeat 
+
+G2_9_2 The Spires Of Deshar---------------------------------
+Don't forget the Sisters Of Garukhan!!!
+Sisters should be in a G-shaped tile, use process of 
+elimination to find it
+
+Kill Tor Gul, TP > Town then Caravan > The Dreadnought
+
+G2_12_1 The Dreadnought-------------------------------------
+Be patient, enemies jump behind you, easy to get swarmed
+
+Go roughtly up/left
+
+G2_12_2 Drednought Vanguard---------------------------------
+Be patient, enemies jump behind you, easy to get swarmed
+
+RECOMMEND lightning resist
+
+Go roughtly up/left

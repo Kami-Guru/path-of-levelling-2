@@ -5,6 +5,7 @@ import { GeneralSettingsComponent } from './GeneralSettingsComponent';
 import { GemSettingsComponent } from './GemSettingsComponent';
 import { AboutSettingsComponent } from './AboutSettingsComponent';
 import { ActNotesSettingsComponent } from './ActNotesSettingsComponent';
+import { ZoneNotesSettingsComponent } from './ZoneNotesSettingsComponent';
 
 export function SettingsComponent({
 	setFontSizeFunction,
@@ -13,7 +14,7 @@ export function SettingsComponent({
 	setFontSizeFunction: (n: number) => void;
 	fontSize: number;
 }) {
-	const [activePage, setActivePage] = useState<'General' | 'Gems' | 'Act Notes' | 'About'>('General');
+	const [activePage, setActivePage] = useState<'General' | 'Gems' | 'Act Notes' | 'Zone Notes' | 'About'>('General');
 	const [isHovered, setIsHovered] = useState(false);
 	const [moveMode, setMoveMode] = useState(false);
 
@@ -156,6 +157,12 @@ export function SettingsComponent({
 						<h3>Act Notes</h3>
 					</button>
 					<button
+						className={`SidebarTab${activePage === 'Zone Notes' ? ' Active' : ''}`}
+						onClick={() => setActivePage('Zone Notes')}
+					>
+						<h3>Zone Notes</h3>
+					</button>
+					<button
 						className={`SidebarTab${activePage === 'About' ? ' Active' : ''}`}
 						onClick={() => setActivePage('About')}
 					>
@@ -169,6 +176,7 @@ export function SettingsComponent({
 						setFontSizeFunction={setFontSizeFunction} />}
 					{activePage === 'Gems' && <GemSettingsComponent />}
 					{activePage === 'Act Notes' && <ActNotesSettingsComponent />}
+					{activePage === 'Zone Notes' && <ZoneNotesSettingsComponent />}
 					{activePage === 'About' && <AboutSettingsComponent />}
 				</div>
 			</div>
