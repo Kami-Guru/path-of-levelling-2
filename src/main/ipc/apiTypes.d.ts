@@ -19,7 +19,7 @@ type channelReturnTypeMapping = {
 	getFontScalingFactor: number;
 	getFontSize: number;
 	saveFontSize: number;
-	
+
 	getClientPath: string;
 	saveClientPath: boolean;
 	getIsClientWatcherActive: boolean;
@@ -36,6 +36,7 @@ type channelReturnTypeMapping = {
 	// Act Notes Settings
 	getActNotesSettingsState: ActNotesSettingsDto;
 	saveActNotesForBuild: ActNotesSettingsDto;
+	postCopyActNotesFromBuild: ActNotesSettingsDto;
 	postResetActNoteForAct: ActNote; // Send back the default Act Note, DON'T reset the whole screen
 	postBuildSelectedFromActNotes: ActNotesSettingsDto;
 	postAddNewBuildFromActNotes: ActNotesSettingsDto;
@@ -44,6 +45,7 @@ type channelReturnTypeMapping = {
 	// Zone Notes Settings
 	getZoneNotesSettingsState: ZoneNotesSettingsDto;
 	saveZoneNotesForBuild: ZoneNotesSettingsDto;
+	postCopyZoneNotesFromBuild: ZoneNotesSettingsDto;
 	postResetZoneNoteForZone: ZoneNote; // Send back the default Zone Note, DON'T reset the whole screen
 	postBuildSelectedFromZoneNotes: ZoneNotesSettingsDto;
 	postAddNewBuildFromZoneNotes: ZoneNotesSettingsDto;
@@ -90,12 +92,14 @@ type channelRequestTypeMapping = {
 
 	postBuildSelectedFromActNotes: string;
 	saveActNotesForBuild: SaveActNotesRequest;
+	postCopyActNotesFromBuild: CopyActNotesFromBuildRequest;
 	postResetActNoteForAct: string;
 	postAddNewBuildFromActNotes: string;
 	postDeleteBuildFromActNotes: string;
 
 	postBuildSelectedFromZoneNotes: string;
 	saveZoneNotesForBuild: SaveZoneNotesRequest;
+	postCopyZoneNotesFromBuild: CopyZoneNotesFromBuildRequest;
 	postResetZoneNoteForZone: string;
 	postAddNewBuildFromZoneNotes: string;
 	postDeleteBuildFromZoneNotes: string;
@@ -137,6 +141,11 @@ type SaveActNotesRequest = {
 	allActNotes: ActNote[];
 };
 
+type CopyActNotesFromBuildRequest = {
+	buildName: string;
+	buildToCopyName: string;
+};
+
 type ActNotesSettingsDto = {
 	buildName: string;
 	allBuildNames: string[],
@@ -146,6 +155,11 @@ type ActNotesSettingsDto = {
 type SaveZoneNotesRequest = {
 	buildName: string;
 	allZoneNotes: ZoneNote[];
+};
+
+type CopyZoneNotesFromBuildRequest = {
+	buildName: string;
+	buildToCopyName: string;
 };
 
 type ZoneNotesSettingsDto = {

@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-Convert PoE2 act/zone-notes draft .txt files into zoneNotes.json.
+Convert PoE2 Act/Zone notes from .txt into zoneNotes.json
+Running this script creates a zoneNotes.json in the poe2/ directory, replace the zoneNotes.json in
+profiles/poe2/referenceData/ with the new one.
 
 Zone drafts: each zone starts with a header line
-  <zoneCode> <zoneName>------------------------------------------
+  <zoneCode> <zoneName>---
 followed by note lines until the next zone header.
 
-Act notes: poe2/act notes.txt — blocks headed by ACT N--- or Interludes---.
+Act notes: blocks headed by ACT 1--- or Interludes---.
 """
 
 from __future__ import annotations

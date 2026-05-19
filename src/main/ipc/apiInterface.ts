@@ -31,6 +31,9 @@ declare global {
 			saveActNotesForBuild: (
 				saveActNotesDto: SaveActNotesRequest
 			) => Promise<ActNotesSettingsDto>;
+			postCopyActNotesFromBuild: (
+				copyActNotesFromBuildRequest: CopyActNotesFromBuildRequest
+			) => Promise<ActNotesSettingsDto>;
 			postResetActNoteForAct: (actName: string) => Promise<ActNote>;
 			postBuildSelectedFromActNotes: (buildName: string) => Promise<ActNotesSettingsDto>;
 			postAddNewBuildFromActNotes: (buildName: string) => Promise<ActNotesSettingsDto>;
@@ -40,6 +43,9 @@ declare global {
 			getZoneNotesSettingsState: () => Promise<ZoneNotesSettingsDto>;
 			saveZoneNotesForBuild: (
 				saveZoneNotesDto: SaveZoneNotesRequest
+			) => Promise<ZoneNotesSettingsDto>;
+			postCopyZoneNotesFromBuild: (
+				copyZoneNotesFromBuildRequest: CopyZoneNotesFromBuildRequest
 			) => Promise<ZoneNotesSettingsDto>;
 			postResetZoneNoteForZone: (zoneCode: string) => Promise<ZoneNote>;
 			postBuildSelectedFromZoneNotes: (buildName: string) => Promise<ZoneNotesSettingsDto>;

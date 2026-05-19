@@ -37,6 +37,7 @@ export function ActNotesSettingsComponent() {
     const [allBuildNames, setAllBuildNames] = useState<string[]>([]);
     const [addingBuild, setAddingBuild] = useState(false);
     const [newBuildName, setNewBuildName] = useState("");
+    const [buildToCopyName, setBuildToCopyName] = useState<string>("");
 
     const [editableActNotes, setEditableActNotes] = useState<ActNote[]>([]);
 
@@ -104,6 +105,19 @@ export function ActNotesSettingsComponent() {
         // Save notes in main process and use returned state to refresh local state
         window.electron.saveActNotesForBuild(payload).then((response) => {
             setEditableActNotes(response.allActNotes || editableActNotes);
+        });
+    };
+
+    const handleCopyActNotesFromBuild = () => {
+        if (!buildToCopyName || buildToCopyName === selectedBuild) return;
+
+        const payload = {
+            buildName: selectedBuild,
+            buildToCopyName: buildToCopyName
+        };
+
+        window.electron.postCopyActNotesFromBuild(payload).then((response) => {
+            setEditableActNotes(response.allActNotes || []);
         });
     };
 
@@ -186,6 +200,7 @@ export function ActNotesSettingsComponent() {
     return (
         <div className="ActNotesSettingsComponent">
             <h3>Act Notes</h3>
+
             {/* Row at the top for selecting/adding/deleting build */}
             <div className="ActNotesSettingsBuildRow">
                 <label htmlFor="build-select">Select Build:</label>
@@ -212,6 +227,34 @@ export function ActNotesSettingsComponent() {
                     </button>
                 )}
             </div>
+
+            {/* Copy Act Notes From section */}
+            {!addingBuild && (
+                <div className="ActNotesSettingsCopyRow">
+                    <button
+                        className="ActNotesSettingsCopyButton"
+                        onClick={handleCopyActNotesFromBuild}
+                        disabled={!buildToCopyName || buildToCopyName === selectedBuild}
+                        title="Copy act notes from another build"
+                    >
+                        Copy Act Notes From:
+                    </button>
+                    <select
+                        className="ActNotesSettingsCopySelect"
+                        value={buildToCopyName}
+                        onChange={e => setBuildToCopyName(e.target.value)}
+                    >
+                        <option value="">Select build...</option>
+                        {allBuildNames
+                            .filter(name => name !== selectedBuild)
+                            .map(name => (
+                                <option key={name} value={name}>{name}</option>
+                            ))}
+                    </select>
+                </div>
+            )}
+
+            {/* Add Build section */}
             {addingBuild && (
                 <div className="ActNotesSettingsAddBuildContainer">
                     <input

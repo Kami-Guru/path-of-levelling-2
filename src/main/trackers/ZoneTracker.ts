@@ -194,9 +194,15 @@ export class ZoneTracker {
 		this.loadActNotes();
 	}
 
-	saveZoneNotes(buildName: string, newZoneNotes: Array<ZoneNote>) {
-		log.info("Received new notes:", newZoneNotes.find(zoneNote => zoneNote.zoneCode == "G1_1"));
+	CopyActNotesFromBuild(buildName: string, buildToCopyName: string) {
+		const buildToCopy = objectFactory.getStoreService().getBuild(buildToCopyName);
 
+		const actNotesToCopy = buildToCopy?.actNotes ?? [];
+
+		this.saveActNotes(buildName, actNotesToCopy);
+	}
+
+	saveZoneNotes(buildName: string, newZoneNotes: Array<ZoneNote>) {
 		// Notes which are different to the default note must be saved with lockedCannotUnlock
 		const customZoneNotesToSave = newZoneNotes
 			.filter(newZoneNote => newZoneNote.notes !== this.defaultActAndZoneNotes.zoneNotes
@@ -215,8 +221,6 @@ export class ZoneTracker {
 		// Zip the lists together for saving
 		const zoneNotesToSave = [...customZoneNotesToSave, ...lockedZoneNotesToSave];
 
-		log.info("Saving new notes:", newZoneNotes.find(zoneNote => zoneNote.zoneCode == "G1_1"));
-
 		// Save the new notes to build - create a new build if required
 		objectFactory.getStoreService().setBuild(buildName, {
 			...(objectFactory.getStoreService().getBuild(buildName)
@@ -230,6 +234,14 @@ export class ZoneTracker {
 
 		// Re-load the notes from the build store into memory
 		this.loadZoneNotes();
+	}
+
+	CopyZoneNotesFromBuild(buildName: string, buildToCopyName: string) {
+		const buildToCopy = objectFactory.getStoreService().getBuild(buildToCopyName);
+
+		const zoneNotesToCopy = buildToCopy?.zoneNotes ?? [];
+
+		this.saveZoneNotes(buildName, zoneNotesToCopy);
 	}
 
 	// Remove the user's act note from the saved custom Act Notes

@@ -147,7 +147,7 @@ function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatch
 	});
 
 	ipcMainHandle("getFontSize", async (_) => {
-		return objectFactory.getSettingsService().getFontSize()
+		return objectFactory.getSettingsService().getFontSize();
 	});
 
 	ipcMainHandle("saveFontSize", async (_, fontSize) => {
@@ -445,9 +445,35 @@ function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatch
 		return objectFactory.getZoneTracker().getActNotesSettingsDto();
 	});
 
+	ipcMainHandle("postCopyActNotesFromBuild", async (_, request) => {
+		// Set the current build
+		objectFactory.getSettingsService().saveBuildName(request.buildName);
+
+		// Copy the act notes to the current build
+		objectFactory.getZoneTracker().CopyActNotesFromBuild(request.buildName, request.buildToCopyName);
+
+		// Send the updated state to the Gem Tracker component (gem tracker also cares about
+		// build change)
+		ipcWebContentsSend(
+			"subscribeToGemUpdates",
+			mainWindow.webContents,
+			objectFactory.getGemTracker().getGemDataDto()
+		);
+
+		// Send the updated state to the Zone Tracker component
+		ipcWebContentsSend(
+			"zoneUpdatesFromLog",
+			mainWindow.webContents,
+			objectFactory.getZoneTracker().getZoneDataDto()
+		);
+
+		// Return the updated state to Zone Notes Settings component
+		return objectFactory.getZoneTracker().getActNotesSettingsDto();
+	});
+
 	ipcMainHandle("postResetActNoteForAct", async (_, actName) => {
-		return objectFactory.getZoneTracker().resetActNoteForAct(actName)
-	})
+		return objectFactory.getZoneTracker().resetActNoteForAct(actName);
+	});
 
 	// --- Handle events from the Zone Notes SETTINGS --- //
 	ipcMainHandle("getZoneNotesSettingsState", async (_, args) => {
@@ -549,6 +575,32 @@ function createIPCEventListeners(mainWindow: BrowserWindow, logWatcher: LogWatch
 
 		// Save the new build
 		objectFactory.getZoneTracker().saveZoneNotes(request.buildName, request.allZoneNotes);
+
+		// Send the updated state to the Gem Tracker component (gem tracker also cares about
+		// build change)
+		ipcWebContentsSend(
+			"subscribeToGemUpdates",
+			mainWindow.webContents,
+			objectFactory.getGemTracker().getGemDataDto()
+		);
+
+		// Send the updated state to the Zone Tracker component
+		ipcWebContentsSend(
+			"zoneUpdatesFromLog",
+			mainWindow.webContents,
+			objectFactory.getZoneTracker().getZoneDataDto()
+		);
+
+		// Return the updated state to Zone Notes Settings component
+		return objectFactory.getZoneTracker().getZoneNotesSettingsDto();
+	});
+
+	ipcMainHandle("postCopyZoneNotesFromBuild", async (_, request) => {
+		// Set the current build
+		objectFactory.getSettingsService().saveBuildName(request.buildName);
+
+		// Copy the zone notes to the current build
+		objectFactory.getZoneTracker().CopyZoneNotesFromBuild(request.buildName, request.buildToCopyName);
 
 		// Send the updated state to the Gem Tracker component (gem tracker also cares about
 		// build change)

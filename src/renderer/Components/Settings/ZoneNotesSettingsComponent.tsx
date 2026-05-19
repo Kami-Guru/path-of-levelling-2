@@ -37,6 +37,7 @@ export function ZoneNotesSettingsComponent() {
     const [allBuildNames, setAllBuildNames] = useState<string[]>([]);
     const [addingBuild, setAddingBuild] = useState(false);
     const [newBuildName, setNewBuildName] = useState("");
+    const [buildToCopyName, setBuildToCopyName] = useState<string>("");
 
     const [editableZoneNotes, setEditableZoneNotes] = useState<ZoneNote[]>([]);
     const textareaRefs = React.useRef<{ [zoneCode: string]: HTMLTextAreaElement | null; }>({});
@@ -107,6 +108,19 @@ export function ZoneNotesSettingsComponent() {
         // Save notes in main process and use returned state to refresh local state
         window.electron.saveZoneNotesForBuild(payload).then((response) => {
             setEditableZoneNotes(response.allZoneNotes);
+        });
+    };
+
+    const handleCopyZoneNotesFromBuild = () => {
+        if (!buildToCopyName || buildToCopyName === selectedBuild) return;
+
+        const payload = {
+            buildName: selectedBuild,
+            buildToCopyName: buildToCopyName
+        };
+
+        window.electron.postCopyZoneNotesFromBuild(payload).then((response) => {
+            setEditableZoneNotes(response.allZoneNotes || []);
         });
     };
 
@@ -224,6 +238,7 @@ export function ZoneNotesSettingsComponent() {
     return (
         <div className="ZoneNotesSettingsComponent" ref={containerRef}>
             <h3>Zone Notes</h3>
+
             {/* Row at the top for selecting/adding/deleting build */}
             <div className="ZoneNotesSettingsBuildRow">
                 <label htmlFor="build-select">Select Build:</label>
@@ -250,6 +265,34 @@ export function ZoneNotesSettingsComponent() {
                     </button>
                 )}
             </div>
+
+            {/* Copy Zone Notes From section */}
+            {!addingBuild && (
+                <div className="ZoneNotesSettingsCopyRow">
+                    <button
+                        className="ZoneNotesSettingsCopyButton"
+                        onClick={handleCopyZoneNotesFromBuild}
+                        disabled={!buildToCopyName || buildToCopyName === selectedBuild}
+                        title="Copy zone notes from another build"
+                    >
+                        Copy Zone Notes From:
+                    </button>
+                    <select
+                        className="ZoneNotesSettingsCopySelect"
+                        value={buildToCopyName}
+                        onChange={e => setBuildToCopyName(e.target.value)}
+                    >
+                        <option value="">Select build...</option>
+                        {allBuildNames
+                            .filter(name => name !== selectedBuild)
+                            .map(name => (
+                                <option key={name} value={name}>{name}</option>
+                            ))}
+                    </select>
+                </div>
+            )}
+
+            {/* Add Build section */}
             {addingBuild && (
                 <div className="ZoneNotesSettingsAddBuildContainer">
                     <input

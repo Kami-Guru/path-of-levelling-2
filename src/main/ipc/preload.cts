@@ -124,6 +124,8 @@ electron.contextBridge.exposeInMainWorld("electron", {
 	getActNotesSettingsState: async () => ipcRendererInvokeGet("getActNotesSettingsState"),
 	saveActNotesForBuild: async (response) =>
 		ipcRendererInvokePost("saveActNotesForBuild", response),
+	postCopyActNotesFromBuild: async (response) =>
+		ipcRendererInvokePost("postCopyActNotesFromBuild", response),
 	postResetActNoteForAct: async (actName) => ipcRendererInvokePost("postResetActNoteForAct", actName),
 	postBuildSelectedFromActNotes: async (buildName) =>
 		ipcRendererInvokePost("postBuildSelectedFromActNotes", buildName),
@@ -134,6 +136,8 @@ electron.contextBridge.exposeInMainWorld("electron", {
 	getZoneNotesSettingsState: async () => ipcRendererInvokeGet("getZoneNotesSettingsState"),
 	saveZoneNotesForBuild: async (response) =>
 		ipcRendererInvokePost("saveZoneNotesForBuild", response),
+	postCopyZoneNotesFromBuild: async (response) =>
+		ipcRendererInvokePost("postCopyZoneNotesFromBuild", response),
 	postResetZoneNoteForZone: async (zoneCode) => ipcRendererInvokePost("postResetZoneNoteForZone", zoneCode),
 	postBuildSelectedFromZoneNotes: async (buildName) =>
 		ipcRendererInvokePost("postBuildSelectedFromZoneNotes", buildName),
