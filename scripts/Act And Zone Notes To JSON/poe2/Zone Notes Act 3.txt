@@ -8,42 +8,39 @@ drops Lesser Jeweller's Orb
 Exit > Town then Exit > Jungle Ruins
 
 G3_3 Jungle Ruins-------------------------------------------
-Three main locations:
+Four main locations:
 1) Infested Barrens - opposite wall from entrance
-2) The Venom Crypts - in one of 9 places arranged in a grid
-3) Silverfist - usually top third of zone, occasionally in
-    the middle
-
-If you find The Venom Crypts go in, get waypoint, come back
+2) The Venom Crypts - snakes slither towards entrance
+3) Silverfist - usually top third of zone, or in the middle
+4) Matlan Waterways
 
 Steps:
 1. Start following the downward wall to find 2) or 3)
 2. From opposite side checkpoint to the start and wall 
     follow the other way to find 1)
-3. If you found all 3 locations then Exit > Infested Barrens
+3. If you found all 4 locations then Exit > Infested Barrens
 4. Else scan back and forth through the zone starting from
     top/left third of map
 
 [Optional] Jungle grave for a belt
-[Optional] Troubled Camp for a vendor
+[Optional] Troubled Camp for a vendor, they point to exit
 
-Exit > Infested Barrens
+Exit > Venom Crypts
+
+Second time here Exit > Infested Barrens
+
+Third time here Exit > Matlan Waterways
 
 G3_2_1 Infested Barrens-------------------------------------
 All locations are on edges of zone so wall-follow to get all
-checkpoints and The Matlan Waterways Waypoint
+checkpoints and Waypoint
 
-Exit > The Azak Bog
-
-Second time here Exit > Chimeral Wetlands
-
-Third time here Exit > The Matlan Waterways
+Exit > Chimeral Wetlands
 
 G3_7 The Azak Bog-------------------------------------------
 Boss is generally in up-right quarter of the zone
 
-Kill boss, TP > Town then Waypoint > Infested Barrens then
-Checkpoint > Chimeral Wetlands
+Kill boss, TP > Town then Waypoint > Matlan Waterways
 
 G3_4 The Venom Crypts---------------------------------------
 If you spawn on the edge of the zone, corpse is always in
@@ -51,6 +48,9 @@ the middle, follow the wall opposite the entrance
 
 If the corpse is not in the middle it can be in any corner,
 good luck
+
+Either take the Exit > Jungle Ruins to find Infested Barrens
+OR Waypoint > Jungle Ruins if you already found it
 
 G3_5 Chimeral Wetlands--------------------------------------
 Wall-follow to the right
@@ -81,7 +81,10 @@ Exit > The Matlan Waterways
 G3_2_2 The Matlan Waterways---------------------------------
 RECOMMEND fire resist and patience
 
-Find the lever then TP > Town then Exit > The Drowned City
+Exit > Azak Bog for Spirit + Spirit Gem
+
+Second time here Find the lever, then TP > Town,
+then Exit > The Drowned City
 
 G3_8 The Drowned City---------------------------------------
 Don't forget the waypoint at the start!
