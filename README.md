@@ -21,11 +21,18 @@ In Progress:
  - Add a PR that adds notes from the recent [0.5 Campaign Streamlining teaser](https://www.youtube.com/watch?v=miL0Ms-VwGI)
      - Will merge this & publish a release ~72 hours before launch
 
-Recently Completed:
+Completed:
+ - Display Act and Zone notes that automatically update when changing zone
+ - Display Gem Setups that automatically update when levelling up
+ - Display Level Diff, the difference between player level and monster level, and EXP modifier, which updates when levelling up and when changing zone
  - Builds:
-     - Custom per-build Act notes and custom Zone notes
+     - Customisable per-build Act and Zone notes
          - Ability to copy Act and Zone notes from another build
-     - Overlay for custom per-build Gem setups at different level breakpoints
+     - Customisable per-build Gem Setups at different level breakpoints
+ - Misc:
+     - Hotkeys to show/hide any part of the overlay
+     - Fully resizable/movable overlay elements
+     - Adjustable font sizing
 
 Canned:
  - ~~An overlay which shows a screenshot of a passive skill tree (presumably from POB), with many potential screenshots~~
