@@ -18,7 +18,7 @@ Backlog:
 In Progress:
  - Update some zones I forgot about in 0.4 (Clearfell, Mud Burrow)
  - Another pass on some of the more egregiously-sized images (Sisters of Garukhan tile image lmao)
- - Add a PR that adds notes from the recent (0.5 Campaign Streamlining teaser)[https://www.youtube.com/watch?v=miL0Ms-VwGI]
+ - Add a PR that adds notes from the recent [0.5 Campaign Streamlining teaser](https://www.youtube.com/watch?v=miL0Ms-VwGI)
      - Will merge this & publish a release ~72 hours before launch
 
 Recently Completed:
