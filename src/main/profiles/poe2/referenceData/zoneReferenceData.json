@@ -87,6 +87,10 @@
 		"act": "Act 2",
 		"zoneName": "Mastodon Badlands"
 	},
+	"Abyss_Intro": {
+		"act": "Act 2",
+		"zoneName": "Lightless Passage"
+	},
 	"G2_5_2": {
 		"act": "Act 2",
 		"zoneName": "The Bone Pits"
@@ -125,7 +129,7 @@
 	},
 	"G2_12_2": {
 		"act": "Act 2",
-		"zoneName": "Drednought Vanguard"
+		"zoneName": "Dreadnought Vanguard"
 	},
 	"G3_1": {
 		"act": "Act 3",

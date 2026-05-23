@@ -37,13 +37,13 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G1_2",
 			"zoneName": "Clearfell",
-			"notes": "[Optional] Mud Burrow boss has Lvl 2 Skill + Lvl 1 Support\n\nGet the waypoint\nBeira usually directly north from waypoint\n\nExit > The Grelwood"
+			"notes": "[Optional] Mud Burrow boss has Lvl 2 Skill + Lvl 1 Support\n\nMinimap shows a grey-ish path to Mud Burrow if you don't\nhave transparent terrain\n\nIf entering up/left and you immediately see a bridge, Beira\nand exit is on your side, Mud Burrow is other side\nOtherwise entering up/left means only one bridge, and all \npoints of interest are on the other side of the bridge\n\nIf entering up/right, anything could be anywhere, good luck\n\nExit > The Grelwood"
 		},
 		{
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G1_3",
 			"zoneName": "Mud Burrow",
-			"notes": "Skippable area, Devourer drops Lvl 2 Skill + quest reward\nLvl 1 Support"
+			"notes": "Skippable area, Devourer drops Lvl 2 Skill + quest reward\nLvl 1 Support\n\nBoss is directly left/right/up/down from the entrance"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -73,7 +73,7 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G1_8",
 			"zoneName": "Mausoleum Of The Praetor",
-			"notes": "Draw a line from the exit through the tile in the middle of\nthe zone, boss is in that direction\n\nKill the boss, Exit > Cemetary Of The Eternals\nThen Checkpoint > Tomb Of The Consort"
+			"notes": "Draw a line from the exit through the tile in the middle of\nthe zone, boss is usually in that direction\n\nIf you enter at the bottom of the zone, boss could be on the\nright of the center\n\nKill the boss, Exit > Cemetary Of The Eternals\nThen Checkpoint > Tomb Of The Consort"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -169,7 +169,13 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G2_5_1",
 			"zoneName": "Mastodon Badlands",
-			"notes": "Best chance is wall-follow the wall opposite side of the\nWaypoint\n\nEffigy in this zone drops Lvl 1 Support\n\nExit > The Bone Pits"
+			"notes": "Wall-follow the wall opposite the Waypoint\n\nAbyss in this area drops Jawbone (weapon mod)\nEffigy in this zone drops Lvl 1 Support\n\nExit > Lightless Passage\n\nSecond time here Exit > The Bone Pits"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "Abyss_Intro",
+			"zoneName": "Lightless Passage",
+			"notes": "Well of Souls is always top-left\n\nExit > Well of Souls\nThen Waypoint > Mastodon Badlands"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -216,7 +222,7 @@
 		{
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G2_12_2",
-			"zoneName": "Drednought Vanguard",
+			"zoneName": "Dreadnought Vanguard",
 			"notes": "Be patient, enemies jump behind you, easy to get swarmed\n\nRECOMMEND lightning resist\n\nGo roughtly up/left"
 		},
 		{
@@ -245,9 +251,15 @@
 		},
 		{
 			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_4",
+			"zoneName": "The Venom Crypts",
+			"notes": "If you spawn on the edge of the zone, corpse is always in\nthe middle, follow the wall opposite the entrance\n\nIf the corpse is not in the middle it can be in any corner,\ngood luck"
+		},
+		{
+			"lockNoteOption": "unlocked",
 			"zoneCode": "G3_5",
 			"zoneName": "Chimeral Wetlands",
-			"notes": "Get waypoint in Temple of Chaos and Jiquani's Machinarium\nTemple of Chaos is usually top of the zone facing directly \nup, go in get the waypoint then come back\nJiquani's Machinarium always faces the left, wall-follow to \nthe left\n\nExit > Jiquani's Machinarium"
+			"notes": "Wall-follow to the right\n\nJiquani's Machinarium always faces the left (right wall)\nTemple of Chaos always faces down (top wall)\n\nGet waypoint for ToC and Jiquani's Machinarium then \nExit > Jiquani's Machinarium"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -271,13 +283,19 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G3_8",
 			"zoneName": "The Drowned City",
-			"notes": "Don't forget the waypoint at the start!\n\nGo up/right until you hit a wall, then down/right until you\nfind a large area with a checkpoint. This is an ambush\nExit the ambush then turn down/right then up/right for exit\n\nExit > Apex Of Filth"
+			"notes": "Don't forget the waypoint at the start!\n\nGo up/right until you hit a wall, then down/right until you\nfind a large area with a checkpoint. This is an ambush\nExit the ambush then turn down/right then up/right for exit\n\nIf you see Molten Vault, enter to get the Waypoint, but you\ndon't need 3-to-1 until endgame so leave this zone for later\n\nExit > Apex Of Filth"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G3_9",
+			"zoneName": "The Molten Vault",
+			"notes": "Best to leave this zone for after Campaign for fastest clear\n\nGo up/left until you pull lever to cross the lava\nGo up/right, cross bridges and enter doors when stuck\nEventually you'll hit a wall, go bottom/right to reach boss"
 		},
 		{
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G3_11",
 			"zoneName": "Apex Of Filth",
-			"notes": "Run the zone in a spiral, following the causeways\nIf you hit the dead end wall in the Layout Images with the\narrow, boss is on the other side of that\n\nMy eyes :(\nKill the boss then TP > Town \nThen go down the big stairs again to Exit > Temple of Kopec"
+			"notes": "Zone moves approximately up/right or up/left\nHalfway point in the zone is a big arch, after that turn\nleft, then turn right, and continue to the end of the zone\nIf the boss isn't there, turn right again and keep checking\nthat end of the zone\n\nMy eyes :(\nKill the boss then TP > Town \nThen go down the big stairs again to Exit > Temple of Kopec"
 		},
 		{
 			"lockNoteOption": "unlocked",

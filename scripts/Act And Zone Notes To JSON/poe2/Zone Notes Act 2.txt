@@ -77,12 +77,20 @@ cold/fire/lightning res ring
 Kill the boss, TP > Town then Caravan > Mastodon Badlands
 
 G2_5_1 Mastodon Badlands------------------------------------
-Best chance is wall-follow the wall opposite side of the
-Waypoint
+Wall-follow the wall opposite the Waypoint
 
+Abyss in this area drops Jawbone (weapon mod)
 Effigy in this zone drops Lvl 1 Support
 
-Exit > The Bone Pits
+Exit > Lightless Passage
+
+Second time here Exit > The Bone Pits
+
+Abyss_Intro Lightless Passage-------------------------------
+Well of Souls is always top-left
+
+Exit > Well of Souls
+Then Waypoint > Mastodon Badlands
 
 G2_5_2 The Bone Pits----------------------------------------
 Bone Arch near entrance to zone points directly to the boss
@@ -133,7 +141,7 @@ Be patient, enemies jump behind you, easy to get swarmed
 
 Go roughtly up/left
 
-G2_12_2 Drednought Vanguard---------------------------------
+G2_12_2 Dreadnought Vanguard---------------------------------
 Be patient, enemies jump behind you, easy to get swarmed
 
 RECOMMEND lightning resist

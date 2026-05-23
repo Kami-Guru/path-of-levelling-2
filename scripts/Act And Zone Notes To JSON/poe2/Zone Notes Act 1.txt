@@ -6,14 +6,23 @@ Thank you for using Path Of Levelling 2!
 G1_2 Clearfell----------------------------------------------
 [Optional] Mud Burrow boss has Lvl 2 Skill + Lvl 1 Support
 
-Get the waypoint
-Beira usually directly north from waypoint
+Minimap shows a grey-ish path to Mud Burrow if you don't
+have transparent terrain
+
+If entering up/left and you immediately see a bridge, Beira
+and exit is on your side, Mud Burrow is other side
+Otherwise entering up/left means only one bridge, and all 
+points of interest are on the other side of the bridge
+
+If entering up/right, anything could be anywhere, good luck
 
 Exit > The Grelwood
 
 G1_3 Mud Burrow---------------------------------------------
 Skippable area, Devourer drops Lvl 2 Skill + quest reward
 Lvl 1 Support
+
+Boss is directly left/right/up/down from the entrance
 
 G1_4 The Grelwood-------------------------------------------
 Four locations, always shaped like a diamond
@@ -62,7 +71,10 @@ Second time here Checkpoint > Tomb Of The Consort
 
 G1_8 Mausoleum Of The Praetor-------------------------------
 Draw a line from the exit through the tile in the middle of
-the zone, boss is in that direction
+the zone, boss is usually in that direction
+
+If you enter at the bottom of the zone, boss could be on the
+right of the center
 
 Kill the boss, Exit > Cemetary Of The Eternals
 Then Checkpoint > Tomb Of The Consort

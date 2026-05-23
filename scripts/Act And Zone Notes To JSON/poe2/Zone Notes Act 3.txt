@@ -45,13 +45,20 @@ Boss is generally in up-right quarter of the zone
 Kill boss, TP > Town then Waypoint > Infested Barrens then
 Checkpoint > Chimeral Wetlands
 
-G3_5 Chimeral Wetlands--------------------------------------
-Get waypoint in Temple of Chaos and Jiquani's Machinarium
-Temple of Chaos is usually top of the zone facing directly 
-up, go in get the waypoint then come back
-Jiquani's Machinarium always faces the left, wall-follow to 
-the left
+G3_4 The Venom Crypts---------------------------------------
+If you spawn on the edge of the zone, corpse is always in
+the middle, follow the wall opposite the entrance
 
+If the corpse is not in the middle it can be in any corner,
+good luck
+
+G3_5 Chimeral Wetlands--------------------------------------
+Wall-follow to the right
+
+Jiquani's Machinarium always faces the left (right wall)
+Temple of Chaos always faces down (top wall)
+
+Get waypoint for ToC and Jiquani's Machinarium then 
 Exit > Jiquani's Machinarium
 
 G3_6_1 Jiquani's Machinarium--------------------------------
@@ -83,12 +90,24 @@ Go up/right until you hit a wall, then down/right until you
 find a large area with a checkpoint. This is an ambush
 Exit the ambush then turn down/right then up/right for exit
 
+If you see Molten Vault, enter to get the Waypoint, but you
+don't need 3-to-1 until endgame so leave this zone for later
+
 Exit > Apex Of Filth
 
+G3_9 The Molten Vault---------------------------------------
+Best to leave this zone for after Campaign for fastest clear
+
+Go up/left until you pull lever to cross the lava
+Go up/right, cross bridges and enter doors when stuck
+Eventually you'll hit a wall, go bottom/right to reach boss
+
 G3_11 Apex Of Filth-----------------------------------------
-Run the zone in a spiral, following the causeways
-If you hit the dead end wall in the Layout Images with the
-arrow, boss is on the other side of that
+Zone moves approximately up/right or up/left
+Halfway point in the zone is a big arch, after that turn
+left, then turn right, and continue to the end of the zone
+If the boss isn't there, turn right again and keep checking
+that end of the zone
 
 My eyes :(
 Kill the boss then TP > Town 
