@@ -151,12 +151,8 @@ Kill Tor Gul, TP > Town then Caravan > The Dreadnought
 G2_12_1 The Dreadnought-------------------------------------
 Be patient, enemies jump behind you, easy to get swarmed
 
-Go roughtly up/left
-
-
-G2_12_2 Dreadnought Vanguard---------------------------------
-Be patient, enemies jump behind you, easy to get swarmed
-
 RECOMMEND lightning resist
 
 Go roughtly up/left
+
+Kill Jamanra then TP > Town for Act 3!
