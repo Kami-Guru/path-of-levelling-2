@@ -3,6 +3,7 @@ Kill Hillock and Exit > Town
 
 Thank you for using Path Of Levelling 2!
 
+
 G1_2 Clearfell----------------------------------------------
 [Optional] Mud Burrow boss has Lvl 2 Skill + Lvl 1 Support
 
@@ -18,11 +19,13 @@ If entering up/right, anything could be anywhere, good luck
 
 Exit > The Grelwood
 
+
 G1_3 Mud Burrow---------------------------------------------
 Skippable area, Devourer drops Lvl 2 Skill + quest reward
 Lvl 1 Support
 
 Boss is directly left/right/up/down from the entrance
+
 
 G1_4 The Grelwood-------------------------------------------
 Four locations, always shaped like a diamond
@@ -30,12 +33,13 @@ Four locations, always shaped like a diamond
 If you find The Grim Tangle or The Red Vale, go in and grab 
 the waypoint before coming back
 
-1) The Grim Tangle - enter and get the waypoint
-2) Tree Of Souls + Waypoint
+1) The Grim Tangle - mushrooms spawn near entrance
+2) Tree Of Souls - magical faintly glowing roots point to it
 3) Brambleghast - Lvl 1 Skill
 4) Areagne's Hut - optional potions + Lvl 1 Skill
 
-Exit > The Red Vale, usually same corner as Brambleghast
+Exit > The Red Vale, upstream from river on edge of the zone
+
 
 G1_5 The Red Vale-------------------------------------------
 Usually a spiral pattern, try following the zone clockwise
@@ -58,6 +62,7 @@ go south
 
 Exit > Cemetary Of The Eternals
 
+
 G1_7 Cemetary Of The Eternals-------------------------------
 Zone layout may be rotated
 Wall-follow around the zone, get both checkpoints first
@@ -69,6 +74,7 @@ Checkpoint > Mausoleum Of The Praetor
 
 Second time here Checkpoint > Tomb Of The Consort
 
+
 G1_8 Mausoleum Of The Praetor-------------------------------
 Draw a line from the exit through the tile in the middle of
 the zone, boss is usually in that direction
@@ -79,6 +85,7 @@ right of the center
 Kill the boss, Exit > Cemetary Of The Eternals
 Then Checkpoint > Tomb Of The Consort
 
+
 G1_9 Tomb Of The Consort------------------------------------
 Boss is usually in north corner of the zone or in the middle
 
@@ -86,11 +93,16 @@ Follow the corridors through the center of the zone
 
 TP > Town, Waypoint > Cemetary Of The Eternals for boss
 
+
 G1_11 Hunting Grounds---------------------------------------
 Follow the edge of the zone clockwise
 
-Kill Crowbell for 2 Passive Points. If you find a giant pit
-the boss is nearby
+Kill Crowbell for 2 Passive Points. Footprints lead to boss,
+also a giant thorny pit nearby
+
+Signpost points to Ogham Farmlands, get Waypoint, come back
+
+Completed Ritual in middle has locusts flying to Freythorn
 
 If you find Ogham Farmlands or Freythorn then go in, get the
 waypoint and come back
@@ -99,14 +111,14 @@ Exit > Freythorn, or TP Town then Waypoint if you got it
 
 Second time here Exit/TP > Ogham Farmlands
 
-G1_12 Freythorn---------------------------------------------
-This layout is busted, good luck.
 
-If you find the final ritual without the other 3, there are
-wisps that point to the direction of the remaining rituals
+G1_12 Freythorn---------------------------------------------
+Completed Rituals have trail of locusts leading you to the
+next one
 
 Kill King In The Mist then TP > Town
 Then Waypoint > Hunting Grounds to Exit > Ogham Farmlands
+
 
 G1_13_1 Ogham Farmlands-------------------------------------
 Usually go down and left, exit always on opposite wall from

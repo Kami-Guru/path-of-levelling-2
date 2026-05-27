@@ -49,7 +49,7 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G1_4",
 			"zoneName": "The Grelwood",
-			"notes": "Four locations, always shaped like a diamond\n\nIf you find The Grim Tangle or The Red Vale, go in and grab \nthe waypoint before coming back\n\n1) The Grim Tangle - enter and get the waypoint\n2) Tree Of Souls + Waypoint\n3) Brambleghast - Lvl 1 Skill\n4) Areagne's Hut - optional potions + Lvl 1 Skill\n\nExit > The Red Vale, usually same corner as Brambleghast"
+			"notes": "Four locations, always shaped like a diamond\n\nIf you find The Grim Tangle or The Red Vale, go in and grab \nthe waypoint before coming back\n\n1) The Grim Tangle - mushrooms spawn near entrance\n2) Tree Of Souls - magical faintly glowing roots point to it\n3) Brambleghast - Lvl 1 Skill\n4) Areagne's Hut - optional potions + Lvl 1 Skill\n\nExit > The Red Vale, upstream from river on edge of the zone"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -85,13 +85,13 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G1_11",
 			"zoneName": "Hunting Grounds",
-			"notes": "Follow the edge of the zone clockwise\n\nKill Crowbell for 2 Passive Points. If you find a giant pit\nthe boss is nearby\n\nIf you find Ogham Farmlands or Freythorn then go in, get the\nwaypoint and come back\n\nExit > Freythorn, or TP Town then Waypoint if you got it\n\nSecond time here Exit/TP > Ogham Farmlands"
+			"notes": "Follow the edge of the zone clockwise\n\nKill Crowbell for 2 Passive Points. Footprints lead to boss,\nalso a giant thorny pit nearby\n\nSignpost points to Ogham Farmlands, get Waypoint, come back\n\nCompleted Ritual in middle has locusts flying to Freythorn\n\nIf you find Ogham Farmlands or Freythorn then go in, get the\nwaypoint and come back\n\nExit > Freythorn, or TP Town then Waypoint if you got it\n\nSecond time here Exit/TP > Ogham Farmlands"
 		},
 		{
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G1_12",
 			"zoneName": "Freythorn",
-			"notes": "This layout is busted, good luck.\n\nIf you find the final ritual without the other 3, there are\nwisps that point to the direction of the remaining rituals\n\nKill King In The Mist then TP > Town\nThen Waypoint > Hunting Grounds to Exit > Ogham Farmlands"
+			"notes": "Completed Rituals have trail of locusts leading you to the\nnext one\n\nKill King In The Mist then TP > Town\nThen Waypoint > Hunting Grounds to Exit > Ogham Farmlands"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -121,7 +121,7 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G2_1",
 			"zoneName": "Vastiri Outskirts",
-			"notes": "Zone layout may be flipped, Boss is either down/left or \ndown/right, rougly Z shape\n\nStay on the tip of Rathbreaker's cliff to avoid spears\n\nKill Rathbreaker then TP to start and Exit > Town\nIn Town Caravan > The Halani Gates, don't need to talk to \nSekhema just get the ! over her head then Exit > Town\n\nIn Town Caravan > Mawdun Quarry"
+			"notes": "Zone layout may be flipped, Boss is either down/left or \ndown/right, rougly Z shape\n\nStay on the tip of Rathbreaker's cliff to avoid spears\n\nKill Rathbreaker then TP to start and Exit > Town\nIn Town Caravan > Traitor's Passage, skip Halani Gates\n\nIn Town Caravan > Mawdun Quarry"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -187,7 +187,7 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G2_6",
 			"zoneName": "Valley Of The Titans",
-			"notes": "Wall-follow either direction for seals and permanent buff,\nthird seal might be in the middle of the zone\n\nExit > The Titan Grotto"
+			"notes": "Zone is just three paths with a seal and portal at the end\nComplete all three paths then Exit > The Titan Grotto"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -217,13 +217,7 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G2_12_1",
 			"zoneName": "The Dreadnought",
-			"notes": "Be patient, enemies jump behind you, easy to get swarmed\n\nGo roughtly up/left"
-		},
-		{
-			"lockNoteOption": "unlocked",
-			"zoneCode": "G2_12_2",
-			"zoneName": "Dreadnought Vanguard",
-			"notes": "Be patient, enemies jump behind you, easy to get swarmed\n\nRECOMMEND lightning resist\n\nGo roughtly up/left"
+			"notes": "Be patient, enemies jump behind you, easy to get swarmed\n\nRECOMMEND lightning resist\n\nGo roughtly up/left\n\nKill Jamanra then TP > Town for Act 3!"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -235,25 +229,25 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G3_3",
 			"zoneName": "Jungle Ruins",
-			"notes": "Three main locations:\n1) Infested Barrens - opposite wall from entrance\n2) The Venom Crypts - in one of 9 places arranged in a grid\n3) Silverfist - usually top third of zone, occasionally in\n    the middle\n\nIf you find The Venom Crypts go in, get waypoint, come back\n\nSteps:\n1. Start following the downward wall to find 2) or 3)\n2. From opposite side checkpoint to the start and wall \n    follow the other way to find 1)\n3. If you found all 3 locations then Exit > Infested Barrens\n4. Else scan back and forth through the zone starting from\n    top/left third of map\n\n[Optional] Jungle grave for a belt\n[Optional] Troubled Camp for a vendor\n\nExit > Infested Barrens"
+			"notes": "Four main locations:\n1) Infested Barrens - opposite wall from entrance\n2) The Venom Crypts - snakes slither towards entrance\n3) Silverfist - usually top third of zone, or in the middle\n4) Matlan Waterways\n\nSteps:\n1. Start following the downward wall to find 2) or 3)\n2. From opposite side checkpoint to the start and wall \n    follow the other way to find 1)\n3. If you found all 4 locations then Exit > Infested Barrens\n4. Else scan back and forth through the zone starting from\n    top/left third of map\n\n[Optional] Jungle grave for a belt\n[Optional] Troubled Camp for a vendor, they point to exit\n\nExit > Venom Crypts\n\nSecond time here Exit > Infested Barrens\n\nThird time here Exit > Matlan Waterways"
 		},
 		{
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G3_2_1",
 			"zoneName": "Infested Barrens",
-			"notes": "All locations are on edges of zone so wall-follow to get all\ncheckpoints and The Matlan Waterways Waypoint\n\nExit > The Azak Bog\n\nSecond time here Exit > Chimeral Wetlands\n\nThird time here Exit > The Matlan Waterways"
+			"notes": "All locations are on edges of zone so wall-follow to get all\ncheckpoints and Waypoint\n\nExit > Chimeral Wetlands"
 		},
 		{
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G3_7",
 			"zoneName": "The Azak Bog",
-			"notes": "Boss is generally in up-right quarter of the zone\n\nKill boss, TP > Town then Waypoint > Infested Barrens then\nCheckpoint > Chimeral Wetlands"
+			"notes": "Boss is generally in up-right quarter of the zone\n\nKill boss, TP > Town then Waypoint > Matlan Waterways"
 		},
 		{
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G3_4",
 			"zoneName": "The Venom Crypts",
-			"notes": "If you spawn on the edge of the zone, corpse is always in\nthe middle, follow the wall opposite the entrance\n\nIf the corpse is not in the middle it can be in any corner,\ngood luck"
+			"notes": "If you spawn on the edge of the zone, corpse is always in\nthe middle, follow the wall opposite the entrance\n\nIf the corpse is not in the middle it can be in any corner,\ngood luck\n\nEither take the Exit > Jungle Ruins to find Infested Barrens\nOR Waypoint > Jungle Ruins if you already found it"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -277,7 +271,7 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G3_2_2",
 			"zoneName": "The Matlan Waterways",
-			"notes": "RECOMMEND fire resist and patience\n\nFind the lever then TP > Town then Exit > The Drowned City"
+			"notes": "RECOMMEND fire resist and patience\n\nExit > Azak Bog for Spirit + Spirit Gem\n\nSecond time here Find the lever, then TP > Town,\nthen Exit > The Drowned City"
 		},
 		{
 			"lockNoteOption": "unlocked",
