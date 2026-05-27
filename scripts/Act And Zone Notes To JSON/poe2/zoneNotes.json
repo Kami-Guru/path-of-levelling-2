@@ -18,7 +18,7 @@
 		{
 			"lockNoteOption": "unlocked",
 			"actName": "Act 4",
-			"notes": "Journey's End           - +2 Passives\nHalls of the Dead       - +5 for each Res or Stat \nHalls of the Dead       - 5% Increased Max Mana\nTrials of the Ancestors - +2 Passives\nAbandoned Prison        - Life/Mana Flask Recovery\nArastas - Evening Bell  - 3 Exalted Orbs\n\nEye of Hinekora when you free Matiki\nKedge Bay > Whakapanu > Prison > Arastas > Ngakanu\nShrike Island/Isle of Kin (maybe optional)\n\nCheck Vendor at level up for\nMovespeed boots - Max 25% this Act\nPotions: Lvl 40, 50, 60"
+			"notes": "Journey's End           - +2 Passives\nHalls of the Dead       - +5 for each Res or Stat \nHalls of the Dead       - 5% Increased Max Mana\nTrials of the Ancestors - +2 Passives\nAbandoned Prison        - Life/Mana Flask Recovery\nArastas - Evening Bell  - 3 Exalted Orbs\n\nEye of Hinekora when you free Matiki\nKedge Bay > Whakapanu > Prison > \nShrike Island/Isle of Kin (maybe optional)\nAfter all weapon pieces, Arastas > Ngakanu\n\nCheck Vendor at level up for\nMovespeed boots - Max 25% this Act\nPotions: Lvl 40, 50, 60"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -55,7 +55,7 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G1_5",
 			"zoneName": "The Red Vale",
-			"notes": "Usually a spiral pattern, try following the zone clockwise\nor counterclockwise with the wall just offscreen\n\nListen for music when altar is nearby\n\nOne altar may randomly spawn in the middle of the zone\n\nKill the boss, TP > Town, then Waypoint > The Grim Tangle"
+			"notes": "Usually a spiral pattern, try following the zone clockwise\nor counterclockwise with the wall just offscreen\nListen for music when altar is nearby\nOne altar may randomly spawn in the middle of the zone\n\nRefined Arms in this area drops level 5 martial weapon base\n\nKill the boss, TP > Town, then Waypoint > The Grim Tangle"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -379,7 +379,7 @@
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G4_5_1",
 			"zoneName": "Abandoned Prison",
-			"notes": "Find the Goddess of Justice then\nExit > Solitary Confinement"
+			"notes": "Find The Chapel, the key drops randomly from enemies\n\nExit > Solitary Confinement"
 		},
 		{
 			"lockNoteOption": "unlocked",
@@ -408,6 +408,12 @@
 		{
 			"lockNoteOption": "unlocked",
 			"zoneCode": "G4_11_1a",
+			"zoneName": "Ngakanu",
+			"notes": "Hand in the Shark Fin for choice of Spirit, Skill, or\nSupport Gem"
+		},
+		{
+			"lockNoteOption": "unlocked",
+			"zoneCode": "G4_11_1b",
 			"zoneName": "Ngakanu",
 			"notes": "After leaving the main building follow the wall to\nExit > Heart of the Tribe"
 		},

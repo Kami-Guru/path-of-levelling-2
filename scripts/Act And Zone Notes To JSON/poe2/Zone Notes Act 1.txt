@@ -40,10 +40,10 @@ Exit > The Red Vale, usually same corner as Brambleghast
 G1_5 The Red Vale-------------------------------------------
 Usually a spiral pattern, try following the zone clockwise
 or counterclockwise with the wall just offscreen
-
 Listen for music when altar is nearby
-
 One altar may randomly spawn in the middle of the zone
+
+Refined Arms in this area drops level 5 martial weapon base
 
 Kill the boss, TP > Town, then Waypoint > The Grim Tangle
 
