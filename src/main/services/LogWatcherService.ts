@@ -91,13 +91,15 @@ export class LogWatcherService {
 					mainWindow.webContents,
 					objectFactory.getZoneTracker().getZoneDataDto()
 				);
-
-				ipcWebContentsSend(
-					"zoneLayoutImageUpdates",
-					mainWindow.webContents,
-					objectFactory.getZoneTracker().zoneImageFilePaths
-				);
 			}
+
+			// We always update the zone layout images, even if the zone wasn't found, the images 
+			// should still be cleared in saveZoneFromCode, so here we're just updating the UI
+			ipcWebContentsSend(
+				"zoneLayoutImageUpdates",
+				mainWindow.webContents,
+				objectFactory.getZoneTracker().zoneImageFilePaths
+			);
 
 			if (shouldUpdateLevelTracker) {
 				ipcWebContentsSend(
