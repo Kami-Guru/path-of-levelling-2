@@ -43,7 +43,8 @@ Get the +2 Passives then TP > Town
 Sail to the next island, follow the Act Notes
 
 G4_5_1 Abandoned Prison-------------------------------------
-Find the Goddess of Justice then
+Find The Chapel, the key drops randomly from enemies
+
 Exit > Solitary Confinement
 
 G4_5_2 Solitary Confinement---------------------------------
@@ -69,6 +70,10 @@ Pick a wall and follow it all the way to the boss
 Kill the boss and TP > Town to Sail > Ngakanu
 
 G4_11_1a Ngakanu--------------------------------------------
+Hand in the Shark Fin for choice of Spirit, Skill, or
+Support Gem
+
+G4_11_1b Ngakanu--------------------------------------------
 After leaving the main building follow the wall to
 Exit > Heart of the Tribe
 
