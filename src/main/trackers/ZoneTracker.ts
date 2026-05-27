@@ -345,9 +345,14 @@ export class ZoneTracker {
 	// Returns a boolean representing whether or not there was actually a change in zone
 	// !If a zone is not found with that code we just do nothing!
 	saveZoneFromCode(zoneCode: string, updateOnly: boolean = false): boolean {
-		var zoneChanged: boolean = this.setZoneFromCode(zoneCode);
+		var zoneExists: boolean = this.setZoneFromCode(zoneCode);
 
-		if (!zoneChanged) return false;
+		// If we couldn't find a zone with that code (e.g. in Town) then clear the layout images
+		// and don't change the zone notes
+		if (!zoneExists) {
+			this.zoneImageFilePaths = [];
+			return false;
+		}
 
 		this.setZoneNotes();
 
