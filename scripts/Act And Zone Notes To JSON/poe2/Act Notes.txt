@@ -7,6 +7,10 @@ Ogham Manor     - Candlemass    - +20 Life
 
 Ctrl+Alt+S to open settings and drag/scale windows
 
+"Runesmithing: [some reward]" indicates POSSIBLE guaranteed
+rewards from 0.5 League Mechanic, based on 0.4 mechanic.
+0.4 copied 0.3 so 0.5 may copy 0.4.
+
 Check Vendor at level up for
 Movespeed boots - Max 10% this Act
 New Weapon

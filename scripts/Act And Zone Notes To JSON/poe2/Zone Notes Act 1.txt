@@ -42,6 +42,7 @@ Exit > The Red Vale, upstream from river on edge of the zone
 
 
 G1_5 The Red Vale-------------------------------------------
+Runesmithing: Lvl 2 Skill
 Usually a spiral pattern, try following the zone clockwise
 or counterclockwise with the wall just offscreen
 Listen for music when altar is nearby
@@ -53,6 +54,7 @@ Kill the boss, TP > Town, then Waypoint > The Grim Tangle
 
 
 G1_6 The Grim Tangle----------------------------------------
+Runesmithing: Lvl 3 Skill
 Go roughly up and left
 
 Zone layout may be flipped vertically, so if you start north
@@ -64,6 +66,7 @@ Exit > Cemetary Of The Eternals
 
 
 G1_7 Cemetary Of The Eternals-------------------------------
+Runesmithing: Regal
 Zone layout may be rotated
 Wall-follow around the zone, get both checkpoints first
 Exits usually on opposite sides of the zone
@@ -95,6 +98,7 @@ TP > Town, Waypoint > Cemetary Of The Eternals for boss
 
 
 G1_11 Hunting Grounds---------------------------------------
+Runesmithing: Exalt
 Follow the edge of the zone clockwise
 
 Kill Crowbell for 2 Passive Points. Footprints lead to boss,
@@ -121,6 +125,7 @@ Then Waypoint > Hunting Grounds to Exit > Ogham Farmlands
 
 
 G1_13_1 Ogham Farmlands-------------------------------------
+Runesmithing: Lvl 4 Skill
 Usually go down and left, exit always on opposite wall from
 entrance
 
@@ -131,6 +136,7 @@ Exit > Ogham Village
 
 
 G1_13_2 Ogham Village---------------------------------------
+Runesmithing: Artificer's Orb
 Follow the edge of the zone north
 
 If you find the boss before Renly's Tools take Checkpoint to
@@ -140,6 +146,7 @@ Kill The Executioner then Exit > The Manor Ramparts
 
 
 G1_14 The Manor Ramparts------------------------------------
+Runesmithing: Lvl 5 Skill
 Layout could be flipped vertically! Usually go clockwise
 
 [Optional] Gallows on north wall has Lvl 1 Support, or south
@@ -147,6 +154,7 @@ wall if layout is flipped
 
 
 G1_15 Ogham Manor-------------------------------------------
+Runesmithing: Alchemy
 Each floor has a bridge roughly in the middle, find that
 first
 

@@ -1,4 +1,5 @@
 G3_1 Sandswept Marsh----------------------------------------
+Runesmithing: Lvl 3 Support
 In swamp area kill Rootredge for Lvl 9 Skill Gem, usually in
 the middle
 
@@ -8,6 +9,7 @@ drops Lesser Jeweller's Orb
 Exit > Town then Exit > Jungle Ruins
 
 G3_3 Jungle Ruins-------------------------------------------
+Runesmithing: Alchemy
 Four main locations:
 1) Infested Barrens - opposite wall from entrance
 2) The Venom Crypts - snakes slither towards entrance
@@ -32,6 +34,7 @@ Second time here Exit > Infested Barrens
 Third time here Exit > Matlan Waterways
 
 G3_2_1 Infested Barrens-------------------------------------
+Runesmithing: Exalt
 All locations are on edges of zone so wall-follow to get all
 checkpoints and Waypoint
 
@@ -53,6 +56,7 @@ Either take the Exit > Jungle Ruins to find Infested Barrens
 OR Waypoint > Jungle Ruins if you already found it
 
 G3_5 Chimeral Wetlands--------------------------------------
+Runesmithing: Lvl 9 Skill
 Wall-follow to the right
 
 Jiquani's Machinarium always faces the left (right wall)
@@ -62,6 +66,7 @@ Get waypoint for ToC and Jiquani's Machinarium then
 Exit > Jiquani's Machinarium
 
 G3_6_1 Jiquani's Machinarium--------------------------------
+Runesmithing: Artificer's Orb
 Listen to loot filer sounds if you have one, quest item will
 make a sound before you can see it
 
@@ -70,6 +75,7 @@ Blackjaw is in far left or far right of zone
 Exit > Jiquani's Sanctum
 
 G3_6_2 Jiquani's Sanctum------------------------------------
+Runesmithing: Exalt
 For second generator, respawn at checkpoint then walk away a
 bit, rinse and repeat until soul core spawns nearby
 
@@ -79,6 +85,7 @@ Kill boss then TP > Town then Waypoint > Infested Barrens to
 Exit > The Matlan Waterways
 
 G3_2_2 The Matlan Waterways---------------------------------
+Runesmithing: Lvl 10 Spirit Gem
 RECOMMEND fire resist and patience
 
 Exit > Azak Bog for Spirit + Spirit Gem
@@ -87,6 +94,7 @@ Second time here Find the lever, then TP > Town,
 then Exit > The Drowned City
 
 G3_8 The Drowned City---------------------------------------
+Runesmithing: Lvl 3 Support
 Don't forget the waypoint at the start!
 
 Go up/right until you hit a wall, then down/right until you
@@ -117,6 +125,7 @@ Kill the boss then TP > Town
 Then go down the big stairs again to Exit > Temple of Kopec
 
 G3_12 Temple of Kopec---------------------------------------
+Runesmithing: Lvl 11 Spirit Gem
 Each floor is a triangle and the exit is in a corner
 
 Door won't show on minimap until you're really close, don't
@@ -138,6 +147,7 @@ After boss turn down/right then up/right for exit
 Exit > Aggorat
 
 G3_16 Aggorat-----------------------------------------------
+Runesmithing: Lvl 11 Skill
 Find the gigantic area with altar with the enemies praying, 
 go through the arch to get to second half of zone
 

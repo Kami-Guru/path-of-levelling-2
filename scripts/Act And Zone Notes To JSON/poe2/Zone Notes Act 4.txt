@@ -4,20 +4,24 @@ When you hit a wall, follow it
 Exit > Volcanic Warrens
 
 G4_1_2 Volcanic Warrens-------------------------------------
+Runesmithing: Lvl 4 Support
 Long and winding area, boss is at the very end of it
 Kill the boss then TP > Town 
 By now you have ToTA and weapon so sail > Arastas
 
 G4_2_1 Kedge Bay--------------------------------------------
+Runesmithing: Exalt
 Just keep following the zone to the end
 Exit > Journey's End
 
 G4_2_2 Journey's End----------------------------------------
+Runesmithing: Alchemy
 Winding area, keep following the zone to the end
 Checkpoint to start to fight Omniphobia
 TP > Town then Sail > Whakapanu
 
 G4_3_1 Whakapanu Island-------------------------------------
+Runesmithing: Artificer's Orb
 Great XP here
 Can kill the Great White One for the shark fin, turn
 in at Ngakanu for a Skill, Spirit, OR Support gem
@@ -30,6 +34,7 @@ Solved layout just follow the images
 Kill the boss, TP > Town and Sail > Abandoned Prison
 
 G4_4_1 Eye of Hinekora--------------------------------------
+Runesmithing: Chaos Orb
 Don't miss Navali's 5% Max Mana
 Exit > Halls of the Dead
 
@@ -43,6 +48,7 @@ Get the +2 Passives then TP > Town
 Sail to the next island, follow the Act Notes
 
 G4_5_1 Abandoned Prison-------------------------------------
+Runesmithing: Exalt
 Find The Chapel, the key drops randomly from enemies
 
 Exit > Solitary Confinement
@@ -53,11 +59,13 @@ Kill the boss then TP > Town
 In Town start doing optional areas for Matiki/Weapon
 
 G4_7 Shrike Island------------------------------------------
+Runesmithing: Lvl 4 Support
 Incredibly linear layout just keep moving forward
 Kill the boss then TP > Town
 In Town start doing optional areas for Matiki/Weapon
 
 G4_8b Arastas-----------------------------------------------
+Runesmithing: Lvl 12 Skill
 1. Get out of town square, there is nothing here
 2. Hug top wall to get to Evening Bell
 3. [Optional] Morning Bell is opposite side of
@@ -66,6 +74,7 @@ G4_8b Arastas-----------------------------------------------
   kill boss and Exit > The Excavation
 
 G4_10 The Excavation----------------------------------------
+Runesmithing: Rare Amulet
 Pick a wall and follow it all the way to the boss
 Kill the boss and TP > Town to Sail > Ngakanu
 
@@ -74,10 +83,12 @@ Hand in the Shark Fin for choice of Spirit, Skill, or
 Support Gem
 
 G4_11_1b Ngakanu--------------------------------------------
+Runesmithing: Greater Jeweller's Orb - big if true
 After leaving the main building follow the wall to
 Exit > Heart of the Tribe
 
 G4_11_2 Heart of the Tribe----------------------------------
+Runesmithing: Lvl 12 Spirit
 Keep trying to head north, every time you see a 
 Checkpoint go back and find the fork, you went the
 wrong way

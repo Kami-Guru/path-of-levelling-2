@@ -1,4 +1,5 @@
 G2_1 Vastiri Outskirts--------------------------------------
+Runesmithing: Exalt
 Zone layout may be flipped, Boss is either down/left or 
 down/right, rougly Z shape
 
@@ -11,12 +12,14 @@ In Town Caravan > Mawdun Quarry
 
 
 G2_10_1 Mawdun Quarry---------------------------------------
+Runesmithing: Lvl 5 Spirit Gem
 Roughly Z Shape. If in doubt follow a wall
 
 Exit > Mawdun Mine
 
 
 G2_10_2 Mawdun Mine-----------------------------------------
+Runesmithing: Lvl 2 Support
 Boss is usually directly north from entrance
 
 RECOMMEND Fire Res, boss can deal a lot of damage. Watch out
@@ -36,6 +39,7 @@ Exit > The Halani Gates
 
 
 G2_3 The Halani Gates---------------------------------------
+Runesmithing: Exalt
 Head to opposite corner from entrance
 
 RECOMMEND Lightning Resistance, Topaz Charm
@@ -58,6 +62,7 @@ Exit > The Lost City
 
 
 G2_4_2 The Lost City----------------------------------------
+Runesmithing: Alchemy
 Zone is shaped like a diamond with bridges as the corners
 
 First bridge is either far left or far right of the first
@@ -69,6 +74,7 @@ Exit > Buried Shrines
 
 
 G2_4_3 Buried Shrines---------------------------------------
+Runesmithing: Lesser Jeweller's Orb - big if true
 Zone is two rectangles joined by bridges
 
 The direction the bridge points tells you where the boss is:
@@ -84,6 +90,7 @@ Kill the boss, TP > Town then Caravan > Mastodon Badlands
 
 
 G2_5_1 Mastodon Badlands------------------------------------
+Runesmithing: Regal
 Wall-follow the wall opposite the Waypoint
 
 Abyss in this area drops Jawbone (weapon mod)
@@ -101,6 +108,7 @@ Then Waypoint > Mastodon Badlands
 
 
 G2_5_2 The Bone Pits----------------------------------------
+Runesmithing: Exalt
 Bone Arch near entrance to zone points directly to the boss
 
 Kill boss then TP > Town and Caravan > Valley Of The Titans
