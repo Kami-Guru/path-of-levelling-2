@@ -50,8 +50,9 @@ You can download Path of Levelling 2 on the following platforms:
 
 *Note that the Windows installer is unsigned, so you will have to bypass a security check the first time you run the application.
 
-> [!TIP] 
-> **Path of Exile 2 must be Windowed or Windowed Fullscreen for the overlay to function.**
+::: info
+**Path of Exile 2 must be Windowed or Windowed Fullscreen for the overlay to function.**
+:::
 
 ### Additional Linux Setup Steps
 Linux requires some additional steps to get up and running. First, if you use Windowed Fullscreen on KDE, create the following window rule:
@@ -63,3 +64,15 @@ If you use KDE at all, also create the following window rule:
 ![Linux Window Rule Overlay Fix](/images/linux-window-rule-taskbar-fix.png)
 
 This gets rid of the annoying flashing taskbar icon created whenever the overlay hides then reappears by blocking it from appearing on the taskbar. You can still exit the app by right clicking it in the tray. The same rule can be used with window class `exiled-exchange-2` to fix the same issue with Exiled Exchange 2, if you use it.
+
+#### Wayland Fixes
+Wayland support is experimental, and can break in some configurations. If you are running Wayland, try running with the following configurations:  
+
+```bash-vue
+./Path-Of-Levelling-2-{{ VITE_APP_VERSION }}.AppImage --ozone-platform=x11
+```
+
+```bash-vue
+XDG_SESSION_TYPE=x11 ./Path-Of-Levelling-2-{{ VITE_APP_VERSION }}.AppImage
+```
+

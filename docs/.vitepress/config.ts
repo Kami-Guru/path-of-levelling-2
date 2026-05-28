@@ -20,7 +20,9 @@ export default defineConfig({
       {
         items: [
           { text: 'Download', link: '/' },
-          { text: 'Quick Start Guide', link: '/quick-start' }
+          { text: 'Quick Start Guide', link: '/quick-start' },
+          { text: 'Creating A Gem Setup', link: '/creating-a-gem-setup' },
+          { text: 'Customising Notes', link: '/customising-notes' },
         ]
       },
       {
