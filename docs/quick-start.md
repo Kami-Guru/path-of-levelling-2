@@ -8,7 +8,8 @@ First, download and install from the [Downloads Page](/index). The app checks fo
 ## First Startup
 Start Path of Exile 2 and Path of Levelling 2 to display the overlay; at your first startup all the windows will be in the top left (to avoid windows starting offscreen for low resolutions). 
 
-Hit `Ctrl+Alt+S` to make the overlay interactible and drag/resize windows to wherever you want. Here you can also click the Act dropdown then Zone dropdown to select a zone, but it will automatically update as you change zones. 
+Hit `Ctrl+Alt+S` to make the overlay interactible and drag/resize windows to wherever you want. Here you can also click the Act dropdown then Zone dropdown to select a zone, but it will automatically update as you change zones. I have my overlay set up like this, don't worry, the font size is configurable!
+![Configured Overlay Example](/images/configured-overlay-in-game-example.png)
 
 The settings menu also display hotkeys that show or hide individual windows, so you can display only the information you need. 
 
