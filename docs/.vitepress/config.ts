@@ -7,7 +7,6 @@ export default defineConfig({
   title: "Path of Levelling 2",
   description: "A Path of Exile 2 levelling overlay",
   base: BASE,
-  mpa: true,
   head: [['link', {rel: 'shortcut icon', Text: 'test'}]],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
