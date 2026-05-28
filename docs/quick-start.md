@@ -9,7 +9,7 @@ First, download and install from the [Downloads Page](/index). The app checks fo
 Start Path of Exile 2 and Path of Levelling 2 to display the overlay; at your first startup all the windows will be in the top left (to avoid windows starting offscreen for low resolutions).
 
 ::: info
-If you are on Linux, make sure to do the [Additional Linux Setup Steps](http://localhost:5173/path-of-levelling-2/#additional-linux-setup-steps)
+If you are on Linux, make sure to do the [Additional Linux Setup Steps](/index#additional-linux-setup-steps)
 :::
 
 Hit `Ctrl+Alt+S` to make the overlay interactible, then hover over a window to reveal and click the 'Drag/Resize' button in the top right, and drag/resize windows to wherever you want. Here you can also click the Act dropdown then Zone dropdown to select a zone, but it will automatically update as you change zones. I have my overlay set up like this, don't worry, the font size is configurable!
