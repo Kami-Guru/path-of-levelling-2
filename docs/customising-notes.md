@@ -21,4 +21,4 @@ All of these features are also available on the Zone Notes screen!
 
 ![Zone Notes Settings Screen](/images/customising-notes/zone-notes-settings-screen.png)
 
-On every guild you can customise notes for every act and zone, and the Act and Zone Notes window will automatically switch between acts and zones as you progress through the game!
+On every build you can customise notes for every act and zone, and the Act and Zone Notes window will automatically switch between acts and zones as you progress through the game!
