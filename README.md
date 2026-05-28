@@ -6,22 +6,7 @@ A levelling overlay for Path Of Exile 2
 To see the full documentation, including the quick start guide, go here: https://kami-guru.github.io/path-of-levelling-2/
 
 ## Features
-Backlog:
- - Show diff between gem setups (e.g. Green for new gems, Blue for upgrades, Red for removed)
- - Add the ability for hiding images/notes/gem setups after a customisable duration in each zone
- - Better updating system, only checking on startup and only updating on next startup is not good enough
- - Put overlay on second monitor (probably need to just put it in a browser tab cuz Electron)
-
- - Bug: Input textboxes are wonky (any wrapped lines cause a variety of display issues)
- - Bug: Gem Setups Tracker is adding an extra empty line at the bottom, for whatever reason
-
-In Progress:
- - Update some zones I forgot about in 0.4 (Clearfell, Mud Burrow)
- - Another pass on some of the more egregiously-sized images (Sisters of Garukhan tile image lmao)
- - Add a PR that adds notes from the recent [0.5 Campaign Streamlining teaser](https://www.youtube.com/watch?v=miL0Ms-VwGI)
-     - Will merge this & publish a release ~72 hours before launch
-
-Completed:
+Feature List:
  - Display Act and Zone notes that automatically update when changing zone
  - Display Gem Setups that automatically update when levelling up
  - Display Level Diff, the difference between player level and monster level, and EXP modifier, which updates when levelling up and when changing zone
@@ -33,6 +18,28 @@ Completed:
      - Hotkeys to show/hide any part of the overlay
      - Fully resizable/movable overlay elements
      - Adjustable font sizing
+  
+## To-Do:
+Backlog:
+ - Show diff between gem setups (e.g. Green for new gems, Blue for upgrades, Red for removed)
+ - Add the ability for hiding images/notes/gem setups after a customisable duration in each zone
+ - Better updating system, only checking on startup and only updating on next startup is not good enough
+ - Put overlay on second monitor (probably need to just put it in a browser tab cuz Electron)
+
+ - Bug: Input textboxes are wonky (any wrapped lines cause a variety of display issues)
+ - Bug: Gem Setups Tracker is adding an extra empty line at the bottom, for whatever reason
+
+In Progress:
+ - Bug URGENT: Changing page on the settings screen will wipe any unsaved changes without warning
+ - Bug: Adding a new build will copy all the changes from the previous build in the UI but not actually save them. New build should be added with no changes from Default build.
+
+Recently Completed:
+ - Update some zones I forgot about in 0.4 (Clearfell, Mud Burrow)
+ - Another pass on some of the more egregiously-sized images (Sisters of Garukhan tile image lmao)
+ - Add a PR that adds notes from the recent [0.5 Campaign Streamlining teaser](https://www.youtube.com/watch?v=miL0Ms-VwGI)
+     - Will merge this & publish a release ~72 hours before launch
+
+
 
 Canned:
  - ~~An overlay which shows a screenshot of a passive skill tree (presumably from POB), with many potential screenshots~~
