@@ -1,0 +1,77 @@
+{
+	"buildName": "0.5.0 GuyThatDies Twister Huntress",
+	"gemBuild": {
+		"changedByUser": true,
+		"gemSetups": [
+			{
+				"level": 1,
+				"gemLinks": [
+					"Level 1",
+					"Whirling Slash - Rage I - Rapid Attacks I",
+					"Twister - Retreat I",
+					"Barrage - Rapid Casting I",
+					"Fangs of Frost",
+					"Frost Bomb",
+					"War Banner - Prolonged Duration"
+				],
+				"gemSources": []
+			},
+			{
+				"level": 15,
+				"gemLinks": [
+					"Whirling Slash - Rage I - Rapid Attacks I",
+					"Twister - Retreat I - Frost Nexus - Elemental Armament II",
+					"Barrage - Rapid Casting I",
+					"Freezing Mark - Prolonged Duration I",
+					"Ice-Tipped Arrows - Elemental Armament II - Magnified Area I",
+					"Herald of Ice - Magnified Area I - Elemental Armament II",
+					"War Banner - Prolonged Duration"
+				],
+				"gemSources": []
+			},
+			{
+				"level": 29,
+				"gemLinks": [
+					"Whirling Slash - Rage III - Rapid Attacks III - Knockback",
+					"Twister - Retreat III - Nexus - Ele Arm II - Proj Acc III",
+					"Barrage - Rapid Casting II - Heightened Charges",
+					"Thunderous Leap - Rapid Attacks III",
+					"Freezing Mark - Prolonged Duration II - Charged Mark",
+					"Ice-Tipped - Ele Arm II - Ele Focus - Cooldown Recovery II",
+					"Herald of Ice - Mag Area I - Ele Arm II - Cold Attunement",
+					"War Banner - Prolonged Duration II",
+					"Combat Frenzy"
+				],
+				"gemSources": []
+			}
+		]
+	},
+	"actNotes": [
+		{
+			"lockNoteOption": "lockedCannotUnlock",
+			"actName": "Act 1",
+			"notes": "Clearfell       - Beira         - 10% Cold Res\nHunting Ground  - Crowbell Boss - 2 Passive Points\nFreythorn - King In The Mists - 30 Spirit + Lvl4 Spirit Gem\nOgham Farmlands - Una's Lute    - 2 Passive Points\nOgham Manor     - Candlemass    - +20 Life\n\nCtrl+Alt+S to open settings and drag/scale windows\n\nSkills: Twister > Frost Bomb > Fangs of Frost > Upgrade \n    Twister > Barrage > Ice-Tipped Arrows\nSupports: Retreat I > Rage I > Rapid Attacks I > Pro Dur I\n\nCheck Vendor at level up for\nMovespeed boots - Max 10% this Act\nNew Weapon\nPotions: Lvl 4, 10, 16, 23\nAct and Zone Notes are this wide----------------------------"
+		},
+		{
+			"lockNoteOption": "lockedCannotUnlock",
+			"actName": "Act 2",
+			"notes": "Traitor's Passage    - Balbala      - Ascendancy\nKeth                 - Kabala       - 2 Passive Points\nValley Of The Titans - Ancient Vows - Charge Generation\nDeshar               - Final Letter - 2 Passive Points\nSpires Of Deshar - Sisters Of Garukhan - 10% Light res\n\nUpgrades: Twister > Ice-Tipped Arrows (not Whirling Slash)\nLvl2 Support: Frost Nexus (Twister) > Ele Arm II (Twister)\n    > Ele Arm II (Herald of Ice)\nJewellers: Twister > Ice-Tipped Arrows\n\nCheck Vendor at level up for\nMovespeed boots - Max 15% this Act\nNew Weapon\nPotions: Lvl 23, 30, 40"
+		},
+		{
+			"lockNoteOption": "lockedCannotUnlock",
+			"actName": "Act 3",
+			"notes": "Sandswept Marsh - Orok Campfire     - Lesser Jeweller's\nJungle Ruins    - Mighty Silverfist - 2 Passive Points\nVenom Crypts    - Venom Draught     - Stun Threshold\nAzak Bog        - Ignagduk - 30 Spirit / Lvl10 spirit gem\nJiquani's Machinarium - Blackjaw    - +10% Fire res\nAggorat         - Blood Sacrifice   - 2 Passive Points\n\nT3 Supps: Retreat II (Twister) > Ele Focus II (Ice-Tipped)\n\nCheck Vendor at level up for\nMovespeed boots - Max 20% this Act\nNew Weapon\nPotions: Lvl 30, 40, 50"
+		},
+		{
+			"lockNoteOption": "lockedCannotUnlock",
+			"actName": "Act 4",
+			"notes": "Journey's End           - +2 Passives\nHalls of the Dead       - Strength/Dexterity/Intelligence\nHalls of the Dead       - 5% Increased Max Mana\nTrials of the Ancestors - +2 Passives\nAbandoned Prison        - Life Flask Recovery\nArastas - Evening Bell  - 3 Exalted Orbs\n\nT4 Supps: Rapid II (Whirl) > Rage II (Whirl) > CDR II (Ice)\n\nEye of Hinekora when you free Matiki\nKedge Bay > Whakapanu > Prison > Arastas > Ngakanu\nShrike Island/Isle of Kin (maybe optional)\n\nCheck Vendor at level up for\nMovespeed boots - Max 25% this Act\nPotions: Lvl 40, 50, 60"
+		},
+		{
+			"lockNoteOption": "lockedCannotUnlock",
+			"actName": "Interludes",
+			"notes": "No zone notes for Interludes :( change the zone to \nsee the bonuses each Interlude gives to choose your\nown order to do the Interludes\n\nT5 Supps: Charged Mark > Proj Acc III > Rage III > \n    Rapid III (Whirl) > Rapid III (Leap)\n\nIn Qimah: Global Defences, Elemental Resist, or CDR\n\nCompleting all Interludes gives +2 Passives\n\nCheck Vendor at level up for\nMovespeed boots - Max 25% in Interludes\nPotions cap out at required level 60"
+		}
+	],
+	"zoneNotes": []
+}

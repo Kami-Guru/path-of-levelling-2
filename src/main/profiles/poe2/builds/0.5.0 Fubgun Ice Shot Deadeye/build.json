@@ -1,0 +1,129 @@
+{
+    "buildName": "0.5.0 Fubgun Ice Shot Deadeye",
+    "gemBuild": {
+        "changedByUser": true,
+        "gemSetups": [
+            {
+                "level": 1,
+                "gemLinks": [
+                    "Lightning Arrow - Rapid Attacks I - Elemental Armament I",
+                    "Lightning Rod - Conc Area - Elemental Armament I",
+                    "Frost Bomb (Keep Lvl 3)",
+                    "Pounce",
+                    "Herald of Thunder - Conc Area",
+                    "Rapid Attacks > Ele Arms > Conc Area > 2nd Ele Arms",
+                    "Swap Elemental Armament between L Arrow and L Rod for boss"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 14,
+                "gemLinks": [
+                    "Lightning Arrow - Rapid Attacks I - Elemental Armament II",
+                    "Lightning Rod - Conc Area - Elemental Armament II",
+                    "Ice-Tipped Arrows - Mag Area I - Elemental Armament II",
+                    "Barrage",
+                    "Frost Bomb (Keep Lvl 3)",
+                    "Pounce",
+                    "Herald of Thunder - Conc Area - Elemental Armament II"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 22,
+                "gemLinks": [
+                    "Lightning Arrow - Rapid Attacks I - Elemental Armament II",
+                    "Snipe - Conc Area - Window of Opps - Elemental Armament II",
+                    "Ice-Tipped Arrows - Mag Area I - Elemental Armament II",
+                    "Freezing Salvo - Freeze - Conc Area",
+                    "Freezing Mark - Prolonged Duration I",
+                    "Barrage",
+                    "Frost Bomb (Keep Lvl 3)",
+                    "Herald of Thunder - Conc Area - Elemental Armament II"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 31,
+                "gemLinks": [
+                    "Ice Shot - Rapid Attacks I - Ele Arm II - Ice Bite II",
+                    "Snipe - Conc Area - Window of Opps - Ele Arm II",
+                    "Ice-Tipped Arrows - Mag Area I - Ele Arm II",
+                    "Freezing Salvo - Freeze - Conc Area",
+                    "Freezing Mark - Pro Duration II - Siphoning - Eternal Mark",
+                    "Barrage - Cooldown Recovery I",
+                    "Combat Frenzy",
+                    "Herald of Ice - Mag Area I - Ele Arm II - Ele Focus",
+                    "",
+                    "Jewellers: Snipe > Ice Shot > Freezing Mark > HoI",
+                    "Quality: Ice Shot > Freezing Mark > HoI > Snipe"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 41,
+                "gemLinks": [
+                    "Ice Shot - Rapid II - Ele Arm II - Ice Bite II - Fork",
+                    "Snipe - Conc Area - Window of Opps - Ele Arm II - Ele Focus",
+                    "Ice-Tipped Arrows - Short Fuse I - Mag Area II - Ele Arm II",
+                    "Freezing Mark - Pro Duration II - Siphoning - Eternal Mark",
+                    "Barrage - Cooldown Recovery II - Rapid Casting II",
+                    "Tornado Shot - Pro Dur II - Overabundance II - Rapid II",
+                    "Combat Frenzy - Charge Profusion",
+                    "Herald of Ice - Mag Area II - Ele Arm II - Ele Focus",
+                    "Wind Dancer - Knockback",
+                    "",
+                    "Jewellers: Snipe > Ice Shot > Freezing Mark > HoI",
+                    "Quality: Ice Shot > Freezing Mark > HoI > Snipe"
+                ],
+                "gemSources": []
+            },
+            {
+                "level": 52,
+                "gemLinks": [
+                    "Ice Shot - Rapid II - Ele Arm II - Ice Bite II - Fork",
+                    "Snipe - Conc Area - Window of Opps - Ele Arm II - Ele Focus",
+                    "Ice-Tipped Arrows - Short Fuse I - Mag Area II - Ele Arm II",
+                    "Freezing Mark - Charged Mark - Pro Dur II - Eternal Mark",
+                    "Barrage - Cooldown Recovery II - Rapid Casting II",
+                    "Tornado Shot - Pro Dur II - Overabundance II - Rapid II",
+                    "Combat Frenzy - Charge Profusion",
+                    "Herald of Ice - Mag Area II - Ele Arm II - Ele Focus",
+                    "Wind Dancer - Knockback",
+                    "",
+                    "Jewellers: Snipe > Ice Shot > Freezing Mark > HoI",
+                    "Quality: Ice Shot > Freezing Mark > HoI > Snipe"
+                ],
+                "gemSources": []
+            }
+        ]
+    },
+    "actNotes": [
+        {
+            "lockNoteOption": "lockedCannotUnlock",
+            "actName": "Act 1",
+            "notes": "Clearfell       - Beira         - 10% Cold Res\nHunting Ground  - Crowbell Boss - 2 Passive Points\nFreythorn - King In The Mists - 30 Spirit + Lvl4 Spirit Gem\nOgham Farmlands - Una's Lute    - 2 Passive Points\nOgham Manor     - Candlemass    - +20 Life\n\nCtrl+Alt+S to open settings and drag/scale windows\n\n\"Runesmithing: [some reward]\" indicates POSSIBLE guaranteed\nrewards from 0.5 League Mechanic, based on 0.4 mechanic.\n0.4 copied 0.3 so 0.5 may copy 0.4.\n\nDevourer (Rapid Attacks I) > Beira (Elemental Armament I) >\nAreagne > Rust King\n\nGet Lvl 5 and Shortbow before Rust King\nFrom Lvl 11 use highest DPS Warden Bow you can find\nSave currency for Level 16 Recurve Bow\n\nCheck Vendor at level up for\nMovespeed boots - Max 10% this Act\nPotions: Lvl 4, 10\nAct and Zone Notes are this wide----------------------------"
+        },
+        {
+            "lockNoteOption": "lockedCannotUnlock",
+            "actName": "Act 2",
+            "notes": "Traitor's Passage    - Balbala      - Ascendancy\nKeth                 - Kabala       - 2 Passive Points\nValley Of The Titans - Ancient Vows - Charm Charges\nDeshar               - Final Letter - 2 Passive Points\nSpires Of Deshar - Sisters Of Garukhan - 10% Light res\n\nSave Lvl 6 and 7 gems for Lvl 22 mini-swap\nMini-swap requires a Lvl7 (Freezing Mark), 2 Lvl5+ Skill\nGems, and 4-5 Support Gems\n\nLevel 16 craft Recurve Bow to 6-mod + 2 sockets + quality\nQuiver: Flat Damage and +Levels\n\nCheck Vendor at level up for\nMovespeed boots - Max 15% this Act\nPotions: Lvl 16, 23, 30, 40"
+        },
+        {
+            "lockNoteOption": "lockedCannotUnlock",
+            "actName": "Act 3",
+            "notes": "Sandswept Marsh - Orok Campfire     - Lesser Jeweller's\nJungle Ruins    - Mighty Silverfist - 2 Passive Points\nVenom Crypts    - Venom Draught     - Stun Threshold\nAzak Bog        - Ignagduk - 30 Spirit / Lvl10 spirit gem\nJiquani's Machinarium - Blackjaw    - +10% Fire res\nAggorat         - Blood Sacrifice   - 2 Passive Points\n\nLvl 9 skill gem is for Ice Shot\nLvl 9 spirit gem is for Combat Frenzy\n\nUpgrade Dualstring/Cultist bow at ilvl33+ for T6 Flat Phys\n\nCheck Vendor at level up for\nMovespeed boots - Max 20% this Act\nPotions: Lvl 30, 40, 50"
+        },
+        {
+            "lockNoteOption": "lockedCannotUnlock",
+            "actName": "Act 4",
+            "notes": "Journey's End           - +2 Passives\nHalls of the Dead       - Dex/Cold Res/Fire Res\nHalls of the Dead       - 5% Increased Max Mana\nTrials of the Ancestors - +2 Passives\nAbandoned Prison        - Life Flask Recovery\nArastas - Evening Bell  - 3 Exalted Orbs\n\nUpgrade Artillery bow at ilvl46 for T5 Flat Phys\n\nEye of Hinekora when you free Matiki\nKedge Bay > Whakapanu > Prison > \nShrike Island/Isle of Kin (maybe optional)\nAfter all weapon pieces, Arastas > Ngakanu\n\nCheck Vendor at level up for\nMovespeed boots - Max 25% this Act\nPotions: Lvl 40, 50, 60"
+        },
+        {
+            "lockNoteOption": "lockedCannotUnlock",
+            "actName": "Interludes",
+            "notes": "No zone notes for Interludes :( change the zone to \nsee the bonuses each Interlude gives to choose your\nown order to do the Interludes\n\nCompleting all Interludes gives +2 Passives\n\nIn Qimah can take Resist, Movespeed, or Global Defences\n\nCheck Vendor at level up for\nMovespeed boots - Max 25% in Interludes\nPotions cap out at required level 60"
+        }
+    ],
+    "zoneNotes": []
+}
